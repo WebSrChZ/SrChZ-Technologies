@@ -58,6 +58,7 @@
 </script>
 </head>
 <body>
+<div class="scroll-progress" id="progress" aria-hidden="true"></div>
 <a class="skip" href="#metodo">Pular para o conteúdo</a>
 
 <!-- ===== NAV ===== -->
@@ -218,12 +219,30 @@
             <li>Instalável (PWA)</li>
           </ul>
         </div>
-        <div class="portal-stats">
-          <div class="stat"><span class="stat-n">100%</span><span class="stat-l">Fluxo do cliente em tempo real</span></div>
-          <div class="stat"><span class="stat-n">12+</span><span class="stat-l">Conteúdos/mês com cadência fixa</span></div>
-          <div class="stat"><span class="stat-n">8</span><span class="stat-l">Pilares editoriais estruturados</span></div>
-          <div class="stat"><span class="stat-n">4K</span><span class="stat-l">Produção de vídeo cinematográfica</span></div>
+        <div class="portal-mock" aria-hidden="true">
+          <div class="mock">
+            <div class="mock-bar"><span></span><span></span><span></span><em>portal.cliente · srchz</em></div>
+            <div class="mock-body">
+              <aside class="mock-side"><i class="active"></i><i></i><i></i><i></i><i></i></aside>
+              <div class="mock-main">
+                <div class="mock-head"><b>Cronograma</b><span class="mock-pill">Junho</span></div>
+                <div class="mock-row"><span class="mc-dot pub"></span><i class="bar"></i><span class="mc-tag pub">Publicado</span></div>
+                <div class="mock-row"><span class="mc-dot edt"></span><i class="bar w2"></i><span class="mc-tag edt">Editando</span></div>
+                <div class="mock-row"><span class="mc-dot pen"></span><i class="bar w3"></i><span class="mc-tag pen">Pendente</span></div>
+                <div class="mock-cal">
+                  <i></i><i class="on g"></i><i></i><i class="on o"></i><i></i><i></i><i class="on gr"></i>
+                  <i></i><i class="on g"></i><i></i><i></i><i class="on o"></i><i></i><i class="on g"></i>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+      <div class="portal-stats">
+        <div class="stat"><span class="stat-n" data-count="100" data-suffix="%">100%</span><span class="stat-l">Fluxo do cliente em tempo real</span></div>
+        <div class="stat"><span class="stat-n" data-count="12" data-suffix="+">12+</span><span class="stat-l">Conteúdos/mês com cadência fixa</span></div>
+        <div class="stat"><span class="stat-n" data-count="8">8</span><span class="stat-l">Pilares editoriais estruturados</span></div>
+        <div class="stat"><span class="stat-n">4K</span><span class="stat-l">Produção de vídeo cinematográfica</span></div>
       </div>
     </div>
   </div>

@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Rafael Cordeiro — Growth &amp; Branding · Planos &amp; Soluções</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#09090b; --ink:#f6f2e9; --soft:#d2cabb; --muted:#8b8576;
+    --gold:#c9a24b; --gold-2:#ead29a; --gold-deep:#9c7c2e;
+    --line:rgba(201,162,75,.26); --line-2:rgba(201,162,75,.14);
+    --panel:#121215; --panel-2:#16171b;
+    --serif:'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+    --sans:'Inter','Segoe UI', Arial, sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0}
+  html,body{background:#2c2c2e}
+  body{font-family:var(--sans); color:var(--ink); -webkit-print-color-adjust:exact; print-color-adjust:exact}
+
+  .page{
+    position:relative; width:210mm; height:297mm; margin:0 auto; background:var(--bg);
+    padding:14mm 15mm 11mm; overflow:hidden;
+    background-image:
+      radial-gradient(130% 70% at 50% -8%, rgba(201,162,75,.085), transparent 58%),
+      radial-gradient(90% 50% at 50% 112%, rgba(201,162,75,.05), transparent 60%);
+  }
+  .page + .page{margin-top:8mm}
+  .frame{position:absolute; inset:7.5mm; border:1px solid var(--line); pointer-events:none}
+  .frame::after{content:""; position:absolute; inset:3px; border:1px solid var(--line-2)}
+  .corner{position:absolute; width:15px; height:15px; border:2px solid var(--gold); z-index:2}
+  .corner.tl{top:7.5mm; left:7.5mm; border-right:0; border-bottom:0}
+  .corner.tr{top:7.5mm; right:7.5mm; border-left:0; border-bottom:0}
+  .corner.bl{bottom:7.5mm; left:7.5mm; border-right:0; border-top:0}
+  .corner.br{bottom:7.5mm; right:7.5mm; border-left:0; border-top:0}
+  .inner{position:relative; height:100%; display:flex; flex-direction:column; z-index:1}
+
+  .gold-text{background:linear-gradient(180deg,var(--gold-2) 0%,var(--gold) 52%,var(--gold-deep) 100%);
+    -webkit-background-clip:text; background-clip:text; color:transparent}
+  .rule{height:1px; background:linear-gradient(90deg,transparent,var(--line) 16%,var(--gold) 50%,var(--line) 84%,transparent)}
+
+  .ptag{display:flex; justify-content:space-between; align-items:center; font-size:8.5px; letter-spacing:.34em; text-transform:uppercase; color:var(--muted)}
+  .ptag .g{color:var(--gold)}
+
+  /* ============ COVER ============ */
+  .cover .inner{justify-content:space-between; text-align:center}
+  .ckicker{font-size:10px; letter-spacing:.5em; text-transform:uppercase; color:var(--muted)}
+  .cname{font-family:var(--serif); font-weight:700; font-size:60px; letter-spacing:.05em; line-height:1; margin-top:12px}
+  .ctitle{font-size:12px; letter-spacing:.5em; text-transform:uppercase; color:var(--gold-2); margin-top:13px}
+  .cline{font-family:var(--serif); font-style:italic; font-size:22px; color:var(--soft); margin-top:24px; line-height:1.45}
+  .cline b{font-style:normal; font-weight:600; color:var(--ink)}
+  .disc{display:flex; justify-content:center; flex-wrap:wrap; gap:8px 0}
+  .disc span{font-size:9px; letter-spacing:.22em; text-transform:uppercase; color:var(--soft); padding:0 15px; position:relative}
+  .disc span + span::before{content:"\2756"; position:absolute; left:-3px; top:1px; color:var(--gold); font-size:7px}
+  .cfoot{display:flex; justify-content:space-between; align-items:flex-end; font-size:9.5px; color:var(--soft)}
+  .cfoot .g{color:var(--gold-2); letter-spacing:.04em}
+
+  /* section label */
+  .seclabel{display:flex; align-items:center; gap:11px; font-size:10.5px; letter-spacing:.32em; text-transform:uppercase; color:var(--gold)}
+  .seclabel::after{content:""; flex:1; height:1px; background:var(--line)}
+  .seclabel .no{color:var(--muted)}
+
+  .lede{font-family:var(--serif); font-size:17.5px; line-height:1.5; color:var(--soft)}
+  .lede b{color:var(--ink); font-weight:600}
+
+  /* ===== PAGE 2 — stacked plan cards that fill the page ===== */
+  .p2 .inner{justify-content:flex-start}
+  .block-h{margin-bottom:11px}
+  .plans{flex:1; display:flex; flex-direction:column; gap:13px; margin-top:13px}
+  .plan{position:relative; border:1px solid var(--line); background:var(--panel); padding:15px 20px;
+    display:grid; grid-template-columns:54px 1fr; gap:18px; align-items:center; flex:1; overflow:hidden}
+  .plan::before{content:""; position:absolute; left:0; top:0; bottom:0; width:2px; background:var(--gold)}
+  .plan .pn{font-family:var(--serif); font-size:40px; font-weight:700; color:var(--gold); line-height:1; text-align:center}
+  .plan .ph{display:flex; align-items:baseline; gap:13px; flex-wrap:wrap}
+  .plan .pt{font-family:var(--serif); font-size:25px; font-weight:600; letter-spacing:.01em}
+  .plan .ps{font-size:9px; letter-spacing:.2em; text-transform:uppercase; color:var(--gold-2)}
+  .plan .pd{font-size:10.5px; color:var(--muted); margin:4px 0 9px; line-height:1.4}
+  .plan ul{list-style:none; display:grid; grid-template-columns:1fr 1fr; gap:5px 26px}
+  .plan li{font-size:11px; line-height:1.45; color:var(--soft); padding-left:16px; position:relative}
+  .plan li::before{content:"\25C6"; position:absolute; left:0; top:2px; color:var(--gold); font-size:7px}
+  .plan li b{color:var(--ink); font-weight:600}
+  .plan.feature{border-color:var(--gold); background:linear-gradient(180deg,rgba(201,162,75,.08),rgba(201,162,75,0) 62%),var(--panel-2)}
+  .plan .badge{position:absolute; top:0; right:0; background:var(--gold); color:#0a0a0a; font-size:8px; letter-spacing:.16em; text-transform:uppercase; font-weight:700; padding:4px 11px}
+
+  /* ===== PAGE 3 — distributed blocks ===== */
+  .p3 .inner{justify-content:space-between}
+  .portal{border:1px solid var(--gold); background:linear-gradient(180deg,rgba(201,162,75,.11),rgba(201,162,75,0) 72%),var(--panel); padding:20px 22px; position:relative}
+  .portal .tag{position:absolute; top:-9px; left:18px; background:var(--bg); color:var(--gold-2); font-size:9px; letter-spacing:.26em; text-transform:uppercase; padding:0 10px}
+  .portal h3{font-family:var(--serif); font-size:28px; font-weight:600; letter-spacing:.01em}
+  .portal p{font-size:11.5px; line-height:1.6; color:var(--soft); margin-top:7px; max-width:162mm}
+  .feats{display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px 18px; margin-top:15px}
+  .feats span{font-size:10px; letter-spacing:.02em; color:var(--gold-2)}
+  .feats span::before{content:"\269C"; color:var(--gold); margin-right:8px; font-size:9px}
+
+  .proof{display:grid; grid-template-columns:repeat(4,1fr); border:1px solid var(--line)}
+  .proof .c{padding:16px 12px; text-align:center}
+  .proof .c + .c{border-left:1px solid var(--line-2)}
+  .proof .n{font-family:var(--serif); font-size:30px; font-weight:600; color:var(--gold-2); line-height:1}
+  .proof .l{font-size:8.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-top:7px; line-height:1.35}
+
+  .steps{display:grid; grid-template-columns:1fr 1fr 1fr; border:1px solid var(--line)}
+  .steps .s{padding:16px 18px}
+  .steps .s + .s{border-left:1px solid var(--line-2)}
+  .steps .k{font-size:9px; letter-spacing:.22em; text-transform:uppercase; color:var(--muted)}
+  .steps .t{font-family:var(--serif); font-size:21px; color:var(--gold-2); margin-top:3px}
+  .steps .d{font-size:10px; color:var(--soft); margin-top:6px; line-height:1.45}
+
+  .cta{border:1px solid var(--gold); background:linear-gradient(120deg,rgba(201,162,75,.13),rgba(201,162,75,.02)); padding:20px 24px; display:flex; justify-content:space-between; align-items:center; gap:20px}
+  .cta .l h4{font-family:var(--serif); font-size:27px; font-weight:600}
+  .cta .l p{font-size:11px; color:var(--soft); margin-top:5px}
+  .cta .r{text-align:right; white-space:nowrap}
+  .cta .r .e{font-size:14px; color:var(--gold-2); font-weight:600}
+  .cta .r .loc{font-size:9px; color:var(--muted); letter-spacing:.16em; text-transform:uppercase; margin-top:5px}
+
+  .seclabel.lblmt{margin-bottom:11px}
+  .foot{padding-top:11px; border-top:1px solid var(--line); display:flex; justify-content:space-between; align-items:flex-end}
+  .foot .who{font-family:var(--serif); font-size:13px; color:var(--ink)}
+  .foot .who span{color:var(--gold)}
+  .foot .svc{font-size:8px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin-top:3px}
+  .foot .pg{font-size:9px; letter-spacing:.22em; color:var(--gold); text-transform:uppercase}
+
+  @media print{ html,body{background:#fff} .page{margin:0} .page+.page{margin-top:0; page-break-before:always} }
+  @page{ size:A4; margin:0 }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 · COVER ============ -->
+<section class="page cover">
+  <div class="frame"></div>
+  <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+  <div class="inner">
+
+    <div class="ptag"><span>SrChZ Technologies</span><span class="g">Planos &amp; Solu&ccedil;&otilde;es &middot; 2026</span></div>
+
+    <div>
+      <svg width="88" height="88" viewBox="0 0 100 100" fill="none" style="display:block;margin:0 auto">
+        <circle cx="50" cy="50" r="47" stroke="#c9a24b" stroke-width="1"/>
+        <circle cx="50" cy="50" r="40" stroke="#c9a24b" stroke-width="0.6" stroke-opacity="0.5"/>
+        <circle cx="50" cy="6" r="1.4" fill="#c9a24b"/><circle cx="50" cy="94" r="1.4" fill="#c9a24b"/>
+        <circle cx="6" cy="50" r="1.4" fill="#c9a24b"/><circle cx="94" cy="50" r="1.4" fill="#c9a24b"/>
+        <text x="50" y="62" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="34" font-weight="700" fill="#ead29a" letter-spacing="1">RC</text>
+      </svg>
+      <div class="ckicker" style="margin-top:20px">⚜ &nbsp; High-Performance Ecosystems &nbsp; ⚜</div>
+      <h1 class="cname gold-text">RAFAEL CORDEIRO</h1>
+      <div class="ctitle">Growth &amp; Branding Strategist</div>
+      <div class="rule" style="width:46%; margin:24px auto 0"></div>
+      <p class="cline">Transformo marcas em <b>ativos lucr&aacute;veis</b> —<br>onde percep&ccedil;&atilde;o, desejo e convers&atilde;o operam como um s&oacute; sistema.</p>
+    </div>
+
+    <div>
+      <div class="disc">
+        <span>Web Dev</span><span>Meta Ads</span><span>Branding</span><span>Visual Maker</span><span>Social Media</span><span>Portal &amp; Dados</span>
+      </div>
+      <div class="rule" style="width:100%; margin:16px 0 13px"></div>
+      <div class="cfoot">
+        <span class="g">Perception &middot; Strategy &middot; Execution</span>
+        <span>Cl&aacute;udio, MG &nbsp;&middot;&nbsp; rafaelhenriquecsantosz@gmail.com</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ PAGE 2 · MÉTODO + PLANOS ============ -->
+<section class="page p2">
+  <div class="frame"></div>
+  <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+  <div class="inner">
+
+    <div class="ptag"><span>Rafael Cordeiro &middot; Growth &amp; Branding</span><span class="g">M&eacute;todo &amp; Planos</span></div>
+
+    <div style="margin-top:15px">
+      <div class="seclabel lblmt">Modelo de Opera&ccedil;&atilde;o</div>
+      <p class="lede">Crio <b>Ecossistemas de Alta Performance</b>. Minha metodologia integra o rigor t&eacute;cnico da
+      <b>Engenharia</b>, a leitura comportamental da <b>Psican&aacute;lise</b> e a <b>est&eacute;tica High-End</b> — unindo
+      tecnologia, tr&aacute;fego e produ&ccedil;&atilde;o visual num &uacute;nico motor de crescimento.</p>
+    </div>
+
+    <div class="seclabel" style="margin-top:17px">Planos &amp; Solu&ccedil;&otilde;es</div>
+    <div class="plans">
+
+      <article class="plan">
+        <div class="pn">01</div>
+        <div>
+          <div class="ph"><span class="pt">Performance Lead</span><span class="ps">Tra&ccedil;&atilde;o &amp; Vendas</span></div>
+          <div class="pd">Resultado imediato no WhatsApp e gera&ccedil;&atilde;o de caixa.</div>
+          <ul>
+            <li>Gest&atilde;o total de <b>Tr&aacute;fego Pago</b> (Meta Ads)</li>
+            <li>P&uacute;blico-alvo &amp; <b>segmenta&ccedil;&atilde;o geogr&aacute;fica</b></li>
+            <li>Consultoria de <b>vendas</b> (CX / WhatsApp)</li>
+            <li>Relat&oacute;rio mensal de m&eacute;tricas e convers&otilde;es</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="plan">
+        <div class="pn">02</div>
+        <div>
+          <div class="ph"><span class="pt">Visual &amp; Content</span><span class="ps">Posicionamento &amp; Desejo</span></div>
+          <div class="pd">Est&eacute;tica profissional e cinematogr&aacute;fica para a marca.</div>
+          <ul>
+            <li>Videomaking &amp; <b>fotografia</b> presencial mensal</li>
+            <li>Reels: <b>legendas sincronizadas</b> e &aacute;udio masterizado</li>
+            <li>Editorial por <b>pilares</b> + quadros fixos</li>
+            <li>Social Media + <b>identidade visual e tom de voz</b></li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="plan feature">
+        <span class="badge">Solu&ccedil;&atilde;o Completa</span>
+        <div class="pn">03</div>
+        <div>
+          <div class="ph"><span class="pt">Ecossistema High-End</span><span class="ps">A Solu&ccedil;&atilde;o Estrat&eacute;gica</span></div>
+          <div class="pd">Tecnologia, tr&aacute;fego e produ&ccedil;&atilde;o de luxo num s&oacute; sistema.</div>
+          <ul>
+            <li>Tudo dos planos <b>01 e 02</b></li>
+            <li><b>Portal do Cliente</b> ao vivo (p&aacute;g. 3)</li>
+            <li><b>Reestrutura&ccedil;&atilde;o Web</b> padr&atilde;o High-End</li>
+            <li>SEO, remarketing &amp; <b>E-commerce</b></li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="plan">
+        <div class="pn">04</div>
+        <div>
+          <div class="ph"><span class="pt">Consultoria &amp; Web</span><span class="ps">Projeto Sob Demanda</span></div>
+          <div class="pd">Infraestrutura digital — desenvolvimento e reconstru&ccedil;&atilde;o.</div>
+          <ul>
+            <li>Design de interfaces (<b>UI/UX</b>)</li>
+            <li>Desenvolvimento de <b>portais e web apps</b></li>
+            <li>Analytics, automa&ccedil;&otilde;es e fluxo</li>
+            <li>Otimiza&ccedil;&atilde;o para <b>velocidade e convers&atilde;o</b></li>
+          </ul>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="foot" style="margin-top:14px">
+      <div><div class="who">Rafael <span>Cordeiro</span></div><div class="svc">Web Design &middot; Visual Maker &middot; Meta Ads &middot; Social Media</div></div>
+      <div class="pg">02 / 03</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ PAGE 3 · DIFERENCIAL + COMO COMEÇAR ============ -->
+<section class="page p3">
+  <div class="frame"></div>
+  <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+  <div class="inner">
+
+    <div class="ptag"><span>O Diferencial</span><span class="g">Tecnologia Propriet&aacute;ria</span></div>
+
+    <div class="portal">
+      <span class="tag">Portal do Cliente</span>
+      <h3>Cada marca recebe o seu pr&oacute;prio painel.</h3>
+      <p>Um web app sob medida onde voc&ecirc; acompanha tudo em tempo real — do briefing &agrave; publica&ccedil;&atilde;o.
+      Transpar&ecirc;ncia total, aprova&ccedil;&atilde;o &aacute;gil e dados na palma da m&atilde;o, sincronizados entre todos os dispositivos.</p>
+      <div class="feats">
+        <span>Cronograma de conte&uacute;do</span>
+        <span>Aprova&ccedil;&atilde;o de roteiros</span>
+        <span>Status de produ&ccedil;&atilde;o ao vivo</span>
+        <span>M&eacute;tricas de Instagram</span>
+        <span>Sincroniza&ccedil;&atilde;o multi-device</span>
+        <span>Instal&aacute;vel (PWA)</span>
+      </div>
+    </div>
+
+    <div>
+      <div class="seclabel lblmt">O Sistema em A&ccedil;&atilde;o</div>
+      <div class="proof">
+        <div class="c"><div class="n">100%</div><div class="l">Fluxo do cliente<br>em tempo real</div></div>
+        <div class="c"><div class="n">12+</div><div class="l">Conte&uacute;dos/m&ecirc;s<br>com cad&ecirc;ncia fixa</div></div>
+        <div class="c"><div class="n">8</div><div class="l">Pilares editoriais<br>estruturados</div></div>
+        <div class="c"><div class="n">4K</div><div class="l">Produ&ccedil;&atilde;o de v&iacute;deo<br>cinematogr&aacute;fica</div></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="seclabel lblmt">Como Come&ccedil;ar</div>
+      <div class="steps">
+        <div class="s"><div class="k">Passo 01</div><div class="t">Diagn&oacute;stico</div><div class="d">Conversa e leitura do seu ecossistema atual — sem custo.</div></div>
+        <div class="s"><div class="k">Passo 02</div><div class="t">Proposta</div><div class="d">Desenho do plano sob medida e do cronograma.</div></div>
+        <div class="s"><div class="k">Passo 03</div><div class="t">Execu&ccedil;&atilde;o</div><div class="d">Implementa&ccedil;&atilde;o com portal pr&oacute;prio e acompanhamento.</div></div>
+      </div>
+    </div>
+
+    <div class="cta">
+      <div class="l">
+        <h4>Vamos construir o seu ecossistema.</h4>
+        <p>Agende um diagn&oacute;stico e receba uma proposta sob medida.</p>
+      </div>
+      <div class="r">
+        <div class="e">rafaelhenriquecsantosz@gmail.com</div>
+        <div class="loc">Cl&aacute;udio, MG &middot; SrChZ Technologies</div>
+      </div>
+    </div>
+
+    <div class="foot">
+      <div><div class="who">SrChZ <span>Technologies</span></div><div class="svc">Perception &middot; Strategy &middot; Execution</div></div>
+      <div class="pg">03 / 03</div>
+    </div>
+
+  </div>
+</section>
+
+</body>
+</html>
