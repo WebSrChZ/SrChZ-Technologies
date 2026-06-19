@@ -54,7 +54,7 @@ a{color:inherit; text-decoration:none}
 .nav.scrolled{background:rgba(9,9,11,.82); backdrop-filter:blur(14px); border-bottom-color:var(--line)}
 .nav-inner{display:flex; align-items:center; justify-content:space-between}
 .brand{display:flex; align-items:center; gap:11px; color:var(--gold-2)}
-.brand-mark{color:var(--gold); flex:none}
+.brand-mark{height:34px; width:auto; flex:none; display:block}
 .brand-txt{font-family:var(--serif); font-size:21px; font-weight:600; letter-spacing:.02em; color:var(--ink)}
 .brand-txt em{font-style:normal; color:var(--gold)}
 .nav-links{display:flex; align-items:center; gap:30px}
@@ -85,9 +85,7 @@ a{color:inherit; text-decoration:none}
     radial-gradient(60% 50% at 50% 0%, rgba(201,162,75,.14), transparent 60%),
     radial-gradient(40% 40% at 50% 100%, rgba(201,162,75,.07), transparent 60%);}
 .hero-inner{position:relative; z-index:1; max-width:780px}
-.medallion{margin:0 auto 14px}
-.hero-cipher{font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:var(--muted); margin:0 0 22px}
-.hero-cipher b{color:var(--gold-2); font-weight:600}
+.medallion{display:block; margin:0 auto 22px; height:auto}
 .hero-kicker{font-size:clamp(9px,2.4vw,11px); letter-spacing:.45em; text-transform:uppercase; color:var(--muted)}
 .hero-name{font-family:var(--serif); font-weight:700; font-size:clamp(40px,9vw,82px); line-height:1; letter-spacing:.04em; margin-top:12px}
 .hero-title{font-size:clamp(11px,2.6vw,14px); letter-spacing:.42em; text-transform:uppercase; color:var(--gold-2); margin-top:16px}
