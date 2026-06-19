@@ -1,0 +1,14 @@
+{
+  "name": "SrChZ Technologies — Growth & Branding",
+  "short_name": "SrChZ",
+  "description": "Ecossistemas de Alta Performance: tráfego, branding, produção de vídeo e portal do cliente.",
+  "lang": "pt-BR",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#09090b",
+  "theme_color": "#09090b",
+  "icons": [
+    { "src": "assets/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
