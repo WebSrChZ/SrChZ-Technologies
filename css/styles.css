@@ -197,7 +197,7 @@ a{color:inherit; text-decoration:none}
   background:linear-gradient(135deg,rgba(201,162,75,.14),rgba(201,162,75,.02)); padding:clamp(40px,7vw,72px) 28px}
 .cta h2{font-family:var(--serif); font-size:clamp(30px,6vw,52px); font-weight:600; line-height:1.08}
 .cta>p{font-size:clamp(15px,2.4vw,17px); color:var(--soft); margin-top:14px}
-.cta-actions{margin-top:30px}
+.cta-actions{margin-top:30px; display:flex; gap:14px; justify-content:center; flex-wrap:wrap}
 .cta-meta{font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-top:26px}
 .cta-meta span{color:var(--gold)}
 
