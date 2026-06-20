@@ -97,8 +97,8 @@
   }
 
   /* lead form -> Supabase (insert-only, tabela srchz_leads) */
-  const SB_URL = 'https://aqbwwiarinvmgqfaqvnr.supabase.co';
-  const SB_KEY = 'sb_publishable_N0Xq3_7aAqpKlNQ3rgUh3w_7Svto18O';
+  const SB_URL = 'https://hhrllexkkbekdbzivlgi.supabase.co';
+  const SB_KEY = 'sb_publishable_f3GT1APWArXWS3O04z_S2Q_8FoOjGIF';
   const leadForm = document.getElementById('leadForm');
   if (leadForm) {
     const statusEl = document.getElementById('leadStatus');
