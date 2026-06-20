@@ -237,6 +237,37 @@ a{color:inherit; text-decoration:none}
 .reveal[data-delay="2"]{transition-delay:.16s}
 .reveal[data-delay="3"]{transition-delay:.24s}
 
+/* ============ CASE STUDY ============ */
+.case-grid{align-items:start}
+.case-id{display:flex; flex-direction:column; align-items:flex-start}
+.case-logo{border-radius:14px; border:1px solid var(--line); margin-bottom:18px}
+.case-name{font-family:var(--serif); font-size:30px; font-weight:600; line-height:1.05}
+.case-name em{font-style:normal; color:var(--gold)}
+.case-meta{font-size:11.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin-top:8px}
+.case-quote{font-family:var(--serif); font-style:italic; font-size:19px; color:var(--soft); line-height:1.5; margin-top:22px; padding-left:16px; border-left:2px solid var(--gold)}
+.case-deliver-h{display:block; font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--gold); margin-bottom:16px}
+.case-feats{grid-template-columns:1fr; margin-top:0; gap:11px}
+.case-feats li{font-size:14.5px; color:var(--soft)}
+.case-stats{margin-top:26px}
+.case-stats .stat-n{font-size:clamp(30px,5vw,42px)}
+
+/* ============ LEAD FORM ============ */
+.lead-wrap{max-width:560px; margin:30px auto 0}
+.lead-or{font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); margin-bottom:16px}
+.lead-form{display:grid; gap:12px; text-align:left}
+.lead-row{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+.lead-in{width:100%; font-family:var(--sans); font-size:14px; color:var(--ink); background:rgba(9,9,11,.55);
+  border:1px solid var(--line); border-radius:2px; padding:13px 14px; transition:border-color .2s, background .2s}
+.lead-in::placeholder{color:var(--muted)}
+.lead-in:focus{outline:none; border-color:var(--gold); background:rgba(9,9,11,.82)}
+.lead-ta{resize:vertical; min-height:84px; line-height:1.5}
+.lead-hp{position:absolute!important; left:-9999px!important; width:1px!important; height:1px!important; opacity:0}
+.lead-btn{width:100%; margin-top:2px}
+.lead-status{font-size:13px; margin:2px 0 0; min-height:18px; text-align:center; color:var(--soft)}
+.lead-status.ok{color:var(--gold-2)}
+.lead-status.err{color:#e0795f}
+@media (max-width:480px){ .lead-row{grid-template-columns:1fr} }
+
 /* ============ RESPONSIVE ============ */
 @media (min-width:921px){ .mobile-menu{display:none!important} }
 @media (max-width:920px){

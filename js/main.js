@@ -95,4 +95,49 @@
     }, { rootMargin: '-45% 0px -50% 0px' });
     sections.forEach(s => spy.observe(s));
   }
+
+  /* lead form -> Supabase (insert-only, tabela srchz_leads) */
+  const SB_URL = 'https://aqbwwiarinvmgqfaqvnr.supabase.co';
+  const SB_KEY = 'sb_publishable_N0Xq3_7aAqpKlNQ3rgUh3w_7Svto18O';
+  const leadForm = document.getElementById('leadForm');
+  if (leadForm) {
+    const statusEl = document.getElementById('leadStatus');
+    const setStatus = (msg, cls) => { statusEl.textContent = msg; statusEl.className = 'lead-status' + (cls ? ' ' + cls : ''); };
+    leadForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fd = new FormData(leadForm);
+      if ((fd.get('website') || '').trim()) return;          // honeypot: provável bot
+      const name = (fd.get('name') || '').trim();
+      const contact = (fd.get('contact') || '').trim();
+      if (!name || contact.length < 3) { setStatus('Preencha nome e um contato válido.', 'err'); return; }
+
+      const btn = leadForm.querySelector('.lead-btn');
+      const label = btn.textContent;
+      btn.disabled = true; btn.textContent = 'Enviando…'; setStatus('', '');
+      try {
+        const res = await fetch(SB_URL + '/rest/v1/srchz_leads', {
+          method: 'POST',
+          headers: {
+            'apikey': SB_KEY,
+            'Authorization': 'Bearer ' + SB_KEY,
+            'Content-Type': 'application/json',
+            'Prefer': 'return=minimal'
+          },
+          body: JSON.stringify({
+            name, contact,
+            segment: (fd.get('segment') || '').trim() || null,
+            message: (fd.get('message') || '').trim() || null,
+            user_agent: (navigator.userAgent || '').slice(0, 400)
+          })
+        });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        leadForm.reset();
+        setStatus('✓ Recebido! Rafael entra em contato em breve.', 'ok');
+      } catch (err) {
+        setStatus('Não consegui enviar agora. Tente pelo WhatsApp acima.', 'err');
+      } finally {
+        btn.disabled = false; btn.textContent = label;
+      }
+    });
+  }
 })();

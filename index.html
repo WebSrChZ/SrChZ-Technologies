@@ -71,6 +71,7 @@
       <a href="#metodo">Método</a>
       <a href="#planos">Planos</a>
       <a href="#portal">Portal</a>
+      <a href="#casos">Casos</a>
       <a href="#comecar">Como começar</a>
       <a class="nav-cta" href="#contato">Falar comigo</a>
     </nav>
@@ -80,6 +81,7 @@
     <a href="#metodo">Método</a>
     <a href="#planos">Planos</a>
     <a href="#portal">Portal</a>
+    <a href="#casos">Casos</a>
     <a href="#comecar">Como começar</a>
     <a href="#contato">Falar comigo</a>
   </div>
@@ -243,8 +245,49 @@
   </div>
 </section>
 
+<!-- ===== CASOS ===== -->
+<section class="section section-alt" id="casos">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Caso em Operação</span>
+      <h2 class="sec-title">O ecossistema, na prática.</h2>
+      <p class="sec-lede">Um cliente real rodando o método completo — conteúdo, produção e portal próprio operando como um só sistema.</p>
+    </div>
+
+    <article class="portal-card case-card reveal">
+      <span class="portal-tag">Caso · ItsPower</span>
+      <div class="portal-grid case-grid">
+        <div class="case-id">
+          <img class="case-logo" src="assets/case-itspower.jpg" alt="ItsPower Academia" width="92" height="92" loading="lazy">
+          <h3 class="case-name">ItsPower <em>Academia</em></h3>
+          <p class="case-meta">Cláudio · MG&nbsp;&nbsp;—&nbsp;&nbsp;24 anos&nbsp;&nbsp;·&nbsp;&nbsp;2 unidades</p>
+          <p class="case-quote">Do briefing à publicação, tudo num sistema só — e o cliente acompanha em tempo real.</p>
+          <a class="portal-live" href="https://websrchz.github.io/its-power-hub/" target="_blank" rel="noopener">Ver o portal do cliente ao vivo <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="case-deliver">
+          <span class="case-deliver-h">O que entregamos</span>
+          <ul class="feats case-feats">
+            <li><b>Sistema editorial</b> — 8 pilares + 3 quadros fixos</li>
+            <li><b>12 vídeos/mês</b> em cadência fixa</li>
+            <li>Motion graphics + <b>legendas sincronizadas</b></li>
+            <li>Áudio <b>masterizado</b> + sound design</li>
+            <li><b>Portal do Cliente</b> ao vivo (PWA, multi-device)</li>
+            <li>Direção visual e <b>tom de voz</b></li>
+          </ul>
+        </div>
+      </div>
+      <div class="portal-stats case-stats">
+        <div class="stat"><span class="stat-n">24</span><span class="stat-l">Anos de marca, repaginados</span></div>
+        <div class="stat"><span class="stat-n">12</span><span class="stat-l">Vídeos por mês</span></div>
+        <div class="stat"><span class="stat-n">2</span><span class="stat-l">Unidades sob um sistema</span></div>
+        <div class="stat"><span class="stat-n">+8</span><span class="stat-l">Pilares editoriais</span></div>
+      </div>
+    </article>
+  </div>
+</section>
+
 <!-- ===== COMO COMEÇAR ===== -->
-<section class="section section-alt" id="comecar">
+<section class="section" id="comecar">
   <div class="wrap">
     <div class="sec-head reveal">
       <span class="eyebrow">Como Começar</span>
@@ -271,6 +314,22 @@
         <a class="btn btn-ghost btn-lg" href="mailto:rafaelhenriquecsantosz@gmail.com?subject=Diagn%C3%B3stico%20Growth%20%26%20Branding">Enviar e-mail</a>
         <a class="btn btn-ghost btn-lg" href="Planos.GrowthBranding.v2.pdf" download="SrChZ-Proposta-Growth-Branding.pdf">Baixar proposta (PDF)</a>
       </div>
+
+      <div class="lead-wrap">
+        <p class="lead-or">ou deixe seus dados e eu te chamo</p>
+        <form class="lead-form" id="leadForm" novalidate>
+          <div class="lead-row">
+            <input class="lead-in" name="name" type="text" placeholder="Seu nome" autocomplete="name" required maxlength="120" aria-label="Seu nome">
+            <input class="lead-in" name="contact" type="text" placeholder="WhatsApp ou e-mail" autocomplete="email" required maxlength="160" aria-label="WhatsApp ou e-mail">
+          </div>
+          <input class="lead-in" name="segment" type="text" placeholder="Seu segmento — academia, clínica, loja… (opcional)" maxlength="120" aria-label="Seu segmento">
+          <textarea class="lead-in lead-ta" name="message" placeholder="O que você quer resolver? (opcional)" maxlength="2000" rows="3" aria-label="Mensagem"></textarea>
+          <input class="lead-hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <button class="btn btn-gold btn-lg lead-btn" type="submit">Quero meu diagnóstico gratuito</button>
+          <p class="lead-status" id="leadStatus" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+
       <p class="cta-meta">Cláudio, MG · <span>Perception · Strategy · Execution</span></p>
     </div>
   </div>
