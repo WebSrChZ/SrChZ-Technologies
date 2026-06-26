@@ -415,5 +415,12 @@
 </a>
 <button class="to-top" id="toTop" aria-label="Voltar ao topo" hidden>↑</button>
 <script src="js/main.js" defer></script>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js').catch(() => {});
+    });
+  }
+</script>
 </body>
 </html>
