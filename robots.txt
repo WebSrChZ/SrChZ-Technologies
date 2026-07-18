@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://websrchz.github.io/SrChZ-Technologies/sitemap.xml
+Sitemap: https://www.srchz-technologies.com.br/sitemap.xml

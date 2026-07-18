@@ -3,26 +3,28 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Página não encontrada — SrChZ Technologies</title>
 <meta name="robots" content="noindex">
-<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;600&display=swap" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;600&display=swap"></noscript>
-<link rel="stylesheet" href="css/styles.css">
+<title>404 — SrChZ Technologies</title>
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@300;500&display=swap">
 <style>
-  .nf{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 20px;
-    background-image:radial-gradient(60% 50% at 50% 0%,rgba(201,162,75,.12),transparent 60%)}
-  .nf .code{font-family:var(--serif);font-size:clamp(90px,22vw,180px);font-weight:700;line-height:1}
-  .nf p{color:var(--soft);margin:10px 0 28px;font-size:16px}
+  :root{--gold:#c9a24b;--gold2:#ead29a;--ink:#f6f2e9;--soft:#cfc7b6;--bg:#08080a}
+  *{margin:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);font-family:"Inter",system-ui,sans-serif;font-weight:300;min-height:100vh;display:grid;place-items:center;text-align:center;padding:2rem}
+  .glow{position:fixed;inset:0;background:radial-gradient(50% 45% at 50% 35%,rgba(201,162,75,.14),transparent 70%);pointer-events:none}
+  .code{font-family:"Cormorant Garamond",serif;font-weight:700;font-size:clamp(5rem,18vw,9rem);line-height:1;background:linear-gradient(180deg,#f6e4ad,#cda74f 55%,#9a7833);-webkit-background-clip:text;background-clip:text;color:transparent}
+  h1{font-family:"Cormorant Garamond",serif;font-weight:600;font-size:clamp(1.4rem,4vw,2rem);margin:.4rem 0 .6rem}
+  p{color:var(--soft);max-width:42ch;margin:0 auto 1.6rem}
+  a{display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 1.5rem;border-radius:999px;background:linear-gradient(180deg,#f6e4ad,#cda74f 55%,#9a7833);color:#0a0a0a;text-decoration:none;font-weight:500}
 </style>
 </head>
 <body>
-  <div class="nf">
-    <div class="code gold-text">404</div>
-    <p>Esta página não existe — mas o seu ecossistema pode existir.</p>
-    <a class="btn btn-gold" href="./">Voltar ao início</a>
-  </div>
+<div class="glow"></div>
+<main>
+  <div class="code">404</div>
+  <h1>Página não encontrada</h1>
+  <p>O caminho que você procurou não existe — mas a solução certa está a um clique.</p>
+  <a href="/">Voltar para a SrChZ Technologies</a>
+</main>
 </body>
 </html>
