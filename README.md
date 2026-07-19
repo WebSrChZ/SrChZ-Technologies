@@ -49,7 +49,7 @@ Estático puro. **Deploy:** push na `main` → GitHub Pages publica em ~1 min (d
 `HTML5` · `CSS3` · `JavaScript (vanilla)` · `Supabase` · `GitHub Pages`
 
 ## 📬 Contato
-**rafaelhenriquecsantosz@gmail.com** · Cláudio, MG · [WhatsApp](https://wa.me/5511996869309)
+**rafaelhenriquecsantosz@gmail.com** · [WhatsApp](https://wa.me/5511996869309)
 
 ---
 <sub>© Rafael Cordeiro · SrChZ Technologies — *Sua definição de qualidade.*</sub>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Calculadora de Caminho do Som (Sound Path) — Ultrassom N2 · SrChZ</title>
+<meta name="description" content="Calculadora grátis de caminho do som (sound path) para cabeçote angular no aço: percurso da perna, salto, profundidade e distância projetada. Ultrassom Nível II — SrChZ." />
+<meta name="theme-color" content="#09090b" />
+<link rel="icon" href="assets/img/logo-icon.png" />
+<link rel="canonical" href="https://www.srchz-technologies.com.br/end/USN2/calculadora.html" />
+<meta property="og:title" content="Calculadora de Caminho do Som — Ultrassom Nível II" />
+<meta property="og:description" content="Ferramenta grátis: percurso da perna, salto, profundidade e projeção para cabeçote angular no aço." />
+<meta property="og:image" content="assets/img/og.png" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/styles.css" />
+<style>
+.calc-wrap{max-width:900px;margin:0 auto;padding:120px 22px 40px}
+.calc{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:30px}
+.calc__panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:26px}
+.calc__panel h3{font-family:var(--serif);color:var(--gold-2);font-size:1.25rem;margin-bottom:16px}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:.82rem;color:var(--soft);margin-bottom:5px}
+.field input{width:100%;background:var(--bg);border:1px solid var(--line-2);border-radius:4px;padding:11px 12px;color:var(--ink);font-family:var(--sans);font-size:1rem}
+.field input:focus{outline:none;border-color:var(--gold)}
+.out{display:flex;justify-content:space-between;align-items:baseline;padding:9px 0;border-bottom:1px solid var(--line-2);font-size:.92rem}
+.out span{color:var(--soft)}.out b{color:var(--gold-2);font-size:1.05rem;font-variant-numeric:tabular-nums}
+.leg{color:var(--muted);font-size:.8rem;margin-top:14px;line-height:1.6}
+.cta-box{margin-top:34px;background:linear-gradient(160deg,rgba(201,162,75,.10),var(--panel-2));border:1px solid var(--gold);border-radius:10px;padding:26px;text-align:center}
+.cta-box h3{font-family:var(--serif);font-size:1.5rem;margin-bottom:8px}
+.cta-box p{color:var(--soft);margin-bottom:16px}
+@media(max-width:720px){.calc{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="nav" id="nav"><div class="container nav__inner">
+  <a class="nav__brand" href="index.html"><img src="assets/img/logo-icon.png" alt="SrChZ" class="nav__logo"/><span class="nav__name">Guia <b>Ultrassom N2</b></span></a>
+  <nav class="nav__links"><a href="index.html">← Voltar ao guia</a><a href="index.html#planos" class="btn btn--gold btn--sm">Ver planos</a></nav>
+</div></header>
+
+<div class="calc-wrap">
+  <p class="eyebrow">Ferramenta grátis · Ultrassom Nível II</p>
+  <h1 class="hero__title" style="font-size:clamp(1.9rem,5vw,2.8rem)">Calculadora de <span class="gold-grad">Caminho do Som</span></h1>
+  <p class="hero__sub">Cabeçote angular no aço. Informe os dados e veja perna, salto, profundidade e projeção — calculados na hora.</p>
+
+  <div class="calc">
+    <div class="calc__panel">
+      <h3>Entradas</h3>
+      <div class="field"><label>Ângulo do cabeçote θ (°)</label><input type="number" id="ang" value="60" step="1"/></div>
+      <div class="field"><label>Espessura t (mm)</label><input type="number" id="esp" value="20" step="0.5"/></div>
+      <div class="field"><label>Percurso sônico PS lido (mm)</label><input type="number" id="ps" value="30" step="0.5"/></div>
+      <div class="field"><label>Frequência f (MHz) — opcional</label><input type="number" id="freq" value="4" step="0.5"/></div>
+      <div class="field"><label>Diâmetro do cristal D (mm) — opcional</label><input type="number" id="diam" value="10" step="1"/></div>
+      <p class="leg">Constantes (aço): V<sub>L</sub>=5920 m/s · V<sub>T</sub>=3230 m/s.</p>
+    </div>
+    <div class="calc__panel">
+      <h3>Resultados</h3>
+      <div class="out"><span>λ transversal (mm)</span><b id="r_lt">—</b></div>
+      <div class="out"><span>Campo próximo N (mm)</span><b id="r_n">—</b></div>
+      <div class="out"><span>Percurso 1ª perna S = t/cosθ</span><b id="r_s">—</b></div>
+      <div class="out"><span>Superfície (meio salto) t·tanθ</span><b id="r_sup">—</b></div>
+      <div class="out"><span>Salto completo 2t·tanθ</span><b id="r_salto">—</b></div>
+      <div class="out"><span>PS·cosθ (componente vertical)</span><b id="r_vert">—</b></div>
+      <div class="out"><span>Perna do refletor</span><b id="r_perna">—</b></div>
+      <div class="out"><span>Profundidade real</span><b id="r_prof">—</b></div>
+      <div class="out"><span>Distância projetada PS·senθ</span><b id="r_proj">—</b></div>
+      <p class="leg">Profundidade usa a 2ª perna automaticamente quando PS·cosθ &gt; espessura.</p>
+    </div>
+  </div>
+
+  <div class="cta-box">
+    <h3>Quer a versão completa?</h3>
+    <p>A <b>Planilha Sound Path automatizada</b> + o <b>Caderno de 125 questões comentadas</b> + checklist de calibração estão no <b>Kit Aprovação</b>.</p>
+    <a href="index.html#planos" class="btn btn--gold">Ver o Kit Aprovação →</a>
+  </div>
+</div>
+
+<footer class="footer"><div class="container footer__inner">
+  <div class="footer__brand"><img src="assets/img/logo-horizontal.png" alt="SrChZ Technologies"/><p>Sua definição de qualidade. ⚜️</p></div>
+  <nav class="footer__links"><a href="index.html">O guia</a><a href="index.html#planos">Planos</a><a href="../privacidade.html">Privacidade</a></nav>
+</div></footer>
+
+<script>
+const VL=5.92, VT=3.23; // mm/µs
+const $=id=>document.getElementById(id);
+const rad=d=>d*Math.PI/180;
+function calc(){
+  const th=parseFloat($('ang').value), t=parseFloat($('esp').value), ps=parseFloat($('ps').value);
+  const f=parseFloat($('freq').value), D=parseFloat($('diam').value);
+  const c=Math.cos(rad(th)), s=Math.sin(rad(th)), tn=Math.tan(rad(th));
+  const fx=(v,dec=1)=>isFinite(v)?v.toFixed(dec):'—';
+  if(isFinite(f)&&f>0){ $('r_lt').textContent=fx(VT/f,3); $('r_n').textContent=isFinite(D)?fx((D*D*f)/(4*VL)):'—'; }
+  else { $('r_lt').textContent='—'; $('r_n').textContent='—'; }
+  $('r_s').textContent=fx(t/c);
+  $('r_sup').textContent=fx(t*tn);
+  $('r_salto').textContent=fx(2*t*tn);
+  const vert=ps*c;
+  $('r_vert').textContent=fx(vert);
+  const segunda = vert>t;
+  $('r_perna').textContent = segunda?'2ª perna':'1ª perna';
+  $('r_prof').textContent = fx(segunda ? (2*t-vert) : vert);
+  $('r_proj').textContent = fx(ps*s);
+}
+['ang','esp','ps','freq','diam'].forEach(id=>$(id).addEventListener('input',calc));
+calc();
+</script>
+</body>
+</html>

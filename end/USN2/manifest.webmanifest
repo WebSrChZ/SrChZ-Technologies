@@ -1,0 +1,12 @@
+{
+  "name": "Guia Ultrassom Nível II — SrChZ",
+  "short_name": "Ultrassom N2",
+  "description": "Guia definitivo de certificação de Ultrassom Nível II (END/UT).",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#09090b",
+  "theme_color": "#09090b",
+  "icons": [
+    { "src": "assets/img/logo-icon.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}
