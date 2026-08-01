@@ -10,6 +10,13 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="SrChZ">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+<!-- CSP: o GitHub Pages não permite cabeçalhos próprios, então vai por meta.
+     `unsafe-inline` é necessário enquanto houver <style>/<script> inline nesta
+     página. O ganho principal é `connect-src`: mesmo que algum script injetado
+     rode, ele não consegue enviar dados para outro host que não o Supabase.
+     `frame-ancestors` é ignorado em meta — para anti-clickjacking real seria
+     preciso um cabeçalho HTTP (ver README). -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https://hhrllexkkbekdbzivlgi.supabase.co">
 <title>SrChZ Technologies — Growth &amp; Branding | Rafael Cordeiro</title>
 <meta name="description" content="Growth &amp; Branding de alta performance: tráfego pago, branding, produção de vídeo e Portal do Cliente próprio — engenharia, psicanálise e estética.">
 <meta name="author" content="Rafael Cordeiro">
@@ -388,6 +395,10 @@
           <input class="lead-in" name="segment" type="text" placeholder="Seu segmento — academia, clínica, loja… (opcional)" maxlength="120" aria-label="Seu segmento">
           <textarea class="lead-in lead-ta" name="message" placeholder="O que você quer resolver? (opcional)" maxlength="2000" rows="3" aria-label="Mensagem"></textarea>
           <input class="lead-hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <label class="lead-consent">
+            <input type="checkbox" name="consent" id="leadConsent" required>
+            <span>Autorizo a SrChZ Technologies a usar meus dados para entrar em contato sobre este pedido. Posso revogar quando quiser. Veja a <a href="/privacidade.html" target="_blank" rel="noopener">Política de Privacidade</a>.</span>
+          </label>
           <button class="btn btn-gold btn-lg lead-btn" type="submit">Quero meu diagnóstico gratuito</button>
           <p class="lead-status" id="leadStatus" role="status" aria-live="polite"></p>
         </form>
@@ -407,6 +418,7 @@
     </div>
     <div class="footer-meta">
       <a href="mailto:rafaelhenriquecsantosz@gmail.com">rafaelhenriquecsantosz@gmail.com</a>
+      <a href="/privacidade.html">Política de Privacidade</a>
       <span id="year">© 2026 Rafael Cordeiro</span>
     </div>
   <nav class="social" aria-label="Redes sociais de SrChZ Technologies">
