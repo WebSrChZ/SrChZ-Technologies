@@ -27,6 +27,9 @@ growth/                 Prática Branding & Growth (one-page premium)
   ├─ css/ · js/          estilos, animações e main.js (nav, reveal, scroll-spy, count-up, lead)
   ├─ manifest.webmanifest · sw.js   PWA do subsite
   └─ Planos/Planos.GrowthBranding.v2.pdf   proposta para download
+kl-sports/              Catálogo digital do cliente KL Sports Fitness (pesos para musculação)
+  ├─ index.html          21 produtos, seleção de pesos e orçamento enviado pelo WhatsApp
+  └─ assets/             fotos dos produtos, logos, capa e og.jpg (prévia do link no WhatsApp)
 ```
 As **portas** da home levam a: **Branding &amp; Growth** (`/growth/`), **Engenharia &amp; END** (hub do livro *Ultrassom Nível II*, publicado na Amazon) e **Tecnologia &amp; Dados/IA** (em breve).
 

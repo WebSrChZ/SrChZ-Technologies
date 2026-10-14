@@ -1,0 +1,899 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#07142A">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Catálogo KL Sports Fitness</title>
+<meta name="description" content="Anilhas, halteres, dumbbells, barras, kettlebells, suportes e piso emborrachado. Escolha os pesos e peça seu orçamento pelo WhatsApp.">
+<link rel="canonical" href="https://www.srchz-technologies.com.br/kl-sports/">
+
+<!-- Open Graph / Twitter (prévia do link no WhatsApp) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="KL Sports Fitness">
+<meta property="og:title" content="Catálogo KL Sports Fitness · Pesos para Musculação">
+<meta property="og:description" content="Anilhas, halteres, dumbbells, kettlebells, barras, suportes e piso. Escolha os pesos e peça seu orçamento pelo WhatsApp.">
+<meta property="og:url" content="https://www.srchz-technologies.com.br/kl-sports/">
+<meta property="og:image" content="https://www.srchz-technologies.com.br/kl-sports/assets/og.jpg">
+<meta property="og:image:secure_url" content="https://www.srchz-technologies.com.br/kl-sports/assets/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Catálogo KL Sports Fitness: pesos para musculação">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Catálogo KL Sports Fitness · Pesos para Musculação">
+<meta name="twitter:description" content="Escolha os pesos e peça seu orçamento pelo WhatsApp.">
+<meta name="twitter:image" content="https://www.srchz-technologies.com.br/kl-sports/assets/og.jpg">
+
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+<link rel="preload" as="image" href="assets/capa.jpg">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SportingGoodsStore",
+  "name": "KL Sports Fitness",
+  "description": "Pesos para musculação: anilhas, halteres, dumbbells, barras, kettlebells, suportes e piso emborrachado.",
+  "url": "https://www.srchz-technologies.com.br/kl-sports/",
+  "image": "https://www.srchz-technologies.com.br/kl-sports/assets/og.jpg",
+  "logo": "https://www.srchz-technologies.com.br/kl-sports/assets/logo-kl-sports.png",
+  "telephone": "+55 37 99825-8881",
+  "sameAs": ["https://www.instagram.com/klsportfitness/"]
+}
+</script>
+<!--ART:HEAD-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Saira+Condensed:wght@600;700;800&display=swap">
+<style>
+/* Layout: vitrine de academia. Capa azul-marinho com foto e régua de faixas de peso,
+   depois prateleiras de produtos em grade; cada card é uma ficha com bandeja cinza
+   (o fundo das fotos do catálogo) e chips de peso que montam o orçamento. */
+:root{
+  --navy:#07142A; --navy-2:#0D2147; --navy-ink:#F2F6FC; --navy-ink-2:#A9B8D0; --navy-line:rgba(242,246,252,.2);
+  --blue:#0A63D8; --blue-hover:#0852B4; --blue-bright:#3B86F5; --on-blue:#FFFFFF;
+  --bg:#EDF1F7; --surface:#FFFFFF; --tray:#EFEFEF;
+  --ink:#0B1626; --ink-2:#4B5870; --line:#D6DDE8;
+  --accent-ink:#0A55BB; --chip-bg:#E8EFFB; --chip-ink:#0A4FA8; --chip-line:#C7D7F2;
+  --danger:#B42318; --focus:#3B86F5;
+  --scrim:rgba(5,12,24,.55);
+  --shadow:0 1px 2px rgba(7,20,42,.06),0 10px 28px -14px rgba(7,20,42,.25);
+  --f-display:'Saira Condensed','Arial Narrow','Helvetica Neue',Arial,sans-serif;
+  --f-body:'Archivo',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;
+  --r:16px; --r-sm:10px; --nav-h:60px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#050C18; --surface:#0C1829; --ink:#E6ECF5; --ink-2:#9AA8BE; --line:#1D2C45;
+    --accent-ink:#6EA8FF; --chip-bg:#10264A; --chip-ink:#A6C8FF; --chip-line:#24426F;
+    --danger:#FF8A7F; --scrim:rgba(0,0,0,.65);
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 12px 30px -14px rgba(0,0,0,.7);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#050C18; --surface:#0C1829; --ink:#E6ECF5; --ink-2:#9AA8BE; --line:#1D2C45;
+  --accent-ink:#6EA8FF; --chip-bg:#10264A; --chip-ink:#A6C8FF; --chip-line:#24426F;
+  --danger:#FF8A7F; --scrim:rgba(0,0,0,.65);
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 12px 30px -14px rgba(0,0,0,.7);
+  color-scheme:dark;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 var(--f-body);
+  -webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3{margin:0;text-wrap:balance}
+p{margin:0}
+button,input{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:6px}
+.i{width:1.15em;height:1.15em;flex:none}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.wrap{max-width:1200px;margin-inline:auto;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+/* Botões */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5em;min-height:46px;padding:0 18px;
+  border-radius:var(--r-sm);border:1px solid transparent;font:600 .95rem/1.1 var(--f-body);text-decoration:none;
+  cursor:pointer;transition:background-color .15s,border-color .15s,transform .1s;-webkit-tap-highlight-color:transparent}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:var(--blue);color:var(--on-blue)}
+.btn-primary:hover{background:var(--blue-hover)}
+.btn-ghost{background:transparent;color:var(--accent-ink);border-color:var(--chip-line)}
+.btn-ghost:hover{background:var(--chip-bg)}
+.btn-navy{background:transparent;color:var(--navy-ink);border-color:var(--navy-line)}
+.btn-navy:hover{background:rgba(242,246,252,.08)}
+.btn[aria-disabled="true"]{opacity:.45;pointer-events:none}
+
+/* Capa */
+.hero{position:relative;isolation:isolate;overflow:hidden;background:var(--navy);color:var(--navy-ink)}
+.hero::before{content:"";position:absolute;inset:0;z-index:-2;background:url("assets/capa.jpg") 70% 0/cover no-repeat}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(180deg,rgba(7,20,42,.25) 0%,rgba(7,20,42,.82) 38%,var(--navy) 62%)}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:14px}
+.topbar img{height:34px;width:auto}
+.topbar .btn{min-height:40px;padding:0 14px;font-size:.88rem;background:rgba(7,20,42,.45);backdrop-filter:blur(6px)}
+.hero-body{padding-block:clamp(110px,30vw,170px) 34px;display:grid;gap:22px;max-width:640px}
+.kicker{display:block;font:800 clamp(3.4rem,15vw,6.8rem)/.86 var(--f-display);color:var(--blue-bright);
+  text-transform:uppercase;letter-spacing:.005em}
+.hero-title .line{display:block;margin-top:12px;font:600 clamp(.85rem,3.4vw,1.05rem)/1.3 var(--f-body);
+  letter-spacing:.32em;text-transform:uppercase;color:var(--navy-ink)}
+.hero-lead{font-size:1.08rem;color:var(--navy-ink-2);max-width:44ch}
+.hero-cta{display:flex;flex-wrap:wrap;gap:10px}
+.ranges{list-style:none;margin:0;padding:0 0 30px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.ranges a{display:grid;gap:2px;padding:12px 14px;border:1px solid var(--navy-line);border-radius:12px;
+  background:rgba(13,33,71,.55);text-decoration:none;transition:border-color .15s,background-color .15s}
+.ranges a:hover{border-color:var(--blue-bright);background:rgba(13,33,71,.85)}
+.r-label{font:600 .74rem/1.2 var(--f-body);letter-spacing:.14em;text-transform:uppercase;color:var(--navy-ink-2)}
+.r-val{font:800 2rem/1 var(--f-display);font-variant-numeric:tabular-nums;color:var(--navy-ink)}
+.r-val small{font-size:.5em;font-weight:700;margin-left:.25em;color:var(--blue-bright);letter-spacing:.06em}
+
+/* Navegação por categoria */
+.catnav{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:var(--surface);
+  border-bottom:1px solid var(--line);box-shadow:0 6px 16px -14px rgba(7,20,42,.5)}
+.catnav-row{position:relative;display:flex;gap:8px;overflow-x:auto;padding-block:10px;scrollbar-width:none;scroll-padding-inline:16px}
+.catnav-row::-webkit-scrollbar{display:none}
+.catnav a{flex:none;white-space:nowrap;padding:9px 15px;border-radius:999px;border:1px solid var(--line);
+  font:600 .9rem/1 var(--f-body);color:var(--ink-2);text-decoration:none;transition:background-color .15s,color .15s,border-color .15s}
+.catnav a:hover{color:var(--ink);border-color:var(--chip-line)}
+.catnav a[aria-current="true"]{background:var(--blue);border-color:var(--blue);color:var(--on-blue)}
+
+/* Como pedir */
+.steps{list-style:none;margin:0;padding:22px 0 6px;display:grid;gap:10px}
+.steps li{display:flex;gap:14px;align-items:flex-start;padding:14px 16px;background:var(--surface);
+  border:1px solid var(--line);border-radius:var(--r-sm)}
+.steps b{flex:none;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;
+  background:var(--chip-bg);color:var(--chip-ink);font:800 1.15rem/1 var(--f-display)}
+.steps strong{display:block;font-weight:700}
+.steps span{display:block;color:var(--ink-2);font-size:.92rem}
+
+/* Categorias */
+.cat{padding-block:34px 8px;scroll-margin-top:var(--nav-h)}
+.cat-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:4px 16px;margin-bottom:16px}
+.cat-head h2{font:800 clamp(2.1rem,7vw,3rem)/.95 var(--f-display);text-transform:uppercase;letter-spacing:.01em}
+.cat-head p{color:var(--ink-2)}
+.cat-count{font:700 .8rem/1 var(--f-body);letter-spacing:.12em;text-transform:uppercase;color:var(--accent-ink)}
+.note{display:flex;gap:10px;align-items:flex-start;margin-bottom:16px;padding:12px 14px;border-radius:var(--r-sm);
+  background:var(--chip-bg);border:1px solid var(--chip-line);color:var(--ink);font-weight:600;font-size:.94rem}
+.note .i{color:var(--accent-ink);margin-top:.1em}
+.grid{display:grid;gap:16px;grid-template-columns:minmax(0,1fr)}
+
+/* Card de produto */
+.card{display:flex;flex-direction:column;min-width:0;background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--r);overflow:hidden;scroll-margin-top:calc(var(--nav-h) + 14px);transition:box-shadow .2s,border-color .2s}
+.card:hover{box-shadow:var(--shadow)}
+.card.flash{border-color:var(--blue);box-shadow:0 0 0 3px var(--blue)}
+.tray{position:relative;aspect-ratio:16/10;background:var(--tray);padding:16px 22px}
+.tray img{width:100%;height:100%;object-fit:contain}
+.share-mini{position:absolute;top:10px;right:10px;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;
+  background:#FFFFFF;color:#0A55BB;box-shadow:0 2px 8px rgba(7,20,42,.18);text-decoration:none}
+.share-mini:hover{background:#E8EFFB}
+.card-body{flex:1;display:flex;flex-direction:column;gap:14px;padding:18px;container-type:inline-size}
+.card h3{font:700 1.55rem/1.02 var(--f-display);letter-spacing:.005em}
+.card h3 .finish{display:block;color:var(--accent-ink)}
+.desc{color:var(--ink-2);font-size:.95rem;max-width:62ch}
+.spec{display:grid;gap:8px}
+.spec-label{font:700 .74rem/1.2 var(--f-body);letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
+.spec-label span{font-weight:500;letter-spacing:.04em;text-transform:none;color:var(--ink-2)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{display:inline-flex;align-items:baseline;gap:2px;min-width:52px;min-height:38px;justify-content:center;padding:8px 10px;
+  border-radius:8px;border:1px solid var(--chip-line);background:var(--chip-bg);color:var(--chip-ink);
+  font:700 1.02rem/1 var(--f-display);font-variant-numeric:tabular-nums;cursor:pointer;
+  transition:background-color .12s,color .12s,border-color .12s;-webkit-tap-highlight-color:transparent}
+.chip small{font-size:.72em;font-weight:600;opacity:.8}
+.chip:hover{border-color:var(--blue)}
+.chip[aria-pressed="true"]{background:var(--blue);border-color:var(--blue);color:var(--on-blue)}
+.pill{justify-self:start;padding:8px 12px;border-radius:8px;background:var(--chip-bg);border:1px solid var(--chip-line);
+  color:var(--chip-ink);font:700 1.05rem/1 var(--f-display);font-variant-numeric:tabular-nums}
+.field{display:grid;gap:6px;font-size:.88rem;color:var(--ink-2)}
+.field em{font-style:normal;opacity:.8}
+.input{width:100%;min-height:44px;padding:10px 12px;border-radius:var(--r-sm);border:1px solid var(--line);
+  background:var(--bg);color:var(--ink);font-size:1rem}
+.input:focus{border-color:var(--blue);outline:none;box-shadow:0 0 0 3px rgba(59,134,245,.3)}
+.err{color:var(--danger);font-size:.88rem;font-weight:600}
+.actions{margin-top:auto;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;padding-top:4px}
+.actions .btn{padding:0 14px}
+@container (max-width:380px){.actions [data-ask] span{display:none}}
+@container (max-width:300px){.actions .long{display:none}}
+
+/* Card de chamada dentro da grade */
+.cta-card{display:flex;flex-direction:column;justify-content:space-between;gap:18px;min-width:0;padding:24px 22px;
+  border-radius:var(--r);background:var(--navy);color:var(--navy-ink);
+  background-image:radial-gradient(120% 90% at 100% 0%,rgba(59,134,245,.35),transparent 60%)}
+.cta-card h3{font:800 2rem/1 var(--f-display);text-transform:uppercase}
+.cta-card p{color:var(--navy-ink-2);margin-top:10px}
+.cta-card .btn{justify-self:start;align-self:flex-start}
+
+/* Fechamento */
+.closing{position:relative;isolation:isolate;overflow:hidden;margin-top:44px;background:var(--navy);color:var(--navy-ink)}
+.closing::before{content:"";position:absolute;inset:0;z-index:-2;background:url("assets/fechamento.jpg") 60% 30%/cover no-repeat;opacity:.55}
+.closing::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(7,20,42,.6),var(--navy) 85%)}
+.closing-inner{display:grid;gap:28px;padding-block:48px 34px}
+.closing-copy{display:grid;gap:14px;max-width:560px}
+.closing-copy img{width:150px;height:auto}
+.closing h2{font:800 clamp(2rem,6.5vw,3.1rem)/.98 var(--f-display);text-transform:uppercase}
+.closing-copy p{color:var(--navy-ink-2);font-size:1.05rem}
+.contacts{display:grid;gap:10px;align-content:start}
+.contact{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:12px;background:var(--blue);color:var(--on-blue);text-decoration:none;transition:background-color .15s}
+.contact:hover{background:var(--blue-hover)}
+.contact .i{width:28px;height:28px}
+.contact small{display:block;font:600 .72rem/1.2 var(--f-body);letter-spacing:.14em;text-transform:uppercase;opacity:.85}
+.contact strong{display:block;font:700 1.35rem/1.15 var(--f-display);font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.ig{display:inline-flex;align-items:center;gap:8px;padding:10px 4px;color:var(--navy-ink);text-decoration:none;font-weight:600}
+.ig:hover{text-decoration:underline}
+.foot{display:grid;gap:18px;padding-block:22px calc(100px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--navy-line)}
+.sharebox{display:grid;gap:8px}
+.sharebox label{font:700 .74rem/1.2 var(--f-body);letter-spacing:.14em;text-transform:uppercase;color:var(--navy-ink-2)}
+.sharebox-row{display:flex;flex-wrap:wrap;gap:8px}
+.sharebox .input{flex:1 1 240px;min-width:0;background:rgba(242,246,252,.06);border-color:var(--navy-line);color:var(--navy-ink)}
+.fine{color:var(--navy-ink-2);font-size:.85rem}
+
+/* Barra fixa de orçamento */
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:40;display:flex;gap:8px;align-items:center;background:var(--surface);
+  border-top:1px solid var(--line);box-shadow:0 -8px 24px -18px rgba(7,20,42,.6);
+  padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.dock-quote{display:inline-flex;align-items:center;gap:6px;min-height:46px;padding:0 12px;white-space:nowrap;border-radius:var(--r-sm);
+  border:1px solid var(--line);background:var(--bg);color:var(--ink);font-weight:600;cursor:pointer}
+.dock-quote:hover{border-color:var(--chip-line)}
+.count{display:inline-grid;place-items:center;min-width:24px;height:24px;padding:0 6px;border-radius:999px;
+  background:var(--blue);color:var(--on-blue);font:700 .85rem/1 var(--f-body);font-variant-numeric:tabular-nums}
+.count[data-zero]{background:var(--line);color:var(--ink-2)}
+.count.bump{animation:bump .35s ease}
+@keyframes bump{40%{transform:scale(1.35)}}
+.dock .btn{flex:1;min-width:0;padding:0 14px;white-space:nowrap}
+
+/* Aviso */
+.toast{position:fixed;left:50%;transform:translateX(-50%);z-index:45;bottom:calc(80px + env(safe-area-inset-bottom,0px));
+  width:min(520px,calc(100% - 32px));display:flex;align-items:center;gap:12px;padding:12px 12px 12px 16px;border-radius:12px;
+  background:var(--navy);color:var(--navy-ink);box-shadow:0 12px 30px -10px rgba(0,0,0,.5);font-size:.93rem}
+.toast span{flex:1;min-width:0}
+.toast button{flex:none;border:0;background:transparent;color:var(--blue-bright);font-weight:700;cursor:pointer;padding:8px}
+
+/* Painel do orçamento */
+.sheet{border:0;padding:0;margin:0;position:fixed;inset:auto 0 0 0;width:100%;max-width:none;max-height:min(90vh,100%);
+  background:var(--surface);color:var(--ink);border-radius:20px 20px 0 0;box-shadow:0 -20px 50px -20px rgba(0,0,0,.5)}
+.sheet[open]{display:flex;flex-direction:column}
+.sheet::backdrop{background:var(--scrim)}
+.sheet-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 18px 12px;border-bottom:1px solid var(--line)}
+.sheet-head h2{font:800 1.7rem/1 var(--f-display);text-transform:uppercase}
+.icon-btn{display:grid;place-items:center;width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
+.icon-btn:hover{background:var(--bg)}
+.sheet-body{flex:1;overflow:auto;overscroll-behavior:contain;padding:8px 18px 4px}
+.q-list{list-style:none;margin:0;padding:0}
+.q-item{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:10px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.q-name{font-weight:700;line-height:1.25}
+.q-detail{color:var(--accent-ink);font:700 1rem/1.2 var(--f-display);margin-top:2px}
+.q-item .input{min-height:38px;margin-top:6px;padding:6px 10px;font-size:.92rem}
+.stepper{display:flex;align-items:center;border:1px solid var(--line);border-radius:999px}
+.stepper button{display:grid;place-items:center;width:34px;height:34px;border:0;background:transparent;border-radius:50%;color:var(--ink);cursor:pointer}
+.stepper button:hover{background:var(--bg)}
+.stepper output{min-width:24px;text-align:center;font:700 1.05rem/1 var(--f-display);font-variant-numeric:tabular-nums}
+.q-del{width:36px;height:36px;border:0;background:transparent;color:var(--ink-2);border-radius:50%;cursor:pointer;display:grid;place-items:center}
+.q-del:hover{color:var(--danger);background:var(--bg)}
+.q-empty{padding:26px 4px;color:var(--ink-2);display:grid;gap:12px;justify-items:start}
+.q-empty strong{color:var(--ink);font-size:1.05rem}
+.sheet-foot{display:grid;gap:12px;padding:14px 18px calc(16px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line)}
+.q-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.q-phone{border:0;margin:0;padding:0;display:grid;gap:6px}
+.q-phone legend{padding:0;margin-bottom:6px;font:700 .74rem/1.2 var(--f-body);letter-spacing:.14em;text-transform:uppercase}
+.seg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.seg label{position:relative}
+.seg input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.seg span{display:block;text-align:center;padding:10px 8px;border-radius:var(--r-sm);border:1px solid var(--line);
+  font:700 1rem/1.1 var(--f-display);font-variant-numeric:tabular-nums;color:var(--ink-2)}
+.seg input:checked + span{border-color:var(--blue);background:var(--chip-bg);color:var(--chip-ink)}
+.seg input:focus-visible + span{outline:3px solid var(--focus);outline-offset:2px}
+.foot-row{display:flex;gap:8px;align-items:center}
+.foot-row .btn-primary{flex:1;min-height:50px;font-size:1rem}
+.btn-text{background:transparent;border:0;color:var(--ink-2);font-weight:600;padding:0 10px;min-height:46px;cursor:pointer;border-radius:var(--r-sm)}
+.btn-text:hover{color:var(--danger)}
+.btn-text[data-armed]{color:var(--danger)}
+.q-hint{font-size:.84rem;color:var(--ink-2)}
+
+@media (min-width:620px){
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tray{aspect-ratio:4/3}
+  .steps{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .closing-inner{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);align-items:end}
+}
+@media (min-width:760px){
+  .hero::after{background:linear-gradient(90deg,var(--navy) 28%,rgba(7,20,42,.7) 55%,rgba(7,20,42,.15) 100%),
+    linear-gradient(0deg,var(--navy) 0%,rgba(7,20,42,0) 35%)}
+  .hero::before{background-position:right center;left:30%}
+  .hero-body{padding-block:56px 34px}
+  .ranges{grid-template-columns:repeat(4,minmax(0,1fr));max-width:760px}
+  .r-val{font-size:2.4rem}
+  .foot{padding-block:22px 112px}
+  .dock{left:auto;right:calc(20px + env(safe-area-inset-right,0px));bottom:calc(20px + env(safe-area-inset-bottom,0px));
+    padding:8px;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}
+  .dock .btn{flex:none}
+  .toast{left:auto;right:calc(20px + env(safe-area-inset-right,0px));transform:none;bottom:calc(96px + env(safe-area-inset-bottom,0px))}
+  .sheet{inset:0 0 0 auto;width:min(460px,100%);height:100%;max-height:100%;border-radius:0}
+  .foot{grid-template-columns:minmax(0,1fr) auto;align-items:end}
+  .closing-inner{padding-block:72px 40px}
+}
+@media (min-width:1000px){
+  .grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition:none!important;animation:none!important}
+}
+</style>
+<!--/ART:HEAD-->
+</head>
+<body>
+<!--ART:BODY-->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8z"/><path fill="currentColor" d="M8.6 7.3c-.2-.4-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 2.9 2.9 0 0 0-.9 2.2c0 1.3.9 2.5 1 2.7.1.2 1.8 2.9 4.5 4 2.2.9 2.7.7 3.2.7s1.5-.6 1.7-1.2c.2-.6.2-1.1.2-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.9z"/></symbol>
+  <symbol id="i-share" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-minus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4H7a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2"/><rect x="9" y="2.5" width="6" height="3.5" rx="1"/><path d="M9 11h6M9 15h4"/></symbol>
+  <symbol id="i-ig" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.5h.01"/></symbol>
+</svg>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="topbar">
+      <img src="assets/logo-kl-sports-branco.png" alt="KL Sports Fitness" width="129" height="34">
+      <a class="btn btn-navy" data-share href="#" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-share"/></svg>Compartilhar</a>
+    </div>
+    <div class="hero-body">
+      <h1 class="hero-title"><span class="kicker">Catálogo</span><span class="line">Pesos para musculação</span></h1>
+      <p class="hero-lead">Tudo para equipar sua academia, estúdio ou treino em casa. Escolha os pesos, monte o seu kit e peça o orçamento pelo WhatsApp.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" data-wa-general href="#" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Chamar no WhatsApp</a>
+        <a class="btn btn-navy" href="#anilhas">Ver produtos</a>
+      </div>
+    </div>
+    <ul class="ranges" aria-label="Faixas de peso">
+      <li><a href="#anilhas"><span class="r-label">Anilhas</span><span class="r-val">1–25<small>kg</small></span></a></li>
+      <li><a href="#halteres"><span class="r-label">Halteres</span><span class="r-val">1–30<small>kg</small></span></a></li>
+      <li><a href="#dumbbells"><span class="r-label">Dumbbells</span><span class="r-val">6–60<small>kg</small></span></a></li>
+      <li><a href="#kettlebells"><span class="r-label">Kettlebells</span><span class="r-val">4–40<small>kg</small></span></a></li>
+    </ul>
+  </div>
+</header>
+
+<nav class="catnav" aria-label="Categorias">
+  <div class="wrap catnav-row" id="catnav"></div>
+</nav>
+
+<main class="wrap" id="catalogo">
+  <ol class="steps" aria-label="Como pedir">
+    <li><b>1</b><div><strong>Escolha os pesos</strong><span>Toque nos pesos que você quer em cada produto.</span></div></li>
+    <li><b>2</b><div><strong>Adicione ao orçamento</strong><span>Monte o seu kit com quantos itens quiser.</span></div></li>
+    <li><b>3</b><div><strong>Envie pelo WhatsApp</strong><span>A mensagem sai pronta para a nossa equipe.</span></div></li>
+  </ol>
+  <noscript><p class="note">Ative o JavaScript para ver os produtos, ou chame a equipe no WhatsApp: +55 (37) 99825-8881.</p></noscript>
+</main>
+
+<section class="closing" id="contato" aria-labelledby="h-contato">
+  <div class="wrap closing-inner">
+    <div class="closing-copy">
+      <img src="assets/logo-kl-sports.png" alt="KL Sports Fitness" width="150" height="129" loading="lazy">
+      <h2 id="h-contato">Antes de comprar, fale com a nossa equipe</h2>
+      <p>Confira os últimos lançamentos disponíveis. Estamos sempre com novidades chegando!</p>
+    </div>
+    <div class="contacts">
+      <a class="contact" data-wa-to="a" href="#" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg><span><small>Chamar no WhatsApp</small><strong>+55 (37) 99825-8881</strong></span></a>
+      <a class="contact" data-wa-to="b" href="#" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg><span><small>Chamar no WhatsApp</small><strong>+55 (37) 9994-5854</strong></span></a>
+      <a class="ig" href="https://www.instagram.com/klsportfitness/" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-ig"/></svg>@klsportfitness</a>
+    </div>
+  </div>
+  <div class="wrap foot">
+    <div class="sharebox">
+      <label for="site-link">Link do catálogo</label>
+      <div class="sharebox-row">
+        <input class="input" id="site-link" type="text" readonly>
+        <button class="btn btn-navy" type="button" id="copy-link"><svg class="i" aria-hidden="true"><use href="#i-copy"/></svg>Copiar link</button>
+        <a class="btn btn-primary" data-share href="#" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Enviar no WhatsApp</a>
+      </div>
+    </div>
+    <p class="fine">© KL Sports Fitness · Pesos para musculação</p>
+  </div>
+</section>
+
+<div class="dock" role="region" aria-label="Orçamento">
+  <button class="dock-quote" type="button" id="open-quote" aria-haspopup="dialog">
+    <svg class="i" aria-hidden="true"><use href="#i-list"/></svg>Orçamento <span class="count" id="quote-count" data-zero>0</span>
+  </button>
+  <a class="btn btn-primary" id="dock-send" href="#" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg><span id="dock-send-label">WhatsApp</span></a>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden>
+  <span id="toast-msg"></span>
+  <button type="button" id="toast-view">Ver orçamento</button>
+</div>
+
+<dialog class="sheet" id="quote" aria-labelledby="quote-title">
+  <div class="sheet-head">
+    <h2 id="quote-title">Meu orçamento</h2>
+    <button class="icon-btn" type="button" id="close-quote" aria-label="Fechar orçamento"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button>
+  </div>
+  <div class="sheet-body">
+    <ul class="q-list" id="q-list"></ul>
+    <div class="q-empty" id="q-empty">
+      <strong>Seu orçamento está vazio.</strong>
+      <span>Toque nos pesos de um produto e depois em “Adicionar ao orçamento”. Você pode juntar vários produtos e enviar tudo de uma vez.</span>
+      <button class="btn btn-ghost" type="button" id="q-browse">Ver produtos</button>
+    </div>
+  </div>
+  <div class="sheet-foot">
+    <div class="q-fields">
+      <label class="field" for="q-name"><span>Seu nome <em>(opcional)</em></span><input class="input" id="q-name" type="text" autocomplete="name"></label>
+      <label class="field" for="q-city"><span>Cidade <em>(opcional)</em></span><input class="input" id="q-city" type="text" autocomplete="address-level2"></label>
+    </div>
+    <fieldset class="q-phone">
+      <legend>Enviar para</legend>
+      <div class="seg">
+        <label><input type="radio" name="q-phone" id="q-phone-a" value="a"><span>(37) 99825-8881</span></label>
+        <label><input type="radio" name="q-phone" id="q-phone-b" value="b"><span>(37) 9994-5854</span></label>
+      </div>
+    </fieldset>
+    <div class="foot-row">
+      <button class="btn-text" type="button" id="q-clear">Limpar</button>
+      <a class="btn btn-primary" id="q-send" href="#" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Enviar pelo WhatsApp</a>
+    </div>
+    <p class="q-hint">O WhatsApp abre com a mensagem pronta. Confira e toque em enviar.</p>
+  </div>
+</dialog>
+
+<script>
+(() => {
+  'use strict';
+
+  const SITE_URL = 'https://www.srchz-technologies.com.br/kl-sports/';
+  const PHONES = {
+    a: { label: '(37) 99825-8881', wa: '5537998258881' },
+    b: { label: '(37) 9994-5854', wa: '553799945854' }
+  };
+  const HELLO = 'Olá, KL Sports Fitness!';
+
+  const span = (a, b, step = 1) => Array.from({ length: Math.floor((b - a) / step) + 1 }, (_, i) => a + i * step);
+  const PLATES = [1, 2, 3, 4, 5, 10, 15, 20, 25];
+  const DB_DESC = 'Alta resistência a impactos. Os exercícios com dumbbells aumentam o potencial de força dos membros superiores (braços, antebraços, punhos e tronco), com aquele aspecto atlético que se traduz em saúde e qualidade de vida.';
+
+  const CATS = [
+    { id: 'anilhas', name: 'Anilhas', tagline: 'Emborrachada, pintada e injetada', items: [
+      { slug: 'anilha-vazada-emborrachada', name: 'Anilha Vazada', finish: 'Emborrachada', weights: PLATES,
+        desc: 'Ferro fundido revestido em PVC vinil (emborrachado). Protege o equipamento contra oxidação e desgaste e oferece duas pegadas mais confortáveis para a prática de vários exercícios.' },
+      { slug: 'anilha-vazada-pintada', name: 'Anilha Vazada', finish: 'Pintada', weights: PLATES,
+        desc: 'Ferro fundido com pintura especial Weglack Premium, de grande qualidade e durabilidade. As duas pegadas facilitam o manuseio, trazendo agilidade e mobilidade ao treino.' },
+      { slug: 'anilha-vazada-injetada', name: 'Anilha Vazada', finish: 'Injetada', weights: PLATES,
+        desc: 'Anilha olímpica de borracha injetada de alta qualidade, projetada para o uso profissional. O equipamento ideal para o treino de musculação.' }
+    ]},
+    { id: 'halteres', name: 'Halteres', tagline: 'Bola e sextavado, em 5 acabamentos', items: [
+      { slug: 'halter-bola-emborrachado', name: 'Halter Bola', finish: 'Emborrachado', weights: span(1, 10),
+        desc: 'Ferro fundido revestido em PVC vinil (emborrachado).' },
+      { slug: 'halter-bola-pintado', name: 'Halter Bola', finish: 'Pintado', weights: span(1, 10),
+        desc: 'Ferro fundido com acabamento em pintura Weglack Premium. O halter ideal para os seus treinos.' },
+      { slug: 'halter-sextavado-emborrachado', name: 'Halter Sextavado', finish: 'Emborrachado', range: '1 a 30 kg',
+        desc: 'Design único, com dimensões proporcionais nas hastes sextavadas e no punho, que proporciona conforto durante a prática de exercícios.' },
+      { slug: 'halter-sextavado-pintado', name: 'Halter Sextavado', finish: 'Pintado', range: '1 a 30 kg',
+        desc: 'A pintura torna o halter mais aderente às mãos, com característica antiderrapante durante o uso, sem causar desconforto.' },
+      { slug: 'halter-sextavado-injetado-pegada-cromada', name: 'Halter Sextavado Injetado', finish: 'Pegada Cromada', range: '1 a 30 kg',
+        desc: 'Ferro fundido revestido em PVC vinil (emborrachado), com pegada cromada.' }
+    ]},
+    { id: 'dumbbells', name: 'Dumbbells', tagline: 'Injetado, vazado, sport e pegada recartilhada',
+      note: 'Todos os dumbbells podem ser recartilhados.', items: [
+      { slug: 'dumbbell-injetado-pegada-recartilhada', name: 'Dumbbell Injetado', finish: 'Pegada Recartilhada', range: '6 a 60 kg', desc: DB_DESC },
+      { slug: 'dumbbell-sport-emborrachado', name: 'Dumbbell Sport', finish: 'Emborrachado', range: '6 a 60 kg',
+        desc: 'Discos emborrachados que protegem o equipamento e o ambiente de treino, com conforto, estabilidade e resistência para o uso diário.' },
+      { slug: 'dumbbell-vazado-pintado', name: 'Dumbbell Vazado', finish: 'Pintado', range: '6 a 60 kg', desc: DB_DESC },
+      { slug: 'dumbbell-vazado-emborrachado-pegada-recartilhada', name: 'Dumbbell Vazado Emborrachado', finish: 'Pegada Recartilhada', range: '6 a 60 kg', desc: DB_DESC },
+      { slug: 'dumbbell-vazado-pintado-pegada-recartilhada', name: 'Dumbbell Vazado Pintado', finish: 'Pegada Recartilhada', range: '6 a 60 kg',
+        desc: 'Anilhas em ferro fundido com pintura especial Weglack Premium, de grande qualidade e durabilidade, com duas pegadas e pegada recartilhada para firmeza no manuseio.' },
+      { slug: 'dumbbell-vazado-pintado-2', name: 'Dumbbell Vazado', finish: 'Pintado', range: '6 a 60 kg', desc: DB_DESC }
+    ]},
+    { id: 'barras-e-piso', name: 'Barras e piso', tagline: 'Barra montada injetada e piso emborrachado para academia', items: [
+      { slug: 'barra-montada-injetada', name: 'Barra Montada', finish: 'Injetada', range: '6 a 60 kg',
+        desc: 'Barra montada injetada, prática e eficiente. Ideal para treinos de musculação e funcionais, é um equipamento importado de alta qualidade para uso profissional.' },
+      { slug: 'piso-emborrachado', name: 'Piso Emborrachado', finish: 'para Academia', spec: ['Medidas', 'Consulte medidas'],
+        desc: 'Mais segurança, conforto e durabilidade. Desenvolvido para suportar impactos e proteger o piso e os equipamentos, também reduz o ruído durante os treinos. Ideal para áreas de musculação, cross training e espaços funcionais, com material antiderrapante.' }
+    ], cta: { title: 'Mais opções de barras', text: 'Temos mais opções de barras, incluindo lançamentos recentes! Consulte nosso catálogo completo com nossa equipe antes de finalizar sua compra.',
+      button: 'Consultar a equipe', message: 'Quero conhecer as outras opções de barras, incluindo os lançamentos recentes.' } },
+    { id: 'kettlebells', name: 'Kettlebells', tagline: 'Pintado e emborrachado, de 4 a 40 kg', items: [
+      { slug: 'kettlebell-pintado', name: 'Kettlebell', finish: 'Pintado', weights: span(4, 40, 2),
+        desc: 'Ideal para o treino aplicado. Em ferro fundido com revestimento em pintura, é a opção mais completa para o seu treino, com pegada em formato anatômico que eleva a prática para uma qualidade superior.' },
+      { slug: 'kettlebell-emborrachado', name: 'Kettlebell', finish: 'Emborrachado', weights: span(4, 40, 2),
+        desc: 'Ideal para o treino aplicado. Em ferro fundido com revestimento em borracha, com pegada anatômica, segurança e conforto — equipamento de qualidade superior aos demais do mercado atual.' }
+    ], cta: { title: 'Monte o seu kit', text: 'Escolha os pesos de cada produto, adicione ao orçamento e envie tudo de uma vez pelo WhatsApp.',
+      button: 'Ver meu orçamento', open: true } },
+    { id: 'suportes', name: 'Suportes', tagline: 'Racks, torre e suporte sextavado',
+      note: 'Consulte todos os tipos de suporte disponíveis. Temos mais modelos!', items: [
+      { slug: 'suporte-dumbbells-meia-lua', name: 'Suporte Dumbbells c/ Apoio', finish: 'Meia Lua 10 Pares', spec: ['Capacidade', '10 pares'],
+        desc: 'Mantenha a academia organizada e os treinos eficientes. Design elegante em meia lua, projetado para acomodar até 10 pares de dumbbells, com estrutura robusta e fácil acesso aos pesos.' },
+      { slug: 'suporte-dumbbell-sextavado', name: 'Suporte de Dumbbell', finish: 'Sextavado', spec: ['Para', 'Dumbbells hexagonais'],
+        desc: 'Solução compacta para armazenar e organizar dumbbells hexagonais, otimizando o espaço de treino com design sólido e funcional.' },
+      { slug: 'suporte-halter-torre', name: 'Suporte Halter', finish: 'Torre 10 Pares', spec: ['Capacidade', '10 pares'],
+        desc: 'O acessório ideal para organizar seus halteres. Elaborada em ferro metalon com pintura eletrostática, destaca-se pela qualidade e durabilidade.' }
+    ]}
+  ];
+
+  const BY_SLUG = {};
+  CATS.forEach(c => c.items.forEach(p => { p.full = `${p.name} ${p.finish}`; BY_SLUG[p.slug] = p; }));
+
+  /* ---------- utilidades ---------- */
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const esc = s => String(s).replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
+  const icon = n => `<svg class="i" aria-hidden="true"><use href="#i-${n}"/></svg>`;
+  const store = {
+    get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
+    set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* armazenamento indisponível */ } }
+  };
+  const waTo = (phoneId, text) => `https://wa.me/${PHONES[phoneId].wa}?text=${encodeURIComponent(text)}`;
+  const waShare = text => `https://wa.me/?text=${encodeURIComponent(text)}`;
+  const listPt = arr => arr.length < 2 ? arr.join('') : `${arr.slice(0, -1).join(', ')} e ${arr[arr.length - 1]}`;
+
+  /* ---------- estado ---------- */
+  let quote = store.get('kl.quote', []).filter(q => q && BY_SLUG[q.slug]);
+  let phoneId = store.get('kl.phone', 'a');
+  if (!PHONES[phoneId]) phoneId = 'a';
+  const save = () => store.set('kl.quote', quote);
+
+  /* ---------- catálogo ---------- */
+  const main = $('#catalogo');
+  const nav = $('#catnav');
+
+  function specHTML(p) {
+    if (p.weights) {
+      return `<div class="spec">
+        <p class="spec-label" id="l-${p.slug}">Pesos <span>· toque para escolher</span></p>
+        <div class="chips" role="group" aria-labelledby="l-${p.slug}">${p.weights.map(w =>
+          `<button type="button" class="chip" data-action="chip" data-w="${w}" aria-pressed="false">${w}<small>kg</small></button>`).join('')}</div>
+        <p class="err" data-err aria-live="polite" hidden>Escolha pelo menos um peso.</p>
+      </div>`;
+    }
+    if (p.range) {
+      return `<div class="spec">
+        <p class="spec-label">Pesos disponíveis</p>
+        <span class="pill">${esc(p.range)}</span>
+        <label class="field" for="w-${p.slug}"><span>Quais pesos você procura? <em>(opcional)</em></span>
+          <input class="input" id="w-${p.slug}" type="text" autocomplete="off" placeholder="Ex.: 10, 12 e 20 kg" data-action="note"></label>
+      </div>`;
+    }
+    return `<div class="spec"><p class="spec-label">${esc(p.spec[0])}</p><span class="pill">${esc(p.spec[1])}</span></div>`;
+  }
+
+  function cardHTML(p) {
+    return `<article class="card" id="${p.slug}" data-slug="${p.slug}">
+      <div class="tray">
+        <img src="assets/produtos/${p.slug}.jpg" alt="${esc(p.full)}" loading="lazy" decoding="async">
+        <a class="share-mini" href="${shareProductHref(p)}" target="_blank" rel="noopener" aria-label="Compartilhar ${esc(p.full)} no WhatsApp" title="Compartilhar no WhatsApp">${icon('share')}</a>
+      </div>
+      <div class="card-body">
+        <h3><span>${esc(p.name)}</span> <span class="finish">${esc(p.finish)}</span></h3>
+        <p class="desc">${esc(p.desc)}</p>
+        ${specHTML(p)}
+        <div class="actions">
+          <button type="button" class="btn btn-primary" data-action="add">${icon('plus')}<span>Adicionar<span class="long"> ao orçamento</span></span></button>
+          <a class="btn btn-ghost" data-ask href="#" target="_blank" rel="noopener" aria-label="Perguntar sobre ${esc(p.full)} no WhatsApp">${icon('wa')}<span>Perguntar</span></a>
+        </div>
+      </div>
+    </article>`;
+  }
+
+  function ctaHTML(c) {
+    const action = c.cta.open
+      ? `<button type="button" class="btn btn-primary" data-action="open-quote">${icon('list')}${esc(c.cta.button)}</button>`
+      : `<a class="btn btn-primary" data-wa-msg="${esc(c.cta.message)}" href="#" target="_blank" rel="noopener">${icon('wa')}${esc(c.cta.button)}</a>`;
+    return `<div class="cta-card"><div><h3>${esc(c.cta.title)}</h3><p>${esc(c.cta.text)}</p></div>${action}</div>`;
+  }
+
+  CATS.forEach(c => {
+    const sec = document.createElement('section');
+    sec.className = 'cat';
+    sec.id = c.id;
+    sec.setAttribute('aria-labelledby', `h-${c.id}`);
+    sec.innerHTML = `
+      <div class="cat-head">
+        <div><h2 id="h-${c.id}">${esc(c.name)}</h2><p>${esc(c.tagline)}</p></div>
+        <span class="cat-count">${c.items.length} ${c.items.length > 1 ? 'produtos' : 'produto'}</span>
+      </div>
+      ${c.note ? `<p class="note">${icon('info')}<span>${esc(c.note)}</span></p>` : ''}
+      <div class="grid">${c.items.map(cardHTML).join('')}${c.cta ? ctaHTML(c) : ''}</div>`;
+    main.appendChild(sec);
+    nav.insertAdjacentHTML('beforeend', `<a href="#${c.id}" data-cat="${c.id}">${esc(c.name)}</a>`);
+  });
+
+  /* ---------- mensagens ---------- */
+  function cardChoice(card) {
+    const p = BY_SLUG[card.dataset.slug];
+    const weights = p.weights ? $$('.chip[aria-pressed="true"]', card).map(b => `${b.dataset.w} kg`) : [];
+    const note = p.range ? ($('input', card).value || '').trim() : '';
+    return { p, weights, note };
+  }
+
+  function askMessage(card) {
+    const { p, weights, note } = cardChoice(card);
+    let msg = `${HELLO} Vi no catálogo o produto *${p.full}* e quero mais informações.`;
+    if (weights.length) msg += `\nPesos: ${listPt(weights)}`;
+    if (note) msg += `\nPesos: ${note}`;
+    return msg;
+  }
+
+  function shareProductHref(p) {
+    return waShare(`Olha este produto da KL Sports Fitness: *${p.full}*\n${SITE_URL}#${p.slug}`);
+  }
+
+  function quoteMessage() {
+    const lines = quote.map(q => {
+      const p = BY_SLUG[q.slug];
+      let s = `• ${q.qty}x *${p.full}*`;
+      if (q.weight) s += ` (${q.weight})`;
+      else if (p.range) s += q.note ? ` (pesos: ${q.note})` : ` (pesos a definir, ${p.range})`;
+      return s;
+    });
+    let msg = `${HELLO} Vim pelo catálogo digital e quero um orçamento:\n\n${lines.join('\n')}`;
+    const name = $('#q-name').value.trim();
+    const city = $('#q-city').value.trim();
+    const extra = [name && `Nome: ${name}`, city && `Cidade: ${city}`].filter(Boolean);
+    if (extra.length) msg += `\n\n${extra.join('\n')}`;
+    return msg;
+  }
+
+  const generalMessage = () => `${HELLO} Vim pelo catálogo digital e gostaria de mais informações.`;
+  const shareCatalogText = () => `Catálogo KL Sports Fitness: pesos para musculação. Veja os produtos e peça seu orçamento: ${SITE_URL}`;
+
+  function updateAsk(card) {
+    $('[data-ask]', card).href = waTo(phoneId, askMessage(card));
+  }
+
+  function refreshLinks() {
+    $$('.card').forEach(updateAsk);
+    $$('[data-wa-general]').forEach(a => { a.href = waTo(phoneId, generalMessage()); });
+    $$('[data-wa-msg]').forEach(a => { a.href = waTo(phoneId, `${HELLO} ${a.dataset.waMsg}`); });
+    $$('[data-wa-to]').forEach(a => { a.href = waTo(a.dataset.waTo, generalMessage()); });
+    $$('[data-share]').forEach(a => { a.href = waShare(shareCatalogText()); });
+    renderQuote();
+  }
+
+  /* ---------- orçamento ---------- */
+  let uidSeq = 0;
+  const uid = () => `${Date.now().toString(36)}${(uidSeq++).toString(36)}`;
+
+  function upsert(slug, weight, note) {
+    const hit = quote.find(q => q.slug === slug && q.weight === weight && q.note === note);
+    if (hit) hit.qty = Math.min(hit.qty + 1, 99);
+    else quote.push({ id: uid(), slug, weight, note, qty: 1 });
+  }
+
+  function addFromCard(card) {
+    const { p, weights, note } = cardChoice(card);
+    if (p.weights && !weights.length) {
+      $('[data-err]', card).hidden = false;
+      return;
+    }
+    if (p.weights) {
+      weights.forEach(w => upsert(p.slug, w, ''));
+      $$('.chip[aria-pressed="true"]', card).forEach(b => b.setAttribute('aria-pressed', 'false'));
+    } else {
+      upsert(p.slug, '', note);
+      if (p.range) $('input', card).value = '';
+    }
+    save();
+    renderQuote();
+    updateAsk(card);
+    const count = $('#quote-count');
+    count.classList.remove('bump'); void count.offsetWidth; count.classList.add('bump');
+    const what = weights.length ? ` (${listPt(weights)})` : note ? ` (${note})` : '';
+    toast(`Adicionado ao orçamento: ${p.full}${what}`);
+  }
+
+  function renderQuote() {
+    const total = quote.reduce((n, q) => n + q.qty, 0);
+    const count = $('#quote-count');
+    count.textContent = total;
+    count.toggleAttribute('data-zero', total === 0);
+    $('#open-quote').setAttribute('aria-label', `Abrir orçamento, ${total} ${total === 1 ? 'item' : 'itens'}`);
+
+    const dockSend = $('#dock-send');
+    $('#dock-send-label').textContent = quote.length ? 'Enviar orçamento' : 'WhatsApp';
+    dockSend.setAttribute('aria-label', quote.length ? 'Enviar orçamento pelo WhatsApp' : 'Chamar a equipe no WhatsApp');
+    dockSend.href = quote.length ? waTo(phoneId, quoteMessage()) : waTo(phoneId, generalMessage());
+
+    const send = $('#q-send');
+    send.href = quote.length ? waTo(phoneId, quoteMessage()) : '#';
+    send.setAttribute('aria-disabled', quote.length ? 'false' : 'true');
+    $('#q-empty').hidden = quote.length > 0;
+    $('#q-clear').hidden = quote.length === 0;
+
+    const list = $('#q-list');
+    const focusedId = document.activeElement && document.activeElement.dataset ? document.activeElement.dataset.note : null;
+    list.innerHTML = quote.map(q => {
+      const p = BY_SLUG[q.slug];
+      let detail = '';
+      if (q.weight) detail = `<p class="q-detail">${esc(q.weight)}</p>`;
+      else if (p.range) detail = `<label class="sr" for="qn-${q.id}">Pesos de ${esc(p.full)}</label>
+        <input class="input" id="qn-${q.id}" data-note="${q.id}" type="text" autocomplete="off" value="${esc(q.note)}" placeholder="Quais pesos? (${esc(p.range)})">`;
+      else if (p.spec) detail = `<p class="q-detail">${esc(p.spec[1])}</p>`;
+      return `<li class="q-item" data-id="${q.id}">
+        <div><p class="q-name">${esc(p.full)}</p>${detail}</div>
+        <div class="stepper" role="group" aria-label="Quantidade de ${esc(p.full)}">
+          <button type="button" data-q="dec" aria-label="Diminuir">${icon('minus')}</button>
+          <output aria-live="polite">${q.qty}</output>
+          <button type="button" data-q="inc" aria-label="Aumentar">${icon('plus')}</button>
+        </div>
+        <button type="button" class="q-del" data-q="del" aria-label="Remover ${esc(p.full)}">${icon('x')}</button>
+      </li>`;
+    }).join('');
+    if (focusedId) {
+      const again = list.querySelector(`[data-note="${focusedId}"]`);
+      if (again) { again.focus(); const L = again.value.length; again.setSelectionRange(L, L); }
+    }
+    $(`#q-phone-${phoneId}`).checked = true;
+  }
+
+  const sheet = $('#quote');
+  function openQuote() {
+    hideToast();
+    if (typeof sheet.showModal === 'function') { if (!sheet.open) sheet.showModal(); }
+    else sheet.setAttribute('open', '');
+  }
+  function closeQuote() {
+    if (typeof sheet.close === 'function') sheet.close(); else sheet.removeAttribute('open');
+  }
+
+  /* ---------- aviso ---------- */
+  let toastTimer;
+  function toast(msg) {
+    $('#toast-msg').textContent = msg;
+    $('#toast').hidden = false;
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(hideToast, 4200);
+  }
+  function hideToast() { $('#toast').hidden = true; }
+
+  /* ---------- eventos ---------- */
+  main.addEventListener('click', e => {
+    const el = e.target.closest('[data-action]');
+    if (!el) return;
+    const card = el.closest('.card');
+    if (el.dataset.action === 'chip') {
+      el.setAttribute('aria-pressed', String(el.getAttribute('aria-pressed') !== 'true'));
+      $('[data-err]', card).hidden = true;
+      updateAsk(card);
+    } else if (el.dataset.action === 'add') {
+      addFromCard(card);
+    } else if (el.dataset.action === 'open-quote') {
+      openQuote();
+    }
+  });
+  main.addEventListener('input', e => {
+    if (e.target.matches('[data-action="note"]')) updateAsk(e.target.closest('.card'));
+  });
+
+  $('#open-quote').addEventListener('click', openQuote);
+  $('#toast-view').addEventListener('click', openQuote);
+  $('#close-quote').addEventListener('click', closeQuote);
+  $('#q-browse').addEventListener('click', () => { closeQuote(); location.hash = 'anilhas'; });
+  sheet.addEventListener('click', e => { if (e.target === sheet) closeQuote(); });
+
+  $('#q-list').addEventListener('click', e => {
+    const b = e.target.closest('[data-q]');
+    if (!b) return;
+    const id = b.closest('.q-item').dataset.id;
+    const q = quote.find(x => x.id === id);
+    if (!q) return;
+    if (b.dataset.q === 'inc') q.qty = Math.min(q.qty + 1, 99);
+    if (b.dataset.q === 'dec') q.qty = Math.max(q.qty - 1, 1);
+    if (b.dataset.q === 'del') quote = quote.filter(x => x.id !== id);
+    save();
+    renderQuote();
+    const same = $(`.q-item[data-id="${id}"] [data-q="${b.dataset.q}"]`);
+    if (same) same.focus(); else $('#close-quote').focus();
+  });
+  $('#q-list').addEventListener('input', e => {
+    const id = e.target.dataset.note;
+    const q = id && quote.find(x => x.id === id);
+    if (!q) return;
+    q.note = e.target.value;
+    save();
+    const href = waTo(phoneId, quoteMessage());
+    $('#q-send').href = href;
+    $('#dock-send').href = href;
+  });
+
+  const fields = { name: $('#q-name'), city: $('#q-city') };
+  const saved = store.get('kl.contact', {});
+  fields.name.value = saved.name || '';
+  fields.city.value = saved.city || '';
+  Object.values(fields).forEach(f => f.addEventListener('input', () => {
+    store.set('kl.contact', { name: fields.name.value, city: fields.city.value });
+    renderQuote();
+  }));
+
+  $$('input[name="q-phone"]').forEach(r => r.addEventListener('change', () => {
+    phoneId = r.value;
+    store.set('kl.phone', phoneId);
+    refreshLinks();
+  }));
+
+  const clearBtn = $('#q-clear');
+  let clearTimer;
+  clearBtn.addEventListener('click', () => {
+    if (clearBtn.hasAttribute('data-armed')) {
+      quote = [];
+      save();
+      clearBtn.removeAttribute('data-armed');
+      clearBtn.textContent = 'Limpar';
+      renderQuote();
+      return;
+    }
+    clearBtn.setAttribute('data-armed', '');
+    clearBtn.textContent = 'Toque de novo para limpar';
+    clearTimeout(clearTimer);
+    clearTimer = setTimeout(() => { clearBtn.removeAttribute('data-armed'); clearBtn.textContent = 'Limpar'; }, 3500);
+  });
+
+  /* Compartilhar: a folha nativa do celular quando o site está aberto direto; senão, o link do WhatsApp. */
+  const topLevel = (() => { try { return window.self === window.top; } catch (e) { return false; } })();
+  document.addEventListener('click', e => {
+    const a = e.target.closest('[data-share]');
+    if (!a || !topLevel || !navigator.share) return;
+    e.preventDefault();
+    navigator.share({ title: 'Catálogo KL Sports Fitness', text: 'Pesos para musculação. Veja os produtos e peça seu orçamento:', url: SITE_URL })
+      .catch(err => { if (err && err.name !== 'AbortError') window.location.href = a.href; });
+  });
+
+  const linkInput = $('#site-link');
+  linkInput.value = SITE_URL;
+  $('#copy-link').addEventListener('click', () => {
+    const done = () => toast('Link do catálogo copiado.');
+    const fallback = () => { linkInput.focus(); linkInput.select(); toast('Link selecionado. Use copiar do seu aparelho.'); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(SITE_URL).then(done, fallback);
+    else fallback();
+  });
+
+  /* ---------- categoria ativa ---------- */
+  const navLinks = $$('a[data-cat]', nav);
+  function setActive(id) {
+    navLinks.forEach(a => {
+      const on = a.dataset.cat === id;
+      a.setAttribute('aria-current', on ? 'true' : 'false');
+      if (on) {
+        const left = a.offsetLeft - (nav.clientWidth - a.offsetWidth) / 2;
+        nav.scrollTo({ left: Math.max(0, left), behavior: 'smooth' });
+      }
+    });
+  }
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(en => { if (en.isIntersecting) setActive(en.target.id); });
+    }, { rootMargin: '-35% 0px -60% 0px' });
+    $$('.cat').forEach(s => io.observe(s));
+  }
+
+  /* ---------- link direto para um produto (#slug) ---------- */
+  function focusHash() {
+    let id = '';
+    try { id = decodeURIComponent(location.hash.slice(1)); } catch (e) { return; }
+    const target = id && document.getElementById(id);
+    if (!target) return;
+    target.scrollIntoView({ block: 'start' });
+    if (target.classList.contains('card')) {
+      target.classList.add('flash');
+      setTimeout(() => target.classList.remove('flash'), 2600);
+    }
+  }
+  window.addEventListener('hashchange', focusHash);
+
+  refreshLinks();
+  if (location.hash) requestAnimationFrame(focusHash);
+})();
+</script>
+<!--/ART:BODY-->
+</body>
+</html>
