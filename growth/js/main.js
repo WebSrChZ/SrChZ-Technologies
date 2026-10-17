@@ -78,7 +78,7 @@
 
   /* current year */
   const y = document.getElementById('year');
-  if (y) y.textContent = '© ' + new Date().getFullYear() + ' Rafael Cordeiro';
+  if (y) y.textContent = '© ' + new Date().getFullYear() + ' SrChZ Technologies';
 
   /* active section highlight in nav */
   const sections = [...document.querySelectorAll('section[id]')];
