@@ -1,6 +1,6 @@
 /* ─── SERVICE WORKER — SrChZ Technologies ─── */
 /* Bump CACHE a cada deploy para entregar a versão nova aos usuários recorrentes. */
-const CACHE = 'srchz-v20260626-1';
+const CACHE = 'srchz-v20261017-225dd0a';
 const ASSETS = [
   './',
   './index.html',

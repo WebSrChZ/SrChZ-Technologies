@@ -78,7 +78,7 @@
 
   /* current year */
   const y = document.getElementById('year');
-  if (y) y.textContent = '© ' + new Date().getFullYear() + ' Rafael Cordeiro';
+  if (y) y.textContent = '© ' + new Date().getFullYear() + ' SrChZ Technologies';
 
   /* active section highlight in nav */
   const sections = [...document.querySelectorAll('section[id]')];
@@ -110,6 +110,13 @@
       const name = (fd.get('name') || '').trim();
       const contact = (fd.get('contact') || '').trim();
       if (!name || contact.length < 3) { setStatus('Preencha nome e um contato válido.', 'err'); return; }
+      // O form é novalidate, então o `required` do checkbox não é aplicado pelo
+      // navegador — a base legal do envio (consentimento LGPD) é checada aqui.
+      if (!fd.get('consent')) {
+        setStatus('Marque a autorização de contato para enviar.', 'err');
+        document.getElementById('leadConsent')?.focus();
+        return;
+      }
 
       const btn = leadForm.querySelector('.lead-btn');
       const label = btn.textContent;
@@ -123,6 +130,10 @@
             'Content-Type': 'application/json',
             'Prefer': 'return=minimal'
           },
+          // Para registrar a prova de consentimento no banco (recomendado),
+          // rode `supabase_leads.sql` e acrescente aqui:
+          //   consent: true, consent_at: new Date().toISOString()
+          // Enviar esses campos antes de criar as colunas faz o insert falhar.
           body: JSON.stringify({
             name, contact,
             segment: (fd.get('segment') || '').trim() || null,

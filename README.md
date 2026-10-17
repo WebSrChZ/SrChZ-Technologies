@@ -1,6 +1,6 @@
 # SrChZ Technologies — Solutions Strategist
 
-Site **guarda-chuva** de **Rafael Cordeiro** · *Solutions Strategist*. Hub que apresenta o Rafael e roteia para cada prática.
+Site **guarda-chuva** da **SrChZ Technologies** (CNPJ 68.371.698/0001-95) · *Solutions Strategist*. Hub que apresenta a operação e roteia para cada prática.
 
 > ⚜️ Perception, Strategy &amp; Execution — *solving what most people overlook.*
 
@@ -36,10 +36,25 @@ As **portas** da home levam a: **Branding &amp; Growth** (`/growth/`), **Engenha
 ## ✨ Destaques
 - **Design** preto / branco / dourado (Cormorant Garamond + Inter), responsivo mobile-first, reveal on-scroll.
 - **Acessibilidade**: skip-link, foco visível, hierarquia de headings, ARIA, `prefers-reduced-motion`.
-- **SEO**: Open Graph / Twitter Card (imagem absoluta), canonical, `sitemap.xml`, `robots.txt` e **JSON-LD** (`Person` na home; `ProfessionalService` + `FAQPage` no growth).
+- **SEO**: Open Graph / Twitter Card (imagem absoluta), canonical, `sitemap.xml`, `robots.txt` e **JSON-LD** consolidado — a `Organization` (com `legalName` e `taxID`) é declarada uma vez na home sob o `@id` `/#organization`, e as outras seções a referenciam por esse `@id` em vez de repetir um nó solto.
 - **PWA-ready**: `manifest.webmanifest`, ícones 192/512, `favicon.ico`, `theme-color`.
 - **Captura de lead** (no growth): formulário → **Supabase** (`srchz_leads`, RLS insert-only, honeypot).
 - **Zero dependências de build** — HTML, CSS e JavaScript vanilla.
+
+## ✅ Verificação antes do merge
+
+O deploy é o próprio repositório: o que entra na `main` vai ao ar. O workflow
+`.github/workflows/pr-checks.yml` roda em todo PR e barra quatro coisas que
+quebrariam em produção — HTML malformado, JSON-LD inválido (o Google descarta o
+bloco em silêncio), XML/manifest inválido e link ou asset interno apontando
+para arquivo inexistente. Também exige o bump do `CACHE` em `growth/sw.js`
+quando `growth/` muda, senão visitantes recorrentes continuam na versão antiga.
+
+Mesma verificação, localmente:
+
+```bash
+python3 tools/check_site.py .
+```
 
 ## 🚀 Rodar localmente
 ```bash
@@ -55,4 +70,4 @@ Estático puro. **Deploy:** push na `main` → GitHub Pages publica em ~1 min (d
 **rafaelhenriquecsantosz@gmail.com** · [WhatsApp](https://wa.me/5511996869309)
 
 ---
-<sub>© Rafael Cordeiro · SrChZ Technologies — *Sua definição de qualidade.*</sub>
+<sub>© SrChZ Technologies · CNPJ 68.371.698/0001-95 — *Sua definição de qualidade.*</sub>
