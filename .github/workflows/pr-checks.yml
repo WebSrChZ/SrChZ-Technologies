@@ -17,6 +17,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # O step do service worker compara com a branch base: sem o
+          # historico completo, origin/<base> nao existe no runner e o
+          # git diff falha silenciosamente dentro do pipe.
+          fetch-depth: 0
 
       - name: Verificacao estatica do site
         run: python3 tools/check_site.py .
@@ -37,8 +42,14 @@ jobs:
           # O sw.js cacheia index.html, css e js. Se a versao nao e bumpada no
           # mesmo PR que altera esses arquivos, quem ja visitou o site continua
           # vendo a versao antiga.
-          if git diff --name-only origin/${{ github.base_ref }}...HEAD | grep -qE '^growth/(index\.html|css/|js/)'; then
-            if ! git diff --name-only origin/${{ github.base_ref }}...HEAD | grep -q '^growth/sw\.js$'; then
+          base="origin/${{ github.base_ref }}"
+          # Falha explicita: um check que nao consegue comparar precisa gritar,
+          # nao passar verde. Dentro de um pipe, o erro do git era engolido.
+          git rev-parse --verify "$base" >/dev/null 2>&1 \
+            || { echo "::error::$base indisponivel no runner"; exit 1; }
+          changed=$(git diff --name-only "$base...HEAD")
+          if echo "$changed" | grep -qE '^growth/(index\.html|css/|js/)'; then
+            if ! echo "$changed" | grep -q '^growth/sw\.js$'; then
               echo "::error::growth/ mudou mas growth/sw.js nao: bumpe CACHE em growth/sw.js"
               exit 1
             fi
