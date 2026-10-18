@@ -37,6 +37,9 @@ jobs:
           done < <(find . -name '*.js' -not -path './.git/*' -not -path './node_modules/*' -print0)
           exit $status
 
+      - name: Traducao completa em todos os idiomas
+        run: node tools/check_i18n.js .
+
       - name: Service worker com versao de cache propria
         run: |
           # O sw.js cacheia index.html, css e js. Se a versao nao e bumpada no

@@ -1,0 +1,166 @@
+#!/usr/bin/env node
+/* Guarda de CI para a traducao do site.
+ *
+ * O risco real deste desenho: marcar um texto novo com data-i18n numa pagina e
+ * esquecer de acrescentar a chave em en/es/ja. O visitante estrangeiro cairia
+ * numa pagina meio traduzida, e nada no build avisaria. Este check quebra o PR
+ * nesse caso.
+ *
+ * Verifica:
+ *   1. toda chave usada no HTML existe em todos os idiomas
+ *   2. os idiomas tem exatamente o mesmo conjunto de chaves entre si
+ *   3. _meta completo em cada idioma
+ *   4. nenhum valor vazio
+ *   5. nenhuma chave orfa (definida e nunca usada)
+ *
+ * Roda na stdlib do node, sem dependencia. Uso: node tools/check_i18n.js [raiz]
+ */
+'use strict';
+
+const fs = require('fs');
+const path = require('path');
+
+const ROOT = path.resolve(process.argv[2] || '.');
+const DICT_DIR = path.join(ROOT, 'assets', 'i18n');
+const DEFAULT_LANG = 'pt';                 // o HTML ja esta escrito em portugues
+
+let failed = false;
+const fail = (msg) => { console.error('ERRO: ' + msg); failed = true; };
+const note = (msg) => console.log('  ' + msg);
+
+// ---- 1. varre o HTML atras de chaves -------------------------------------
+
+function walk(dir, out = []) {
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    if (entry.name === '.git' || entry.name === 'node_modules') continue;
+    const full = path.join(dir, entry.name);
+    if (entry.isDirectory()) walk(full, out);
+    else if (/\.html?$/i.test(entry.name)) out.push(full);
+  }
+  return out;
+}
+
+const pages = walk(ROOT);
+const usedBy = new Map();                  // chave -> [paginas]
+const instrumented = [];
+
+for (const file of pages) {
+  const html = fs.readFileSync(file, 'utf8');
+  const rel = path.relative(ROOT, file);
+  const keys = new Set();
+
+  for (const m of html.matchAll(/data-i18n(?:-html)?="([^"]*)"/g)) {
+    if (m[1]) keys.add(m[1]);
+  }
+  for (const m of html.matchAll(/data-i18n-attr="([^"]*)"/g)) {
+    for (const pair of m[1].split(';')) {
+      const parts = pair.split(':');
+      if (parts.length >= 2 && parts[1].trim()) keys.add(parts[1].trim());
+    }
+  }
+
+  if (!keys.size) continue;
+  instrumented.push(rel);
+  for (const k of keys) {
+    if (!usedBy.has(k)) usedBy.set(k, []);
+    usedBy.get(k).push(rel);
+  }
+
+  // uma pagina com chaves precisa carregar o motor, senao nada e traduzido
+  if (!/assets\/i18n\.js/.test(html)) {
+    fail(`${rel} usa data-i18n mas nao carrega assets/i18n.js`);
+  }
+  // ...e precisa de um ponto de ancoragem para o seletor
+  if (!/data-i18n-switcher/.test(html)) {
+    fail(`${rel} usa data-i18n mas nao tem [data-i18n-switcher] para o seletor`);
+  }
+}
+
+console.log(`Paginas instrumentadas: ${instrumented.length}`);
+instrumented.forEach((p) => note(p));
+console.log(`Chaves usadas no HTML: ${usedBy.size}`);
+
+// ---- 2. carrega os dicionarios -------------------------------------------
+
+if (!fs.existsSync(DICT_DIR)) {
+  fail(`pasta de dicionarios ausente: ${path.relative(ROOT, DICT_DIR)}`);
+  process.exit(1);
+}
+
+global.window = {};
+const langs = [];
+for (const f of fs.readdirSync(DICT_DIR).sort()) {
+  if (!f.endsWith('.js')) continue;
+  const code = f.replace(/\.js$/, '');
+  try {
+    // eslint-disable-next-line no-eval
+    eval(fs.readFileSync(path.join(DICT_DIR, f), 'utf8'));
+    langs.push(code);
+  } catch (e) {
+    fail(`${f} nao avaliou: ${e.message}`);
+  }
+}
+
+const dicts = global.window.SRCHZ_I18N || {};
+console.log(`Idiomas encontrados: ${langs.join(', ') || '(nenhum)'}`);
+
+for (const code of langs) {
+  if (!dicts[code]) fail(`${code}.js nao define window.SRCHZ_I18N.${code}`);
+}
+if (langs.includes(DEFAULT_LANG)) {
+  note(`aviso: ${DEFAULT_LANG}.js existe mas nao e carregado — o HTML ja esta em ${DEFAULT_LANG}`);
+}
+
+// ---- 3. cobertura --------------------------------------------------------
+
+const present = {};
+for (const code of langs) {
+  present[code] = new Set(Object.keys(dicts[code] || {}).filter((k) => k !== '_meta'));
+}
+
+for (const code of langs) {
+  const missing = [...usedBy.keys()].filter((k) => !present[code].has(k));
+  if (missing.length) {
+    fail(`[${code}] ${missing.length} chave(s) do HTML sem traducao:`);
+    missing.slice(0, 25).forEach((k) => console.error(`        ${k}   (${usedBy.get(k).join(', ')})`));
+    if (missing.length > 25) console.error(`        … e mais ${missing.length - 25}`);
+  }
+}
+
+// ---- 4. paridade entre idiomas -------------------------------------------
+
+const union = new Set();
+for (const code of langs) for (const k of present[code]) union.add(k);
+for (const code of langs) {
+  const gaps = [...union].filter((k) => !present[code].has(k));
+  if (gaps.length) fail(`[${code}] diverge do conjunto comum: ${gaps.slice(0, 15).join(', ')}`);
+}
+
+// ---- 5. _meta e valores vazios -------------------------------------------
+
+for (const code of langs) {
+  const d = dicts[code] || {};
+  const meta = d._meta || {};
+  for (const req of ['htmlLang', 'ogLocale', 'title', 'description']) {
+    if (!meta[req]) fail(`[${code}] _meta.${req} ausente`);
+  }
+  for (const [k, v] of Object.entries(d)) {
+    if (k === '_meta') continue;
+    if (typeof v !== 'string' || !v.trim()) fail(`[${code}] valor vazio ou nao-texto: ${k}`);
+  }
+}
+
+// ---- 6. chaves orfas ------------------------------------------------------
+
+const orphans = [...union].filter((k) => !usedBy.has(k));
+if (orphans.length) {
+  fail(`${orphans.length} chave(s) definida(s) e nunca usada(s): ${orphans.slice(0, 20).join(', ')}`);
+}
+
+// ---------------------------------------------------------------------------
+
+if (failed) {
+  console.error('\ni18n: FALHOU');
+  process.exit(1);
+}
+console.log('\ni18n: sem problemas');
