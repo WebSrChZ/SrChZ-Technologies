@@ -130,14 +130,16 @@
             'Content-Type': 'application/json',
             'Prefer': 'return=minimal'
           },
-          // Para registrar a prova de consentimento no banco (recomendado),
-          // rode `supabase_leads.sql` e acrescente aqui:
-          //   consent: true, consent_at: new Date().toISOString()
-          // Enviar esses campos antes de criar as colunas faz o insert falhar.
+          // Prova de consentimento: as colunas `consent` e `consent_at` existem
+          // no banco desde a migracao leads_prova_de_consentimento. Sob LGPD,
+          // consentimento que nao da para demonstrar nao se sustenta.
           body: JSON.stringify({
             name, contact,
             segment: (fd.get('segment') || '').trim() || null,
             message: (fd.get('message') || '').trim() || null,
+            source: 'srchz-growth',
+            consent: true,
+            consent_at: new Date().toISOString(),
             user_agent: (navigator.userAgent || '').slice(0, 400)
           })
         });

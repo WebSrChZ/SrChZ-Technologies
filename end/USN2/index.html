@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https://hhrllexkkbekdbzivlgi.supabase.co" />
 <title>Ultrassom Nível II: Guia Definitivo de Certificação — SrChZ Technologies</title>
 <meta name="description" content="Guia definitivo de Ultrassom Nível II (END/UT): teoria, cálculo resolvido passo a passo e 20 questões comentadas. Por Rafael Cordeiro · SrChZ." />
 <meta name="theme-color" content="#09090b" />
@@ -225,9 +226,10 @@
       <label>Nome<input type="text" name="nome" required placeholder="Seu nome" autocomplete="name" /></label>
       <label>E-mail<input type="email" name="email" required placeholder="voce@email.com" autocomplete="email" /></label>
       <label>WhatsApp <span class="opt">(opcional)</span><input type="tel" name="whatsapp" placeholder="(00) 90000-0000" autocomplete="tel" /></label>
+      <label class="isca__consent"><input type="checkbox" name="consent" id="iscaConsent" required /><span>Autorizo a SrChZ Technologies a usar meus dados para me enviar a amostra e novidades sobre o guia. Posso pedir a remoção quando quiser. Veja a <a href="../privacidade.html" target="_blank" rel="noopener">Política de Privacidade</a>.</span></label>
       <button type="submit" class="btn btn--gold btn--block">Receber amostra grátis</button>
-      <p class="isca__ok" id="leadOk" hidden>✅ Pronto! Seu download vai começar e enviamos por e-mail também.</p>
-      <p class="isca__legal">Sem spam. Você pode sair da lista quando quiser.</p>
+      <p class="isca__ok" id="leadOk" hidden>✅ Pronto! Seu download vai começar.</p>
+      <p class="isca__legal">Seus dados ficam só comigo, para enviar novidades sobre o guia. Sem repasse a terceiros, e você pode pedir a remoção a qualquer momento.</p>
     </form>
   </div>
 </section>

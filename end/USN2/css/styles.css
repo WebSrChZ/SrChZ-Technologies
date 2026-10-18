@@ -119,6 +119,10 @@ a{color:inherit;text-decoration:none}
 .isca__form input:focus{outline:none;border-color:var(--gold)}
 .isca__ok{color:var(--gold-2);font-size:.9rem;font-weight:500}
 .isca__legal{font-size:.76rem;color:var(--muted);text-align:center}
+/* Consentimento da isca: base legal do envio, checada no submit. */
+.isca__consent{display:flex;gap:9px;align-items:flex-start;font-size:.78rem;color:var(--soft,#cbc4b6);line-height:1.5;font-weight:400}
+.isca__consent input{margin-top:.22rem;accent-color:var(--gold);flex:0 0 auto}
+.isca__consent a{color:var(--gold-2,#ead29a);text-decoration:underline}
 
 /* faq */
 .acc details{background:var(--panel);border:1px solid var(--line-2);border-radius:6px;margin-bottom:12px;overflow:hidden}

@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https://hhrllexkkbekdbzivlgi.supabase.co" />
 <title>SrChZ · END — Inspeção, Laudos e Formação em Ensaios Não Destrutivos</title>
 <meta name="description" content="Inspeção por ensaios não destrutivos: ultrassom, ferrovia, espessura e líquido penetrante — com laudo conforme norma. E os guias de certificação END." />
 <meta name="theme-color" content="#09090b" />
@@ -93,6 +94,24 @@ a{color:inherit;text-decoration:none}
 .creds span{font-size:.74rem;letter-spacing:.10em;text-transform:uppercase;font-weight:600;color:var(--soft);border:1px solid var(--line);border-radius:999px;padding:7px 16px;background:rgba(201,162,75,.05)}
 .band{background:linear-gradient(165deg,rgba(201,162,75,.09),var(--panel-2));border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2);padding:64px 0;text-align:center}
 .band .lead{margin-bottom:28px}
+/* Formulário de pedido de inspeção. O WhatsApp sozinho perdia quem navega no
+   desktop do trabalho — que é justamente o comprador industrial. */
+.insp-or{margin:26px 0 12px;font-size:.84rem;letter-spacing:.04em;color:var(--muted)}
+.insp-form{max-width:620px;margin:0 auto;text-align:left;display:grid;gap:12px}
+.insp-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.insp-in{width:100%;padding:13px 15px;background:var(--panel);border:1px solid var(--line-2);border-radius:3px;color:var(--ink);font-family:var(--sans);font-size:.95rem;font-weight:300}
+.insp-in::placeholder{color:var(--muted)}
+.insp-in:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,162,75,.14)}
+.insp-ta{resize:vertical;min-height:84px}
+.insp-hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.insp-consent{display:flex;gap:10px;align-items:flex-start;font-size:.82rem;color:var(--soft);line-height:1.5}
+.insp-consent input{margin-top:.28rem;accent-color:var(--gold);flex:0 0 auto}
+.insp-consent a{color:var(--gold-2);text-decoration:underline}
+.insp-form .btn{justify-content:center}
+.insp-status{min-height:1.2em;font-size:.88rem;color:var(--muted)}
+.insp-status.ok{color:#7fd4a2}
+.insp-status.err{color:#e2a0a0}
+@media(max-width:620px){.insp-row{grid-template-columns:1fr}}
 .section--alt{background:var(--bg-alt)}
 .footer{background:#060608;border-top:1px solid var(--line-2);padding:46px 0;text-align:center}
 .footer img{max-width:170px;margin:0 auto 10px}
@@ -186,6 +205,23 @@ a{color:inherit;text-decoration:none}
     <a class="btn btn--gold" href="https://wa.me/5511996869309?text=Ol%C3%A1%20Rafael%2C%20preciso%20de%20uma%20inspe%C3%A7%C3%A3o%20de%20END." target="_blank" rel="noopener">Solicitar orçamento →</a>
     <a class="btn btn--ghost" href="#formacao">Ver os guias</a>
   </div>
+
+  <p class="insp-or">ou descreva aqui — eu retorno com escopo, método e o que o laudo cobre</p>
+  <form class="insp-form" id="inspForm" novalidate>
+    <div class="insp-row">
+      <input class="insp-in" name="name" type="text" placeholder="Seu nome" autocomplete="name" required maxlength="120" aria-label="Seu nome">
+      <input class="insp-in" name="contact" type="text" placeholder="WhatsApp ou e-mail" autocomplete="email" required maxlength="160" aria-label="WhatsApp ou e-mail">
+    </div>
+    <input class="insp-in" name="segment" type="text" placeholder="Componente e norma — ex.: solda aluminotérmica, trilho, vaso de pressão" maxlength="160" aria-label="Componente e norma">
+    <textarea class="insp-in insp-ta" name="message" placeholder="O que precisa ser inspecionado, e qual o prazo?" maxlength="2000" rows="3" aria-label="Escopo e prazo"></textarea>
+    <input class="insp-hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <label class="insp-consent">
+      <input type="checkbox" name="consent" id="inspConsent" required>
+      <span>Autorizo a SrChZ Technologies a usar meus dados para responder sobre esta inspeção. Posso revogar quando quiser. Veja a <a href="/privacidade.html" target="_blank" rel="noopener">Política de Privacidade</a>.</span>
+    </label>
+    <button class="btn btn--gold" type="submit">Enviar pedido de inspeção</button>
+    <p class="insp-status" id="inspStatus" role="status" aria-live="polite"></p>
+  </form>
 </div></section>
 
 <section class="section section--alt" id="formacao"><div class="container">
@@ -220,5 +256,6 @@ a{color:inherit;text-decoration:none}
   <p style="margin-top:8px">© <span id="y"></span> SrChZ Technologies · CNPJ 68.371.698/0001-95. Inspeção, laudos e formação em END.</p>
 </div></footer>
 <script>document.getElementById("y").textContent=new Date().getFullYear();</script>
+<script src="js/leads.js" defer></script>
 </body>
 </html>

@@ -8,7 +8,13 @@ const CONFIG = {
     kit:   "https://pay.kiwify.com.br/z5Ac6OJ",      // Kiwify — Kit Aprovação R$197
     vip:   ""                                        // VIP → cai no WhatsApp (venda assistida)
   },
-  leadEndpoint: "",                // Brevo (a configurar)
+  // Captura de lead da isca. A chave e publicavel por natureza: fica neste
+  // arquivo e no DevTools de quem abrir a pagina. O que protege a base e a RLS
+  // insert-only da tabela, nao a chave.
+  leads: {
+    url: "https://hhrllexkkbekdbzivlgi.supabase.co",
+    key: "sb_publishable_f3GT1APWArXWS3O04z_S2Q_8FoOjGIF"
+  },
   iscaFile: "downloads/isca-formulario-calibracao-ut.pdf"
 };
 const WA_MSG = {
@@ -69,17 +75,39 @@ form.addEventListener("submit", async (ev) => {
     alert("Preencha nome e um e-mail válido.");
     return;
   }
-  // 1) salva o lead (se houver endpoint configurado)
-  if (CONFIG.leadEndpoint) {
-    try {
-      await fetch(CONFIG.leadEndpoint, {
-        method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...data, produto: "isca-ultrassom-n2", origem: location.href })
-      });
-    } catch (_) { /* segue mesmo se falhar — não bloqueia o download */ }
+  // A base legal do envio e o consentimento. O form e `novalidate`, entao o
+  // `required` do checkbox nao e aplicado pelo navegador: checa aqui.
+  if (!data.consent) {
+    alert("Marque a autorização de contato para receber a amostra.");
+    return;
   }
-  // backup local
-  try { localStorage.setItem("srchz_lead", JSON.stringify({ ...data, ts: Date.now() })); } catch (_) {}
+
+  // 1) salva o lead. Antes daqui o `leadEndpoint` estava vazio e o lead era
+  //    simplesmente descartado: a isca entregava o PDF e nao capturava nada.
+  //    Vai para a mesma tabela dos outros formularios do site, com `source`
+  //    separando a origem. A chave e publicavel e a RLS da tabela e
+  //    insert-only, entao da para enviar e nao da para ler a base.
+  try {
+    await fetch(CONFIG.leads.url + "/rest/v1/srchz_leads", {
+      method: "POST",
+      headers: {
+        "apikey": CONFIG.leads.key,
+        "Authorization": "Bearer " + CONFIG.leads.key,
+        "Content-Type": "application/json",
+        "Prefer": "return=minimal"
+      },
+      body: JSON.stringify({
+        name: data.nome,
+        contact: data.email,
+        segment: "isca-ultrassom-n2",
+        message: data.whatsapp ? "WhatsApp: " + data.whatsapp : null,
+        source: "srchz-usn2",
+        consent: true,
+        consent_at: new Date().toISOString(),
+        user_agent: (navigator.userAgent || "").slice(0, 400)
+      })
+    });
+  } catch (_) { /* segue mesmo se falhar — nao bloqueia o download prometido */ }
 
   // 2) entrega a amostra
   const a = document.createElement("a");
