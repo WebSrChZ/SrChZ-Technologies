@@ -30,6 +30,10 @@ window.SRCHZ_I18N.ja = {
       privacy: {
         title: 'プライバシーポリシー — SrChZ Technologies',
         description: 'srchz-technologies.com.br で取得した個人データを SrChZ Technologies がブラジル個人データ保護法（LGPD、法律第13.709/2018号）に基づきどのように取り扱うかについて。'
+      },
+      privacyEnd: {
+        title: 'プライバシーポリシー — SrChZ · 非破壊検査',
+        description: 'エンジニアリング＆非破壊検査セクションで取得した個人データを SrChZ Technologies がブラジル個人データ保護法（LGPD、法律第13.709/2018号）に基づきどのように取り扱うかについて。'
       }
     }
   },
@@ -244,5 +248,43 @@ window.SRCHZ_I18N.ja = {
 
   'priv.h2.9': '9. 本ポリシーの変更',
   'priv.changes': '重要な変更は、上部に表示された公開日から有効になります。変更履歴は<a href="https://github.com/WebSrChZ/SrChZ-Technologies" target="_blank" rel="noopener">サイトのリポジトリ</a>で公開しています。',
-  'priv.back': '← ホームに戻る'
+  'priv.back': '← ホームに戻る',
+
+  // ---- /end/privacidade.html ----------------------------------------------
+  'pend.h1': 'プライバシーポリシー',
+  'pend.meta': 'SrChZ Technologies · 非破壊検査 · 法人番号（CNPJ）68.371.698/0001-95 — 最終更新：2026年10月',
+  'pend.langNote': '<strong>参考訳です。</strong>本ポリシーはブラジル法に準拠し、相違がある場合は <a href="?lang=pt">/end/privacidade.html</a> のポルトガル語版が優先します。',
+  'pend.intro': '本ポリシーは、<strong>SrChZ Technologies</strong>（Rafael Cordeiro）が本サイトで取得した個人データを、<strong>ブラジル個人データ保護法（LGPD — 法律第13.709/2018号）</strong>に基づきどのように取り扱うかを説明するものです。',
+
+  'pend.h2.1': '1. 取得するデータ',
+  'pend.forms': '本セクションにはフォームが二つあり、取得する内容はそれぞれ異なります。',
+  'pend.form1': '<b>ガイドの無料サンプル</b>（<i>/end/USN2/</i>）：お名前、メールアドレス、任意で WhatsApp。',
+  'pend.form2': '<b>検査のご依頼</b>（<i>/end/</i>）：お名前、ご連絡先（WhatsApp またはメール）、そしてご記入いただいた場合は対象部材と適用規格、範囲、納期。この項目は技術的な内容ですが、貴社を特定しうるため、同じ配慮の対象とします。',
+  'pend.ua': 'いずれのフォームも、自動送信の抑止と同意の証跡保持のために、<b>ブラウザの識別子（ユーザーエージェント）</b>と本ポリシーへの<b>同意日時</b>を記録します。トラッキングCookieや広告ピクセルは使用していません。',
+
+  'pend.h2.2': '2. 利用目的',
+  'pend.purp1': 'ご請求いただいた資料（無料サンプル／ガイド）のお届け。',
+  'pend.purp2': '検査のご依頼に対し、範囲・手法・納期をお示しして回答すること。',
+  'pend.purp3': '製品および非破壊検査の学習コンテンツに関する関連情報のご案内。',
+  'pend.purp4': 'サイトとユーザー体験の改善。',
+  'pend.noSell': 'マーケティング目的で第三者にデータを販売・共有することはありません。',
+
+  'pend.h2.3': '3. 法的根拠',
+  'pend.basis': '取り扱いは、同意欄にチェックしてフォームを送信することによる<b>同意</b>と、関連製品についてご案内することへの<b>正当な利益</b>に基づきます。同意はいつでも撤回できます。',
+
+  'pend.h2.31': '3.1. データの保管場所',
+  'pend.where': '両フォームの送信内容は <b>Supabase</b>（マネージドPostgreSQL）の<b>南米・サンパウロ</b>リージョンに保存され、同社は<i>処理者</i>として扱われます。書き込みには挿入のみに制限された公開鍵を使用しており、レコードの送信はできてもデータベースの読み取りはできません。サイトは <b>GitHub Pages</b> でホストされています。',
+
+  'pend.h2.4': '4. お客様の権利（LGPD）',
+  'pend.rights': '開示、訂正、データポータビリティ、<b>削除</b>をご請求いただけるほか、配信停止も可能です。マーケティングメールにはすべて<b>配信停止</b>リンクを記載しています。',
+
+  'pend.h2.5': '5. 保存とセキュリティ',
+  'pend.retention': 'データは上記の目的に必要な期間のみ保存し、相応のセキュリティ対策を講じています。インフラ提供者（ホスティング／メール）が処理者としてデータを取り扱う場合があります。',
+
+  'pend.h2.6': '6. 管理者の連絡先',
+  'pend.controller': '管理者：<strong>SRCHZ TECHNOLOGIES SOLUCOES LTDA</strong>（屋号：SrChZ Technologies）— 法人番号（CNPJ）<strong>68.371.698/0001-95</strong>、所在地 Alameda Rio Negro, 503, Sala 2020 — Alphaville Centro Industrial e Empresarial, Barueri/SP, 06454-000, ブラジル、代表者 Rafael Henrique Cordeiro Santos。',
+  'pend.contact': '権利の行使やお問い合わせは <a href="mailto:rafaelhenriquecsantosz@gmail.com">rafaelhenriquecsantosz@gmail.com</a> まで。15日以内に回答します。',
+
+  'pend.trademarks': '本サイトは独立した学習教材です。ABENDI および ASNT は各権利者の商標です。',
+  'pend.back': '← ガイドに戻る'
 };

@@ -25,6 +25,10 @@ window.SRCHZ_I18N.es = {
       privacy: {
         title: 'Política de Privacidad — SrChZ Technologies',
         description: 'Cómo SrChZ Technologies trata los datos personales recogidos en srchz-technologies.com.br conforme a la ley brasileña de protección de datos (LGPD, Ley 13.709/2018).'
+      },
+      privacyEnd: {
+        title: 'Política de Privacidad — SrChZ · END',
+        description: 'Cómo SrChZ Technologies trata los datos personales recogidos en la sección de Ingeniería & END, conforme a la ley brasileña de protección de datos (LGPD, Ley 13.709/2018).'
       }
     }
   },
@@ -239,5 +243,43 @@ window.SRCHZ_I18N.es = {
 
   'priv.h2.9': '9. Cambios en esta política',
   'priv.changes': 'Los cambios relevantes pasan a valer en la fecha de publicación indicada arriba. El historial de versiones es público en el <a href="https://github.com/WebSrChZ/SrChZ-Technologies" target="_blank" rel="noopener">repositorio del sitio</a>.',
-  'priv.back': '← Volver al inicio'
+  'priv.back': '← Volver al inicio',
+
+  // ---- /end/privacidade.html ----------------------------------------------
+  'pend.h1': 'Política de Privacidad',
+  'pend.meta': 'SrChZ Technologies · END · CNPJ 68.371.698/0001-95 — última actualización: octubre de 2026',
+  'pend.langNote': '<strong>Traducción de cortesía.</strong> Esta política se rige por la ley brasileña y la versión en portugués en <a href="?lang=pt">/end/privacidade.html</a> es la que prevalece en caso de discrepancia.',
+  'pend.intro': 'Esta política describe cómo <strong>SrChZ Technologies</strong> (Rafael Cordeiro) trata los datos personales recogidos en este sitio, conforme a la <strong>Ley General de Protección de Datos de Brasil (LGPD — Ley 13.709/2018)</strong>.',
+
+  'pend.h2.1': '1. Datos que recogemos',
+  'pend.forms': 'Hay dos formularios en esta sección, y cada uno recoge cosas distintas.',
+  'pend.form1': '<b>Muestra gratis de la guía</b> (<i>/end/USN2/</i>): nombre, correo y, opcionalmente, WhatsApp.',
+  'pend.form2': '<b>Solicitud de inspección</b> (<i>/end/</i>): nombre, contacto (WhatsApp o correo) y, si los indicas, el componente y la norma involucrados, el alcance y el plazo. Ese campo es técnico y describe el servicio, pero puede identificar a tu empresa — así que merece el mismo cuidado.',
+  'pend.ua': 'Los dos registran también el <b>identificador de tu navegador (user agent)</b> y el <b>momento de la aceptación</b> de esta política, para contener envíos automatizados y guardar la prueba del consentimiento. No usamos cookies de rastreo ni píxeles de anuncios.',
+
+  'pend.h2.2': '2. Finalidad',
+  'pend.purp1': 'Entregar el material solicitado (muestra gratis / guía).',
+  'pend.purp2': 'Responder a solicitudes de inspección con alcance, método y plazo.',
+  'pend.purp3': 'Enviar comunicaciones relevantes sobre el producto y contenidos de estudio de END.',
+  'pend.purp4': 'Mejorar el sitio y la experiencia del usuario.',
+  'pend.noSell': 'No vendemos ni compartimos tus datos con terceros con fines de marketing.',
+
+  'pend.h2.3': '3. Base legal',
+  'pend.basis': 'El tratamiento se basa en tu <b>consentimiento</b>, dado al marcar la casilla de autorización y enviar el formulario, y en el <b>interés legítimo</b> de comunicar sobre productos relacionados. Puedes retirar el consentimiento en cualquier momento.',
+
+  'pend.h2.31': '3.1. Dónde quedan los datos',
+  'pend.where': 'Los envíos de los dos formularios se graban en <b>Supabase</b> (PostgreSQL gestionado), en la región <b>América del Sur — São Paulo</b>, actuando como <i>encargado del tratamiento</i>. La grabación usa una clave pública restringida a inserción: se puede enviar un registro, no se puede leer la base. El sitio está alojado en <b>GitHub Pages</b>.',
+
+  'pend.h2.4': '4. Tus derechos (LGPD)',
+  'pend.rights': 'Puedes solicitar acceso, corrección, portabilidad o <b>eliminación</b> de tus datos, además de darte de baja de las comunicaciones. Todo correo de marketing lleva un enlace de <b>cancelación</b>.',
+
+  'pend.h2.5': '5. Retención y seguridad',
+  'pend.retention': 'Conservamos los datos solo durante el tiempo necesario para las finalidades anteriores y aplicamos medidas razonables de seguridad. Los proveedores de infraestructura (alojamiento/correo) pueden tratar datos como encargados.',
+
+  'pend.h2.6': '6. Contacto del responsable',
+  'pend.controller': 'Responsable: <strong>SRCHZ TECHNOLOGIES SOLUCOES LTDA</strong> (nombre comercial: SrChZ Technologies) — CNPJ <strong>68.371.698/0001-95</strong>, con domicilio social en Alameda Rio Negro, 503, Sala 2020 — Alphaville Centro Industrial e Empresarial, Barueri/SP, 06454-000, Brasil, representada por Rafael Henrique Cordeiro Santos.',
+  'pend.contact': 'Para ejercer tus derechos o resolver dudas: <a href="mailto:rafaelhenriquecsantosz@gmail.com">rafaelhenriquecsantosz@gmail.com</a>. Respondemos en hasta 15 días.',
+
+  'pend.trademarks': 'Este sitio es material de estudio independiente. ABENDI y ASNT son marcas de sus respectivos titulares.',
+  'pend.back': '← Volver a la guía'
 };
