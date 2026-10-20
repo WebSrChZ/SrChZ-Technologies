@@ -26,6 +26,10 @@ window.SRCHZ_I18N.ja = {
         title: 'SrChZ · テクノロジー＆データ/AI｜ウェブ・ポータル・自動化・動画・AI',
         ogTitle: 'SrChZ · テクノロジー＆データ/AI',
         description: 'SrChZ のテクノロジー部門：受託ウェブ開発、ポータルとウェブアプリ、業務自動化と連携、ホスティングとデータ処理、動画の制作と編集、経営コンサルティング、そして実務で使える AI。設計からデプロイまで。'
+      },
+      privacy: {
+        title: 'プライバシーポリシー — SrChZ Technologies',
+        description: 'srchz-technologies.com.br で取得した個人データを SrChZ Technologies がブラジル個人データ保護法（LGPD、法律第13.709/2018号）に基づきどのように取り扱うかについて。'
       }
     }
   },
@@ -186,5 +190,59 @@ window.SRCHZ_I18N.ja = {
   'tech.faq.q4': 'コードとシステムは自分のものになりますか。',
   'tech.faq.a4': 'はい。リポジトリもインフラもお客様名義で、管理者権限もお客様が持ちます。プロジェクトを続けるうえで特定の業者に縛られることはありません。',
   'tech.faq.q5': '納品物における個人情報保護はどう扱われますか。',
-  'tech.faq.a5': '最後ではなく、設計の段階で扱います：法的根拠の明示、日付つきの同意記録、データベースの行単位アクセス制御、そして実際に取得する項目を記載したプライバシーポリシー——ありきたりの雛形ではありません。'
+  'tech.faq.a5': '最後ではなく、設計の段階で扱います：法的根拠の明示、日付つきの同意記録、データベースの行単位アクセス制御、そして実際に取得する項目を記載したプライバシーポリシー——ありきたりの雛形ではありません。',
+
+  // ---- /privacidade.html --------------------------------------------------
+  'priv.h1': 'プライバシーポリシー',
+  'priv.meta': 'SrChZ Technologies · 法人番号（CNPJ）68.371.698/0001-95 — 最終更新：2026年10月',
+  'priv.langNote': '<strong>参考訳です。</strong>本ポリシーはブラジル法に準拠し、相違がある場合は <a href="?lang=pt">/privacidade.html</a> のポルトガル語版が優先します。ここに記載する権利と期限は、LGPD（法律第13.709/2018号）が定めるものです。',
+  'priv.intro': '本ポリシーは、<strong>SrChZ Technologies</strong>（法人番号 CNPJ <strong>68.371.698/0001-95</strong>）が <strong>srchz-technologies.com.br</strong> で取得した個人データを、<strong>ブラジル個人データ保護法（LGPD — 法律第13.709/2018号）</strong>に基づきどのように取り扱うかを説明するものです。',
+  'priv.scope': '対象は、統合サイト、<a href="growth/">ブランディング＆グロース</a>のセクション、および<a href="tech/">テクノロジー＆データ/AI</a>のセクションです。エンジニアリング＆非破壊検査のセクションには <a href="end/privacidade.html">/end/privacidade.html</a> に独自のポリシーがあります。',
+
+  'priv.h2.1': '1. 管理者について',
+  'priv.controller': '<strong>SRCHZ TECHNOLOGIES SOLUCOES LTDA</strong>（屋号：SrChZ Technologies）<br>法人番号（CNPJ）：<strong>68.371.698/0001-95</strong><br>所在地：Alameda Rio Negro, 503, Sala 2020 — Alphaville Centro Industrial e Empresarial, Barueri/SP, 06454-000, ブラジル<br>代表者：Rafael Henrique Cordeiro Santos<br>管理者の連絡先：<a href="mailto:rafaelhenriquecsantosz@gmail.com">rafaelhenriquecsantosz@gmail.com</a>',
+  'priv.controllerNote': '第6項に記載する権利の行使も、このメールアドレスで受け付けます。15日以内に回答します。',
+
+  'priv.h2.2': '2. 取得するデータ',
+  'priv.collect': '取得するのは、お問い合わせフォームにご入力いただいた内容のみです——<a href="growth/">グロース</a>のセクションのフォームと、<a href="tech/">テクノロジー＆データ/AI</a>のセクションのフォームです。項目も保存先も同じで、違いは送信元の区別だけで、それも併せて記録されます。トラッキングCookie、広告ピクセル、アクセス解析ツールは一切使用していません。',
+  'priv.tbl.h1': 'データ',
+  'priv.tbl.h2': '取得元',
+  'priv.tbl.h3': '必須',
+  'priv.tbl.r1': 'お名前',
+  'priv.tbl.r2': '連絡先（WhatsApp またはメール）',
+  'priv.tbl.r3': '業種',
+  'priv.tbl.r4': 'メッセージ',
+  'priv.tbl.r5': 'ユーザーエージェント（ブラウザとOS）',
+  'priv.tbl.byYou': 'ご入力',
+  'priv.tbl.byBrowser': 'ブラウザが送信',
+  'priv.tbl.yes': 'はい',
+  'priv.tbl.no': 'いいえ',
+  'priv.tbl.auto': '自動',
+  'priv.ua': '<strong>ユーザーエージェント</strong>は、自動送信（スパム）を見分けるためだけに記録します。閲覧履歴のプロファイルを作ることも、サイトをまたいで追跡することもありません。',
+
+  'priv.h2.3': '3. 利用目的と法的根拠',
+  'priv.basis1': '<strong>お問い合わせへの回答</strong>とご提案の提示——法的根拠：<strong>同意</strong>（チェックボックスにチェックしてフォームを送信することによる）。',
+  'priv.basis2': '<strong>スパムの抑止</strong>（ユーザーエージェント）——法的根拠：連絡手段を機能させ続けることへの<strong>正当な利益</strong>。',
+  'priv.noSell': '第三者のマーケティング目的でお客様のデータを販売、貸与、共有することはありません。自動化された意思決定にも使用しません。',
+
+  'priv.h2.4': '4. データの保管場所',
+  'priv.where': '送信内容は <strong>Supabase</strong>（マネージドPostgreSQL）の<strong>南米・サンパウロ（sa-east-1）</strong>リージョンに保存され、同社は<em>処理者</em>として扱われます。書き込みには挿入のみに制限された公開鍵を使用します。サイトは <strong>GitHub Pages</strong> でホストされ、HTTPSが強制されています。',
+  'priv.fonts': '書体は Google Fonts から読み込まれるため、ページ表示時にお客様のIPアドレスが Google に渡ります——CDNとして一般的な挙動であり、当方で個人を特定することはありません。',
+
+  'priv.h2.5': '5. 保存期間',
+  'priv.retention': '商談に関する連絡先は、最後のご連絡から最長<strong>24か月</strong>保存し、その後削除します。それより前に削除をご希望の場合は、<strong>15日以内</strong>に削除します。',
+
+  'priv.h2.6': '6. お客様の権利',
+  'priv.rights': 'LGPD は次の権利を保障しています：取り扱いの<strong>確認</strong>、<strong>開示</strong>、<strong>訂正</strong>、<strong>匿名化または削除</strong>、<strong>データポータビリティ</strong>、共有に関する<strong>情報提供</strong>、そしていつでも可能な<strong>同意の撤回</strong>。',
+  'priv.rightsHow': '<a href="mailto:rafaelhenriquecsantosz@gmail.com">rafaelhenriquecsantosz@gmail.com</a> までご連絡ください——15日以内に回答します。同意の撤回は、撤回前に行われた取り扱いの適法性に影響しません。',
+
+  'priv.h2.7': '7. セキュリティ',
+  'priv.security': 'サイト全体でHTTPSを使用し、データベースへのアクセスは行単位のセキュリティで制限し、フォームが使う鍵には最小権限の原則を適用しています。完全な仕組みは存在しません。お客様のデータに重大なリスクを伴うセキュリティ事故が発生した場合は、LGPD第48条に従い、お客様とブラジルのデータ保護当局（ANPD）に通知します。',
+
+  'priv.h2.8': '8. 未成年者について',
+  'priv.minors': '本フォームは18歳未満の方を対象としておらず、児童・青少年のデータを意図的に取得することはありません。',
+
+  'priv.h2.9': '9. 本ポリシーの変更',
+  'priv.changes': '重要な変更は、上部に表示された公開日から有効になります。変更履歴は<a href="https://github.com/WebSrChZ/SrChZ-Technologies" target="_blank" rel="noopener">サイトのリポジトリ</a>で公開しています。',
+  'priv.back': '← ホームに戻る'
 };

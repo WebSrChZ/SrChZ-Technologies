@@ -21,6 +21,10 @@ window.SRCHZ_I18N.en = {
         title: 'SrChZ · Technology & Data/AI | Web, Portals, Automation, Video and AI',
         ogTitle: 'SrChZ · Technology & Data/AI',
         description: 'The SrChZ technology practice: custom web development, portals and web apps, automation and integrations, hosting and data processing, video production and post, management consulting and applied AI. From design to deploy.'
+      },
+      privacy: {
+        title: 'Privacy Policy — SrChZ Technologies',
+        description: 'How SrChZ Technologies handles personal data collected on srchz-technologies.com.br under the Brazilian data protection law (LGPD, Law 13.709/2018).'
       }
     }
   },
@@ -181,5 +185,59 @@ window.SRCHZ_I18N.en = {
   'tech.faq.q4': 'Do the code and the system stay with me?',
   'tech.faq.a4': 'Yes. The repository and the infrastructure stay in your name, with your admin access. No vendor lock-in to carry the project forward.',
   'tech.faq.q5': 'How is data protection handled in what you deliver?',
-  'tech.faq.a5': 'In the design, not at the end: a declared legal basis, proof of consent recorded with its date, row-level access control in the database, and a privacy policy describing the fields actually collected — not generic boilerplate.'
+  'tech.faq.a5': 'In the design, not at the end: a declared legal basis, proof of consent recorded with its date, row-level access control in the database, and a privacy policy describing the fields actually collected — not generic boilerplate.',
+
+  // ---- /privacidade.html --------------------------------------------------
+  'priv.h1': 'Privacy Policy',
+  'priv.meta': 'SrChZ Technologies · Company ID (CNPJ) 68.371.698/0001-95 — last updated: October 2026',
+  'priv.langNote': '<strong>Translation for convenience.</strong> This policy is governed by Brazilian law and the Portuguese version at <a href="?lang=pt">/privacidade.html</a> is the one that prevails in case of any discrepancy. Rights and deadlines described here are those granted by the LGPD (Law 13.709/2018).',
+  'priv.intro': 'This policy explains how <strong>SrChZ Technologies</strong> — company ID (CNPJ) <strong>68.371.698/0001-95</strong> — handles the personal data collected on <strong>srchz-technologies.com.br</strong>, under the <strong>Brazilian General Data Protection Law (LGPD — Law 13.709/2018)</strong>.',
+  'priv.scope': 'It covers the umbrella site, the <a href="growth/">Branding &amp; Growth</a> section and the <a href="tech/">Technology &amp; Data/AI</a> section. The Engineering &amp; NDT section has its own policy at <a href="end/privacidade.html">/end/privacidade.html</a>.',
+
+  'priv.h2.1': '1. Who the controller is',
+  'priv.controller': '<strong>SRCHZ TECHNOLOGIES SOLUCOES LTDA</strong> (trading as: SrChZ Technologies)<br>Company ID (CNPJ): <strong>68.371.698/0001-95</strong><br>Registered office: Alameda Rio Negro, 503, Sala 2020 — Alphaville Centro Industrial e Empresarial, Barueri/SP, 06454-000, Brazil<br>Representative: Rafael Henrique Cordeiro Santos<br>Controller contact: <a href="mailto:rafaelhenriquecsantosz@gmail.com">rafaelhenriquecsantosz@gmail.com</a>',
+  'priv.controllerNote': 'That email is also the channel for exercising any of the rights described in item 6. We reply within 15 days.',
+
+  'priv.h2.2': '2. Data we collect',
+  'priv.collect': 'We only collect what you type into the contact forms — the one in the <a href="growth/">Growth</a> section and the one in the <a href="tech/">Technology &amp; Data/AI</a> section. Both ask for the same fields and write to the same place; what tells them apart is the origin of the submission, recorded alongside the rest. We use no tracking cookies, no ad pixels and no analytics tools.',
+  'priv.tbl.h1': 'Data',
+  'priv.tbl.h2': 'Source',
+  'priv.tbl.h3': 'Required',
+  'priv.tbl.r1': 'Name',
+  'priv.tbl.r2': 'Contact (WhatsApp or email)',
+  'priv.tbl.r3': 'Segment',
+  'priv.tbl.r4': 'Message',
+  'priv.tbl.r5': 'User agent (browser and system)',
+  'priv.tbl.byYou': 'typed by you',
+  'priv.tbl.byBrowser': 'sent by your browser',
+  'priv.tbl.yes': 'Yes',
+  'priv.tbl.no': 'No',
+  'priv.tbl.auto': 'Automatic',
+  'priv.ua': 'The <strong>user agent</strong> is recorded only to spot automated submissions (spam). We do not build a browsing profile and we do not track you across sites.',
+
+  'priv.h2.3': '3. Purpose and legal basis',
+  'priv.basis1': '<strong>Replying to your enquiry</strong> and presenting a proposal — legal basis: <strong>consent</strong>, given by ticking the box and submitting the form.',
+  'priv.basis2': '<strong>Containing spam</strong> (user agent) — legal basis: <strong>legitimate interest</strong> in keeping the channel working.',
+  'priv.noSell': 'We do not sell, rent or share your data for third-party marketing. We do not use your data for automated decisions.',
+
+  'priv.h2.4': '4. Where the data lives',
+  'priv.where': 'Submissions are written to <strong>Supabase</strong> (managed PostgreSQL), in the <strong>South America — São Paulo (sa-east-1)</strong> region, acting as <em>processor</em>. The write uses a public key restricted to insertion. The site is hosted on <strong>GitHub Pages</strong>, with HTTPS enforced.',
+  'priv.fonts': 'Typefaces come from Google Fonts, which exposes your IP address to Google as the page loads — standard CDN behaviour, with no personal identification on our part.',
+
+  'priv.h2.5': '5. How long we keep it',
+  'priv.retention': 'Business contacts are kept for up to <strong>24 months</strong> after the last contact and then deleted. If you ask for deletion before that, we delete within <strong>15 days</strong>.',
+
+  'priv.h2.6': '6. Your rights',
+  'priv.rights': 'The LGPD grants you: <strong>confirmation</strong> that processing exists, <strong>access</strong>, <strong>correction</strong>, <strong>anonymisation or deletion</strong>, <strong>portability</strong>, <strong>information</strong> about sharing, and <strong>withdrawal of consent</strong> at any time.',
+  'priv.rightsHow': 'Write to <a href="mailto:rafaelhenriquecsantosz@gmail.com">rafaelhenriquecsantosz@gmail.com</a> — we reply within 15 days. Withdrawing consent does not invalidate processing carried out before the withdrawal.',
+
+  'priv.h2.7': '7. Security',
+  'priv.security': 'HTTPS across the whole site, database access restricted by Row Level Security, and least privilege on the key the form uses. No system is infallible: if a security incident carries relevant risk to your data, we will notify you and the Brazilian data protection authority (ANPD) as required by article 48 of the LGPD.',
+
+  'priv.h2.8': '8. Minors',
+  'priv.minors': 'The form is not intended for people under 18 and we do not knowingly collect data from children or adolescents.',
+
+  'priv.h2.9': '9. Changes to this policy',
+  'priv.changes': 'Material changes take effect on the publication date shown at the top. The version history is public in the <a href="https://github.com/WebSrChZ/SrChZ-Technologies" target="_blank" rel="noopener">site repository</a>.',
+  'priv.back': '← Back to home'
 };

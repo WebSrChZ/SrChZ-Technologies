@@ -231,6 +231,10 @@
       try { url = new URL(a.href, location.href); } catch (e) { return; }
       if (url.origin !== location.origin) return;
       if (!/\.(html?)$|\/$/.test(url.pathname)) return;   // nao mexe em pdf, imagem etc.
+      /* Link que ja declara um idioma foi escrito de proposito — o aviso de
+         idioma prevalente na politica de privacidade aponta para a versao em
+         portugues, e sobrescrever isso o mandaria de volta para a traducao. */
+      if (url.searchParams.has('lang')) return;
       url.searchParams.set('lang', current);
       a.setAttribute('href', url.pathname + url.search + url.hash);
     });
