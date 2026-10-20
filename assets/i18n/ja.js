@@ -42,6 +42,19 @@ window.SRCHZ_I18N.ja = {
       end: {
         title: 'SrChZ · 非破壊検査｜超音波探傷・鉄道検査・肉厚測定・浸透探傷',
         description: '現場での非破壊検査：超音波探傷、鉄道検査、肉厚測定、浸透探傷——追跡可能な校正と規格準拠の報告書まで。資格取得用の学習ガイドも扱っています。'
+      },
+      nf: {
+        title: '404 — SrChZ Technologies',
+        description: 'ページが見つかりません。'
+      },
+      nfGrowth: {
+        title: 'ページが見つかりません — SrChZ Technologies',
+        description: 'ページが見つかりません。'
+      },
+      calc: {
+        title: '音響距離（ビームパス）計算ツール — 超音波探傷レベルII · SrChZ',
+        ogTitle: '音響距離（ビームパス）計算ツール — 超音波探傷レベルII',
+        description: '鋼材における斜角探触子の音響距離を無償で計算：脚長、スキップ、深さ、投影距離。超音波探傷レベルII — SrChZ。'
       }
     }
   },
@@ -526,5 +539,47 @@ window.SRCHZ_I18N.ja = {
   'end.g5.n': '渦流探傷',
   'end.g5.d': '渦電流試験：インピーダンス、周波数、校正、表面き裂の検出。',
   'end.g6.n': '目視試験',
-  'end.g6.d': '目視による非破壊検査の基礎、照明、器具、検査基準。'
+  'end.g6.d': '目視による非破壊検査の基礎、照明、器具、検査基準。',
+
+  // ---- /404.html ----------------------------------------------------------
+  'nf.h1': 'ページが見つかりません',
+  'nf.p': 'お探しのページは存在しません——ですが、ふさわしい答えはすぐそこにあります。',
+  'nf.back': 'SrChZ Technologies へ戻る',
+
+  // ---- /growth/404.html ---------------------------------------------------
+  'nfg.p': 'このページは存在しません——ですが、御社の仕組みはこれからつくれます。',
+  'nfg.back': '最初に戻る',
+
+  // ---- /end/USN2/calculadora.html -----------------------------------------
+  'calc.nav.back': '← ガイドに戻る',
+  'calc.nav.plans': 'プランを見る',
+  'calc.eyebrow': '無償ツール · 超音波探傷レベルII',
+  'calc.h1': '<span class="gold-grad">音響距離</span>計算ツール',
+  'calc.sub': '鋼材における斜角探触子。数値を入力すると、脚長・スキップ・深さ・投影距離がその場で計算されます。',
+  'calc.in.title': '入力',
+  'calc.in.ang': '探触子屈折角 θ（°）',
+  'calc.in.esp': '板厚 t（mm）',
+  'calc.in.ps': '読み取った音響距離 SP（mm）',
+  'calc.in.freq': '周波数 f（MHz）— 任意',
+  'calc.in.diam': '振動子直径 D（mm）— 任意',
+  'calc.in.const': '定数（鋼）：V<sub>L</sub>=5920 m/s · V<sub>T</sub>=3230 m/s。',
+  'calc.out.title': '計算結果',
+  'calc.out.lt': '横波波長 λ（mm）',
+  'calc.out.n': '近距離音場限界 N（mm）',
+  'calc.out.s': '1/2スキップ経路 S = t/cosθ',
+  'calc.out.sup': '表面距離（ハーフスキップ）t·tanθ',
+  'calc.out.salto': 'フルスキップ 2t·tanθ',
+  'calc.out.vert': 'SP·cosθ（垂直成分）',
+  'calc.out.perna': '反射源のスキップ区分',
+  'calc.out.prof': '実深さ',
+  'calc.out.proj': '投影距離 SP·sinθ',
+  'calc.out.note': 'SP·cosθ が板厚を超えると、深さは自動的に2回目のスキップで計算されます。',
+  'calc.leg1': '1回目',
+  'calc.leg2': '2回目',
+  'calc.cta.title': '完全版をご希望ですか。',
+  'calc.cta.p': '<b>自動計算の Sound Path シート</b>＋<b>解説つき125問の問題集</b>＋校正チェックリストは <b>Kit Aprovação</b> に収録されています。',
+  'calc.cta.btn': 'Kit Aprovação を見る →',
+  'calc.foot.guide': 'ガイド',
+  'calc.foot.plans': 'プラン',
+  'calc.foot.priv': 'プライバシー'
 };

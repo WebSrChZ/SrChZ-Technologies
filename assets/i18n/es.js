@@ -37,6 +37,19 @@ window.SRCHZ_I18N.es = {
       end: {
         title: 'SrChZ · END | Ultrasonido, Ferroviaria, Espesores y Líquidos Penetrantes',
         description: 'Ensayos no destructivos en campo: ultrasonido, ferroviaria, medición de espesores y líquidos penetrantes — con calibración trazable e informe conforme a norma. Y las guías de certificación en END.'
+      },
+      nf: {
+        title: '404 — SrChZ Technologies',
+        description: 'Página no encontrada.'
+      },
+      nfGrowth: {
+        title: 'Página no encontrada — SrChZ Technologies',
+        description: 'Página no encontrada.'
+      },
+      calc: {
+        title: 'Calculadora de Camino Sónico — Ultrasonido Nivel II · SrChZ',
+        ogTitle: 'Calculadora de Camino Sónico — Ultrasonido Nivel II',
+        description: 'Calculadora gratuita de camino sónico para palpador angular en acero: recorrido de la pierna, salto, profundidad y distancia proyectada. Ultrasonido Nivel II — SrChZ.'
       }
     }
   },
@@ -521,5 +534,47 @@ window.SRCHZ_I18N.es = {
   'end.g5.n': 'Corrientes de Foucault',
   'end.g5.d': 'Eddy current: impedancia, frecuencia, calibración y detección de grietas superficiales.',
   'end.g6.n': 'Ensayo Visual',
-  'end.g6.d': 'Fundamentos del END visual, iluminación, instrumentos y criterios de inspección.'
+  'end.g6.d': 'Fundamentos del END visual, iluminación, instrumentos y criterios de inspección.',
+
+  // ---- /404.html ----------------------------------------------------------
+  'nf.h1': 'Página no encontrada',
+  'nf.p': 'La ruta que buscabas no existe — pero la solución correcta está a un clic.',
+  'nf.back': 'Volver a SrChZ Technologies',
+
+  // ---- /growth/404.html ---------------------------------------------------
+  'nfg.p': 'Esta página no existe — pero tu ecosistema sí puede existir.',
+  'nfg.back': 'Volver al inicio',
+
+  // ---- /end/USN2/calculadora.html -----------------------------------------
+  'calc.nav.back': '← Volver a la guía',
+  'calc.nav.plans': 'Ver planes',
+  'calc.eyebrow': 'Herramienta gratuita · Ultrasonido Nivel II',
+  'calc.h1': 'Calculadora de <span class="gold-grad">Camino Sónico</span>',
+  'calc.sub': 'Palpador angular en acero. Introduce los datos y mira pierna, salto, profundidad y proyección — calculados al instante.',
+  'calc.in.title': 'Entradas',
+  'calc.in.ang': 'Ángulo del palpador θ (°)',
+  'calc.in.esp': 'Espesor t (mm)',
+  'calc.in.ps': 'Camino sónico CS leído (mm)',
+  'calc.in.freq': 'Frecuencia f (MHz) — opcional',
+  'calc.in.diam': 'Diámetro del cristal D (mm) — opcional',
+  'calc.in.const': 'Constantes (acero): V<sub>L</sub>=5920 m/s · V<sub>T</sub>=3230 m/s.',
+  'calc.out.title': 'Resultados',
+  'calc.out.lt': 'λ transversal (mm)',
+  'calc.out.n': 'Campo cercano N (mm)',
+  'calc.out.s': 'Recorrido 1ª pierna S = t/cosθ',
+  'calc.out.sup': 'Superficie (medio salto) t·tanθ',
+  'calc.out.salto': 'Salto completo 2t·tanθ',
+  'calc.out.vert': 'CS·cosθ (componente vertical)',
+  'calc.out.perna': 'Pierna del reflector',
+  'calc.out.prof': 'Profundidad real',
+  'calc.out.proj': 'Distancia proyectada CS·senθ',
+  'calc.out.note': 'La profundidad usa la 2ª pierna automáticamente cuando CS·cosθ &gt; espesor.',
+  'calc.leg1': '1ª pierna',
+  'calc.leg2': '2ª pierna',
+  'calc.cta.title': '¿Quieres la versión completa?',
+  'calc.cta.p': 'La <b>planilla Sound Path automatizada</b> + el <b>cuaderno de 125 preguntas comentadas</b> + el checklist de calibración están en el <b>Kit Aprovação</b>.',
+  'calc.cta.btn': 'Ver el Kit Aprovação →',
+  'calc.foot.guide': 'La guía',
+  'calc.foot.plans': 'Planes',
+  'calc.foot.priv': 'Privacidad'
 };

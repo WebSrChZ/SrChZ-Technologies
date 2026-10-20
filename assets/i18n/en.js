@@ -37,6 +37,19 @@ window.SRCHZ_I18N.en = {
       end: {
         title: 'SrChZ · NDT | Ultrasonic, Railway, Thickness and Penetrant Inspection',
         description: 'Non-destructive testing in the field: ultrasonic, railway, thickness measurement and liquid penetrant — with traceable calibration and code-compliant reporting. Plus the NDT certification study guides.'
+      },
+      nf: {
+        title: '404 — SrChZ Technologies',
+        description: 'Page not found.'
+      },
+      nfGrowth: {
+        title: 'Page not found — SrChZ Technologies',
+        description: 'Page not found.'
+      },
+      calc: {
+        title: 'Sound Path Calculator — Ultrasonic Level II · SrChZ',
+        ogTitle: 'Sound Path Calculator — Ultrasonic Level II',
+        description: 'Free sound path calculator for angle beam probes in steel: leg distance, skip, depth and projected distance. Ultrasonic Level II — SrChZ.'
       }
     }
   },
@@ -521,5 +534,47 @@ window.SRCHZ_I18N.en = {
   'end.g5.n': 'Eddy Current',
   'end.g5.d': 'Eddy current testing: impedance, frequency, calibration and detection of surface cracking.',
   'end.g6.n': 'Visual Testing',
-  'end.g6.d': 'Fundamentals of visual NDT, lighting, instruments and inspection criteria.'
+  'end.g6.d': 'Fundamentals of visual NDT, lighting, instruments and inspection criteria.',
+
+  // ---- /404.html ----------------------------------------------------------
+  'nf.h1': 'Page not found',
+  'nf.p': 'The path you were looking for does not exist — but the right solution is one click away.',
+  'nf.back': 'Back to SrChZ Technologies',
+
+  // ---- /growth/404.html ---------------------------------------------------
+  'nfg.p': 'This page does not exist — but your ecosystem can.',
+  'nfg.back': 'Back to the start',
+
+  // ---- /end/USN2/calculadora.html -----------------------------------------
+  'calc.nav.back': '← Back to the guide',
+  'calc.nav.plans': 'See the plans',
+  'calc.eyebrow': 'Free tool · Ultrasonic Level II',
+  'calc.h1': '<span class="gold-grad">Sound Path</span> Calculator',
+  'calc.sub': 'Angle beam probe in steel. Enter the values and see leg, skip, depth and projection — calculated as you type.',
+  'calc.in.title': 'Inputs',
+  'calc.in.ang': 'Probe angle θ (°)',
+  'calc.in.esp': 'Thickness t (mm)',
+  'calc.in.ps': 'Sound path SP as read (mm)',
+  'calc.in.freq': 'Frequency f (MHz) — optional',
+  'calc.in.diam': 'Crystal diameter D (mm) — optional',
+  'calc.in.const': 'Constants (steel): V<sub>L</sub>=5920 m/s · V<sub>T</sub>=3230 m/s.',
+  'calc.out.title': 'Results',
+  'calc.out.lt': 'Shear wavelength λ (mm)',
+  'calc.out.n': 'Near field N (mm)',
+  'calc.out.s': 'First leg path S = t/cosθ',
+  'calc.out.sup': 'Surface (half skip) t·tanθ',
+  'calc.out.salto': 'Full skip 2t·tanθ',
+  'calc.out.vert': 'SP·cosθ (vertical component)',
+  'calc.out.perna': 'Reflector leg',
+  'calc.out.prof': 'Actual depth',
+  'calc.out.proj': 'Projected distance SP·sinθ',
+  'calc.out.note': 'Depth switches to the second leg automatically when SP·cosθ &gt; thickness.',
+  'calc.leg1': '1st leg',
+  'calc.leg2': '2nd leg',
+  'calc.cta.title': 'Want the full version?',
+  'calc.cta.p': 'The <b>automated Sound Path spreadsheet</b> + the <b>125 explained questions workbook</b> + the calibration checklist are in the <b>Kit Aprovação</b>.',
+  'calc.cta.btn': 'See the Kit Aprovação →',
+  'calc.foot.guide': 'The guide',
+  'calc.foot.plans': 'Plans',
+  'calc.foot.priv': 'Privacy'
 };

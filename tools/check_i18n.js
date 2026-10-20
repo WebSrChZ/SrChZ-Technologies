@@ -81,8 +81,12 @@ for (const file of pages) {
   if (!/assets\/i18n\.js/.test(html)) {
     fail(`${rel} usa data-i18n mas nao carrega assets/i18n.js`);
   }
-  // ...e precisa de um ponto de ancoragem para o seletor
-  if (!/data-i18n-switcher/.test(html)) {
+  /* ...e precisa de um ponto de ancoragem para o seletor, salvo numa pagina
+     noindex. Um 404 nao e porta de entrada: o visitante ja chegou com um
+     idioma escolhido e o que ele quer ali e sair. Enfiar um seletor no meio
+     de um layout centrado de 404 custa mais do que entrega. */
+  const noindex = /<meta[^>]+name="robots"[^>]+content="[^"]*noindex/i.test(html);
+  if (!noindex && !/data-i18n-switcher/.test(html)) {
     fail(`${rel} usa data-i18n mas nao tem [data-i18n-switcher] para o seletor`);
   }
   // ...e precisa declarar qual pagina e, para titulo e descricao corretos
@@ -96,9 +100,11 @@ for (const file of pages) {
 
 /* Chaves pedidas pelo JavaScript via t("chave", "alternativa") — mensagens que
    a pagina gera em tempo de execucao e que nenhum atributo data-i18n alcanca.
-   Sem isto a checagem de orfas acusaria essas chaves de nao serem usadas. */
+   Sem isto a checagem de orfas acusaria essas chaves de nao serem usadas.
+   `tr` tambem conta: na calculadora o nome `t` ja e a espessura da peca, entao
+   o helper ali se chama `tr`. Chamar o alias de orfa seria o check errando. */
 function collectRuntimeKeys(text, rel) {
-  for (const m of text.matchAll(/\bt\(\s*["'`]([A-Za-z0-9_.-]+)["'`]/g)) {
+  for (const m of text.matchAll(/\b(?:t|tr)\(\s*["'`]([A-Za-z0-9_.-]+)["'`]/g)) {
     if (!usedBy.has(m[1])) usedBy.set(m[1], []);
     if (!usedBy.get(m[1]).includes(rel)) usedBy.get(m[1]).push(rel);
   }
