@@ -23,6 +23,12 @@ const WA_MSG = {
   vip:   "Olá! Quero entrar no VIP · Aprovação Assistida (R$497)."
 };
 
+/* Mensagens criadas aqui no JavaScript — data-i18n nao as alcanca. O t() do
+   motor traduz; sem dicionario, cai no texto em portugues escrito abaixo. */
+function t(key, fallback) {
+  return (window.SrChZI18n && window.SrChZI18n.t) ? window.SrChZI18n.t(key, fallback) : fallback;
+}
+
 /* ---- ano no rodapé ---- */
 document.getElementById("year").textContent = new Date().getFullYear();
 
@@ -58,7 +64,7 @@ document.querySelectorAll(".plan__buy").forEach(btn => {
     ev.preventDefault();
     const w = waLink(which);
     if (w) { window.open(w, "_blank", "noopener"); }
-    else { location.hash = "#isca"; alert("Checkout em configuração. Deixe seu e-mail que avisamos o lançamento e enviamos a amostra grátis!"); }
+    else { location.hash = "#isca"; alert(t("u.js.checkout","Checkout em configuração. Deixe seu e-mail que avisamos o lançamento e enviamos a amostra grátis!")); }
   });
   // se houver URL real, aplica no href
   const which = btn.dataset.buy;
@@ -72,13 +78,13 @@ form.addEventListener("submit", async (ev) => {
   ev.preventDefault();
   const data = Object.fromEntries(new FormData(form).entries());
   if (!data.nome || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(data.email)) {
-    alert("Preencha nome e um e-mail válido.");
+    alert(t("u.js.errFields","Preencha nome e um e-mail válido."));
     return;
   }
   // A base legal do envio e o consentimento. O form e `novalidate`, entao o
   // `required` do checkbox nao e aplicado pelo navegador: checa aqui.
   if (!data.consent) {
-    alert("Marque a autorização de contato para receber a amostra.");
+    alert(t("u.js.errConsent","Marque a autorização de contato para receber a amostra."));
     return;
   }
 
@@ -116,5 +122,5 @@ form.addEventListener("submit", async (ev) => {
 
   // 3) feedback
   ok.hidden = false;
-  form.querySelector('button[type="submit"]').textContent = "Enviado ✓";
+  form.querySelector('button[type="submit"]').textContent = t("u.js.sent","Enviado ✓");
 });

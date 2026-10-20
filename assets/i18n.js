@@ -101,6 +101,14 @@
   var css = ''
     + 'html.i18n-pending body{visibility:hidden}'
     + '.i18n-sw{position:relative;display:inline-flex;align-items:center}'
+    /* O rotulo e so para leitor de tela. Ele nascia com class="sr-only"
+       contando que a pagina definisse essa classe — e metade das paginas nao
+       define, entao "Idioma / Language" aparecia escrito na barra de navegacao
+       e ainda empurrava o seletor para fora da tela no telefone. Quem cria o
+       elemento e este arquivo, entao a regra mora aqui, escopada em .i18n-sw
+       para nao brigar com o .sr-only das paginas que ja tem o seu. */
+    + '.i18n-sw .sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;'
+    + 'overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}'
     + '.i18n-sw select{appearance:none;-webkit-appearance:none;background:transparent;'
     + 'border:1px solid rgba(201,162,75,.3);color:#cfc7b6;font:inherit;font-size:.82rem;'
     + 'font-weight:500;padding:.38rem 1.7rem .38rem .66rem;border-radius:999px;cursor:pointer;'
@@ -119,15 +127,25 @@
     + '--sans:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",YuGothic,Meiryo,"Noto Sans JP",sans-serif}'
     + 'html[lang="ja"] body{line-height:1.85;font-weight:400}'
     + 'html[lang="ja"] h1,html[lang="ja"] h2,html[lang="ja"] h3{line-height:1.4;letter-spacing:.01em}'
-    /* japones nao usa italico: o navegador sintetiza uma inclinacao feia */
-    + 'html[lang="ja"] em,html[lang="ja"] i,html[lang="ja"] .hero-title,'
-    + 'html[lang="ja"] .pull,html[lang="ja"] .hero-sign{font-style:normal}'
+    /* Japones nao tem italico. Nao existindo o desenho inclinado na fonte, o
+       navegador sintetiza um — inclina o glifo a forca — e kanji tombado fica
+       simplesmente errado. Vale para <em>/<i> e para todo seletor do site que
+       pede italico por estilo. */
+    + 'html[lang="ja"] :is(em,i,.case-quote,.hero-line,.hero-sign,.hero-title,'
+    + '.hero__lead,.pull){font-style:normal}'
     /* quebra de linha adequada a CJK */
     + 'html[lang="ja"] p,html[lang="ja"] li,html[lang="ja"] h1,html[lang="ja"] h2,'
     + 'html[lang="ja"] h3{line-break:strict;overflow-wrap:break-word}'
-    /* o espacamento largo de letras some em CJK, onde ele nao ajuda a leitura */
-    + 'html[lang="ja"] .eyebrow,html[lang="ja"] .hero-kicker,html[lang="ja"] .d-n,'
-    + 'html[lang="ja"] .trail__tag,html[lang="ja"] .proof__tag{letter-spacing:.08em}';
+    /* O espacamento largo de letras e um recurso tipografico latino: em texto
+       japones ele so afasta os kana e atrapalha a leitura. A lista abaixo e
+       todo seletor do site com letter-spacing >= .14em — as duas convencoes de
+       nome convivem (.hero-kicker na home, .hero__kicker no /tech/), entao
+       ambas precisam estar aqui, senao o ajuste passa longe da pagina errada. */
+    + 'html[lang="ja"] :is(.badge,.book__eyebrow,.case-deliver-h,.channel__fmt,'
+    + '.contact small,.door .d-n,.eyebrow,.footer-brand p,.hero-disc li,'
+    + '.hero-kicker,.hero-title,.hero__kicker,.hero__sub,.lead-or,.plan-badge,'
+    + '.plan-sub,.plan__ribbon,.portal-tag,.proof__tag,.q-phone legend,.r-label,'
+    + '.sharebox label,.spec-label,.step-k,.trail__tag){letter-spacing:.06em}';
 
   var styleEl = document.createElement('style');
   styleEl.textContent = css;

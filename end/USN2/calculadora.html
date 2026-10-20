@@ -35,6 +35,20 @@
 .cta-box h3{font-family:var(--serif);font-size:1.5rem;margin-bottom:8px}
 .cta-box p{color:var(--soft);margin-bottom:16px}
 @media(max-width:720px){.calc{grid-template-columns:1fr}}
+/* O styles.css desta pasta transforma .nav__links numa gaveta escondida acima
+   da tela, aberta pelo botao ☰ do guia. Esta pagina nunca teve esse botao,
+   entao no telefone a gaveta ficava fechada para sempre: o link de volta, o
+   CTA e o seletor de idioma eram inalcancaveis. Sao tres itens curtos — em vez
+   de importar o botao, a barra continua sendo uma barra. */
+@media(max-width:860px){
+  .nav__links{position:static;transform:none;flex-direction:row;flex-wrap:wrap;
+    justify-content:flex-end;background:none;border:0;padding:0;gap:12px}
+  .nav__inner{flex-wrap:wrap;height:auto;gap:8px;padding-top:10px;padding-bottom:10px}
+  /* o styles.css esconde o seletor da gaveta em favor do que fica ao lado do
+     ☰; aqui nao ha gaveta nem ☰, entao ele volta a ser o unico e o visivel */
+  .nav__links .i18n-sw{display:inline-flex}
+}
+@media(max-width:420px){.nav__brand .nav__name{display:none}}
 </style>
 </head>
 <body>
