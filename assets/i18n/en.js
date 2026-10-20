@@ -33,6 +33,10 @@ window.SRCHZ_I18N.en = {
       growth: {
         title: 'SrChZ Technologies — Growth & Branding | Rafael Cordeiro',
         description: 'High-performance growth and branding: paid media, brand, video production and a client portal of your own — engineering, psychoanalysis and craft.'
+      },
+      end: {
+        title: 'SrChZ · NDT | Ultrasonic, Railway, Thickness and Penetrant Inspection',
+        description: 'Non-destructive testing in the field: ultrasonic, railway, thickness measurement and liquid penetrant — with traceable calibration and code-compliant reporting. Plus the NDT certification study guides.'
       }
     }
   },
@@ -444,5 +448,78 @@ window.SRCHZ_I18N.en = {
   'gr.form.errConsent': 'Please tick the contact authorisation to send.',
   'gr.form.sending': 'Sending…',
   'gr.form.ok': '✓ Received. Rafael will be in touch shortly.',
-  'gr.form.errSend': 'I could not send that just now. Try WhatsApp above.'
+  'gr.form.errSend': 'I could not send that just now. Try WhatsApp above.',
+
+  // ---- /end/ --------------------------------------------------------------
+  'end.nav.home': '‹ Home',
+  'end.nav.svc': 'Services',
+  'end.nav.cta': 'Request an inspection →',
+
+  'end.hero.kicker': 'Engineering · Non-Destructive Testing',
+  'end.hero.title': 'Non-Destructive<br>Testing',
+  'end.hero.sub': 'Inspection · Technical Reports · Training',
+  'end.hero.lead': 'Someone who inspects in the field does not hand over an opinion — they hand over a report. Ultrasonic, railway and thickness, with the method that also became a book.',
+  'end.hero.cta1': 'See the services →',
+  'end.hero.cta2': 'Certification guides',
+  'end.cred1': 'Ultrasonic Inspector · Level II',
+  'end.cred2': 'Railway Inspection',
+  'end.cred3': 'NR-35 · Work at Height (BR)',
+  'end.cred4': 'NR-12 · Machinery Safety (BR)',
+
+  'end.svc.title': 'Inspection Services',
+  'end.svc.lead': 'Non-destructive testing carried out in the field, with traceable calibration and a report that meets the standard. From rail to pressure vessel.',
+  'end.tag.field': 'In the field',
+  'end.tag.spec': 'Specialty',
+  'end.tag.deliv': 'Deliverable',
+  'end.tag.train': 'Training',
+  'end.tag.avail': 'Available',
+  'end.tag.soon': 'Coming soon',
+
+  'end.s1.n': 'Conventional Ultrasonic Testing',
+  'end.s1.d': 'Detection and sizing of discontinuities in welded joints, castings, forgings, shafts and plate. Calibration on V1/V2 blocks, DAC/DGS curves and scanning gain.',
+  'end.s2.n': 'Railway Inspection',
+  'end.s2.d': 'Rails and thermite welds: 0°, 45°WB and 70° scanning, DiO 562 calibration and multichannel system operation. The specialty of the house.',
+  'end.s3.n': 'Thickness Measurement',
+  'end.s3.d': 'Corrosion and wall-loss monitoring by the echo-to-echo technique: piping, vessels, tanks, hulls and components — with point mapping and history.',
+  'end.s4.n': 'Liquid Penetrant Testing',
+  'end.s4.d': 'Surface-breaking discontinuities: preparation, application, development and evaluation against the acceptance criteria of the applicable standard.',
+  'end.s5.n': 'Reports &amp; Documentation',
+  'end.s5.d': 'Documentation that carries a decision: photographic record, location sketch, test parameters, acceptance criteria and a conclusive opinion.',
+  'end.s6.n': 'Certification Preparation',
+  'end.s6.d': 'Training and mentoring for NDT qualification — theory, worked calculations and explained mock exams. The same method as the guides below.',
+
+  'end.band.title': 'Need an inspection?',
+  'end.band.lead': 'Tell me the component, the standard and the deadline — I come back with scope, method and what the report will cover.',
+  'end.band.cta1': 'Request a quote →',
+  'end.band.cta2': 'See the guides',
+  'end.form.or': 'or describe it here — I come back with scope, method and what the report covers',
+  'end.form.name': 'Your name',
+  'end.form.contact': 'WhatsApp or email',
+  'end.form.segment': 'Component and standard — e.g. thermite weld, rail, pressure vessel',
+  'end.form.segmentLabel': 'Component and standard',
+  'end.form.message': 'What needs inspecting, and by when?',
+  'end.form.messageLabel': 'Scope and deadline',
+  'end.form.consent': 'I authorise SrChZ Technologies to use my data to reply about this inspection. I can withdraw at any time. See the <a href="/privacidade.html" target="_blank" rel="noopener">Privacy Policy</a>.',
+  'end.form.submit': 'Send the inspection request',
+  'end.form.errFields': 'Please fill in a name and a valid contact.',
+  'end.form.errConsent': 'Please tick the contact authorisation to send.',
+  'end.form.sending': 'Sending…',
+  'end.form.ok': 'Received. I will come back with scope, method and timeline.',
+  'end.form.errSend': 'I could not send that just now. Reach me on WhatsApp above.',
+
+  'end.tr.title': 'Training &amp; Certification Guides',
+  'end.tr.lead': 'The other side of the work: turning the field method into study material. One guide per test method — more tracks are on the way.',
+  'end.g1.n': 'Ultrasonic Level II',
+  'end.g1.d': 'The definitive guide: physics, calibration (DAC/DGS), rails and welds, and 20+ worked questions. EPUB + PDF.',
+  'end.g1.go': 'Open the guide →',
+  'end.g2.n': 'Radiographic Testing',
+  'end.g2.d': 'Industrial radiography: generation, exposure techniques, sensitivity and film interpretation.',
+  'end.g3.n': 'Liquid Penetrant',
+  'end.g3.d': 'Preparation, development, sensitivity and acceptance criteria for surface indications.',
+  'end.g4.n': 'Magnetic Particle',
+  'end.g4.d': 'Magnetisation, wet and dry techniques, fluorescent methods and evaluation of discontinuities.',
+  'end.g5.n': 'Eddy Current',
+  'end.g5.d': 'Eddy current testing: impedance, frequency, calibration and detection of surface cracking.',
+  'end.g6.n': 'Visual Testing',
+  'end.g6.d': 'Fundamentals of visual NDT, lighting, instruments and inspection criteria.'
 };

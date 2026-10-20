@@ -33,6 +33,10 @@ window.SRCHZ_I18N.es = {
       growth: {
         title: 'SrChZ Technologies — Growth & Branding | Rafael Cordeiro',
         description: 'Growth y branding de alto rendimiento: medios pagados, marca, producción de video y Portal del Cliente propio — ingeniería, psicoanálisis y estética.'
+      },
+      end: {
+        title: 'SrChZ · END | Ultrasonido, Ferroviaria, Espesores y Líquidos Penetrantes',
+        description: 'Ensayos no destructivos en campo: ultrasonido, ferroviaria, medición de espesores y líquidos penetrantes — con calibración trazable e informe conforme a norma. Y las guías de certificación en END.'
       }
     }
   },
@@ -444,5 +448,78 @@ window.SRCHZ_I18N.es = {
   'gr.form.errConsent': 'Marca la autorización de contacto para enviar.',
   'gr.form.sending': 'Enviando…',
   'gr.form.ok': '✓ Recibido. Rafael te contacta en breve.',
-  'gr.form.errSend': 'No pude enviar ahora. Prueba por WhatsApp arriba.'
+  'gr.form.errSend': 'No pude enviar ahora. Prueba por WhatsApp arriba.',
+
+  // ---- /end/ --------------------------------------------------------------
+  'end.nav.home': '‹ Inicio',
+  'end.nav.svc': 'Servicios',
+  'end.nav.cta': 'Solicitar inspección →',
+
+  'end.hero.kicker': 'Ingeniería · Ensayos No Destructivos',
+  'end.hero.title': 'Ensayos No<br>Destructivos',
+  'end.hero.sub': 'Inspección · Informes Técnicos · Formación',
+  'end.hero.lead': 'Quien inspecciona en campo no entrega una opinión — entrega un informe. Ultrasonido, ferroviaria y espesores, con el método que además se volvió libro.',
+  'end.hero.cta1': 'Ver los servicios →',
+  'end.hero.cta2': 'Guías de certificación',
+  'end.cred1': 'Inspector de Ultrasonido · Nivel II',
+  'end.cred2': 'Inspección Ferroviaria',
+  'end.cred3': 'NR-35 · Trabajo en Altura (BR)',
+  'end.cred4': 'NR-12 · Seguridad en Máquinas (BR)',
+
+  'end.svc.title': 'Servicios de Inspección',
+  'end.svc.lead': 'Ensayos no destructivos ejecutados en campo, con calibración trazable e informe conforme a norma. Del riel al recipiente a presión.',
+  'end.tag.field': 'En campo',
+  'end.tag.spec': 'Especialidad',
+  'end.tag.deliv': 'Entregable',
+  'end.tag.train': 'Formación',
+  'end.tag.avail': 'Disponible',
+  'end.tag.soon': 'Próximamente',
+
+  'end.s1.n': 'Ultrasonido Convencional',
+  'end.s1.d': 'Detección y dimensionamiento de discontinuidades en juntas soldadas, piezas fundidas, forjadas, ejes y chapas. Calibración en bloques V1/V2, curvas DAC/DGS y ganancia de barrido.',
+  'end.s2.n': 'Inspección Ferroviaria',
+  'end.s2.d': 'Rieles y soldaduras aluminotérmicas: barrido 0°, 45°WB y 70°, calibración DiO 562 y operación de sistema multicanal. La especialidad de la casa.',
+  'end.s3.n': 'Medición de Espesores',
+  'end.s3.d': 'Control de corrosión y pérdida de pared por la técnica eco-eco: tuberías, recipientes, tanques, cascos y componentes — con mapeo de puntos e histórico.',
+  'end.s4.n': 'Líquidos Penetrantes',
+  'end.s4.d': 'Discontinuidades abiertas a la superficie: preparación, aplicación, revelado y evaluación con los criterios de aceptación de la norma aplicable.',
+  'end.s5.n': 'Informes &amp; Reportes',
+  'end.s5.d': 'Documentación que sostiene una decisión: registro fotográfico, croquis de ubicación, parámetros de ensayo, criterio de aceptación y dictamen concluyente.',
+  'end.s6.n': 'Preparación para Certificación',
+  'end.s6.d': 'Formación y mentoría para la calificación en END — teoría, cálculo resuelto y simulacros comentados. El mismo método de las guías de abajo.',
+
+  'end.band.title': '¿Necesitas una inspección?',
+  'end.band.lead': 'Dime el componente, la norma y el plazo — vuelvo con alcance, método y lo que cubrirá el informe.',
+  'end.band.cta1': 'Solicitar presupuesto →',
+  'end.band.cta2': 'Ver las guías',
+  'end.form.or': 'o descríbelo aquí — vuelvo con alcance, método y lo que cubre el informe',
+  'end.form.name': 'Tu nombre',
+  'end.form.contact': 'WhatsApp o correo',
+  'end.form.segment': 'Componente y norma — p. ej. soldadura aluminotérmica, riel, recipiente a presión',
+  'end.form.segmentLabel': 'Componente y norma',
+  'end.form.message': '¿Qué necesita inspección y para cuándo?',
+  'end.form.messageLabel': 'Alcance y plazo',
+  'end.form.consent': 'Autorizo a SrChZ Technologies a usar mis datos para responder sobre esta inspección. Puedo revocarlo cuando quiera. Consulta la <a href="/privacidade.html" target="_blank" rel="noopener">Política de Privacidad</a>.',
+  'end.form.submit': 'Enviar solicitud de inspección',
+  'end.form.errFields': 'Completa un nombre y un contacto válido.',
+  'end.form.errConsent': 'Marca la autorización de contacto para enviar.',
+  'end.form.sending': 'Enviando…',
+  'end.form.ok': 'Recibido. Vuelvo con alcance, método y plazo.',
+  'end.form.errSend': 'No pude enviar ahora. Escríbeme por WhatsApp arriba.',
+
+  'end.tr.title': 'Formación &amp; Guías de Certificación',
+  'end.tr.lead': 'El otro lado del trabajo: convertir el método de campo en material de estudio. Una guía por ensayo — llegan nuevas rutas pronto.',
+  'end.g1.n': 'Ultrasonido Nivel II',
+  'end.g1.d': 'La guía definitiva: física, calibración (DAC/DGS), rieles y soldaduras, y más de 20 preguntas resueltas. EPUB + PDF.',
+  'end.g1.go': 'Abrir la guía →',
+  'end.g2.n': 'Radiografía',
+  'end.g2.d': 'Radiología industrial: generación, técnicas de exposición, sensibilidad e interpretación de películas.',
+  'end.g3.n': 'Líquidos Penetrantes',
+  'end.g3.d': 'Preparación, revelado, sensibilidad y criterios de aceptación de indicaciones superficiales.',
+  'end.g4.n': 'Partículas Magnéticas',
+  'end.g4.d': 'Magnetización, técnicas húmeda y seca, fluorescente y evaluación de discontinuidades.',
+  'end.g5.n': 'Corrientes de Foucault',
+  'end.g5.d': 'Eddy current: impedancia, frecuencia, calibración y detección de grietas superficiales.',
+  'end.g6.n': 'Ensayo Visual',
+  'end.g6.d': 'Fundamentos del END visual, iluminación, instrumentos y criterios de inspección.'
 };

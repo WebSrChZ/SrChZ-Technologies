@@ -22,6 +22,12 @@
   if (!form) return;
 
   var statusEl = document.getElementById('inspStatus');
+  /* Mensagens criadas aqui no JavaScript — data-i18n nao as alcanca. O t() do
+     motor traduz; sem dicionario, cai no texto em portugues escrito abaixo. */
+  function t(key, fallback) {
+    return (window.SrChZI18n && window.SrChZI18n.t) ? window.SrChZI18n.t(key, fallback) : fallback;
+  }
+
   function setStatus(msg, cls) {
     statusEl.textContent = msg;
     statusEl.className = 'insp-status' + (cls ? ' ' + cls : '');
@@ -36,14 +42,14 @@
     var name = (fd.get('name') || '').trim();
     var contact = (fd.get('contact') || '').trim();
     if (!name || contact.length < 3) {
-      setStatus('Preencha nome e um contato válido.', 'err');
+      setStatus(t('end.form.errFields','Preencha nome e um contato válido.'), 'err');
       return;
     }
 
     // O form é `novalidate`, então o `required` do checkbox não é aplicado pelo
     // navegador. A base legal do envio é checada aqui, antes de qualquer fetch.
     if (!fd.get('consent')) {
-      setStatus('Marque a autorização de contato para enviar.', 'err');
+      setStatus(t('end.form.errConsent','Marque a autorização de contato para enviar.'), 'err');
       var cb = document.getElementById('inspConsent');
       if (cb) cb.focus();
       return;
@@ -51,7 +57,7 @@
 
     var btn = form.querySelector('button[type="submit"]');
     if (btn) btn.disabled = true;
-    setStatus('Enviando…');
+    setStatus(t('end.form.sending','Enviando…'));
 
     try {
       var res = await fetch(SB_URL + '/rest/v1/srchz_leads', {
@@ -75,10 +81,10 @@
       });
       if (!res.ok) throw new Error('HTTP ' + res.status);
       form.reset();
-      setStatus('Recebido. Retorno com escopo, método e prazo.', 'ok');
+      setStatus(t('end.form.ok','Recebido. Retorno com escopo, método e prazo.'), 'ok');
     } catch (err) {
       console.error('[end/leads]', err);
-      setStatus('Não consegui enviar agora. Me chame no WhatsApp acima.', 'err');
+      setStatus(t('end.form.errSend','Não consegui enviar agora. Me chame no WhatsApp acima.'), 'err');
     } finally {
       if (btn) btn.disabled = false;
     }
