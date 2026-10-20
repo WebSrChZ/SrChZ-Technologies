@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-i18n-page="growth">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,6 +21,15 @@
 <meta name="description" content="Growth &amp; Branding de alta performance: tráfego pago, branding, produção de vídeo e Portal do Cliente próprio — engenharia, psicanálise e estética.">
 <meta name="author" content="Rafael Cordeiro">
 <link rel="canonical" href="https://www.srchz-technologies.com.br/growth/">
+<link rel="alternate" hreflang="pt-BR" href="https://www.srchz-technologies.com.br/growth/?lang=pt">
+<link rel="alternate" hreflang="en" href="https://www.srchz-technologies.com.br/growth/?lang=en">
+<link rel="alternate" hreflang="es" href="https://www.srchz-technologies.com.br/growth/?lang=es">
+<link rel="alternate" hreflang="ja" href="https://www.srchz-technologies.com.br/growth/?lang=ja">
+<link rel="alternate" hreflang="x-default" href="https://www.srchz-technologies.com.br/growth/">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:locale:alternate" content="ja_JP">
+<script src="../assets/i18n.js"></script>
 
 <!-- Open Graph / Twitter -->
 <meta property="og:type" content="website">
@@ -86,24 +95,31 @@
       <span class="brand-txt">SrChZ <em>Technologies</em></span>
     </a>
     <nav class="nav-links" aria-label="Navegação principal">
-      <a href="../" aria-label="Voltar para a home SrChZ Technologies">‹ SrChZ</a>
-      <a href="#metodo">Método</a>
-      <a href="#planos">Planos</a>
-      <a href="#portal">Portal</a>
-      <a href="#casos">Casos</a>
-      <a href="#comecar">Como começar</a>
-      <a class="nav-cta" href="#contato">Falar comigo</a>
+      <a href="../" aria-label="Voltar para a home SrChZ Technologies" data-i18n="gr.nav.home">‹ SrChZ</a>
+      <a href="#metodo" data-i18n="gr.nav.method">Método</a>
+      <a href="#planos" data-i18n="gr.nav.plans">Planos</a>
+      <a href="#portal" data-i18n="gr.nav.portal">Portal</a>
+      <a href="#casos" data-i18n="gr.nav.cases">Casos</a>
+      <a href="#comecar" data-i18n="gr.nav.start">Como começar</a>
+      <a class="nav-cta" href="#contato" data-i18n="gr.nav.cta">Falar comigo</a>
+      <span data-i18n-switcher></span>
     </nav>
-    <button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobileMenu"><span></span><span></span><span></span></button>
+    <div class="nav-right">
+      <!-- Segundo ponto de ancoragem do seletor: o de dentro de .nav-links
+           serve o desktop, mas .nav-links some a 920px e levava o seletor
+           junto. Este aparece exatamente onde o outro desaparece. -->
+      <span class="nav-sw-mobile" data-i18n-switcher></span>
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobileMenu"><span></span><span></span><span></span></button>
+    </div>
   </div>
   <div class="mobile-menu" id="mobileMenu" hidden>
-    <a href="../">‹ SrChZ</a>
-    <a href="#metodo">Método</a>
-    <a href="#planos">Planos</a>
-    <a href="#portal">Portal</a>
-    <a href="#casos">Casos</a>
-    <a href="#comecar">Como começar</a>
-    <a href="#contato">Falar comigo</a>
+    <a href="../" data-i18n="gr.nav.home">‹ SrChZ</a>
+    <a href="#metodo" data-i18n="gr.nav.method">Método</a>
+    <a href="#planos" data-i18n="gr.nav.plans">Planos</a>
+    <a href="#portal" data-i18n="gr.nav.portal">Portal</a>
+    <a href="#casos" data-i18n="gr.nav.cases">Casos</a>
+    <a href="#comecar" data-i18n="gr.nav.start">Como começar</a>
+    <a href="#contato" data-i18n="gr.nav.cta">Falar comigo</a>
   </div>
 </header>
 
@@ -112,18 +128,18 @@
   <div class="hero-glow" aria-hidden="true"></div>
   <div class="wrap hero-inner reveal">
     <img class="medallion" src="assets/logo-mark.png" width="212" height="145" fetchpriority="high" alt="SrChZ Technologies">
-    <p class="hero-kicker">⚜&nbsp;&nbsp;High-Performance Ecosystems&nbsp;&nbsp;⚜</p>
+    <p class="hero-kicker">⚜&nbsp;&nbsp;<span data-i18n="gr.hero.kicker">High-Performance Ecosystems</span>&nbsp;&nbsp;⚜</p>
     <h1 class="hero-name gold-text">RAFAEL CORDEIRO</h1>
-    <p class="hero-title">Growth &amp; Branding Strategist</p>
-    <p class="hero-line">Transformo marcas em <b>ativos lucráveis</b> — onde percepção, desejo e conversão operam como um só sistema.</p>
+    <p class="hero-title" data-i18n="gr.hero.title">Growth &amp; Branding Strategist</p>
+    <p class="hero-line" data-i18n-html="gr.hero.line">Transformo marcas em <b>ativos lucráveis</b> — onde percepção, desejo e conversão operam como um só sistema.</p>
     <div class="hero-actions">
       <a class="btn btn-gold" href="https://wa.me/5511996869309?text=Ol%C3%A1%20Rafael%2C%20vim%20pelo%20site%20e%20quero%20um%20diagn%C3%B3stico%20Growth%20%26%20Branding." target="_blank" rel="noopener">
         <svg viewBox="0 0 32 32" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M16 .4C7.4.4.5 7.3.5 15.9c0 2.8.7 5.5 2.1 7.9L.4 31.6l8-2.1c2.3 1.3 4.9 1.9 7.6 1.9 8.6 0 15.5-6.9 15.5-15.5S24.6.4 16 .4zm0 28.3c-2.4 0-4.7-.6-6.7-1.8l-.5-.3-4.7 1.2 1.3-4.6-.3-.5c-1.3-2.1-2-4.5-2-7C3.4 8.9 9 3.3 16 3.3S28.6 8.9 28.6 16 23 28.7 16 28.7zm7.1-9.4c-.4-.2-2.3-1.1-2.6-1.3-.3-.1-.6-.2-.9.2s-1 1.3-1.2 1.5c-.2.2-.4.3-.8.1-.4-.2-1.6-.6-3.1-1.9-1.1-1-1.9-2.3-2.1-2.7-.2-.4 0-.6.2-.8.2-.2.4-.4.5-.7.2-.2.2-.4.4-.6.1-.3 0-.5 0-.7-.1-.2-.9-2.1-1.2-2.9-.3-.8-.6-.6-.9-.7h-.7c-.2 0-.6.1-.9.4-.3.4-1.2 1.2-1.2 2.9s1.2 3.4 1.4 3.6c.2.2 2.5 3.8 6 5.3.8.4 1.5.6 2 .8.8.3 1.6.2 2.2.1.7-.1 2.3-.9 2.6-1.8.3-.9.3-1.6.2-1.8-.1-.2-.3-.2-.7-.4z"/></svg>
-        Chamar no WhatsApp</a>
-      <a class="btn btn-ghost" href="#planos">Ver planos</a>
+        <span data-i18n="gr.cta.wa">Chamar no WhatsApp</span></a>
+      <a class="btn btn-ghost" href="#planos" data-i18n="gr.hero.plans">Ver planos</a>
     </div>
     <ul class="hero-disc" aria-label="Disciplinas">
-      <li>Web Dev</li><li>Meta Ads</li><li>Branding</li><li>Visual Maker</li><li>Social Media</li><li>Portal &amp; Dados</li>
+      <li data-i18n="gr.disc.1">Web Dev</li><li data-i18n="gr.disc.2">Meta Ads</li><li data-i18n="gr.disc.3">Branding</li><li data-i18n="gr.disc.4">Visual Maker</li><li data-i18n="gr.disc.5">Social Media</li><li data-i18n="gr.disc.6">Portal &amp; Dados</li>
     </ul>
   </div>
   <a class="scroll-cue" href="#metodo" aria-label="Rolar para baixo"><span></span></a>
@@ -133,25 +149,25 @@
 <section class="section" id="metodo">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="eyebrow">Modelo de Operação</span>
-      <h2 class="sec-title">Um único motor de crescimento.</h2>
-      <p class="sec-lede">Crio <b>Ecossistemas de Alta Performance</b> — onde tecnologia, tráfego e produção visual deixam de ser serviços soltos e passam a operar como um sistema integrado, desenhado para gerar desejo e converter.</p>
+      <span class="eyebrow" data-i18n="gr.m.eyebrow">Modelo de Operação</span>
+      <h2 class="sec-title" data-i18n="gr.m.title">Um único motor de crescimento.</h2>
+      <p class="sec-lede" data-i18n-html="gr.m.lede">Crio <b>Ecossistemas de Alta Performance</b> — onde tecnologia, tráfego e produção visual deixam de ser serviços soltos e passam a operar como um sistema integrado, desenhado para gerar desejo e converter.</p>
     </div>
     <div class="pillars">
       <article class="pillar reveal">
         <span class="pillar-ico">⌘</span>
-        <h3>Engenharia</h3>
-        <p>Rigor técnico, automação e infraestrutura digital que sustentam a escala.</p>
+        <h3 data-i18n="gr.m.p1.t">Engenharia</h3>
+        <p data-i18n="gr.m.p1.d">Rigor técnico, automação e infraestrutura digital que sustentam a escala.</p>
       </article>
       <article class="pillar reveal" data-delay="1">
         <span class="pillar-ico">❖</span>
-        <h3>Psicanálise</h3>
-        <p>Leitura comportamental do público: o que move a decisão e o desejo de compra.</p>
+        <h3 data-i18n="gr.m.p2.t">Psicanálise</h3>
+        <p data-i18n="gr.m.p2.d">Leitura comportamental do público: o que move a decisão e o desejo de compra.</p>
       </article>
       <article class="pillar reveal" data-delay="2">
         <span class="pillar-ico">⚜</span>
-        <h3>Estética High-End</h3>
-        <p>Direção visual cinematográfica que posiciona a marca no padrão premium.</p>
+        <h3 data-i18n="gr.m.p3.t">Estética High-End</h3>
+        <p data-i18n="gr.m.p3.d">Direção visual cinematográfica que posiciona a marca no padrão premium.</p>
       </article>
     </div>
   </div>
@@ -161,53 +177,53 @@
 <section class="section section-alt" id="planos">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="eyebrow">Planos &amp; Soluções</span>
-      <h2 class="sec-title">Escolha o nível de parceria.</h2>
-      <p class="sec-lede">Do primeiro caixa ao ecossistema completo — cada plano resolve um estágio do crescimento.</p>
+      <span class="eyebrow" data-i18n="gr.p.eyebrow">Planos &amp; Soluções</span>
+      <h2 class="sec-title" data-i18n="gr.p.title">Escolha o nível de parceria.</h2>
+      <p class="sec-lede" data-i18n="gr.p.lede">Do primeiro caixa ao ecossistema completo — cada plano resolve um estágio do crescimento.</p>
     </div>
     <div class="plans">
       <article class="plan reveal">
-        <header><span class="plan-n">01</span><div><h3>Performance Lead</h3><span class="plan-sub">Tração &amp; Vendas</span></div></header>
-        <p class="plan-desc">Resultado imediato no WhatsApp e geração de caixa.</p>
+        <header><span class="plan-n">01</span><div><h3 data-i18n="gr.p1.n">Performance Lead</h3><span class="plan-sub" data-i18n="gr.p1.sub">Tração &amp; Vendas</span></div></header>
+        <p class="plan-desc" data-i18n="gr.p1.d">Resultado imediato no WhatsApp e geração de caixa.</p>
         <ul>
-          <li>Gestão total de <b>Tráfego Pago</b> (Meta Ads)</li>
-          <li>Público-alvo &amp; <b>segmentação geográfica</b></li>
-          <li>Consultoria de <b>vendas</b> (CX / WhatsApp)</li>
-          <li>Relatório mensal de métricas e conversões</li>
+          <li data-i18n-html="gr.p1.l1">Gestão total de <b>Tráfego Pago</b> (Meta Ads)</li>
+          <li data-i18n-html="gr.p1.l2">Público-alvo &amp; <b>segmentação geográfica</b></li>
+          <li data-i18n-html="gr.p1.l3">Consultoria de <b>vendas</b> (CX / WhatsApp)</li>
+          <li data-i18n="gr.p1.l4">Relatório mensal de métricas e conversões</li>
         </ul>
       </article>
 
       <article class="plan reveal" data-delay="1">
-        <header><span class="plan-n">02</span><div><h3>Visual &amp; Content</h3><span class="plan-sub">Posicionamento &amp; Desejo</span></div></header>
-        <p class="plan-desc">Estética profissional e cinematográfica para a marca.</p>
+        <header><span class="plan-n">02</span><div><h3 data-i18n="gr.p2.n">Visual &amp; Content</h3><span class="plan-sub" data-i18n="gr.p2.sub">Posicionamento &amp; Desejo</span></div></header>
+        <p class="plan-desc" data-i18n="gr.p2.d">Estética profissional e cinematográfica para a marca.</p>
         <ul>
-          <li>Videomaking &amp; <b>fotografia</b> presencial mensal</li>
-          <li>Reels: <b>legendas sincronizadas</b> e áudio masterizado</li>
-          <li>Editorial por <b>pilares</b> + quadros fixos</li>
-          <li>Social Media + <b>identidade visual e tom de voz</b></li>
+          <li data-i18n-html="gr.p2.l1">Videomaking &amp; <b>fotografia</b> presencial mensal</li>
+          <li data-i18n-html="gr.p2.l2">Reels: <b>legendas sincronizadas</b> e áudio masterizado</li>
+          <li data-i18n-html="gr.p2.l3">Editorial por <b>pilares</b> + quadros fixos</li>
+          <li data-i18n-html="gr.p2.l4">Social Media + <b>identidade visual e tom de voz</b></li>
         </ul>
       </article>
 
       <article class="plan plan-feature reveal" data-delay="2">
-        <span class="plan-badge">Solução Completa</span>
-        <header><span class="plan-n">03</span><div><h3>Ecossistema High-End</h3><span class="plan-sub">A Solução Estratégica</span></div></header>
-        <p class="plan-desc">Tecnologia, tráfego e produção de luxo num só sistema.</p>
+        <span class="plan-badge" data-i18n="gr.p3.badge">Solução Completa</span>
+        <header><span class="plan-n">03</span><div><h3 data-i18n="gr.p3.n">Ecossistema High-End</h3><span class="plan-sub" data-i18n="gr.p3.sub">A Solução Estratégica</span></div></header>
+        <p class="plan-desc" data-i18n="gr.p3.d">Tecnologia, tráfego e produção de luxo num só sistema.</p>
         <ul>
-          <li>Tudo dos planos <b>01 e 02</b></li>
-          <li><b>Portal do Cliente</b> ao vivo</li>
-          <li><b>Reestruturação Web</b> padrão High-End</li>
-          <li>SEO, remarketing &amp; <b>E-commerce</b></li>
+          <li data-i18n-html="gr.p3.l1">Tudo dos planos <b>01 e 02</b></li>
+          <li data-i18n-html="gr.p3.l2"><b>Portal do Cliente</b> ao vivo</li>
+          <li data-i18n-html="gr.p3.l3"><b>Reestruturação Web</b> padrão High-End</li>
+          <li data-i18n-html="gr.p3.l4">SEO, remarketing &amp; <b>E-commerce</b></li>
         </ul>
       </article>
 
       <article class="plan reveal" data-delay="3">
-        <header><span class="plan-n">04</span><div><h3>Consultoria &amp; Web</h3><span class="plan-sub">Projeto Sob Demanda</span></div></header>
-        <p class="plan-desc">Infraestrutura digital — desenvolvimento e reconstrução.</p>
+        <header><span class="plan-n">04</span><div><h3 data-i18n="gr.p4.n">Consultoria &amp; Web</h3><span class="plan-sub" data-i18n="gr.p4.sub">Projeto Sob Demanda</span></div></header>
+        <p class="plan-desc" data-i18n="gr.p4.d">Infraestrutura digital — desenvolvimento e reconstrução.</p>
         <ul>
-          <li>Design de interfaces (<b>UI/UX</b>)</li>
-          <li>Desenvolvimento de <b>portais e web apps</b></li>
-          <li>Analytics, automações e fluxo</li>
-          <li>Otimização para <b>velocidade e conversão</b></li>
+          <li data-i18n-html="gr.p4.l1">Design de interfaces (<b>UI/UX</b>)</li>
+          <li data-i18n-html="gr.p4.l2">Desenvolvimento de <b>portais e web apps</b></li>
+          <li data-i18n="gr.p4.l3">Analytics, automações e fluxo</li>
+          <li data-i18n-html="gr.p4.l4">Otimização para <b>velocidade e conversão</b></li>
         </ul>
       </article>
     </div>
@@ -218,22 +234,22 @@
 <section class="section" id="portal">
   <div class="wrap">
     <div class="portal-card reveal">
-      <span class="portal-tag">Tecnologia Proprietária</span>
+      <span class="portal-tag" data-i18n="gr.po.tag">Tecnologia Proprietária</span>
       <div class="portal-grid">
         <div class="portal-copy">
-          <span class="eyebrow">O Diferencial · Portal do Cliente</span>
-          <h2 class="sec-title">Cada marca recebe o seu próprio painel.</h2>
-          <p class="sec-lede">Um web app sob medida onde você acompanha tudo em tempo real — do briefing à publicação. Transparência total, aprovação ágil e dados na palma da mão, sincronizados entre todos os dispositivos.</p>
+          <span class="eyebrow" data-i18n="gr.po.eyebrow">O Diferencial · Portal do Cliente</span>
+          <h2 class="sec-title" data-i18n="gr.po.title">Cada marca recebe o seu próprio painel.</h2>
+          <p class="sec-lede" data-i18n="gr.po.lede">Um web app sob medida onde você acompanha tudo em tempo real — do briefing à publicação. Transparência total, aprovação ágil e dados na palma da mão, sincronizados entre todos os dispositivos.</p>
           <ul class="feats">
-            <li>Cronograma de conteúdo</li>
-            <li>Aprovação de roteiros</li>
-            <li>Status de produção ao vivo</li>
-            <li>Métricas de Instagram</li>
-            <li>Sincronização multi-device</li>
-            <li>Instalável (PWA)</li>
+            <li data-i18n="gr.po.f1">Cronograma de conteúdo</li>
+            <li data-i18n="gr.po.f2">Aprovação de roteiros</li>
+            <li data-i18n="gr.po.f3">Status de produção ao vivo</li>
+            <li data-i18n="gr.po.f4">Métricas de Instagram</li>
+            <li data-i18n="gr.po.f5">Sincronização multi-device</li>
+            <li data-i18n="gr.po.f6">Instalável (PWA)</li>
           </ul>
           <a class="portal-live" href="https://websrchz.github.io/its-power-hub/" target="_blank" rel="noopener">
-            Ver o portal ao vivo <span aria-hidden="true">→</span>
+            <span data-i18n="gr.po.live">Ver o portal ao vivo</span> <span aria-hidden="true">→</span>
           </a>
         </div>
         <div class="portal-mock" aria-hidden="true">
@@ -256,10 +272,10 @@
         </div>
       </div>
       <div class="portal-stats">
-        <div class="stat"><span class="stat-n" data-count="100" data-suffix="%">100%</span><span class="stat-l">Fluxo do cliente em tempo real</span></div>
-        <div class="stat"><span class="stat-n" data-count="12" data-suffix="+">12+</span><span class="stat-l">Conteúdos/mês com cadência fixa</span></div>
-        <div class="stat"><span class="stat-n" data-count="8">8</span><span class="stat-l">Pilares editoriais estruturados</span></div>
-        <div class="stat"><span class="stat-n">4K</span><span class="stat-l">Produção de vídeo cinematográfica</span></div>
+        <div class="stat"><span class="stat-n" data-count="100" data-suffix="%">100%</span><span class="stat-l" data-i18n="gr.po.s1">Fluxo do cliente em tempo real</span></div>
+        <div class="stat"><span class="stat-n" data-count="12" data-suffix="+">12+</span><span class="stat-l" data-i18n="gr.po.s2">Conteúdos/mês com cadência fixa</span></div>
+        <div class="stat"><span class="stat-n" data-count="8">8</span><span class="stat-l" data-i18n="gr.po.s3">Pilares editoriais estruturados</span></div>
+        <div class="stat"><span class="stat-n">4K</span><span class="stat-l" data-i18n="gr.po.s4">Produção de vídeo cinematográfica</span></div>
       </div>
     </div>
   </div>
@@ -269,67 +285,67 @@
 <section class="section section-alt" id="casos">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="eyebrow">Casos em Operação</span>
-      <h2 class="sec-title">O ecossistema, na prática.</h2>
-      <p class="sec-lede">Dois clientes reais no ar. Um rodando o método completo — conteúdo, produção e portal próprio como um só sistema. Outro com o caminho curto: catálogo que fecha a venda onde o cliente já está.</p>
+      <span class="eyebrow" data-i18n="gr.c.eyebrow">Casos em Operação</span>
+      <h2 class="sec-title" data-i18n="gr.c.title">O ecossistema, na prática.</h2>
+      <p class="sec-lede" data-i18n="gr.c.lede">Dois clientes reais no ar. Um rodando o método completo — conteúdo, produção e portal próprio como um só sistema. Outro com o caminho curto: catálogo que fecha a venda onde o cliente já está.</p>
     </div>
 
     <article class="portal-card case-card reveal">
-      <span class="portal-tag">Caso · ItsPower</span>
+      <span class="portal-tag" data-i18n="gr.c.a.tag">Caso · ItsPower</span>
       <div class="portal-grid case-grid">
         <div class="case-id">
           <img class="case-logo" src="assets/case-itspower.jpg" alt="ItsPower Academia" width="92" height="92" loading="lazy">
           <h3 class="case-name">ItsPower <em>Academia</em></h3>
-          <p class="case-meta">24 anos&nbsp;&nbsp;·&nbsp;&nbsp;2 unidades</p>
-          <p class="case-quote">Do briefing à publicação, tudo num sistema só — e o cliente acompanha em tempo real.</p>
-          <a class="portal-live" href="https://websrchz.github.io/its-power-hub/" target="_blank" rel="noopener">Ver o portal do cliente ao vivo <span aria-hidden="true">→</span></a>
+          <p class="case-meta" data-i18n-html="gr.c.a.meta">24 anos&nbsp;&nbsp;·&nbsp;&nbsp;2 unidades</p>
+          <p class="case-quote" data-i18n="gr.c.a.quote">Do briefing à publicação, tudo num sistema só — e o cliente acompanha em tempo real.</p>
+          <a class="portal-live" href="https://websrchz.github.io/its-power-hub/" target="_blank" rel="noopener"><span data-i18n="gr.c.a.live">Ver o portal do cliente ao vivo</span> <span aria-hidden="true">→</span></a>
         </div>
         <div class="case-deliver">
-          <span class="case-deliver-h">O que entregamos</span>
+          <span class="case-deliver-h" data-i18n="gr.c.deliver">O que entregamos</span>
           <ul class="feats case-feats">
-            <li><b>Sistema editorial</b> — 8 pilares + 3 quadros fixos</li>
-            <li><b>12 vídeos/mês</b> em cadência fixa</li>
-            <li>Motion graphics + <b>legendas sincronizadas</b></li>
-            <li>Áudio <b>masterizado</b> + sound design</li>
-            <li><b>Portal do Cliente</b> ao vivo (PWA, multi-device)</li>
-            <li>Direção visual e <b>tom de voz</b></li>
+            <li data-i18n-html="gr.c.a.d1"><b>Sistema editorial</b> — 8 pilares + 3 quadros fixos</li>
+            <li data-i18n-html="gr.c.a.d2"><b>12 vídeos/mês</b> em cadência fixa</li>
+            <li data-i18n-html="gr.c.a.d3">Motion graphics + <b>legendas sincronizadas</b></li>
+            <li data-i18n-html="gr.c.a.d4">Áudio <b>masterizado</b> + sound design</li>
+            <li data-i18n-html="gr.c.a.d5"><b>Portal do Cliente</b> ao vivo (PWA, multi-device)</li>
+            <li data-i18n-html="gr.c.a.d6">Direção visual e <b>tom de voz</b></li>
           </ul>
         </div>
       </div>
       <div class="portal-stats case-stats">
-        <div class="stat"><span class="stat-n" data-count="24">24</span><span class="stat-l">Anos de marca, repaginados</span></div>
-        <div class="stat"><span class="stat-n" data-count="12">12</span><span class="stat-l">Vídeos por mês</span></div>
-        <div class="stat"><span class="stat-n" data-count="2">2</span><span class="stat-l">Unidades sob um sistema</span></div>
-        <div class="stat"><span class="stat-n" data-count="8">8</span><span class="stat-l">Pilares editoriais</span></div>
+        <div class="stat"><span class="stat-n" data-count="24">24</span><span class="stat-l" data-i18n="gr.c.a.s1">Anos de marca, repaginados</span></div>
+        <div class="stat"><span class="stat-n" data-count="12">12</span><span class="stat-l" data-i18n="gr.c.a.s2">Vídeos por mês</span></div>
+        <div class="stat"><span class="stat-n" data-count="2">2</span><span class="stat-l" data-i18n="gr.c.a.s3">Unidades sob um sistema</span></div>
+        <div class="stat"><span class="stat-n" data-count="8">8</span><span class="stat-l" data-i18n="gr.c.a.s4">Pilares editoriais</span></div>
       </div>
     </article>
 
     <article class="portal-card case-card reveal">
-      <span class="portal-tag">Caso · KL Sports Fitness</span>
+      <span class="portal-tag" data-i18n="gr.c.b.tag">Caso · KL Sports Fitness</span>
       <div class="portal-grid case-grid">
         <div class="case-id">
           <span class="case-mark" aria-hidden="true">KL</span>
           <h3 class="case-name">KL Sports <em>Fitness</em></h3>
-          <p class="case-meta">Pesos para musculação&nbsp;&nbsp;·&nbsp;&nbsp;Minas Gerais</p>
-          <p class="case-quote">Catálogo não é vitrine: é o lugar onde o cliente monta o pedido e você recebe pronto.</p>
-          <a class="portal-live" href="../kl-sports/">Ver o catálogo ao vivo <span aria-hidden="true">→</span></a>
+          <p class="case-meta" data-i18n-html="gr.c.b.meta">Pesos para musculação&nbsp;&nbsp;·&nbsp;&nbsp;Minas Gerais</p>
+          <p class="case-quote" data-i18n="gr.c.b.quote">Catálogo não é vitrine: é o lugar onde o cliente monta o pedido e você recebe pronto.</p>
+          <a class="portal-live" href="../kl-sports/"><span data-i18n="gr.c.b.live">Ver o catálogo ao vivo</span> <span aria-hidden="true">→</span></a>
         </div>
         <div class="case-deliver">
-          <span class="case-deliver-h">O que entregamos</span>
+          <span class="case-deliver-h" data-i18n="gr.c.deliver">O que entregamos</span>
           <ul class="feats case-feats">
-            <li><b>Catálogo completo</b> — 27 produtos em 6 linhas</li>
-            <li>Especificação técnica <b>por item</b></li>
-            <li><b>Montador de orçamento</b> — item e quantidade</li>
-            <li>Pedido que <b>sobrevive ao recarregar</b> a página</li>
-            <li>Saída formatada direto no <b>WhatsApp</b></li>
-            <li><b>Link por produto</b>, para mandar um item só</li>
+            <li data-i18n-html="gr.c.b.d1"><b>Catálogo completo</b> — 27 produtos em 6 linhas</li>
+            <li data-i18n-html="gr.c.b.d2">Especificação técnica <b>por item</b></li>
+            <li data-i18n-html="gr.c.b.d3"><b>Montador de orçamento</b> — item e quantidade</li>
+            <li data-i18n-html="gr.c.b.d4">Pedido que <b>sobrevive ao recarregar</b> a página</li>
+            <li data-i18n-html="gr.c.b.d5">Saída formatada direto no <b>WhatsApp</b></li>
+            <li data-i18n-html="gr.c.b.d6"><b>Link por produto</b>, para mandar um item só</li>
           </ul>
         </div>
       </div>
       <div class="portal-stats case-stats">
-        <div class="stat"><span class="stat-n" data-count="27">27</span><span class="stat-l">Produtos catalogados</span></div>
-        <div class="stat"><span class="stat-n" data-count="6">6</span><span class="stat-l">Linhas de produto</span></div>
-        <div class="stat"><span class="stat-n" data-count="0">0</span><span class="stat-l">Checkout a abandonar</span></div>
+        <div class="stat"><span class="stat-n" data-count="27">27</span><span class="stat-l" data-i18n="gr.c.b.s1">Produtos catalogados</span></div>
+        <div class="stat"><span class="stat-n" data-count="6">6</span><span class="stat-l" data-i18n="gr.c.b.s2">Linhas de produto</span></div>
+        <div class="stat"><span class="stat-n" data-count="0">0</span><span class="stat-l" data-i18n="gr.c.b.s3">Checkout a abandonar</span></div>
       </div>
     </article>
   </div>
@@ -339,13 +355,13 @@
 <section class="section" id="comecar">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="eyebrow">Como Começar</span>
-      <h2 class="sec-title">Três passos até o seu ecossistema.</h2>
+      <span class="eyebrow" data-i18n="gr.s.eyebrow">Como Começar</span>
+      <h2 class="sec-title" data-i18n="gr.s.title">Três passos até o seu ecossistema.</h2>
     </div>
     <ol class="steps">
-      <li class="step reveal"><span class="step-k">Passo 01</span><h3>Diagnóstico</h3><p>Conversa e leitura do seu ecossistema atual — sem custo.</p></li>
-      <li class="step reveal" data-delay="1"><span class="step-k">Passo 02</span><h3>Proposta</h3><p>Desenho do plano sob medida e do cronograma.</p></li>
-      <li class="step reveal" data-delay="2"><span class="step-k">Passo 03</span><h3>Execução</h3><p>Implementação com portal próprio e acompanhamento.</p></li>
+      <li class="step reveal"><span class="step-k" data-i18n="gr.s.k1">Passo 01</span><h3 data-i18n="gr.s.t1">Diagnóstico</h3><p data-i18n="gr.s.d1">Conversa e leitura do seu ecossistema atual — sem custo.</p></li>
+      <li class="step reveal" data-delay="1"><span class="step-k" data-i18n="gr.s.k2">Passo 02</span><h3 data-i18n="gr.s.t2">Proposta</h3><p data-i18n="gr.s.d2">Desenho do plano sob medida e do cronograma.</p></li>
+      <li class="step reveal" data-delay="2"><span class="step-k" data-i18n="gr.s.k3">Passo 03</span><h3 data-i18n="gr.s.t3">Execução</h3><p data-i18n="gr.s.d3">Implementação com portal próprio e acompanhamento.</p></li>
     </ol>
   </div>
 </section>
@@ -354,33 +370,33 @@
 <section class="section section-alt" id="faq">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="eyebrow">Perguntas Frequentes</span>
-      <h2 class="sec-title">O que você precisa saber.</h2>
+      <span class="eyebrow" data-i18n="gr.f.eyebrow">Perguntas Frequentes</span>
+      <h2 class="sec-title" data-i18n="gr.f.title">O que você precisa saber.</h2>
     </div>
     <div class="faq reveal">
       <details class="faq-item">
-        <summary>Para quem é a SrChZ?</summary>
-        <div class="faq-a"><p>Para marcas que querem parar de contratar serviços soltos e passar a operar como um sistema — tráfego, conteúdo, percepção e tecnologia puxando na mesma direção. Do primeiro caixa ao ecossistema completo.</p></div>
+        <summary data-i18n="gr.f.q1">Para quem é a SrChZ?</summary>
+        <div class="faq-a"><p data-i18n="gr.f.a1">Para marcas que querem parar de contratar serviços soltos e passar a operar como um sistema — tráfego, conteúdo, percepção e tecnologia puxando na mesma direção. Do primeiro caixa ao ecossistema completo.</p></div>
       </details>
       <details class="faq-item">
-        <summary>Em quanto tempo vejo resultado?</summary>
-        <div class="faq-a"><p>Tráfego bem feito pode gerar caixa em semanas. Branding e percepção funcionam como juros compostos: constroem ao longo de meses e sustentam o crescimento. Não vendo milagre — vendo método.</p></div>
+        <summary data-i18n="gr.f.q2">Em quanto tempo vejo resultado?</summary>
+        <div class="faq-a"><p data-i18n="gr.f.a2">Tráfego bem feito pode gerar caixa em semanas. Branding e percepção funcionam como juros compostos: constroem ao longo de meses e sustentam o crescimento. Não vendo milagre — vendo método.</p></div>
       </details>
       <details class="faq-item">
-        <summary>Preciso fechar a solução completa de uma vez?</summary>
-        <div class="faq-a"><p>Não. Você começa pelo plano que resolve a sua dor atual e evolui quando fizer sentido. O ecossistema se monta por etapas, no seu ritmo.</p></div>
+        <summary data-i18n="gr.f.q3">Preciso fechar a solução completa de uma vez?</summary>
+        <div class="faq-a"><p data-i18n="gr.f.a3">Não. Você começa pelo plano que resolve a sua dor atual e evolui quando fizer sentido. O ecossistema se monta por etapas, no seu ritmo.</p></div>
       </details>
       <details class="faq-item">
-        <summary>Como funciona o Portal do Cliente?</summary>
-        <div class="faq-a"><p>É um web app próprio onde você acompanha tudo em tempo real — cronograma, status de cada vídeo, aprovação de roteiros e métricas — sincronizado entre dispositivos e instalável como app. Transparência total, do briefing à publicação.</p></div>
+        <summary data-i18n="gr.f.q4">Como funciona o Portal do Cliente?</summary>
+        <div class="faq-a"><p data-i18n="gr.f.a4">É um web app próprio onde você acompanha tudo em tempo real — cronograma, status de cada vídeo, aprovação de roteiros e métricas — sincronizado entre dispositivos e instalável como app. Transparência total, do briefing à publicação.</p></div>
       </details>
       <details class="faq-item">
-        <summary>Vocês atendem em todo o Brasil?</summary>
-        <div class="faq-a"><p>Sim. A operação é digital e atende o Brasil inteiro remotamente. As captações presenciais de vídeo e foto são combinadas conforme o projeto.</p></div>
+        <summary data-i18n="gr.f.q5">Vocês atendem em todo o Brasil?</summary>
+        <div class="faq-a"><p data-i18n="gr.f.a5">Sim. A operação é digital e atende o Brasil inteiro remotamente. As captações presenciais de vídeo e foto são combinadas conforme o projeto.</p></div>
       </details>
       <details class="faq-item">
-        <summary>Como começo?</summary>
-        <div class="faq-a"><p>Com um diagnóstico gratuito: leio o seu ecossistema atual, aponto os gargalos e desenho uma proposta sob medida. Sem compromisso — é só chamar no WhatsApp.</p></div>
+        <summary data-i18n="gr.f.q6">Como começo?</summary>
+        <div class="faq-a"><p data-i18n="gr.f.a6">Com um diagnóstico gratuito: leio o seu ecossistema atual, aponto os gargalos e desenho uma proposta sob medida. Sem compromisso — é só chamar no WhatsApp.</p></div>
       </details>
     </div>
   </div>
@@ -405,36 +421,36 @@
 <section class="section cta-section" id="contato">
   <div class="wrap">
     <div class="cta reveal">
-      <h2 class="gold-text">Vamos construir o seu ecossistema.</h2>
-      <p>Agende um diagnóstico gratuito e receba uma proposta sob medida.</p>
+      <h2 class="gold-text" data-i18n="gr.ct.title">Vamos construir o seu ecossistema.</h2>
+      <p data-i18n="gr.ct.lede">Agende um diagnóstico gratuito e receba uma proposta sob medida.</p>
       <div class="cta-actions">
         <a class="btn btn-gold btn-lg" href="https://wa.me/5511996869309?text=Ol%C3%A1%20Rafael%2C%20vim%20pelo%20site%20e%20quero%20um%20diagn%C3%B3stico%20Growth%20%26%20Branding." target="_blank" rel="noopener">
           <svg viewBox="0 0 32 32" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M16 .4C7.4.4.5 7.3.5 15.9c0 2.8.7 5.5 2.1 7.9L.4 31.6l8-2.1c2.3 1.3 4.9 1.9 7.6 1.9 8.6 0 15.5-6.9 15.5-15.5S24.6.4 16 .4zm0 28.3c-2.4 0-4.7-.6-6.7-1.8l-.5-.3-4.7 1.2 1.3-4.6-.3-.5c-1.3-2.1-2-4.5-2-7C3.4 8.9 9 3.3 16 3.3S28.6 8.9 28.6 16 23 28.7 16 28.7zm7.1-9.4c-.4-.2-2.3-1.1-2.6-1.3-.3-.1-.6-.2-.9.2s-1 1.3-1.2 1.5c-.2.2-.4.3-.8.1-.4-.2-1.6-.6-3.1-1.9-1.1-1-1.9-2.3-2.1-2.7-.2-.4 0-.6.2-.8.2-.2.4-.4.5-.7.2-.2.2-.4.4-.6.1-.3 0-.5 0-.7-.1-.2-.9-2.1-1.2-2.9-.3-.8-.6-.6-.9-.7h-.7c-.2 0-.6.1-.9.4-.3.4-1.2 1.2-1.2 2.9s1.2 3.4 1.4 3.6c.2.2 2.5 3.8 6 5.3.8.4 1.5.6 2 .8.8.3 1.6.2 2.2.1.7-.1 2.3-.9 2.6-1.8.3-.9.3-1.6.2-1.8-.1-.2-.3-.2-.7-.4z"/></svg>
-          Chamar no WhatsApp</a>
-        <a class="btn btn-ghost btn-lg" href="mailto:rafaelhenriquecsantosz@gmail.com?subject=Diagn%C3%B3stico%20Growth%20%26%20Branding">Enviar e-mail</a>
-        <a class="btn btn-ghost btn-lg" href="Planos/Planos.GrowthBranding.v2.pdf" download="SrChZ-Proposta-Growth-Branding.pdf">Baixar proposta (PDF)</a>
+          <span data-i18n="gr.cta.wa">Chamar no WhatsApp</span></a>
+        <a class="btn btn-ghost btn-lg" href="mailto:rafaelhenriquecsantosz@gmail.com?subject=Diagn%C3%B3stico%20Growth%20%26%20Branding" data-i18n="gr.ct.mail">Enviar e-mail</a>
+        <a class="btn btn-ghost btn-lg" href="Planos/Planos.GrowthBranding.v2.pdf" download="SrChZ-Proposta-Growth-Branding.pdf" data-i18n="gr.ct.pdf">Baixar proposta (PDF)</a>
       </div>
 
       <div class="lead-wrap">
-        <p class="lead-or">ou deixe seus dados e eu te chamo</p>
+        <p class="lead-or" data-i18n="gr.ct.or">ou deixe seus dados e eu te chamo</p>
         <form class="lead-form" id="leadForm" novalidate>
           <div class="lead-row">
-            <input class="lead-in" name="name" type="text" placeholder="Seu nome" autocomplete="name" required maxlength="120" aria-label="Seu nome">
-            <input class="lead-in" name="contact" type="text" placeholder="WhatsApp ou e-mail" autocomplete="email" required maxlength="160" aria-label="WhatsApp ou e-mail">
+            <input class="lead-in" name="name" type="text" placeholder="Seu nome" autocomplete="name" required maxlength="120" aria-label="Seu nome" data-i18n-attr="placeholder:gr.form.name;aria-label:gr.form.name">
+            <input class="lead-in" name="contact" type="text" placeholder="WhatsApp ou e-mail" autocomplete="email" required maxlength="160" aria-label="WhatsApp ou e-mail" data-i18n-attr="placeholder:gr.form.contact;aria-label:gr.form.contact">
           </div>
-          <input class="lead-in" name="segment" type="text" placeholder="Seu segmento — academia, clínica, loja… (opcional)" maxlength="120" aria-label="Seu segmento">
-          <textarea class="lead-in lead-ta" name="message" placeholder="O que você quer resolver? (opcional)" maxlength="2000" rows="3" aria-label="Mensagem"></textarea>
+          <input class="lead-in" name="segment" type="text" placeholder="Seu segmento — academia, clínica, loja… (opcional)" maxlength="120" aria-label="Seu segmento" data-i18n-attr="placeholder:gr.form.segment;aria-label:gr.form.segmentLabel">
+          <textarea class="lead-in lead-ta" name="message" placeholder="O que você quer resolver? (opcional)" maxlength="2000" rows="3" aria-label="Mensagem" data-i18n-attr="placeholder:gr.form.message;aria-label:gr.form.messageLabel"></textarea>
           <input class="lead-hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
           <label class="lead-consent">
             <input type="checkbox" name="consent" id="leadConsent" required>
-            <span>Autorizo a SrChZ Technologies a usar meus dados para entrar em contato sobre este pedido. Posso revogar quando quiser. Veja a <a href="/privacidade.html" target="_blank" rel="noopener">Política de Privacidade</a>.</span>
+            <span data-i18n-html="gr.form.consent">Autorizo a SrChZ Technologies a usar meus dados para entrar em contato sobre este pedido. Posso revogar quando quiser. Veja a <a href="/privacidade.html" target="_blank" rel="noopener">Política de Privacidade</a>.</span>
           </label>
-          <button class="btn btn-gold btn-lg lead-btn" type="submit">Quero meu diagnóstico gratuito</button>
+          <button class="btn btn-gold btn-lg lead-btn" type="submit" data-i18n="gr.form.submit">Quero meu diagnóstico gratuito</button>
           <p class="lead-status" id="leadStatus" role="status" aria-live="polite"></p>
         </form>
       </div>
 
-      <p class="cta-meta"><span>Perception · Strategy · Execution</span></p>
+      <p class="cta-meta"><span data-i18n="gr.ct.meta">Perception · Strategy · Execution</span></p>
     </div>
   </div>
 </section>

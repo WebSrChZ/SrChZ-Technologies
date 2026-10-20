@@ -66,6 +66,9 @@ a{color:inherit; text-decoration:none}
 .nav-links a.active:not(.nav-cta)::after{width:100%}
 .nav-cta{border:1px solid var(--gold); color:var(--gold-2)!important; padding:9px 18px!important; border-radius:2px}
 .nav-cta:hover{background:rgba(201,162,75,.12)}
+.nav-right{display:flex; align-items:center; gap:14px}
+/* O seletor do desktop vive dentro de .nav-links; este so entra quando ela sai. */
+.nav-sw-mobile{display:none}
 .nav-toggle{display:none; flex-direction:column; gap:5px; background:none; border:0; padding:8px; cursor:pointer}
 .nav-toggle span{width:24px; height:2px; background:var(--gold-2); transition:transform .3s, opacity .3s}
 .nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
@@ -293,6 +296,7 @@ a{color:inherit; text-decoration:none}
 @media (min-width:921px){ .mobile-menu{display:none!important} }
 @media (max-width:920px){
   .nav-links{display:none}
+  .nav-sw-mobile{display:inline-flex}
   .nav-toggle{display:flex}
   .pillars{grid-template-columns:1fr}
   .portal-grid{grid-template-columns:1fr}
