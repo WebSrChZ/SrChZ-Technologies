@@ -40,9 +40,20 @@ function walk(dir, out = []) {
   return out;
 }
 
+function walkJs(dir, out = []) {
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    if (entry.name === '.git' || entry.name === 'node_modules') continue;
+    const full = path.join(dir, entry.name);
+    if (entry.isDirectory()) walkJs(full, out);
+    else if (/\.js$/i.test(entry.name)) out.push(full);
+  }
+  return out;
+}
+
 const pages = walk(ROOT);
 const usedBy = new Map();                  // chave -> [paginas]
 const instrumented = [];
+const pageIds = new Set();                 // valores de data-i18n-page
 
 for (const file of pages) {
   const html = fs.readFileSync(file, 'utf8');
@@ -74,11 +85,39 @@ for (const file of pages) {
   if (!/data-i18n-switcher/.test(html)) {
     fail(`${rel} usa data-i18n mas nao tem [data-i18n-switcher] para o seletor`);
   }
+  // ...e precisa declarar qual pagina e, para titulo e descricao corretos
+  const pid = html.match(/<html[^>]*\sdata-i18n-page="([^"]+)"/);
+  if (!pid) {
+    fail(`${rel} usa data-i18n mas o <html> nao declara data-i18n-page`);
+  } else {
+    pageIds.add(pid[1]);
+  }
+}
+
+/* Chaves pedidas pelo JavaScript via t("chave", "alternativa") — mensagens que
+   a pagina gera em tempo de execucao e que nenhum atributo data-i18n alcanca.
+   Sem isto a checagem de orfas acusaria essas chaves de nao serem usadas. */
+function collectRuntimeKeys(text, rel) {
+  for (const m of text.matchAll(/\bt\(\s*["'`]([A-Za-z0-9_.-]+)["'`]/g)) {
+    if (!usedBy.has(m[1])) usedBy.set(m[1], []);
+    if (!usedBy.get(m[1]).includes(rel)) usedBy.get(m[1]).push(rel);
+  }
+}
+
+for (const file of pages) {
+  const rel = path.relative(ROOT, file);
+  const html = fs.readFileSync(file, 'utf8');
+  for (const m of html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g)) collectRuntimeKeys(m[1], rel);
+}
+for (const file of walkJs(ROOT)) {
+  const rel = path.relative(ROOT, file);
+  if (rel.startsWith('assets/i18n') || rel.startsWith('tools/')) continue;
+  collectRuntimeKeys(fs.readFileSync(file, 'utf8'), rel);
 }
 
 console.log(`Paginas instrumentadas: ${instrumented.length}`);
 instrumented.forEach((p) => note(p));
-console.log(`Chaves usadas no HTML: ${usedBy.size}`);
+console.log(`Chaves usadas (HTML + JS): ${usedBy.size}`);
 
 // ---- 2. carrega os dicionarios -------------------------------------------
 
@@ -141,8 +180,17 @@ for (const code of langs) {
 for (const code of langs) {
   const d = dicts[code] || {};
   const meta = d._meta || {};
-  for (const req of ['htmlLang', 'ogLocale', 'title', 'description']) {
+  for (const req of ['htmlLang', 'ogLocale']) {
     if (!meta[req]) fail(`[${code}] _meta.${req} ausente`);
+  }
+  // cada pagina instrumentada precisa do seu proprio titulo e descricao,
+  // senao herdaria o rotulo da home no buscador
+  for (const pid of pageIds) {
+    const pm = (meta.pages || {})[pid];
+    if (!pm) { fail(`[${code}] _meta.pages["${pid}"] ausente`); continue; }
+    for (const req of ['title', 'description']) {
+      if (!pm[req]) fail(`[${code}] _meta.pages["${pid}"].${req} ausente`);
+    }
   }
   for (const [k, v] of Object.entries(d)) {
     if (k === '_meta') continue;

@@ -1,17 +1,31 @@
 /* SrChZ Technologies — English (en)
    Carregado pelo assets/i18n.js apenas quando o idioma ativo e `en`.
    Traducao autoral, nao literal: o portugues do site tem voz direta e um pouco
-   literaria, e o ingles aqui preserva esse tom em vez de decalcar a sintaxe. */
+   literaria, e o ingles aqui preserva esse tom em vez de decalcar a sintaxe.
+
+   _meta.pages tem um bloco por pagina (a pagina se identifica em
+   <html data-i18n-page="…">), porque titulo e descricao mudam por pagina e
+   herdar os da home faria o buscador mostrar o rotulo errado. */
 window.SRCHZ_I18N = window.SRCHZ_I18N || {};
 window.SRCHZ_I18N.en = {
   _meta: {
     htmlLang: 'en',
     ogLocale: 'en_US',
-    title: 'SrChZ Technologies — Rafael Cordeiro | Solutions Strategist',
-    ogTitle: 'SrChZ Technologies — Solutions Strategist',
-    description: 'Rafael Cordeiro — Solutions Strategist. I solve what everyone else overlooks: Branding & Growth, Engineering & NDT, and Technology & Data/AI.'
+    pages: {
+      home: {
+        title: 'SrChZ Technologies — Rafael Cordeiro | Solutions Strategist',
+        ogTitle: 'SrChZ Technologies — Solutions Strategist',
+        description: 'Rafael Cordeiro — Solutions Strategist. I solve what everyone else overlooks: Branding & Growth, Engineering & NDT, and Technology & Data/AI.'
+      },
+      tech: {
+        title: 'SrChZ · Technology & Data/AI | Web, Portals, Automation, Video and AI',
+        ogTitle: 'SrChZ · Technology & Data/AI',
+        description: 'The SrChZ technology practice: custom web development, portals and web apps, automation and integrations, hosting and data processing, video production and post, management consulting and applied AI. From design to deploy.'
+      }
+    }
   },
 
+  // ---- home ---------------------------------------------------------------
   'nav.skip': 'Skip to content',
   'nav.about': 'About',
   'nav.method': 'Method',
@@ -72,5 +86,100 @@ window.SRCHZ_I18N.en = {
   'contact.mail': 'Send an email',
 
   'footer.tagline': 'Solutions Strategist · Perception · Strategy · Execution',
-  'footer.privacy': 'Privacy Policy'
+  'footer.privacy': 'Privacy Policy',
+
+  // ---- /tech/ -------------------------------------------------------------
+  'tech.nav.home': '‹ Home',
+  'tech.nav.caps': 'Capabilities',
+  'tech.nav.how': 'How it works',
+  'tech.nav.proof': 'In operation',
+  'tech.nav.cta': 'Start →',
+
+  'tech.hero.kicker': 'Technology · Data &amp; AI',
+  'tech.hero.title': 'Technology &amp;<br>Data / AI',
+  'tech.hero.sub': 'Web · Portals · Automation · CX · Data Intelligence',
+  'tech.hero.lead': 'Systems that think before they execute — from design to deploy. Analysis, strategy and craft in the same place.',
+  'tech.hero.cta1': 'Talk about a project →',
+  'tech.hero.cta2': 'See capabilities',
+
+  'tech.caps.title': 'Capabilities',
+  'tech.caps.lead': 'From the site to the system — engineering, data and craft running as one ecosystem.',
+  'tech.tag.live': 'Active',
+  'tech.tag.soon': 'Coming soon',
+
+  'tech.cap.web.n': 'Web &amp; Portals',
+  'tech.cap.web.d': 'Custom sites, web apps and <b>client portals</b> — from design to deploy. Installable PWA, technical SEO, structured data and measured performance.',
+  'tech.cap.aut.n': 'Automation &amp; Integrations',
+  'tech.cap.aut.d': 'Flows that remove manual work: integrations, webhooks and a <i>serverless</i> back end. What is a spreadsheet and copy-paste today starts happening on its own.',
+  'tech.cap.dat.n': 'Data &amp; Hosting',
+  'tech.cap.dat.d': 'Database, application hosting and data processing — with <b>row-level access control</b>, proof of consent and privacy handled in the design.',
+  'tech.cap.vid.n': 'Video &amp; Post-production',
+  'tech.cap.vid.d': 'Production and post: motion graphics, <b>synced captions</b>, mastered audio and sound design — on a fixed cadence, inside an editorial system.',
+  'tech.cap.ges.n': 'Management Consulting',
+  'tech.cap.ges.d': 'Before the code: where the process jams, what is worth automating and what is better left manual. Sometimes the right delivery <b>is not software</b>.',
+  'tech.cap.cx.n': 'Customer Experience',
+  'tech.cap.cx.d': 'Journey, service and conversion — cutting friction where the system ignores how people actually think.',
+  'tech.cap.ia.n': 'Data &amp; AI',
+  'tech.cap.ia.d': 'AI evaluation and training, prompt engineering, quality analysis and applied data intelligence.',
+  'tech.cap.bi.n': 'Dashboards &amp; BI',
+  'tech.cap.bi.d': 'Real-time data panels and reports that turn into decisions.',
+  'tech.cap.api.n': 'Products &amp; APIs',
+  'tech.cap.api.d': 'Micro-products, APIs and tools built for your business.',
+
+  'tech.how.title': 'How it works',
+  'tech.how.lead': 'Four steps. The first one produces no code — and it is the one that decides whether the rest is worth doing.',
+  'tech.how.s1.t': 'Diagnosis',
+  'tech.how.s1.d': 'Understanding where the work jams today, who touches what, and the real cost of the manual process. What comes out is a scope, not a generic quote.',
+  'tech.how.s2.t': 'Design',
+  'tech.how.s2.d': 'Architecture, data model and who gets to see what — settled before the first screen. Access and privacy are decided now, not later.',
+  'tech.how.s3.t': 'Build',
+  'tech.how.s3.d': 'Delivered in increments you can open and use, not a <i>big bang</i> at the end. Each step ships verified.',
+  'tech.how.s4.t': 'Operation',
+  'tech.how.s4.d': 'Deploy, monitoring and technical support. The repository and the infrastructure stay in your name, with your admin access.',
+
+  'tech.proof.title': 'In operation',
+  'tech.proof.lead': 'Two systems live, built end to end — not a <i>mockup</i>, not a prototype.',
+  'tech.proof.a.tag': 'Client portal',
+  'tech.proof.a.d': 'A portal of their own where the client follows production in real time: approval by phase, notifications, activity history and notes. <b>Installable PWA</b>, multi-device.',
+  'tech.proof.a.l1': 'Session-based access, each account seeing only its own data',
+  'tech.proof.a.l2': 'Real-time updates across devices',
+  'tech.proof.a.l3': 'Privacy consent recorded with date and proof',
+  'tech.proof.a.l4': 'Database writes closed to anonymous access',
+  'tech.proof.a.go': 'See the portal live →',
+  'tech.proof.b.tag': 'Catalogue + quoting',
+  'tech.proof.b.d': 'A catalogue of gym weights with a <b>quote builder</b>: the customer picks items and quantities, the order survives in the browser and comes out formatted on WhatsApp. No checkout, no abandoned cart.',
+  'tech.proof.b.l1': 'Six product lines with per-item specification',
+  'tech.proof.b.l2': 'A quote that survives a page reload',
+  'tech.proof.b.l3': 'Direct link per product, to send a single item',
+  'tech.proof.b.l4': 'Closes the sale on the channel the customer is already on',
+  'tech.proof.b.go': 'See the catalogue →',
+
+  'tech.contact.title': 'Start',
+  'tech.contact.lead': 'Tell me what is jamming. If the answer is not software, I will say that too.',
+  'tech.form.name': 'Your name',
+  'tech.form.contact': 'WhatsApp or email',
+  'tech.form.segment': 'What you need — site, portal, automation, video, data… (optional)',
+  'tech.form.segmentLabel': 'What you need',
+  'tech.form.message': 'What is jamming today? (optional)',
+  'tech.form.messageLabel': 'Message',
+  'tech.form.consent': 'I agree to be contacted and to the processing of my data under the <a href="../privacidade.html">Privacy Policy</a>.',
+  'tech.form.submit': 'Send',
+  'tech.form.alt': 'Or reach me directly: <a href="https://wa.me/5511996869309?text=Ol%C3%A1%20Rafael%2C%20vim%20pelo%20hub%20de%20Tecnologia%20%26%20Dados%2FIA." target="_blank" rel="noopener">WhatsApp →</a>',
+  'tech.form.errFields': 'Please fill in a name and a valid contact.',
+  'tech.form.errConsent': 'Please tick the contact authorisation to send.',
+  'tech.form.sending': 'Sending…',
+  'tech.form.ok': '✓ Received. I will be in touch shortly.',
+  'tech.form.errSend': 'I could not send that just now. Try WhatsApp below.',
+
+  'tech.faq.title': 'Frequently asked',
+  'tech.faq.q1': 'Do you only build the site, or the system behind it too?',
+  'tech.faq.a1': 'Both. The practice covers custom development, configurable software, database, hosting, automation and technical support. The site is the visible layer of a system that usually has a portal, authentication and data behind it.',
+  'tech.faq.q2': 'How does a project start?',
+  'tech.faq.a2': 'With a diagnosis of the process, not of the technology. First we work out where the work jams and what is worth automating; only then do we decide what to build — and whether to build at all.',
+  'tech.faq.q3': 'Do you deliver video as well?',
+  'tech.faq.a3': 'Yes: production and post-production. Motion graphics, synced captions, audio mastering and sound design, usually attached to an editorial system on a fixed cadence — as in the ItsPower case.',
+  'tech.faq.q4': 'Do the code and the system stay with me?',
+  'tech.faq.a4': 'Yes. The repository and the infrastructure stay in your name, with your admin access. No vendor lock-in to carry the project forward.',
+  'tech.faq.q5': 'How is data protection handled in what you deliver?',
+  'tech.faq.a5': 'In the design, not at the end: a declared legal basis, proof of consent recorded with its date, row-level access control in the database, and a privacy policy describing the fields actually collected — not generic boilerplate.'
 };

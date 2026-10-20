@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-i18n-page="tech">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -21,6 +21,20 @@
 <meta name="twitter:description" content="Web, portais, automação, CX e inteligência de dados com IA." />
 <meta name="twitter:image" content="https://www.srchz-technologies.com.br/assets/og.png" />
 <link rel="canonical" href="https://www.srchz-technologies.com.br/tech/" />
+
+<!-- Versões por idioma: conteúdo em arquivo único, idioma aplicado no cliente,
+     mas cada variante com URL própria via ?lang= para o buscador indexar. -->
+<link rel="alternate" hreflang="pt-BR" href="https://www.srchz-technologies.com.br/tech/?lang=pt" />
+<link rel="alternate" hreflang="en" href="https://www.srchz-technologies.com.br/tech/?lang=en" />
+<link rel="alternate" hreflang="es" href="https://www.srchz-technologies.com.br/tech/?lang=es" />
+<link rel="alternate" hreflang="ja" href="https://www.srchz-technologies.com.br/tech/?lang=ja" />
+<link rel="alternate" hreflang="x-default" href="https://www.srchz-technologies.com.br/tech/" />
+<meta property="og:locale" content="pt_BR" />
+<meta property="og:locale:alternate" content="en_US" />
+<meta property="og:locale:alternate" content="es_ES" />
+<meta property="og:locale:alternate" content="ja_JP" />
+
+<script src="../assets/i18n.js"></script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
   {"@type":"WebSite","name":"SrChZ · Tecnologia & Dados/IA","url":"https://www.srchz-technologies.com.br/tech/","publisher":{"@id":"https://www.srchz-technologies.com.br/#organization"}},
@@ -159,117 +173,118 @@ a{color:inherit;text-decoration:none}
 <header class="nav"><div class="container nav__in">
   <a class="brand" href="#topo"><img src="assets/img/logo-icon.png" alt="SrChZ"/><span>SrChZ · <b>Tech</b></span></a>
   <nav class="nav__right">
-    <a class="nav__home" href="../">‹ Home</a>
-    <a class="nav__home" href="#capacidades">Capacidades</a>
-    <a class="nav__home" href="#processo">Como funciona</a>
-    <a class="nav__home" href="#prova">Em operação</a>
-    <a class="cta" href="#contato">Começar →</a>
+    <a class="nav__home" href="../" data-i18n="tech.nav.home">‹ Home</a>
+    <a class="nav__home" href="#capacidades" data-i18n="tech.nav.caps">Capacidades</a>
+    <a class="nav__home" href="#processo" data-i18n="tech.nav.how">Como funciona</a>
+    <a class="nav__home" href="#prova" data-i18n="tech.nav.proof">Em operação</a>
+    <a class="cta" href="#contato" data-i18n="tech.nav.cta">Começar →</a>
+    <span data-i18n-switcher></span>
   </nav>
 </div></header>
 
 <section class="hero" id="topo"><div class="container">
   <img class="hero__mark" src="assets/img/logo-mark.png" alt="SrChZ Technologies" width="126"/>
-  <p class="hero__kicker">⚜&nbsp;&nbsp;Tecnologia · Dados &amp; IA&nbsp;&nbsp;⚜</p>
-  <h1 class="hero__title gold-grad">Tecnologia &amp;<br>Dados / IA</h1>
-  <p class="hero__sub">Web · Portais · Automação · CX · Inteligência de Dados</p>
-  <p class="hero__lead">Sistemas que pensam antes de executar — do design ao deploy. Análise, estratégia e estética no mesmo lugar.</p>
+  <p class="hero__kicker">⚜&nbsp;&nbsp;<span data-i18n="tech.hero.kicker">Tecnologia · Dados &amp; IA</span>&nbsp;&nbsp;⚜</p>
+  <h1 class="hero__title gold-grad" data-i18n-html="tech.hero.title">Tecnologia &amp;<br>Dados / IA</h1>
+  <p class="hero__sub" data-i18n="tech.hero.sub">Web · Portais · Automação · CX · Inteligência de Dados</p>
+  <p class="hero__lead" data-i18n="tech.hero.lead">Sistemas que pensam antes de executar — do design ao deploy. Análise, estratégia e estética no mesmo lugar.</p>
   <div class="hero__actions">
-    <a class="btn btn--gold" href="https://wa.me/5511996869309?text=Ol%C3%A1%20Rafael%2C%20quero%20falar%20sobre%20um%20projeto%20de%20Tecnologia%20%26%20Dados%2FIA." target="_blank" rel="noopener">Falar sobre um projeto →</a>
-    <a class="btn btn--ghost" href="#capacidades">Ver capacidades</a>
+    <a class="btn btn--gold" href="https://wa.me/5511996869309?text=Ol%C3%A1%20Rafael%2C%20quero%20falar%20sobre%20um%20projeto%20de%20Tecnologia%20%26%20Dados%2FIA." target="_blank" rel="noopener" data-i18n="tech.hero.cta1">Falar sobre um projeto →</a>
+    <a class="btn btn--ghost" href="#capacidades" data-i18n="tech.hero.cta2">Ver capacidades</a>
   </div>
 </div></section>
 
 <section class="section" id="capacidades"><div class="container">
-  <h2>Capacidades</h2>
-  <p class="lead">Do site ao sistema — engenharia, dados e estética operando como um só ecossistema.</p>
+  <h2 data-i18n="tech.caps.title">Capacidades</h2>
+  <p class="lead" data-i18n="tech.caps.lead">Do site ao sistema — engenharia, dados e estética operando como um só ecossistema.</p>
   <div class="grid">
-    <div class="trail trail--live"><div class="trail__code">WEB</div><div class="trail__name">Web &amp; Portais</div><p class="trail__desc">Sites, web apps e <b>portais do cliente</b> sob encomenda — do design ao deploy. PWA instalável, SEO técnico, dados estruturados e performance medida.</p><span class="trail__tag tag--live">Ativo</span></div>
-    <div class="trail trail--live"><div class="trail__code">AUT</div><div class="trail__name">Automação &amp; Integrações</div><p class="trail__desc">Fluxos que eliminam trabalho manual: integrações, webhooks e back-end <i>serverless</i>. O que hoje é planilha e cópia-e-cola passa a acontecer sozinho.</p><span class="trail__tag tag--live">Ativo</span></div>
-    <div class="trail trail--live"><div class="trail__code">DAT</div><div class="trail__name">Dados &amp; Hospedagem</div><p class="trail__desc">Banco de dados, hospedagem de aplicação e tratamento de dados — com <b>controle de acesso por linha</b>, prova de consentimento e LGPD tratada no desenho.</p><span class="trail__tag tag--live">Ativo</span></div>
-    <div class="trail trail--live"><div class="trail__code">VID</div><div class="trail__name">Vídeo &amp; Pós-produção</div><p class="trail__desc">Produção e pós: motion graphics, <b>legendas sincronizadas</b>, áudio masterizado e sound design — em cadência fixa, dentro de um sistema editorial.</p><span class="trail__tag tag--live">Ativo</span></div>
-    <div class="trail trail--live"><div class="trail__code">GES</div><div class="trail__name">Consultoria em Gestão</div><p class="trail__desc">Antes do código: onde o processo trava, o que vale automatizar e o que é melhor deixar manual. Às vezes a entrega certa <b>não é software</b>.</p><span class="trail__tag tag--live">Ativo</span></div>
-    <div class="trail trail--live"><div class="trail__code">CX</div><div class="trail__name">Customer Experience</div><p class="trail__desc">Jornada, atendimento e conversão — reduzindo o atrito onde o sistema ignora como as pessoas pensam.</p><span class="trail__tag tag--live">Ativo</span></div>
-    <div class="trail trail--live"><div class="trail__code">IA</div><div class="trail__name">Dados &amp; IA</div><p class="trail__desc">Avaliação e treino de IA, prompt engineering, análise de qualidade e inteligência de dados aplicada.</p><span class="trail__tag tag--live">Ativo</span></div>
-    <div class="trail trail--soon"><div class="trail__code">BI</div><div class="trail__name">Dashboards &amp; BI</div><p class="trail__desc">Painéis de dados em tempo real e relatórios que viram decisão.</p><span class="trail__tag tag--soon">Em breve</span></div>
-    <div class="trail trail--soon"><div class="trail__code">API</div><div class="trail__name">Produtos &amp; APIs</div><p class="trail__desc">Micro-produtos, APIs e ferramentas sob medida para o seu negócio.</p><span class="trail__tag tag--soon">Em breve</span></div>
+    <div class="trail trail--live"><div class="trail__code">WEB</div><div class="trail__name" data-i18n="tech.cap.web.n">Web &amp; Portais</div><p class="trail__desc" data-i18n-html="tech.cap.web.d">Sites, web apps e <b>portais do cliente</b> sob encomenda — do design ao deploy. PWA instalável, SEO técnico, dados estruturados e performance medida.</p><span class="trail__tag tag--live" data-i18n="tech.tag.live">Ativo</span></div>
+    <div class="trail trail--live"><div class="trail__code">AUT</div><div class="trail__name" data-i18n="tech.cap.aut.n">Automação &amp; Integrações</div><p class="trail__desc" data-i18n-html="tech.cap.aut.d">Fluxos que eliminam trabalho manual: integrações, webhooks e back-end <i>serverless</i>. O que hoje é planilha e cópia-e-cola passa a acontecer sozinho.</p><span class="trail__tag tag--live" data-i18n="tech.tag.live">Ativo</span></div>
+    <div class="trail trail--live"><div class="trail__code">DAT</div><div class="trail__name" data-i18n="tech.cap.dat.n">Dados &amp; Hospedagem</div><p class="trail__desc" data-i18n-html="tech.cap.dat.d">Banco de dados, hospedagem de aplicação e tratamento de dados — com <b>controle de acesso por linha</b>, prova de consentimento e LGPD tratada no desenho.</p><span class="trail__tag tag--live" data-i18n="tech.tag.live">Ativo</span></div>
+    <div class="trail trail--live"><div class="trail__code">VID</div><div class="trail__name" data-i18n="tech.cap.vid.n">Vídeo &amp; Pós-produção</div><p class="trail__desc" data-i18n-html="tech.cap.vid.d">Produção e pós: motion graphics, <b>legendas sincronizadas</b>, áudio masterizado e sound design — em cadência fixa, dentro de um sistema editorial.</p><span class="trail__tag tag--live" data-i18n="tech.tag.live">Ativo</span></div>
+    <div class="trail trail--live"><div class="trail__code">GES</div><div class="trail__name" data-i18n="tech.cap.ges.n">Consultoria em Gestão</div><p class="trail__desc" data-i18n-html="tech.cap.ges.d">Antes do código: onde o processo trava, o que vale automatizar e o que é melhor deixar manual. Às vezes a entrega certa <b>não é software</b>.</p><span class="trail__tag tag--live" data-i18n="tech.tag.live">Ativo</span></div>
+    <div class="trail trail--live"><div class="trail__code">CX</div><div class="trail__name" data-i18n="tech.cap.cx.n">Customer Experience</div><p class="trail__desc" data-i18n="tech.cap.cx.d">Jornada, atendimento e conversão — reduzindo o atrito onde o sistema ignora como as pessoas pensam.</p><span class="trail__tag tag--live" data-i18n="tech.tag.live">Ativo</span></div>
+    <div class="trail trail--live"><div class="trail__code">IA</div><div class="trail__name" data-i18n="tech.cap.ia.n">Dados &amp; IA</div><p class="trail__desc" data-i18n="tech.cap.ia.d">Avaliação e treino de IA, prompt engineering, análise de qualidade e inteligência de dados aplicada.</p><span class="trail__tag tag--live" data-i18n="tech.tag.live">Ativo</span></div>
+    <div class="trail trail--soon"><div class="trail__code">BI</div><div class="trail__name" data-i18n="tech.cap.bi.n">Dashboards &amp; BI</div><p class="trail__desc" data-i18n="tech.cap.bi.d">Painéis de dados em tempo real e relatórios que viram decisão.</p><span class="trail__tag tag--soon" data-i18n="tech.tag.soon">Em breve</span></div>
+    <div class="trail trail--soon"><div class="trail__code">API</div><div class="trail__name" data-i18n="tech.cap.api.n">Produtos &amp; APIs</div><p class="trail__desc" data-i18n="tech.cap.api.d">Micro-produtos, APIs e ferramentas sob medida para o seu negócio.</p><span class="trail__tag tag--soon" data-i18n="tech.tag.soon">Em breve</span></div>
   </div>
 </div></section>
 
 <!-- COMO FUNCIONA -->
 <section class="section section--alt" id="processo"><div class="container">
-  <h2>Como funciona</h2>
-  <p class="lead">Quatro etapas. A primeira não produz código — e é a que decide se o resto vale a pena.</p>
+  <h2 data-i18n="tech.how.title">Como funciona</h2>
+  <p class="lead" data-i18n="tech.how.lead">Quatro etapas. A primeira não produz código — e é a que decide se o resto vale a pena.</p>
   <div class="steps">
-    <div class="step"><span class="step__n">01</span><div><h3>Diagnóstico</h3><p>Entender onde o trabalho trava hoje, quem toca em quê e qual o custo real do processo manual. Sai daqui um escopo, não um orçamento genérico.</p></div></div>
-    <div class="step"><span class="step__n">02</span><div><h3>Desenho</h3><p>Arquitetura, modelo de dados e quem pode ver o quê — definidos antes da primeira tela. Decisão de acesso e de privacidade entra agora, não depois.</p></div></div>
-    <div class="step"><span class="step__n">03</span><div><h3>Construção</h3><p>Entrega em incrementos que você consegue abrir e usar, não um <i>big bang</i> no fim. Cada passo vai para o ar verificado.</p></div></div>
-    <div class="step"><span class="step__n">04</span><div><h3>Operação</h3><p>Deploy, monitoramento e suporte técnico. O repositório e a infraestrutura ficam no seu nome, com seu acesso de administrador.</p></div></div>
+    <div class="step"><span class="step__n">01</span><div><h3 data-i18n="tech.how.s1.t">Diagnóstico</h3><p data-i18n="tech.how.s1.d">Entender onde o trabalho trava hoje, quem toca em quê e qual o custo real do processo manual. Sai daqui um escopo, não um orçamento genérico.</p></div></div>
+    <div class="step"><span class="step__n">02</span><div><h3 data-i18n="tech.how.s2.t">Desenho</h3><p data-i18n="tech.how.s2.d">Arquitetura, modelo de dados e quem pode ver o quê — definidos antes da primeira tela. Decisão de acesso e de privacidade entra agora, não depois.</p></div></div>
+    <div class="step"><span class="step__n">03</span><div><h3 data-i18n="tech.how.s3.t">Construção</h3><p data-i18n-html="tech.how.s3.d">Entrega em incrementos que você consegue abrir e usar, não um <i>big bang</i> no fim. Cada passo vai para o ar verificado.</p></div></div>
+    <div class="step"><span class="step__n">04</span><div><h3 data-i18n="tech.how.s4.t">Operação</h3><p data-i18n="tech.how.s4.d">Deploy, monitoramento e suporte técnico. O repositório e a infraestrutura ficam no seu nome, com seu acesso de administrador.</p></div></div>
   </div>
 </div></section>
 
 <!-- PROVA -->
 <section class="section" id="prova"><div class="container">
-  <h2>Em operação</h2>
-  <p class="lead">Dois sistemas no ar, construídos de ponta a ponta — não <i>mockup</i>, não protótipo.</p>
+  <h2 data-i18n="tech.proof.title">Em operação</h2>
+  <p class="lead" data-i18n-html="tech.proof.lead">Dois sistemas no ar, construídos de ponta a ponta — não <i>mockup</i>, não protótipo.</p>
   <div class="proofs">
     <article class="proof">
-      <span class="proof__tag">Portal do cliente</span>
+      <span class="proof__tag" data-i18n="tech.proof.a.tag">Portal do cliente</span>
       <h3>ItsPower Academia</h3>
-      <p>Portal próprio onde o cliente acompanha a produção em tempo real: aprovação por fase, notificações, histórico de atividade e anotações. <b>PWA instalável</b>, multi-device.</p>
+      <p data-i18n-html="tech.proof.a.d">Portal próprio onde o cliente acompanha a produção em tempo real: aprovação por fase, notificações, histórico de atividade e anotações. <b>PWA instalável</b>, multi-device.</p>
       <ul class="proof__list">
-        <li>Acesso por sessão, com cada conta vendo só os seus dados</li>
-        <li>Atualização em tempo real entre dispositivos</li>
-        <li>Aceite de LGPD registrado com data e prova</li>
-        <li>Escrita no banco fechada para acesso anônimo</li>
+        <li data-i18n="tech.proof.a.l1">Acesso por sessão, com cada conta vendo só os seus dados</li>
+        <li data-i18n="tech.proof.a.l2">Atualização em tempo real entre dispositivos</li>
+        <li data-i18n="tech.proof.a.l3">Aceite de LGPD registrado com data e prova</li>
+        <li data-i18n="tech.proof.a.l4">Escrita no banco fechada para acesso anônimo</li>
       </ul>
-      <a class="proof__go" href="https://websrchz.github.io/its-power-hub/" target="_blank" rel="noopener">Ver o portal ao vivo →</a>
+      <a class="proof__go" href="https://websrchz.github.io/its-power-hub/" target="_blank" rel="noopener" data-i18n="tech.proof.a.go">Ver o portal ao vivo →</a>
     </article>
     <article class="proof">
-      <span class="proof__tag">Catálogo + orçamento</span>
+      <span class="proof__tag" data-i18n="tech.proof.b.tag">Catálogo + orçamento</span>
       <h3>KL Sports Fitness</h3>
-      <p>Catálogo de pesos para musculação com <b>montador de orçamento</b>: o cliente escolhe itens e quantidades, o pedido persiste no navegador e sai formatado no WhatsApp. Sem checkout, sem carrinho abandonado.</p>
+      <p data-i18n-html="tech.proof.b.d">Catálogo de pesos para musculação com <b>montador de orçamento</b>: o cliente escolhe itens e quantidades, o pedido persiste no navegador e sai formatado no WhatsApp. Sem checkout, sem carrinho abandonado.</p>
       <ul class="proof__list">
-        <li>Cinco linhas de produto com especificação por item</li>
-        <li>Orçamento que sobrevive ao recarregar a página</li>
-        <li>Link direto por produto, para mandar um item específico</li>
-        <li>Fecha a venda no canal onde o cliente já está</li>
+        <li data-i18n="tech.proof.b.l1">Seis linhas de produto com especificação por item</li>
+        <li data-i18n="tech.proof.b.l2">Orçamento que sobrevive ao recarregar a página</li>
+        <li data-i18n="tech.proof.b.l3">Link direto por produto, para mandar um item específico</li>
+        <li data-i18n="tech.proof.b.l4">Fecha a venda no canal onde o cliente já está</li>
       </ul>
-      <a class="proof__go" href="../kl-sports/">Ver o catálogo →</a>
+      <a class="proof__go" href="../kl-sports/" data-i18n="tech.proof.b.go">Ver o catálogo →</a>
     </article>
   </div>
 </div></section>
 
 <!-- CONTATO -->
 <section class="section section--alt" id="contato"><div class="container">
-  <h2>Começar</h2>
-  <p class="lead">Me diga o que está travando. Se a resposta não for software, eu digo isso também.</p>
+  <h2 data-i18n="tech.contact.title">Começar</h2>
+  <p class="lead" data-i18n="tech.contact.lead">Me diga o que está travando. Se a resposta não for software, eu digo isso também.</p>
   <form class="tform" id="techForm" novalidate>
     <div class="tform__row">
-      <input class="tform__in" name="name" type="text" placeholder="Seu nome" autocomplete="name" required maxlength="120" aria-label="Seu nome" />
-      <input class="tform__in" name="contact" type="text" placeholder="WhatsApp ou e-mail" autocomplete="email" required maxlength="160" aria-label="WhatsApp ou e-mail" />
+      <input class="tform__in" name="name" type="text" placeholder="Seu nome" autocomplete="name" required maxlength="120" aria-label="Seu nome" data-i18n-attr="placeholder:tech.form.name;aria-label:tech.form.name" />
+      <input class="tform__in" name="contact" type="text" placeholder="WhatsApp ou e-mail" autocomplete="email" required maxlength="160" aria-label="WhatsApp ou e-mail" data-i18n-attr="placeholder:tech.form.contact;aria-label:tech.form.contact" />
     </div>
-    <input class="tform__in" name="segment" type="text" placeholder="O que você precisa — site, portal, automação, vídeo, dados… (opcional)" maxlength="140" aria-label="O que você precisa" />
-    <textarea class="tform__in tform__ta" name="message" placeholder="O que está travando hoje? (opcional)" maxlength="2000" rows="3" aria-label="Mensagem"></textarea>
+    <input class="tform__in" name="segment" type="text" placeholder="O que você precisa — site, portal, automação, vídeo, dados… (opcional)" maxlength="140" aria-label="O que você precisa" data-i18n-attr="placeholder:tech.form.segment;aria-label:tech.form.segmentLabel" />
+    <textarea class="tform__in tform__ta" name="message" placeholder="O que está travando hoje? (opcional)" maxlength="2000" rows="3" aria-label="Mensagem" data-i18n-attr="placeholder:tech.form.message;aria-label:tech.form.messageLabel"></textarea>
     <input class="tform__hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
     <label class="tform__consent">
       <input type="checkbox" name="consent" value="1" required />
-      <span>Autorizo o contato e o tratamento dos meus dados conforme a <a href="../privacidade.html">Política de Privacidade</a>.</span>
+      <span data-i18n-html="tech.form.consent">Autorizo o contato e o tratamento dos meus dados conforme a <a href="../privacidade.html">Política de Privacidade</a>.</span>
     </label>
-    <button class="btn btn--gold" type="submit">Enviar</button>
+    <button class="btn btn--gold" type="submit" data-i18n="tech.form.submit">Enviar</button>
     <p class="tform__status" id="techStatus" role="status" aria-live="polite"></p>
   </form>
-  <p class="tform__alt">Ou fale direto: <a href="https://wa.me/5511996869309?text=Ol%C3%A1%20Rafael%2C%20vim%20pelo%20hub%20de%20Tecnologia%20%26%20Dados%2FIA." target="_blank" rel="noopener">WhatsApp →</a></p>
+  <p class="tform__alt" data-i18n-html="tech.form.alt">Ou fale direto: <a href="https://wa.me/5511996869309?text=Ol%C3%A1%20Rafael%2C%20vim%20pelo%20hub%20de%20Tecnologia%20%26%20Dados%2FIA." target="_blank" rel="noopener">WhatsApp →</a></p>
 </div></section>
 
 <!-- FAQ -->
 <section class="section" id="faq"><div class="container">
-  <h2>Dúvidas frequentes</h2>
+  <h2 data-i18n="tech.faq.title">Dúvidas frequentes</h2>
   <div class="faq">
-    <details><summary>Vocês fazem só site ou também o sistema por trás?</summary><p>Os dois. A prática cobre desenvolvimento sob encomenda, software customizável, banco de dados, hospedagem, automação e suporte técnico. O site é a camada visível de um sistema que normalmente tem portal, autenticação e dados por trás.</p></details>
-    <details><summary>Como começa um projeto?</summary><p>Por um diagnóstico do processo, não por tecnologia. Primeiro se entende onde o trabalho trava e o que vale automatizar; só depois se decide o que construir — e se vale construir.</p></details>
-    <details><summary>Vocês entregam vídeo também?</summary><p>Sim: produção e pós-produção. Motion graphics, legendas sincronizadas, masterização de áudio e sound design, normalmente acoplados a um sistema editorial de cadência fixa — como no caso da ItsPower.</p></details>
-    <details><summary>O código e o sistema ficam comigo?</summary><p>Sim. O repositório e a infraestrutura ficam no seu nome, com seu acesso de administrador. Sem dependência de fornecedor para continuar o projeto.</p></details>
-    <details><summary>Como fica a LGPD nos sistemas que vocês entregam?</summary><p>Tratada no desenho, não no fim: base legal declarada, prova de consentimento registrada com data, controle de acesso por linha no banco e política de privacidade que descreve os campos que são de fato coletados — não um texto genérico.</p></details>
+    <details><summary data-i18n="tech.faq.q1">Vocês fazem só site ou também o sistema por trás?</summary><p data-i18n="tech.faq.a1">Os dois. A prática cobre desenvolvimento sob encomenda, software customizável, banco de dados, hospedagem, automação e suporte técnico. O site é a camada visível de um sistema que normalmente tem portal, autenticação e dados por trás.</p></details>
+    <details><summary data-i18n="tech.faq.q2">Como começa um projeto?</summary><p data-i18n="tech.faq.a2">Por um diagnóstico do processo, não por tecnologia. Primeiro se entende onde o trabalho trava e o que vale automatizar; só depois se decide o que construir — e se vale construir.</p></details>
+    <details><summary data-i18n="tech.faq.q3">Vocês entregam vídeo também?</summary><p data-i18n="tech.faq.a3">Sim: produção e pós-produção. Motion graphics, legendas sincronizadas, masterização de áudio e sound design, normalmente acoplados a um sistema editorial de cadência fixa — como no caso da ItsPower.</p></details>
+    <details><summary data-i18n="tech.faq.q4">O código e o sistema ficam comigo?</summary><p data-i18n="tech.faq.a4">Sim. O repositório e a infraestrutura ficam no seu nome, com seu acesso de administrador. Sem dependência de fornecedor para continuar o projeto.</p></details>
+    <details><summary data-i18n="tech.faq.q5">Como fica a LGPD nos sistemas que vocês entregam?</summary><p data-i18n="tech.faq.a5">Tratada no desenho, não no fim: base legal declarada, prova de consentimento registrada com data, controle de acesso por linha no banco e política de privacidade que descreve os campos que são de fato coletados — não um texto genérico.</p></details>
   </div>
 </div></section>
 
@@ -299,6 +314,11 @@ document.getElementById("y").textContent=new Date().getFullYear();
   if (!form) return;
   var statusEl = document.getElementById("techStatus");
   function setStatus(msg, cls){ statusEl.textContent = msg; statusEl.className = "tform__status" + (cls ? " " + cls : ""); }
+  /* As mensagens abaixo nascem no JavaScript, entao data-i18n nao as alcanca.
+     O t() do motor traduz; sem dicionario, cai no texto em portugues. */
+  function t(key, fallback){
+    return (window.SrChZI18n && window.SrChZI18n.t) ? window.SrChZI18n.t(key, fallback) : fallback;
+  }
 
   form.addEventListener("submit", async function(ev){
     ev.preventDefault();
@@ -306,14 +326,14 @@ document.getElementById("y").textContent=new Date().getFullYear();
     if ((fd.get("website") || "").trim()) return;              // honeypot: provavel bot
     var name = (fd.get("name") || "").trim();
     var contact = (fd.get("contact") || "").trim();
-    if (!name || contact.length < 3) { setStatus("Preencha nome e um contato válido.", "err"); return; }
+    if (!name || contact.length < 3) { setStatus(t("tech.form.errFields","Preencha nome e um contato válido."), "err"); return; }
     // O form e `novalidate`, entao o `required` do checkbox nao e aplicado pelo
     // navegador — a base legal do envio (consentimento LGPD) e checada aqui.
-    if (!fd.get("consent")) { setStatus("Marque a autorização de contato para enviar.", "err"); return; }
+    if (!fd.get("consent")) { setStatus(t("tech.form.errConsent","Marque a autorização de contato para enviar."), "err"); return; }
 
     var btn = form.querySelector('button[type="submit"]');
     var label = btn.textContent;
-    btn.disabled = true; btn.textContent = "Enviando…"; setStatus("", "");
+    btn.disabled = true; btn.textContent = t("tech.form.sending","Enviando…"); setStatus("", "");
     try {
       var res = await fetch(SB_URL + "/rest/v1/srchz_leads", {
         method: "POST",
@@ -336,9 +356,9 @@ document.getElementById("y").textContent=new Date().getFullYear();
       });
       if (!res.ok) throw new Error("HTTP " + res.status);
       form.reset();
-      setStatus("✓ Recebido. Eu entro em contato em breve.", "ok");
+      setStatus(t("tech.form.ok","✓ Recebido. Eu entro em contato em breve."), "ok");
     } catch (err) {
-      setStatus("Não consegui enviar agora. Tente pelo WhatsApp abaixo.", "err");
+      setStatus(t("tech.form.errSend","Não consegui enviar agora. Tente pelo WhatsApp abaixo."), "err");
     } finally {
       btn.disabled = false; btn.textContent = label;
     }

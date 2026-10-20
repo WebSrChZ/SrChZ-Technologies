@@ -184,19 +184,28 @@
     }
   }
 
+  /* Titulo e descricao sao por pagina, nao por idioma: cada pagina declara sua
+     identidade em <html data-i18n-page="…"> e o dicionario guarda um bloco por
+     pagina em _meta.pages. Sem isso toda pagina herdaria o titulo da home, que
+     e pior do que nao traduzir — o buscador mostraria o rotulo errado. */
   function applyMeta(dict) {
     var meta = dict._meta || {};
+    var pageId = html.getAttribute('data-i18n-page') || 'home';
+    var pm = (meta.pages && meta.pages[pageId]) || {};
+
     html.setAttribute('lang', meta.htmlLang || LANGS[current].htmlLang);
 
-    if (meta.title) {
-      document.title = meta.title;
-      setProp('meta[property="og:title"]', 'content', meta.ogTitle || meta.title);
-      setProp('meta[name="twitter:title"]', 'content', meta.ogTitle || meta.title);
+    if (pm.title) {
+      document.title = pm.title;
+      setProp('meta[property="og:title"]', 'content', pm.ogTitle || pm.title);
+      setProp('meta[name="twitter:title"]', 'content', pm.ogTitle || pm.title);
+    } else if (window.console && console.warn) {
+      console.warn('[i18n] sem _meta.pages["' + pageId + '"] em "' + current + '"');
     }
-    if (meta.description) {
-      setProp('meta[name="description"]', 'content', meta.description);
-      setProp('meta[property="og:description"]', 'content', meta.description);
-      setProp('meta[name="twitter:description"]', 'content', meta.description);
+    if (pm.description) {
+      setProp('meta[name="description"]', 'content', pm.description);
+      setProp('meta[property="og:description"]', 'content', pm.description);
+      setProp('meta[name="twitter:description"]', 'content', pm.description);
     }
     setProp('meta[property="og:locale"]', 'content', meta.ogLocale || LANGS[current].ogLocale);
   }
@@ -332,10 +341,21 @@
     });
   });
 
-  /* Exposto para depuracao no console: SrChZI18n.set('ja') */
+  /* API publica.
+     `t(chave, alternativa)` serve o texto que a pagina gera em JavaScript —
+     mensagens de validacao de formulario, por exemplo — que nao existem no HTML
+     e portanto nao sao alcancadas por data-i18n. Em portugues, ou enquanto o
+     dicionario nao chegou, devolve a alternativa, que e o texto ja escrito na
+     pagina. Assim a mensagem nunca some, no pior caso aparece em portugues. */
   window.SrChZI18n = {
     current: function () { return current; },
     langs: LANGS,
+    t: function (key, fallback) {
+      var bag = window.SRCHZ_I18N;
+      var dict = bag && bag[current];
+      if (dict && Object.prototype.hasOwnProperty.call(dict, key)) return dict[key];
+      return fallback;
+    },
     set: function (code) {
       if (!LANGS[code]) return;
       write(STORE_KEY, code);
