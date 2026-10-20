@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-i18n-page="kl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,6 +9,15 @@
 <title>Catálogo KL Sports Fitness</title>
 <meta name="description" content="Anilhas, halteres, dumbbells, barras, kettlebells, suportes e piso emborrachado. Escolha os pesos e peça seu orçamento pelo WhatsApp.">
 <link rel="canonical" href="https://www.srchz-technologies.com.br/kl-sports/">
+<link rel="alternate" hreflang="pt-BR" href="https://www.srchz-technologies.com.br/kl-sports/?lang=pt">
+<link rel="alternate" hreflang="en" href="https://www.srchz-technologies.com.br/kl-sports/?lang=en">
+<link rel="alternate" hreflang="es" href="https://www.srchz-technologies.com.br/kl-sports/?lang=es">
+<link rel="alternate" hreflang="ja" href="https://www.srchz-technologies.com.br/kl-sports/?lang=ja">
+<link rel="alternate" hreflang="x-default" href="https://www.srchz-technologies.com.br/kl-sports/">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:locale:alternate" content="ja_JP">
+<script src="../assets/i18n.js"></script>
 
 <!-- Open Graph / Twitter (prévia do link no WhatsApp) -->
 <meta property="og:type" content="website">
@@ -121,6 +130,17 @@ button,input{font:inherit;color:inherit}
 .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:14px}
 .topbar img{height:34px;width:auto}
 .topbar .btn{min-height:40px;padding:0 14px;font-size:.88rem;background:rgba(7,20,42,.45);backdrop-filter:blur(6px)}
+/* O seletor de idioma vem do motor com a paleta dourada da SrChZ. Aqui ele
+   esta sobre o azul-marinho da KL, entao veste a casa onde mora. O seletor
+   fica antes do botao Compartilhar; a 420px o botao perde o texto para os
+   dois caberem com folga. */
+.topbar img{margin-right:auto}   /* logo a esquerda, seletor e botao juntos a direita */
+.i18n-sw select{border-color:rgba(242,246,252,.35);color:var(--navy-ink);background:rgba(7,20,42,.45);backdrop-filter:blur(6px);min-height:40px}
+.i18n-sw select:hover,.i18n-sw select:focus{border-color:var(--navy-ink);color:#fff}
+.i18n-sw select option{background:var(--navy-2);color:var(--navy-ink)}
+.i18n-sw::after{color:var(--navy-ink-2)}
+.i18n-sw:hover::after{color:var(--navy-ink)}
+@media(max-width:420px){.topbar [data-share] span[data-i18n]{display:none}.topbar .btn{padding:0 12px}}
 .hero-body{padding-block:clamp(110px,30vw,170px) 34px;display:grid;gap:22px;max-width:640px}
 .kicker{display:block;font:800 clamp(3.4rem,15vw,6.8rem)/.86 var(--f-display);color:var(--blue-bright);
   text-transform:uppercase;letter-spacing:.005em}
@@ -347,106 +367,107 @@ button,input{font:inherit;color:inherit}
   <div class="wrap">
     <div class="topbar">
       <img src="assets/logo-kl-sports-branco.png" alt="KL Sports Fitness" width="129" height="34">
-      <a class="btn btn-navy" data-share href="#" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-share"/></svg>Compartilhar</a>
+      <span data-i18n-switcher></span>
+      <a class="btn btn-navy" data-share href="#" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-share"/></svg><span data-i18n="kl.share">Compartilhar</span></a>
     </div>
     <div class="hero-body">
-      <h1 class="hero-title"><span class="kicker">Catálogo</span><span class="line">Pesos para musculação</span></h1>
-      <p class="hero-lead">Tudo para equipar sua academia, estúdio ou treino em casa. Escolha os pesos, monte o seu kit e peça o orçamento pelo WhatsApp.</p>
+      <h1 class="hero-title"><span class="kicker" data-i18n="kl.hero.kicker">Catálogo</span><span class="line" data-i18n="kl.hero.title">Pesos para musculação</span></h1>
+      <p class="hero-lead" data-i18n="kl.hero.lead">Tudo para equipar sua academia, estúdio ou treino em casa. Escolha os pesos, monte o seu kit e peça o orçamento pelo WhatsApp.</p>
       <div class="hero-cta">
-        <a class="btn btn-primary" data-wa-general href="#" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Chamar no WhatsApp</a>
-        <a class="btn btn-navy" href="#anilhas">Ver produtos</a>
+        <a class="btn btn-primary" data-wa-general href="#" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="kl.hero.cta1">Chamar no WhatsApp</span></a>
+        <a class="btn btn-navy" href="#anilhas" data-i18n="kl.hero.cta2">Ver produtos</a>
       </div>
     </div>
-    <ul class="ranges" aria-label="Faixas de peso">
-      <li><a href="#anilhas"><span class="r-label">Anilhas</span><span class="r-val">1–25<small>kg</small></span></a></li>
-      <li><a href="#halteres"><span class="r-label">Halteres</span><span class="r-val">1–30<small>kg</small></span></a></li>
-      <li><a href="#dumbbells"><span class="r-label">Dumbbells</span><span class="r-val">6–60<small>kg</small></span></a></li>
-      <li><a href="#kettlebells"><span class="r-label">Kettlebells</span><span class="r-val">4–40<small>kg</small></span></a></li>
+    <ul class="ranges" data-i18n-attr="aria-label:kl.ranges.aria" aria-label="Faixas de peso">
+      <li><a href="#anilhas"><span class="r-label" data-i18n="kl.cat.anilhas">Anilhas</span><span class="r-val">1–25<small>kg</small></span></a></li>
+      <li><a href="#halteres"><span class="r-label" data-i18n="kl.cat.halteres">Halteres</span><span class="r-val">1–30<small>kg</small></span></a></li>
+      <li><a href="#dumbbells"><span class="r-label" data-i18n="kl.cat.dumbbells">Dumbbells</span><span class="r-val">6–60<small>kg</small></span></a></li>
+      <li><a href="#kettlebells"><span class="r-label" data-i18n="kl.cat.kettlebells">Kettlebells</span><span class="r-val">4–40<small>kg</small></span></a></li>
     </ul>
   </div>
 </header>
 
-<nav class="catnav" aria-label="Categorias">
+<nav class="catnav" data-i18n-attr="aria-label:kl.catnav.aria" aria-label="Categorias">
   <div class="wrap catnav-row" id="catnav"></div>
 </nav>
 
 <main class="wrap" id="catalogo">
-  <ol class="steps" aria-label="Como pedir">
-    <li><b>1</b><div><strong>Escolha os pesos</strong><span>Toque nos pesos que você quer em cada produto.</span></div></li>
-    <li><b>2</b><div><strong>Adicione ao orçamento</strong><span>Monte o seu kit com quantos itens quiser.</span></div></li>
-    <li><b>3</b><div><strong>Envie pelo WhatsApp</strong><span>A mensagem sai pronta para a nossa equipe.</span></div></li>
+  <ol class="steps" data-i18n-attr="aria-label:kl.steps.aria" aria-label="Como pedir">
+    <li><b>1</b><div><strong data-i18n="kl.step1.t">Escolha os pesos</strong><span data-i18n="kl.step1.d">Toque nos pesos que você quer em cada produto.</span></div></li>
+    <li><b>2</b><div><strong data-i18n="kl.step2.t">Adicione ao orçamento</strong><span data-i18n="kl.step2.d">Monte o seu kit com quantos itens quiser.</span></div></li>
+    <li><b>3</b><div><strong data-i18n="kl.step3.t">Envie pelo WhatsApp</strong><span data-i18n="kl.step3.d">A mensagem sai pronta para a nossa equipe.</span></div></li>
   </ol>
-  <noscript><p class="note">Ative o JavaScript para ver os produtos, ou chame a equipe no WhatsApp: +55 (37) 99825-8881.</p></noscript>
+  <noscript><p class="note" data-i18n="kl.noscript">Ative o JavaScript para ver os produtos, ou chame a equipe no WhatsApp: +55 (37) 99825-8881.</p></noscript>
 </main>
 
 <section class="closing" id="contato" aria-labelledby="h-contato">
   <div class="wrap closing-inner">
     <div class="closing-copy">
       <img src="assets/logo-kl-sports.png" alt="KL Sports Fitness" width="150" height="129" loading="lazy">
-      <h2 id="h-contato">Antes de comprar, fale com a nossa equipe</h2>
-      <p>Confira os últimos lançamentos disponíveis. Estamos sempre com novidades chegando!</p>
+      <h2 id="h-contato" data-i18n="kl.close.h2">Antes de comprar, fale com a nossa equipe</h2>
+      <p data-i18n="kl.close.p">Confira os últimos lançamentos disponíveis. Estamos sempre com novidades chegando!</p>
     </div>
     <div class="contacts">
-      <a class="contact" data-wa-to="a" href="#" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg><span><small>Chamar no WhatsApp</small><strong>+55 (37) 99825-8881</strong></span></a>
-      <a class="contact" data-wa-to="b" href="#" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg><span><small>Chamar no WhatsApp</small><strong>+55 (37) 99994-5854</strong></span></a>
+      <a class="contact" data-wa-to="a" href="#" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg><span><small data-i18n="kl.hero.cta1">Chamar no WhatsApp</small><strong>+55 (37) 99825-8881</strong></span></a>
+      <a class="contact" data-wa-to="b" href="#" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg><span><small data-i18n="kl.hero.cta1">Chamar no WhatsApp</small><strong>+55 (37) 99994-5854</strong></span></a>
       <a class="ig" href="https://www.instagram.com/klsportfitness/" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-ig"/></svg>@klsportfitness</a>
     </div>
   </div>
   <div class="wrap foot">
     <div class="sharebox">
-      <label for="site-link">Link do catálogo</label>
+      <label for="site-link" data-i18n="kl.sharebox.label">Link do catálogo</label>
       <div class="sharebox-row">
         <input class="input" id="site-link" type="text" readonly>
-        <button class="btn btn-navy" type="button" id="copy-link"><svg class="i" aria-hidden="true"><use href="#i-copy"/></svg>Copiar link</button>
-        <a class="btn btn-primary" data-share href="#" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Enviar no WhatsApp</a>
+        <button class="btn btn-navy" type="button" id="copy-link"><svg class="i" aria-hidden="true"><use href="#i-copy"/></svg><span data-i18n="kl.sharebox.copy">Copiar link</span></button>
+        <a class="btn btn-primary" data-share href="#" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="kl.sharebox.send">Enviar no WhatsApp</span></a>
       </div>
     </div>
-    <p class="fine">© KL Sports Fitness · Pesos para musculação</p>
+    <p class="fine">© KL Sports Fitness · <span data-i18n="kl.hero.title">Pesos para musculação</span></p>
   </div>
 </section>
 
-<div class="dock" role="region" aria-label="Orçamento">
+<div class="dock" role="region" data-i18n-attr="aria-label:kl.quote.word" aria-label="Orçamento">
   <button class="dock-quote" type="button" id="open-quote" aria-haspopup="dialog">
-    <svg class="i" aria-hidden="true"><use href="#i-list"/></svg>Orçamento <span class="count" id="quote-count" data-zero>0</span>
+    <svg class="i" aria-hidden="true"><use href="#i-list"/></svg><span data-i18n="kl.quote.word">Orçamento</span> <span class="count" id="quote-count" data-zero>0</span>
   </button>
   <a class="btn btn-primary" id="dock-send" href="#" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg><span id="dock-send-label">WhatsApp</span></a>
 </div>
 
 <div class="toast" id="toast" role="status" aria-live="polite" hidden>
   <span id="toast-msg"></span>
-  <button type="button" id="toast-view">Ver orçamento</button>
+  <button type="button" id="toast-view" data-i18n="kl.toast.view">Ver orçamento</button>
 </div>
 
 <dialog class="sheet" id="quote" aria-labelledby="quote-title">
   <div class="sheet-head">
-    <h2 id="quote-title">Meu orçamento</h2>
-    <button class="icon-btn" type="button" id="close-quote" aria-label="Fechar orçamento"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button>
+    <h2 id="quote-title" data-i18n="kl.sheet.title">Meu orçamento</h2>
+    <button class="icon-btn" type="button" id="close-quote" data-i18n-attr="aria-label:kl.sheet.close" aria-label="Fechar orçamento"><svg class="i" aria-hidden="true"><use href="#i-x"/></svg></button>
   </div>
   <div class="sheet-body">
     <ul class="q-list" id="q-list"></ul>
     <div class="q-empty" id="q-empty">
-      <strong>Seu orçamento está vazio.</strong>
-      <span>Toque nos pesos de um produto e depois em “Adicionar ao orçamento”. Você pode juntar vários produtos e enviar tudo de uma vez.</span>
-      <button class="btn btn-ghost" type="button" id="q-browse">Ver produtos</button>
+      <strong data-i18n="kl.empty.t">Seu orçamento está vazio.</strong>
+      <span data-i18n="kl.empty.d">Toque nos pesos de um produto e depois em “Adicionar ao orçamento”. Você pode juntar vários produtos e enviar tudo de uma vez.</span>
+      <button class="btn btn-ghost" type="button" id="q-browse" data-i18n="kl.hero.cta2">Ver produtos</button>
     </div>
   </div>
   <div class="sheet-foot">
     <div class="q-fields">
-      <label class="field" for="q-name"><span>Seu nome <em>(opcional)</em></span><input class="input" id="q-name" type="text" autocomplete="name"></label>
-      <label class="field" for="q-city"><span>Cidade <em>(opcional)</em></span><input class="input" id="q-city" type="text" autocomplete="address-level2"></label>
+      <label class="field" for="q-name"><span data-i18n-html="kl.f.name">Seu nome <em>(opcional)</em></span><input class="input" id="q-name" type="text" autocomplete="name"></label>
+      <label class="field" for="q-city"><span data-i18n-html="kl.f.city">Cidade <em>(opcional)</em></span><input class="input" id="q-city" type="text" autocomplete="address-level2"></label>
     </div>
     <fieldset class="q-phone">
-      <legend>Enviar para</legend>
+      <legend data-i18n="kl.f.sendto">Enviar para</legend>
       <div class="seg">
         <label><input type="radio" name="q-phone" id="q-phone-a" value="a"><span>(37) 99825-8881</span></label>
         <label><input type="radio" name="q-phone" id="q-phone-b" value="b"><span>(37) 99994-5854</span></label>
       </div>
     </fieldset>
     <div class="foot-row">
-      <button class="btn-text" type="button" id="q-clear">Limpar</button>
-      <a class="btn btn-primary" id="q-send" href="#" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Enviar pelo WhatsApp</a>
+      <button class="btn-text" type="button" id="q-clear" data-i18n="kl.f.clear">Limpar</button>
+      <a class="btn btn-primary" id="q-send" href="#" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="kl.f.send">Enviar pelo WhatsApp</span></a>
     </div>
-    <p class="q-hint">O WhatsApp abre com a mensagem pronta. Confira e toque em enviar.</p>
+    <p class="q-hint" data-i18n="kl.f.hint">O WhatsApp abre com a mensagem pronta. Confira e toque em enviar.</p>
   </div>
 </dialog>
 
@@ -459,6 +480,29 @@ button,input{font:inherit;color:inherit}
     a: { label: '(37) 99825-8881', wa: '5537998258881' },
     b: { label: '(37) 99994-5854', wa: '5537999945854' }
   };
+
+  /* ---------- idioma ----------
+     Duas linguas convivem nesta pagina, e a divisao nao e estetica:
+
+       o que o VISITANTE le  → traduzido. Ficha, botao, aviso, rotulo.
+       o que a EQUIPE le     → portugues, sempre. A mensagem do WhatsApp cai
+                               num celular em Divinopolis. Se um orcamento
+                               chegasse em japones, com nomes de produto em
+                               japones, ninguem ali conseguiria atender — e
+                               atender e a unica coisa que esta pagina faz.
+
+     Por isso cada produto guarda dois nomes: `full` (pt, vai na mensagem e e
+     o que a equipe reconhece como SKU) e `fullL` (traduzido, aparece na tela). */
+  const i18n = window.SrChZI18n;
+  const LANG = i18n ? i18n.current() : 'pt';
+  const t = (key, fallback) => (i18n && i18n.t ? i18n.t(key, fallback) : fallback);
+  const fmt = (key, fallback, vars) =>
+    String(t(key, fallback)).replace(/\{(\w+)\}/g, (m, k) => (k in vars ? vars[k] : m));
+  const whenReady = fn => (i18n && i18n.ready ? i18n.ready(fn) : fn());
+  /* O link compartilhado leva o idioma junto: quem recebe abre o catalogo na
+     mesma lingua em que ele foi visto, nao na do navegador dele. */
+  const shareUrl = () => LANG === 'pt' ? SITE_URL : `${SITE_URL}?lang=${LANG}`;
+
   const HELLO = 'Olá, KL Sports Fitness!';
 
   const span = (a, b, step = 1) => Array.from({ length: Math.floor((b - a) / step) + 1 }, (_, i) => a + i * step);
@@ -525,6 +569,29 @@ button,input{font:inherit;color:inherit}
   const BY_SLUG = {};
   CATS.forEach(c => c.items.forEach(p => { p.full = `${p.name} ${p.finish}`; BY_SLUG[p.slug] = p; }));
 
+  /* Acrescenta a cada categoria e produto o seu texto de tela, deixando intacto
+     o texto de negocio. Roda uma vez, antes de desenhar. */
+  function localize() {
+    CATS.forEach(c => {
+      c.nameL = t(`kl.cat.${c.id}`, c.name);
+      c.tagL = t(`kl.cat.${c.id}.tagline`, c.tagline);
+      if (c.note) c.noteL = t(`kl.cat.${c.id}.note`, c.note);
+      if (c.cta) {
+        c.cta.titleL = t(`kl.cat.${c.id}.cta.title`, c.cta.title);
+        c.cta.textL = t(`kl.cat.${c.id}.cta.text`, c.cta.text);
+        c.cta.buttonL = t(`kl.cat.${c.id}.cta.button`, c.cta.button);
+      }
+      c.items.forEach(p => {
+        p.nameL = t(`kl.p.${p.slug}.name`, p.name);
+        p.finishL = t(`kl.p.${p.slug}.finish`, p.finish);
+        p.descL = t(`kl.p.${p.slug}.desc`, p.desc);
+        p.fullL = `${p.nameL} ${p.finishL}`;
+        if (p.range) p.rangeL = t(`kl.p.${p.slug}.range`, p.range);
+        if (p.spec) p.specL = [t(`kl.p.${p.slug}.spec0`, p.spec[0]), t(`kl.p.${p.slug}.spec1`, p.spec[1])];
+      });
+    });
+  }
+
   /* ---------- utilidades ---------- */
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -536,7 +603,12 @@ button,input{font:inherit;color:inherit}
   };
   const waTo = (phoneId, text) => `https://wa.me/${PHONES[phoneId].wa}?text=${encodeURIComponent(text)}`;
   const waShare = text => `https://wa.me/?text=${encodeURIComponent(text)}`;
+  /* Lista em portugues: vai na mensagem para a equipe, entao nao se traduz. */
   const listPt = arr => arr.length < 2 ? arr.join('') : `${arr.slice(0, -1).join(', ')} e ${arr[arr.length - 1]}`;
+  /* Lista para a tela, no idioma do visitante. O japones nao usa conjuncao
+     entre itens: a vírgula ideografica 、 ja faz esse trabalho. */
+  const listUi = arr => arr.length < 2 ? arr.join('')
+    : `${arr.slice(0, -1).join(t('kl.list.sep', ', '))}${t('kl.list.and', ' e ')}${arr[arr.length - 1]}`;
 
   /* ---------- estado ---------- */
   let quote = store.get('kl.quote', []).filter(q => q && BY_SLUG[q.slug]);
@@ -551,36 +623,36 @@ button,input{font:inherit;color:inherit}
   function specHTML(p) {
     if (p.weights) {
       return `<div class="spec">
-        <p class="spec-label" id="l-${p.slug}">Pesos <span>· toque para escolher</span></p>
+        <p class="spec-label" id="l-${p.slug}">${esc(t('kl.spec.weights', 'Pesos'))} <span>${esc(t('kl.spec.tap', '· toque para escolher'))}</span></p>
         <div class="chips" role="group" aria-labelledby="l-${p.slug}">${p.weights.map(w =>
           `<button type="button" class="chip" data-action="chip" data-w="${w}" aria-pressed="false">${w}<small>kg</small></button>`).join('')}</div>
-        <p class="err" data-err aria-live="polite" hidden>Escolha pelo menos um peso.</p>
+        <p class="err" data-err aria-live="polite" hidden>${esc(t('kl.spec.err', 'Escolha pelo menos um peso.'))}</p>
       </div>`;
     }
     if (p.range) {
       return `<div class="spec">
-        <p class="spec-label">Pesos disponíveis</p>
-        <span class="pill">${esc(p.range)}</span>
-        <label class="field" for="w-${p.slug}"><span>Quais pesos você procura? <em>(opcional)</em></span>
-          <input class="input" id="w-${p.slug}" type="text" autocomplete="off" placeholder="Ex.: 10, 12 e 20 kg" data-action="note"></label>
+        <p class="spec-label">${esc(t('kl.spec.available', 'Pesos disponíveis'))}</p>
+        <span class="pill">${esc(p.rangeL)}</span>
+        <label class="field" for="w-${p.slug}"><span>${esc(t('kl.spec.which', 'Quais pesos você procura?'))} <em>${esc(t('kl.optional', '(opcional)'))}</em></span>
+          <input class="input" id="w-${p.slug}" type="text" autocomplete="off" placeholder="${esc(t('kl.spec.eg', 'Ex.: 10, 12 e 20 kg'))}" data-action="note"></label>
       </div>`;
     }
-    return `<div class="spec"><p class="spec-label">${esc(p.spec[0])}</p><span class="pill">${esc(p.spec[1])}</span></div>`;
+    return `<div class="spec"><p class="spec-label">${esc(p.specL[0])}</p><span class="pill">${esc(p.specL[1])}</span></div>`;
   }
 
   function cardHTML(p) {
     return `<article class="card" id="${p.slug}" data-slug="${p.slug}">
       <div class="tray">
-        <img src="assets/produtos/${p.slug}.jpg" alt="${esc(p.full)}" loading="lazy" decoding="async">
-        <a class="share-mini" href="${shareProductHref(p)}" target="_blank" rel="noopener" aria-label="Compartilhar ${esc(p.full)} no WhatsApp" title="Compartilhar no WhatsApp">${icon('share')}</a>
+        <img src="assets/produtos/${p.slug}.jpg" alt="${esc(p.fullL)}" loading="lazy" decoding="async">
+        <a class="share-mini" href="${shareProductHref(p)}" target="_blank" rel="noopener" aria-label="${esc(fmt('kl.aria.shareProduct', 'Compartilhar {p} no WhatsApp', { p: p.fullL }))}" title="${esc(t('kl.aria.shareWa', 'Compartilhar no WhatsApp'))}">${icon('share')}</a>
       </div>
       <div class="card-body">
-        <h3><span>${esc(p.name)}</span> <span class="finish">${esc(p.finish)}</span></h3>
-        <p class="desc">${esc(p.desc)}</p>
+        <h3><span>${esc(p.nameL)}</span> <span class="finish">${esc(p.finishL)}</span></h3>
+        <p class="desc">${esc(p.descL)}</p>
         ${specHTML(p)}
         <div class="actions">
-          <button type="button" class="btn btn-primary" data-action="add">${icon('plus')}<span>Adicionar<span class="long"> ao orçamento</span></span></button>
-          <a class="btn btn-ghost" data-ask href="#" target="_blank" rel="noopener" aria-label="Perguntar sobre ${esc(p.full)} no WhatsApp">${icon('wa')}<span>Perguntar</span></a>
+          <button type="button" class="btn btn-primary" data-action="add">${icon('plus')}<span>${esc(t('kl.card.add', 'Adicionar'))}<span class="long">${esc(t('kl.card.addLong', ' ao orçamento'))}</span></span></button>
+          <a class="btn btn-ghost" data-ask href="#" target="_blank" rel="noopener" aria-label="${esc(fmt('kl.aria.ask', 'Perguntar sobre {p} no WhatsApp', { p: p.fullL }))}">${icon('wa')}<span>${esc(t('kl.card.ask', 'Perguntar'))}</span></a>
         </div>
       </div>
     </article>`;
@@ -588,26 +660,29 @@ button,input{font:inherit;color:inherit}
 
   function ctaHTML(c) {
     const action = c.cta.open
-      ? `<button type="button" class="btn btn-primary" data-action="open-quote">${icon('list')}${esc(c.cta.button)}</button>`
-      : `<a class="btn btn-primary" data-wa-msg="${esc(c.cta.message)}" href="#" target="_blank" rel="noopener">${icon('wa')}${esc(c.cta.button)}</a>`;
-    return `<div class="cta-card"><div><h3>${esc(c.cta.title)}</h3><p>${esc(c.cta.text)}</p></div>${action}</div>`;
+      ? `<button type="button" class="btn btn-primary" data-action="open-quote">${icon('list')}${esc(c.cta.buttonL)}</button>`
+      : `<a class="btn btn-primary" data-wa-msg="${esc(c.cta.message)}" href="#" target="_blank" rel="noopener">${icon('wa')}${esc(c.cta.buttonL)}</a>`;
+    return `<div class="cta-card"><div><h3>${esc(c.cta.titleL)}</h3><p>${esc(c.cta.textL)}</p></div>${action}</div>`;
   }
 
-  CATS.forEach(c => {
-    const sec = document.createElement('section');
-    sec.className = 'cat';
-    sec.id = c.id;
-    sec.setAttribute('aria-labelledby', `h-${c.id}`);
-    sec.innerHTML = `
-      <div class="cat-head">
-        <div><h2 id="h-${c.id}">${esc(c.name)}</h2><p>${esc(c.tagline)}</p></div>
-        <span class="cat-count">${c.items.length} ${c.items.length > 1 ? 'produtos' : 'produto'}</span>
-      </div>
-      ${c.note ? `<p class="note">${icon('info')}<span>${esc(c.note)}</span></p>` : ''}
-      <div class="grid">${c.items.map(cardHTML).join('')}${c.cta ? ctaHTML(c) : ''}</div>`;
-    main.appendChild(sec);
-    nav.insertAdjacentHTML('beforeend', `<a href="#${c.id}" data-cat="${c.id}">${esc(c.name)}</a>`);
-  });
+  function renderCatalogue() {
+    CATS.forEach(c => {
+      const sec = document.createElement('section');
+      sec.className = 'cat';
+      sec.id = c.id;
+      sec.setAttribute('aria-labelledby', `h-${c.id}`);
+      const n = c.items.length;
+      sec.innerHTML = `
+        <div class="cat-head">
+          <div><h2 id="h-${c.id}">${esc(c.nameL)}</h2><p>${esc(c.tagL)}</p></div>
+          <span class="cat-count">${esc(fmt(n > 1 ? 'kl.count.many' : 'kl.count.one', n > 1 ? '{n} produtos' : '{n} produto', { n }))}</span>
+        </div>
+        ${c.note ? `<p class="note">${icon('info')}<span>${esc(c.noteL)}</span></p>` : ''}
+        <div class="grid">${c.items.map(cardHTML).join('')}${c.cta ? ctaHTML(c) : ''}</div>`;
+      main.appendChild(sec);
+      nav.insertAdjacentHTML('beforeend', `<a href="#${c.id}" data-cat="${c.id}">${esc(c.nameL)}</a>`);
+    });
+  }
 
   /* ---------- mensagens ---------- */
   function cardChoice(card) {
@@ -625,8 +700,11 @@ button,input{font:inherit;color:inherit}
     return msg;
   }
 
+  /* Este vai para os contatos do VISITANTE, nao para a equipe: traduzido, com
+     o nome do produto na lingua dele e o link ja carregando o idioma. */
   function shareProductHref(p) {
-    return waShare(`Olha este produto da KL Sports Fitness: *${p.full}*\n${SITE_URL}#${p.slug}`);
+    return waShare(fmt('kl.share.product', 'Olha este produto da KL Sports Fitness: *{p}*\n{url}',
+      { p: p.fullL, url: `${shareUrl()}#${p.slug}` }));
   }
 
   function quoteMessage() {
@@ -646,7 +724,10 @@ button,input{font:inherit;color:inherit}
   }
 
   const generalMessage = () => `${HELLO} Vim pelo catálogo digital e gostaria de mais informações.`;
-  const shareCatalogText = () => `Catálogo KL Sports Fitness: pesos para musculação. Veja os produtos e peça seu orçamento: ${SITE_URL}`;
+  /* Tambem e o visitante quem envia este: traduzido, com link no idioma dele. */
+  const shareCatalogText = () => fmt('kl.share.catalog',
+    'Catálogo KL Sports Fitness: pesos para musculação. Veja os produtos e peça seu orçamento: {url}',
+    { url: shareUrl() });
 
   function updateAsk(card) {
     $('[data-ask]', card).href = waTo(phoneId, askMessage(card));
@@ -689,8 +770,8 @@ button,input{font:inherit;color:inherit}
     updateAsk(card);
     const count = $('#quote-count');
     count.classList.remove('bump'); void count.offsetWidth; count.classList.add('bump');
-    const what = weights.length ? ` (${listPt(weights)})` : note ? ` (${note})` : '';
-    toast(`Adicionado ao orçamento: ${p.full}${what}`);
+    const what = weights.length ? ` (${listUi(weights)})` : note ? ` (${note})` : '';
+    toast(fmt('kl.toast.added', 'Adicionado ao orçamento: {p}', { p: p.fullL + what }));
   }
 
   function renderQuote() {
@@ -698,11 +779,15 @@ button,input{font:inherit;color:inherit}
     const count = $('#quote-count');
     count.textContent = total;
     count.toggleAttribute('data-zero', total === 0);
-    $('#open-quote').setAttribute('aria-label', `Abrir orçamento, ${total} ${total === 1 ? 'item' : 'itens'}`);
+    $('#open-quote').setAttribute('aria-label', fmt(
+      total === 1 ? 'kl.aria.openOne' : 'kl.aria.openMany',
+      total === 1 ? 'Abrir orçamento, {n} item' : 'Abrir orçamento, {n} itens', { n: total }));
 
     const dockSend = $('#dock-send');
-    $('#dock-send-label').textContent = quote.length ? 'Enviar orçamento' : 'WhatsApp';
-    dockSend.setAttribute('aria-label', quote.length ? 'Enviar orçamento pelo WhatsApp' : 'Chamar a equipe no WhatsApp');
+    $('#dock-send-label').textContent = quote.length ? t('kl.dock.send', 'Enviar orçamento') : 'WhatsApp';
+    dockSend.setAttribute('aria-label', quote.length
+      ? t('kl.aria.sendQuote', 'Enviar orçamento pelo WhatsApp')
+      : t('kl.aria.callTeam', 'Chamar a equipe no WhatsApp'));
     dockSend.href = quote.length ? waTo(phoneId, quoteMessage()) : waTo(phoneId, generalMessage());
 
     const send = $('#q-send');
@@ -717,17 +802,17 @@ button,input{font:inherit;color:inherit}
       const p = BY_SLUG[q.slug];
       let detail = '';
       if (q.weight) detail = `<p class="q-detail">${esc(q.weight)}</p>`;
-      else if (p.range) detail = `<label class="sr" for="qn-${q.id}">Pesos de ${esc(p.full)}</label>
-        <input class="input" id="qn-${q.id}" data-note="${q.id}" type="text" autocomplete="off" value="${esc(q.note)}" placeholder="Quais pesos? (${esc(p.range)})">`;
-      else if (p.spec) detail = `<p class="q-detail">${esc(p.spec[1])}</p>`;
+      else if (p.range) detail = `<label class="sr" for="qn-${q.id}">${esc(fmt('kl.q.weightsOf', 'Pesos de {p}', { p: p.fullL }))}</label>
+        <input class="input" id="qn-${q.id}" data-note="${q.id}" type="text" autocomplete="off" value="${esc(q.note)}" placeholder="${esc(fmt('kl.q.whichPh', 'Quais pesos? ({r})', { r: p.rangeL }))}">`;
+      else if (p.spec) detail = `<p class="q-detail">${esc(p.specL[1])}</p>`;
       return `<li class="q-item" data-id="${q.id}">
-        <div><p class="q-name">${esc(p.full)}</p>${detail}</div>
-        <div class="stepper" role="group" aria-label="Quantidade de ${esc(p.full)}">
-          <button type="button" data-q="dec" aria-label="Diminuir">${icon('minus')}</button>
+        <div><p class="q-name">${esc(p.fullL)}</p>${detail}</div>
+        <div class="stepper" role="group" aria-label="${esc(fmt('kl.aria.qty', 'Quantidade de {p}', { p: p.fullL }))}">
+          <button type="button" data-q="dec" aria-label="${esc(t('kl.aria.dec', 'Diminuir'))}">${icon('minus')}</button>
           <output aria-live="polite">${q.qty}</output>
-          <button type="button" data-q="inc" aria-label="Aumentar">${icon('plus')}</button>
+          <button type="button" data-q="inc" aria-label="${esc(t('kl.aria.inc', 'Aumentar'))}">${icon('plus')}</button>
         </div>
-        <button type="button" class="q-del" data-q="del" aria-label="Remover ${esc(p.full)}">${icon('x')}</button>
+        <button type="button" class="q-del" data-q="del" aria-label="${esc(fmt('kl.aria.del', 'Remover {p}', { p: p.fullL }))}">${icon('x')}</button>
       </li>`;
     }).join('');
     if (focusedId) {
@@ -829,14 +914,17 @@ button,input{font:inherit;color:inherit}
       quote = [];
       save();
       clearBtn.removeAttribute('data-armed');
-      clearBtn.textContent = 'Limpar';
+      clearBtn.textContent = t('kl.f.clear', 'Limpar');
       renderQuote();
       return;
     }
     clearBtn.setAttribute('data-armed', '');
-    clearBtn.textContent = 'Toque de novo para limpar';
+    clearBtn.textContent = t('kl.f.clearAgain', 'Toque de novo para limpar');
     clearTimeout(clearTimer);
-    clearTimer = setTimeout(() => { clearBtn.removeAttribute('data-armed'); clearBtn.textContent = 'Limpar'; }, 3500);
+    clearTimer = setTimeout(() => {
+      clearBtn.removeAttribute('data-armed');
+      clearBtn.textContent = t('kl.f.clear', 'Limpar');
+    }, 3500);
   });
 
   /* Compartilhar: a folha nativa do celular quando o site está aberto direto; senão, o link do WhatsApp. */
@@ -845,23 +933,29 @@ button,input{font:inherit;color:inherit}
     const a = e.target.closest('[data-share]');
     if (!a || !topLevel || !navigator.share) return;
     e.preventDefault();
-    navigator.share({ title: 'Catálogo KL Sports Fitness', text: 'Pesos para musculação. Veja os produtos e peça seu orçamento:', url: SITE_URL })
-      .catch(err => { if (err && err.name !== 'AbortError') window.location.href = a.href; });
+    navigator.share({
+      title: t('kl.share.title', 'Catálogo KL Sports Fitness'),
+      text: t('kl.share.text', 'Pesos para musculação. Veja os produtos e peça seu orçamento:'),
+      url: shareUrl()
+    }).catch(err => { if (err && err.name !== 'AbortError') window.location.href = a.href; });
   });
 
   const linkInput = $('#site-link');
-  linkInput.value = SITE_URL;
+  linkInput.value = shareUrl();
   $('#copy-link').addEventListener('click', () => {
-    const done = () => toast('Link do catálogo copiado.');
-    const fallback = () => { linkInput.focus(); linkInput.select(); toast('Link selecionado. Use copiar do seu aparelho.'); };
-    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(SITE_URL).then(done, fallback);
+    const done = () => toast(t('kl.toast.copied', 'Link do catálogo copiado.'));
+    const fallback = () => {
+      linkInput.focus(); linkInput.select();
+      toast(t('kl.toast.selected', 'Link selecionado. Use copiar do seu aparelho.'));
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(shareUrl()).then(done, fallback);
     else fallback();
   });
 
   /* ---------- categoria ativa ---------- */
-  const navLinks = $$('a[data-cat]', nav);
-  function setActive(id) {
-    navLinks.forEach(a => {
+  function initCatNav() {
+    const navLinks = $$('a[data-cat]', nav);
+    const setActive = id => navLinks.forEach(a => {
       const on = a.dataset.cat === id;
       a.setAttribute('aria-current', on ? 'true' : 'false');
       if (on) {
@@ -869,8 +963,7 @@ button,input{font:inherit;color:inherit}
         nav.scrollTo({ left: Math.max(0, left), behavior: 'smooth' });
       }
     });
-  }
-  if ('IntersectionObserver' in window) {
+    if (!('IntersectionObserver' in window)) return;
     const io = new IntersectionObserver(entries => {
       entries.forEach(en => { if (en.isIntersecting) setActive(en.target.id); });
     }, { rootMargin: '-35% 0px -60% 0px' });
@@ -891,8 +984,18 @@ button,input{font:inherit;color:inherit}
   }
   window.addEventListener('hashchange', focusHash);
 
-  refreshLinks();
-  if (location.hash) requestAnimationFrame(focusHash);
+  /* As fichas nascem do array, nao do HTML — entao esperam o dicionario. Fora
+     do portugues isso custa um carregamento a mais antes de desenhar; dentro
+     dele, `ready` dispara de imediato. O corpo fica escondido pelo motor ate
+     aqui, com a trava de 1,5s garantindo que uma falha de rede mostre o
+     catalogo em portugues em vez de uma pagina vazia. */
+  whenReady(() => {
+    localize();
+    renderCatalogue();
+    initCatNav();
+    refreshLinks();
+    if (location.hash) requestAnimationFrame(focusHash);
+  });
 })();
 </script>
 <!--/ART:BODY-->

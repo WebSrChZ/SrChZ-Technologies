@@ -143,9 +143,10 @@
        ambas precisam estar aqui, senao o ajuste passa longe da pagina errada. */
     + 'html[lang="ja"] :is(.badge,.book__eyebrow,.case-deliver-h,.channel__fmt,'
     + '.contact small,.door .d-n,.eyebrow,.footer-brand p,.hero-disc li,'
-    + '.hero-kicker,.hero-title,.hero__kicker,.hero__sub,.lead-or,.plan-badge,'
-    + '.plan-sub,.plan__ribbon,.portal-tag,.proof__tag,.q-phone legend,.r-label,'
-    + '.sharebox label,.spec-label,.step-k,.trail__tag){letter-spacing:.06em}';
+    + '.cat-count,.hero-kicker,.hero-title .line,.hero-title,.hero__kicker,'
+    + '.hero__sub,.lead-or,.plan-badge,.plan-sub,.plan__ribbon,.portal-tag,'
+    + '.proof__tag,.q-phone legend,.r-label,.sharebox label,.spec-label,'
+    + '.step-k,.trail__tag){letter-spacing:.06em}';
 
   var styleEl = document.createElement('style');
   styleEl.textContent = css;
@@ -339,11 +340,30 @@
     (document.head || html).appendChild(s);
   }
 
+  /* Paginas que montam o proprio conteudo em JavaScript — o catalogo da KL
+     Sports gera cada ficha a partir de um array — nao podem desenhar antes do
+     dicionario chegar, senao desenham em portugues e nada mais passa por ali
+     para corrigir. `ready` avisa quando `t()` ja responde no idioma final; em
+     portugues, ou se o dicionario falhar, avisa do mesmo jeito, porque ai o
+     texto certo e justamente a alternativa em portugues. */
+  var settled = false;
+  var waiting = [];
+  function settle() {
+    if (settled) return;
+    settled = true;
+    while (waiting.length) {
+      try { waiting.shift()(); } catch (e) {
+        if (window.console && console.error) console.error('[i18n] ready:', e);
+      }
+    }
+  }
+
   onReady(function () {
     buildSwitcher();
 
     if (current === DEFAULT) {
       html.setAttribute('lang', LANGS.pt.htmlLang);
+      settle();
       reveal();
       return;
     }
@@ -355,13 +375,20 @@
         if (window.console && console.warn) {
           console.warn('[i18n] dicionario "' + current + '" nao carregou; mantendo pt');
         }
+        settle();
         reveal();
         return;
       }
+      settle();          /* antes de run(): o que o callback criar tambem e
+                            varrido pelo data-i18n logo em seguida */
       run(dict);
       propagateLang();
     });
   });
+
+  /* Rede de seguranca: se o dicionario travar, a pagina nao pode ficar sem
+     catalogo. O mesmo 1,5s que revela o corpo tambem solta quem espera. */
+  setTimeout(settle, 1500);
 
   /* API publica.
      `t(chave, alternativa)` serve o texto que a pagina gera em JavaScript —
@@ -377,6 +404,11 @@
       var dict = bag && bag[current];
       if (dict && Object.prototype.hasOwnProperty.call(dict, key)) return dict[key];
       return fallback;
+    },
+    ready: function (fn) {
+      if (typeof fn !== 'function') return;
+      if (settled) fn();
+      else waiting.push(fn);
     },
     set: function (code) {
       if (!LANGS[code]) return;

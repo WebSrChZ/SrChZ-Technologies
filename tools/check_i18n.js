@@ -103,10 +103,28 @@ for (const file of pages) {
    Sem isto a checagem de orfas acusaria essas chaves de nao serem usadas.
    `tr` tambem conta: na calculadora o nome `t` ja e a espessura da peca, entao
    o helper ali se chama `tr`. Chamar o alias de orfa seria o check errando. */
+const namespaces = new Map();              // prefixo -> [paginas]
+
+function use(key, rel) {
+  if (!usedBy.has(key)) usedBy.set(key, []);
+  if (!usedBy.get(key).includes(rel)) usedBy.get(key).push(rel);
+}
+
 function collectRuntimeKeys(text, rel) {
-  for (const m of text.matchAll(/\b(?:t|tr)\(\s*["'`]([A-Za-z0-9_.-]+)["'`]/g)) {
-    if (!usedBy.has(m[1])) usedBy.set(m[1], []);
-    if (!usedBy.get(m[1]).includes(rel)) usedBy.get(m[1]).push(rel);
+  for (const m of text.matchAll(/\b(?:t|tr|fmt)\(\s*["'`]([A-Za-z0-9_.-]+)["'`]/g)) use(m[1], rel);
+  /* Chave escolhida por condicao: fmt(n > 1 ? 'a.many' : 'a.one', …). As duas
+     pontas sao usadas; so uma aparece por vez. */
+  for (const m of text.matchAll(/\b(?:t|tr|fmt)\(\s*[^,;()]*?\?\s*["'`]([A-Za-z0-9_.-]+)["'`]\s*:\s*["'`]([A-Za-z0-9_.-]+)["'`]/g)) {
+    use(m[1], rel); use(m[2], rel);
+  }
+  /* Chave montada em tempo de execucao: t(`kl.p.${slug}.desc`, …). O nome
+     exato so existe com o dado em maos, mas o PREFIXO esta no codigo — e e
+     ele que o check consegue honrar. Tudo que vive sob um prefixo declarado
+     conta como usado; a completude de cada familia e cobrada logo abaixo. */
+  for (const m of text.matchAll(/\b(?:t|tr|fmt)\(\s*`([A-Za-z0-9_.-]*?)\$\{/g)) {
+    if (!m[1]) continue;
+    if (!namespaces.has(m[1])) namespaces.set(m[1], []);
+    if (!namespaces.get(m[1]).includes(rel)) namespaces.get(m[1]).push(rel);
   }
 }
 
@@ -121,9 +139,24 @@ for (const file of walkJs(ROOT)) {
   collectRuntimeKeys(fs.readFileSync(file, 'utf8'), rel);
 }
 
+/* Produtos do catalogo: cada `slug` do array vira uma familia de chaves que
+   o render pede por nome montado. Aqui a familia e cobrada por extenso —
+   acrescentar um produto sem traduzi-lo quebra o PR, que e exatamente o
+   descuido que o prefixo sozinho deixaria passar. */
+const slugs = new Set();
+for (const file of pages) {
+  const html = fs.readFileSync(file, 'utf8');
+  if (!/\bkl\.p\./.test(html)) continue;
+  for (const m of html.matchAll(/\bslug:\s*'([a-z0-9-]+)'/g)) slugs.add(m[1]);
+}
+
 console.log(`Paginas instrumentadas: ${instrumented.length}`);
 instrumented.forEach((p) => note(p));
 console.log(`Chaves usadas (HTML + JS): ${usedBy.size}`);
+if (namespaces.size) {
+  console.log(`Prefixos em tempo de execucao: ${[...namespaces.keys()].join(', ')}`);
+}
+if (slugs.size) console.log(`Produtos no catalogo: ${slugs.size}`);
 
 // ---- 2. carrega os dicionarios -------------------------------------------
 
@@ -206,9 +239,38 @@ for (const code of langs) {
 
 // ---- 6. chaves orfas ------------------------------------------------------
 
-const orphans = [...union].filter((k) => !usedBy.has(k));
+const prefixes = [...namespaces.keys()];
+const covered = (k) => usedBy.has(k) || prefixes.some((p) => k.startsWith(p));
+const orphans = [...union].filter((k) => !covered(k));
 if (orphans.length) {
   fail(`${orphans.length} chave(s) definida(s) e nunca usada(s): ${orphans.slice(0, 20).join(', ')}`);
+}
+
+// ---- 7. familias de chaves do catalogo -----------------------------------
+
+if (slugs.size) {
+  for (const code of langs) {
+    const have = present[code];
+    const gaps = [];
+    for (const slug of slugs) {
+      for (const field of ['name', 'finish', 'desc']) {
+        const k = `kl.p.${slug}.${field}`;
+        if (!have.has(k)) gaps.push(k);
+      }
+    }
+    if (gaps.length) {
+      fail(`[${code}] ${gaps.length} chave(s) de produto ausente(s):`);
+      gaps.slice(0, 20).forEach((k) => console.error(`        ${k}`));
+    }
+  }
+  // o contrario: traducao sobrando para um produto que saiu do catalogo
+  const stale = [...union].filter((k) => {
+    const m = k.match(/^kl\.p\.([a-z0-9-]+)\./);
+    return m && !slugs.has(m[1]);
+  });
+  if (stale.length) {
+    fail(`${stale.length} chave(s) de produto que nao existe(m) mais: ${stale.slice(0, 10).join(', ')}`);
+  }
 }
 
 // ---------------------------------------------------------------------------
