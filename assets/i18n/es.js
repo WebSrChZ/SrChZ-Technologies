@@ -94,7 +94,7 @@ window.SRCHZ_I18N.es = {
   'about.p3': '¿Tienes algo atascado que nadie resuelve? Estrategia, tecnología, producción visual, datos e IA — llevo el mismo método a cualquier campo. Si necesitas a alguien que <b>piensa antes de ejecutar</b>, escríbeme.',
   'about.p4': 'Las tres prácticas se entregan internacionalmente. La única excepción es la grabación cinematográfica, que exige captación presencial y se acuerda por proyecto.',
   'about.card': '"El Orden del Caos" — consultoría estratégica que une ingeniería, psicoanálisis y estética high-end. Fundada por Rafael Cordeiro.',
-  'about.chip1': 'Trilingüe · <b>PT · EN C2 · JP B1</b>',
+  'about.chip1': 'Idiomas · <b>PT · EN C2 · JP B1 · ES A2</b>',
   'about.chip2': 'Ing. Informática + <b>Psicoanálisis</b>',
   'about.chip3': 'Inspector <b>END Nivel 2</b>',
   'about.chip4': '<b>Customer Experience</b> internacional',

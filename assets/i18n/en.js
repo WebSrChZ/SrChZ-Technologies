@@ -94,7 +94,7 @@ window.SRCHZ_I18N.en = {
   'about.p3': 'Got something stuck that nobody can solve? Strategy, technology, visual production, data &amp; AI — I bring the same method to any field. If you need someone who <b>thinks before executing</b>, get in touch.',
   'about.p4': 'All three practices are delivered internationally. The one exception is cinematographic recording, which requires being on site and is arranged per project.',
   'about.card': '"The Order of Chaos" — a strategy consultancy joining engineering, psychoanalysis and high-end aesthetics. Founded by Rafael Cordeiro.',
-  'about.chip1': 'Trilingual · <b>PT · EN C2 · JP B1</b>',
+  'about.chip1': 'Languages · <b>PT · EN C2 · JP B1 · ES A2</b>',
   'about.chip2': 'Computer Eng. + <b>Psychoanalysis</b>',
   'about.chip3': '<b>NDT Level 2</b> Inspector',
   'about.chip4': 'International <b>Customer Experience</b>',
