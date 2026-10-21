@@ -16,7 +16,16 @@
   html,body{overflow:hidden;background:var(--bg)}
   body{font-family:"Inter",sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
 
-  #stage{position:relative;overflow:hidden;background:var(--bg)}
+  #stage{position:relative;overflow:hidden;background:var(--bg);
+    perspective:2000px;perspective-origin:50% 46%}
+  /* Tudo que e cena mora aqui dentro. A camera nunca para: e isso, e nao o
+     numero de cortes, que separa as referencias do filme anterior — nelas a
+     mudanca mediana por quadro e 3 a 20x maior, com quase nenhum corte. */
+  #world{position:absolute;inset:0;transform-style:preserve-3d}
+  /* luz da tela derramando no ambiente, como num plano de produto */
+  #spill{position:absolute;inset:0;pointer-events:none;opacity:0;
+    background:radial-gradient(52% 30% at 50% 40%, rgba(201,162,75,.46),
+      rgba(201,162,75,.16) 50%, transparent 78%)}
   body[data-fmt="v"] #stage,body[data-fmt="v"] html,body[data-fmt="v"]{width:1080px;height:1920px}
   body[data-fmt="h"] #stage,body[data-fmt="h"] html,body[data-fmt="h"]{width:1920px;height:1080px}
 
@@ -77,6 +86,7 @@
 
   /* ---------- moldura de navegador ---------- */
   .browser{position:absolute;border-radius:18px;overflow:hidden;background:#0c0c0f;
+    transform-style:preserve-3d;will-change:transform;
     box-shadow:0 60px 140px -44px rgba(0,0,0,.95),0 0 0 1px rgba(201,162,75,.22),
                0 0 120px -40px rgba(201,162,75,.26)}
   .chrome{position:absolute;left:0;right:0;top:0;background:#141418;
@@ -140,6 +150,8 @@
   <canvas id="dust"></canvas>
   <canvas id="net"></canvas>
   <div id="halo"></div>
+  <div id="spill"></div>
+  <div id="world">
 
   <!-- 01 THE SIGNAL -->
   <div class="scene" id="s1">
@@ -205,6 +217,8 @@
     <div id="s8url" class="g">www.srchz-technologies.com.br</div>
     <div class="psx" id="s8sig">Perception · Strategy · Execution</div>
   </div>
+
+  </div><!-- /world -->
 
   <div id="grade"></div>
   <div id="vignette"></div>
@@ -665,12 +679,22 @@ function render(t){
   $('#flash').style.opacity=0;
   $('#tech-dia').style.opacity=0;
   $('#graph').style.opacity=0;
+  $('#spill').style.opacity=0;
   drawDust(t);
 
   const s=shotAt(t), lt=t-s.t0, u=clamp(lt/s.d,0,1);
 
   // barras cinematográficas entram no primeiro segundo e saem no último
   $('#bars').style.opacity = V ? outC(inv(t,200,1200))*(1-inv(t,DUR-1400,DUR-500)) : 0;
+
+  /* ---------- a câmera ----------
+     Três senóides de períodos primos entre si: a combinação nunca se repete
+     dentro do filme, então não existe quadro igual ao anterior. É o que as
+     referências têm e o corte sozinho não dá — nelas a mudança mediana por
+     quadro é 3 a 20x maior que a daqui, com quase nenhum corte. */
+  const cy=Math.sin(t/4300)*0.9, cx=Math.cos(t/5900)*0.7, cz=Math.sin(t/7100)*26;
+  $('#world').style.transform=
+    `translateZ(${cz.toFixed(2)}px) rotateY(${cy.toFixed(3)}deg) rotateX(${cx.toFixed(3)}deg)`;
 
   const drift=Math.sin(t/5200)*10;
   $('#glow').style.transform=`translate3d(${drift}px,${drift*.6}px,0)`;
@@ -806,11 +830,19 @@ function panelCommon(s,lt,u,langIdx){
   $('#pTitle').innerHTML=s.title||'';
   $('#pSub').innerHTML=s.sub||'';
 
+  /* A moldura fica de três-quartos e gira devagar o plano inteiro: parada de
+     frente ela é um retângulo chapado, e era disso que o filme era feito. */
   const b=$('#brw');
   const p0=s.fresh?ein(s,lt):1;
-  const dx=(V?1:-1)*lerp(60,0,outQ(p0));
-  b.style.transform=`translateX(${dx}px) scale(${lerp(.985,1,outQ(p0))})`;
+  const dx=(V?1:-1)*lerp(46,0,outQ(p0));
+  const ry=lerp(s.ry0!=null?s.ry0:-12, s.ry1!=null?s.ry1:-6, u);
+  const rx=lerp(3.6,1.0,u);
+  b.style.transform=
+    `translateX(${dx}px) translateZ(${lerp(-130,20,outQ(p0))}px) `+
+    `rotateY(${ry.toFixed(2)}deg) rotateX(${rx.toFixed(2)}deg) scale(${lerp(.99,1,outQ(p0))})`;
   b.style.opacity=s.fresh?outC(inv(lt,0,Math.min(200,s.d*.2))):1;
+  /* a luz da tela acende o ambiente enquanto a moldura está no ar */
+  $('#spill').style.opacity=0.85;
 
   /* rolagem: fracao do que sobra abaixo da janela. Na cena de idiomas a
      referencia e sempre o primeiro print — as paginas tem alturas um pouco
@@ -840,13 +872,18 @@ DRAW.panel=(s,lt,u)=>{
         el.style.fontSize=px(26); el.style.padding=px(13)+' '+px(26);
       });
     }
+    cw.style.display='flex';
     cw.style.top=(tx.offsetTop+tx.offsetHeight+(V?26:24))+'px';
     $$('#pChips .chip').forEach((el,i)=>{
       const pc=inv(lt,180+i*90,620+i*90);
       el.style.opacity=outC(pc);
       el.style.transform=`translateY(${lerp(14,0,outQ(pc))}px)`;
     });
-  } else { cw.innerHTML=''; cw.dataset.for=''; }
+  } else {
+    /* display:none, nao innerHTML vazio: o contentor segue medindo e, com a
+       cena em perspectiva, aparece como caixa de 2px fora do quadro */
+    cw.innerHTML=''; cw.dataset.for=''; cw.style.display='none';
+  }
 };
 
 /* --- a mesma home trocando de lingua debaixo do mesmo layout --- */
@@ -870,11 +907,15 @@ DRAW.detail=(s,lt,u)=>{
   const src=SHOT(s.shot);
   setSrc($('#dimg'),src);
   const nat=SZ[src]; if(!nat) return;
-  const z=s.z*lerp(1,1.035,u);                    // empurra devagar dentro do plano
+  /* Empurra e desliza o plano inteiro. Um close parado e uma foto; o que
+     prende e o movimento continuo dentro dele. */
+  const z=s.z*lerp(1,1.11,u);
   const dw=W*z, dh=dw*nat.h/nat.w;
+  const slide=(s.i%2?1:-1)*lerp(0,W*.035,u);
   $('#dimg').style.width=dw+'px';
-  $('#dimg').style.left=(W/2-s.at[0]*dw)+'px';
-  $('#dimg').style.top =(H/2-s.at[1]*dh)+'px';
+  $('#dimg').style.left=(W/2-s.at[0]*dw+slide)+'px';
+  $('#dimg').style.top =(H/2-s.at[1]*dh-lerp(0,H*.018,u))+'px';
+  $('#spill').style.opacity=0.6;
   sc.style.opacity=outC(inv(lt,0,Math.min(90,s.d*.25)));
 };
 

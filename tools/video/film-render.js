@@ -40,6 +40,18 @@ const FPS = 30;
 const argv = process.argv.slice(2);
 const CHECK = argv.includes('--check');
 const only = (() => { const i = argv.indexOf('--fmt'); return i < 0 ? null : argv[i + 1]; })();
+/* o mesmo motor serve para o amostrador de efeitos: so muda a pagina */
+const PAGE = (() => { const i = argv.indexOf('--page'); return i < 0 ? 'film.html' : argv[i + 1]; })();
+const OUTNAME = (() => { const i = argv.indexOf('--out'); return i < 0 ? null : argv[i + 1]; })();
+/* Desfoque de movimento de verdade: renderiza MB subquadros por quadro final
+   e deixa o ffmpeg fundir cada grupo (tmix). E o que separa "animacao" de
+   "motion graphics" — sem isso, movimento rapido vira pulo de posicao. Custa
+   MB vezes o tempo de renderizacao, entao 1 enquanto se itera, 3 no master. */
+const MB = (() => {
+  const i = argv.indexOf('--mb');
+  const n = i < 0 ? 1 : parseInt(argv[i + 1], 10);
+  return Number.isFinite(n) && n >= 1 && n <= 6 ? n : 1;
+})();
 /* o wav do film-audio.py entra como segunda entrada do mesmo ffmpeg: nao
    ha motivo para escrever o mp4 mudo e remuxar depois */
 const AUDIO = (() => {
@@ -132,6 +144,15 @@ async function check(browser) {
       await page.waitForTimeout(40);
 
       const rects = await page.evaluate((sels) => {
+        /* Mede com a camera neutralizada. Com o mundo girando, o retangulo
+           devolvido e a caixa projetada: maior que a real, e dois vizinhos
+           encostam na medicao sem encostar na tela. Zerar a transformacao
+           do mundo da a geometria verdadeira e ainda respeita o
+           translate(-50%,-50%) dos elementos centralizados, que a caixa de
+           layout (offset*) ignora. */
+        const world = document.getElementById('world');
+        const savedT = world ? world.style.transform : '';
+        if (world) { world.style.transform = 'none'; void world.offsetWidth; }
         const eff = (el) => { let o = 1, n = el;
           while (n && n !== document.body) { o *= parseFloat(getComputedStyle(n).opacity || '1'); n = n.parentElement; }
           return o; };
@@ -141,11 +162,18 @@ async function check(browser) {
           if (!el) continue;
           const box = el.closest('.kLine') || el;     // linhas mascaradas: vale a moldura
           const r = box.getBoundingClientRect();
-          if (r.width < 1 || r.height < 1) continue;
+          if (r.width < 3 || r.height < 3) continue;
+          if (getComputedStyle(box).display === 'none') continue;
           const o = eff(el);
           if (o < 0.06) continue;                      // invisivel no quadro
+          /* Duas geometrias. A projetada (getBoundingClientRect) diz o que
+             sai do quadro, porque e o que se ve. A de layout (offset*) diz
+             se dois blocos se tocam: com a cena em perspectiva a caixa
+             projetada e maior que a real, e dois vizinhos encostariam na
+             medicao sem encostar na tela. */
           out[s] = { x: r.x, y: r.y, w: r.width, h: r.height, o: +o.toFixed(2) };
         }
+        if (world) world.style.transform = savedT;
         return out;
       }, BOXES);
 
@@ -197,15 +225,22 @@ const put = (stream, buf) => new Promise((res, rej) => {
 async function renderFormat(browser, fmt) {
   const { page, W, H } = await openPage(browser, fmt);
   const DUR = await page.evaluate(() => window.DUR);
-  const total = Math.round(DUR / 1000 * FPS);
-  const out = path.join(OUTDIR, fmt === 'v' ? 'srchz-order-of-chaos-9x16.mp4'
-                                            : 'srchz-order-of-chaos-16x9.mp4');
+  /* --secs N encurta a renderizacao para testar o caminho inteiro sem
+     esperar o filme todo */
+  const LIM = (() => { const i = argv.indexOf('--secs'); return i < 0 ? 0 : parseFloat(argv[i + 1]); })();
+  const total = Math.round((LIM > 0 ? Math.min(LIM * 1000, DUR) : DUR) / 1000 * FPS);
+  const sub = total * MB;                       // subquadros a desenhar
+  const out = path.join(OUTDIR, OUTNAME
+    || (fmt === 'v' ? 'srchz-order-of-chaos-9x16.mp4' : 'srchz-order-of-chaos-16x9.mp4'));
   fs.mkdirSync(OUTDIR, { recursive: true });
-  console.log(`  ${fmt}: ${total} quadros · ${FPS}fps · ${(DUR / 1000).toFixed(1)}s · ${W}x${H}`);
+  console.log(`  ${fmt}: ${total} quadros · ${FPS}fps · ${(DUR / 1000).toFixed(1)}s · ${W}x${H}`
+    + (MB > 1 ? ` · desfoque de movimento ${MB}x (${sub} subquadros)` : ''));
 
   const args = ['-loglevel', 'error', '-y',
-    '-f', 'image2pipe', '-framerate', String(FPS), '-i', '-'];
+    '-f', 'image2pipe', '-framerate', String(FPS * MB), '-i', '-'];
   if (AUDIO) args.push('-i', AUDIO);
+  /* funde cada grupo de MB subquadros num quadro final e volta para 30fps */
+  if (MB > 1) args.push('-vf', `tmix=frames=${MB}:weights='${Array(MB).fill(1).join(' ')}',fps=${FPS}`);
   args.push('-c:v', 'libx264', '-preset', 'slow', '-crf', '18',
     '-pix_fmt', 'yuv420p', '-movflags', '+faststart', '-r', String(FPS));
   /* AAC 192k estereo: o wav sai mixado em -16 LUFS, entao aqui e so
@@ -219,14 +254,19 @@ async function renderFormat(browser, fmt) {
     ff.on('error', rej);
   });
 
+  /* Obturador de 180 graus, como em cinema: os MB subquadros se espalham
+     pela METADE do intervalo do quadro, nao pelo intervalo inteiro. Cobrindo
+     tudo, o rastro dobra de tamanho e a imagem fica permanentemente mole. */
+  const SHUTTER = 0.5;
   const t0 = Date.now();
-  for (let i = 0; i < total; i++) {
-    await page.evaluate(ms => window.render(ms), (i / FPS) * 1000);
+  for (let i = 0; i < sub; i++) {
+    const f = Math.floor(i / MB), k = i % MB;
+    await page.evaluate(ms => window.render(ms), ((f + (k / MB) * SHUTTER) / FPS) * 1000);
     const buf = await page.screenshot({ animations: 'disabled' });
     await put(ff.stdin, buf);
-    if (i % 150 === 0 || i === total - 1) {
+    if (i % (150 * MB) === 0 || i === sub - 1) {
       const el = ((Date.now() - t0) / 1000).toFixed(0);
-      console.log(`    ${String(Math.round((i + 1) / total * 100)).padStart(3)}%  ${i + 1}/${total}  (${el}s)`);
+      console.log(`    ${String(Math.round((i + 1) / sub * 100)).padStart(3)}%  ${i + 1}/${sub}  (${el}s)`);
     }
   }
   ff.stdin.end();
