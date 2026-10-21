@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-i18n-page="calc">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,6 +8,12 @@
 <meta name="theme-color" content="#09090b" />
 <link rel="icon" href="assets/img/logo-icon.png" />
 <link rel="canonical" href="https://www.srchz-technologies.com.br/end/USN2/calculadora.html" />
+<link rel="alternate" hreflang="pt-BR" href="https://www.srchz-technologies.com.br/end/USN2/calculadora.html?lang=pt" />
+<link rel="alternate" hreflang="en" href="https://www.srchz-technologies.com.br/end/USN2/calculadora.html?lang=en" />
+<link rel="alternate" hreflang="es" href="https://www.srchz-technologies.com.br/end/USN2/calculadora.html?lang=es" />
+<link rel="alternate" hreflang="ja" href="https://www.srchz-technologies.com.br/end/USN2/calculadora.html?lang=ja" />
+<link rel="alternate" hreflang="x-default" href="https://www.srchz-technologies.com.br/end/USN2/calculadora.html" />
+<script src="../../assets/i18n.js"></script>
 <meta property="og:title" content="Calculadora de Caminho do Som — Ultrassom Nível II" />
 <meta property="og:description" content="Ferramenta grátis: percurso da perna, salto, profundidade e projeção para cabeçote angular no aço." />
 <meta property="og:image" content="https://www.srchz-technologies.com.br/end/USN2/assets/img/og.png" />
@@ -29,54 +35,68 @@
 .cta-box h3{font-family:var(--serif);font-size:1.5rem;margin-bottom:8px}
 .cta-box p{color:var(--soft);margin-bottom:16px}
 @media(max-width:720px){.calc{grid-template-columns:1fr}}
+/* O styles.css desta pasta transforma .nav__links numa gaveta escondida acima
+   da tela, aberta pelo botao ☰ do guia. Esta pagina nunca teve esse botao,
+   entao no telefone a gaveta ficava fechada para sempre: o link de volta, o
+   CTA e o seletor de idioma eram inalcancaveis. Sao tres itens curtos — em vez
+   de importar o botao, a barra continua sendo uma barra. */
+@media(max-width:860px){
+  .nav__links{position:static;transform:none;flex-direction:row;flex-wrap:wrap;
+    justify-content:flex-end;background:none;border:0;padding:0;gap:12px}
+  .nav__inner{flex-wrap:wrap;height:auto;gap:8px;padding-top:10px;padding-bottom:10px}
+  /* o styles.css esconde o seletor da gaveta em favor do que fica ao lado do
+     ☰; aqui nao ha gaveta nem ☰, entao ele volta a ser o unico e o visivel */
+  .nav__links .i18n-sw{display:inline-flex}
+}
+@media(max-width:420px){.nav__brand .nav__name{display:none}}
 </style>
 </head>
 <body>
 <header class="nav" id="nav"><div class="container nav__inner">
   <a class="nav__brand" href="index.html"><img src="assets/img/logo-icon.png" alt="SrChZ" class="nav__logo"/><span class="nav__name">Guia <b>Ultrassom N2</b></span></a>
-  <nav class="nav__links"><a href="index.html">← Voltar ao guia</a><a href="index.html#planos" class="btn btn--gold btn--sm">Ver planos</a></nav>
+  <nav class="nav__links"><a href="index.html" data-i18n="calc.nav.back">← Voltar ao guia</a><a href="index.html#planos" class="btn btn--gold btn--sm" data-i18n="calc.nav.plans">Ver planos</a><span data-i18n-switcher></span></nav>
 </div></header>
 
 <div class="calc-wrap">
-  <p class="eyebrow">Ferramenta grátis · Ultrassom Nível II</p>
-  <h1 class="hero__title" style="font-size:clamp(1.9rem,5vw,2.8rem)">Calculadora de <span class="gold-grad">Caminho do Som</span></h1>
-  <p class="hero__sub">Cabeçote angular no aço. Informe os dados e veja perna, salto, profundidade e projeção — calculados na hora.</p>
+  <p class="eyebrow" data-i18n="calc.eyebrow">Ferramenta grátis · Ultrassom Nível II</p>
+  <h1 class="hero__title" style="font-size:clamp(1.9rem,5vw,2.8rem)" data-i18n-html="calc.h1">Calculadora de <span class="gold-grad">Caminho do Som</span></h1>
+  <p class="hero__sub" data-i18n="calc.sub">Cabeçote angular no aço. Informe os dados e veja perna, salto, profundidade e projeção — calculados na hora.</p>
 
   <div class="calc">
     <div class="calc__panel">
-      <h3>Entradas</h3>
-      <div class="field"><label>Ângulo do cabeçote θ (°)</label><input type="number" id="ang" value="60" step="1"/></div>
-      <div class="field"><label>Espessura t (mm)</label><input type="number" id="esp" value="20" step="0.5"/></div>
-      <div class="field"><label>Percurso sônico PS lido (mm)</label><input type="number" id="ps" value="30" step="0.5"/></div>
-      <div class="field"><label>Frequência f (MHz) — opcional</label><input type="number" id="freq" value="4" step="0.5"/></div>
-      <div class="field"><label>Diâmetro do cristal D (mm) — opcional</label><input type="number" id="diam" value="10" step="1"/></div>
-      <p class="leg">Constantes (aço): V<sub>L</sub>=5920 m/s · V<sub>T</sub>=3230 m/s.</p>
+      <h3 data-i18n="calc.in.title">Entradas</h3>
+      <div class="field"><label data-i18n="calc.in.ang">Ângulo do cabeçote θ (°)</label><input type="number" id="ang" value="60" step="1"/></div>
+      <div class="field"><label data-i18n="calc.in.esp">Espessura t (mm)</label><input type="number" id="esp" value="20" step="0.5"/></div>
+      <div class="field"><label data-i18n="calc.in.ps">Percurso sônico PS lido (mm)</label><input type="number" id="ps" value="30" step="0.5"/></div>
+      <div class="field"><label data-i18n="calc.in.freq">Frequência f (MHz) — opcional</label><input type="number" id="freq" value="4" step="0.5"/></div>
+      <div class="field"><label data-i18n="calc.in.diam">Diâmetro do cristal D (mm) — opcional</label><input type="number" id="diam" value="10" step="1"/></div>
+      <p class="leg" data-i18n-html="calc.in.const">Constantes (aço): V<sub>L</sub>=5920 m/s · V<sub>T</sub>=3230 m/s.</p>
     </div>
     <div class="calc__panel">
-      <h3>Resultados</h3>
-      <div class="out"><span>λ transversal (mm)</span><b id="r_lt">—</b></div>
-      <div class="out"><span>Campo próximo N (mm)</span><b id="r_n">—</b></div>
-      <div class="out"><span>Percurso 1ª perna S = t/cosθ</span><b id="r_s">—</b></div>
-      <div class="out"><span>Superfície (meio salto) t·tanθ</span><b id="r_sup">—</b></div>
-      <div class="out"><span>Salto completo 2t·tanθ</span><b id="r_salto">—</b></div>
-      <div class="out"><span>PS·cosθ (componente vertical)</span><b id="r_vert">—</b></div>
-      <div class="out"><span>Perna do refletor</span><b id="r_perna">—</b></div>
-      <div class="out"><span>Profundidade real</span><b id="r_prof">—</b></div>
-      <div class="out"><span>Distância projetada PS·senθ</span><b id="r_proj">—</b></div>
-      <p class="leg">Profundidade usa a 2ª perna automaticamente quando PS·cosθ &gt; espessura.</p>
+      <h3 data-i18n="calc.out.title">Resultados</h3>
+      <div class="out"><span data-i18n="calc.out.lt">λ transversal (mm)</span><b id="r_lt">—</b></div>
+      <div class="out"><span data-i18n="calc.out.n">Campo próximo N (mm)</span><b id="r_n">—</b></div>
+      <div class="out"><span data-i18n="calc.out.s">Percurso 1ª perna S = t/cosθ</span><b id="r_s">—</b></div>
+      <div class="out"><span data-i18n="calc.out.sup">Superfície (meio salto) t·tanθ</span><b id="r_sup">—</b></div>
+      <div class="out"><span data-i18n="calc.out.salto">Salto completo 2t·tanθ</span><b id="r_salto">—</b></div>
+      <div class="out"><span data-i18n="calc.out.vert">PS·cosθ (componente vertical)</span><b id="r_vert">—</b></div>
+      <div class="out"><span data-i18n="calc.out.perna">Perna do refletor</span><b id="r_perna">—</b></div>
+      <div class="out"><span data-i18n="calc.out.prof">Profundidade real</span><b id="r_prof">—</b></div>
+      <div class="out"><span data-i18n="calc.out.proj">Distância projetada PS·senθ</span><b id="r_proj">—</b></div>
+      <p class="leg" data-i18n-html="calc.out.note">Profundidade usa a 2ª perna automaticamente quando PS·cosθ &gt; espessura.</p>
     </div>
   </div>
 
   <div class="cta-box">
-    <h3>Quer a versão completa?</h3>
-    <p>A <b>Planilha Sound Path automatizada</b> + o <b>Caderno de 125 questões comentadas</b> + checklist de calibração estão no <b>Kit Aprovação</b>.</p>
-    <a href="index.html#planos" class="btn btn--gold">Ver o Kit Aprovação →</a>
+    <h3 data-i18n="calc.cta.title">Quer a versão completa?</h3>
+    <p data-i18n-html="calc.cta.p">A <b>Planilha Sound Path automatizada</b> + o <b>Caderno de 125 questões comentadas</b> + checklist de calibração estão no <b>Kit Aprovação</b>.</p>
+    <a href="index.html#planos" class="btn btn--gold" data-i18n="calc.cta.btn">Ver o Kit Aprovação →</a>
   </div>
 </div>
 
 <footer class="footer"><div class="container footer__inner">
   <div class="footer__brand"><img src="assets/img/logo-horizontal.png" alt="SrChZ Technologies"/><p>Sua definição de qualidade. ⚜️</p></div>
-  <nav class="footer__links"><a href="index.html">O guia</a><a href="index.html#planos">Planos</a><a href="../privacidade.html">Privacidade</a></nav>
+  <nav class="footer__links"><a href="index.html" data-i18n="calc.foot.guide">O guia</a><a href="index.html#planos" data-i18n="calc.foot.plans">Planos</a><a href="../privacidade.html" data-i18n="calc.foot.priv">Privacidade</a></nav>
 </div></footer>
 
 <script>
@@ -96,7 +116,8 @@ function calc(){
   const vert=ps*c;
   $('r_vert').textContent=fx(vert);
   const segunda = vert>t;
-  $('r_perna').textContent = segunda?'2ª perna':'1ª perna';
+  const tr=(k,f)=>(window.SrChZI18n&&window.SrChZI18n.t)?window.SrChZI18n.t(k,f):f;
+  $('r_perna').textContent = segunda?tr('calc.leg2','2ª perna'):tr('calc.leg1','1ª perna');
   $('r_prof').textContent = fx(segunda ? (2*t-vert) : vert);
   $('r_proj').textContent = fx(ps*s);
 }

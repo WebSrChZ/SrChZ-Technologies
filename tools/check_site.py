@@ -156,6 +156,15 @@ def main():
                 failures.append('%s: linha %d aponta para %s, que nao existe'
                                 % (rel, line, href))
 
+        # Pagina indexavel precisa dizer ao buscador o que ela e. Sem a tag, o
+        # buscador inventa o resumo — e, no site traduzido, o motor de i18n nao
+        # tem onde escrever a descricao no idioma do visitante: ele so troca o
+        # conteudo de uma tag existente. As paginas de 404 ficam de fora, que
+        # nao sao para indexar.
+        if not os.path.basename(path).startswith('404'):
+            if 'name="description"' not in source:
+                failures.append('%s: sem <meta name="description">' % rel)
+
     for path in sorted(xml_files):
         rel = os.path.relpath(path, root)
         if path.endswith('.webmanifest'):

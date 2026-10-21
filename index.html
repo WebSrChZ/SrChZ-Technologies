@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-i18n-page="home">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,12 +14,24 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self'">
 <link rel="canonical" href="https://www.srchz-technologies.com.br/">
 
+<!-- Versões por idioma. O conteúdo é um só arquivo e o idioma é aplicado no
+     cliente, mas cada variante tem URL própria via ?lang=, então o buscador
+     consegue indexar e servir a certa por região. x-default aponta para a raiz. -->
+<link rel="alternate" hreflang="pt-BR" href="https://www.srchz-technologies.com.br/?lang=pt">
+<link rel="alternate" hreflang="en" href="https://www.srchz-technologies.com.br/?lang=en">
+<link rel="alternate" hreflang="es" href="https://www.srchz-technologies.com.br/?lang=es">
+<link rel="alternate" hreflang="ja" href="https://www.srchz-technologies.com.br/?lang=ja">
+<link rel="alternate" hreflang="x-default" href="https://www.srchz-technologies.com.br/">
+
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="SrChZ Technologies">
 <meta property="og:title" content="SrChZ Technologies — Solutions Strategist">
 <meta property="og:description" content="Solving what most people overlook. Um método, várias áreas: Branding & Growth · Engenharia & END · Tecnologia & Dados/IA.">
 <meta property="og:url" content="https://www.srchz-technologies.com.br/">
 <meta property="og:locale" content="pt_BR">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:locale:alternate" content="ja_JP">
 <meta property="og:image" content="https://www.srchz-technologies.com.br/assets/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -40,6 +52,10 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@300;400;500;600;700&display=swap"></noscript>
 
+<!-- i18n: resolve o idioma antes da pintura e injeta o seletor. Em português
+     (padrão do HTML) nenhum dicionário é baixado. -->
+<script src="assets/i18n.js"></script>
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -48,14 +64,23 @@
       "@type": "Organization",
       "@id": "https://www.srchz-technologies.com.br/#organization",
       "name": "SrChZ Technologies",
-      "legalName": "SrChZ Technologies",
+      "legalName": "SRCHZ TECHNOLOGIES SOLUCOES LTDA",
+      "alternateName": "SrChZ Technologies",
       "taxID": "68.371.698/0001-95",
       "vatID": "68.371.698/0001-95",
+      "foundingDate": "2026-08-03",
       "url": "https://www.srchz-technologies.com.br/",
       "logo": "https://www.srchz-technologies.com.br/assets/logo-lockup.png",
       "image": "https://www.srchz-technologies.com.br/assets/og.png",
       "email": "rafaelhenriquecsantosz@gmail.com",
-      "address": { "@type": "PostalAddress", "addressCountry": "BR" },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Alameda Rio Negro, 503, Sala 2020",
+        "addressLocality": "Barueri",
+        "addressRegion": "SP",
+        "postalCode": "06454-000",
+        "addressCountry": "BR"
+      },
       "areaServed": "BR",
       "founder": { "@id": "https://www.srchz-technologies.com.br/#rafael" },
       "slogan": "Solving what most people overlook.",
@@ -107,7 +132,11 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.08}
 .nav-links a:hover{color:var(--gold2)}
 .nav-cta{border:1px solid var(--gold);color:var(--gold2)!important;padding:.5rem 1.05rem;border-radius:999px;font-weight:500}
 .nav-cta:hover{background:var(--gold);color:#0a0a0a!important}
-@media(max-width:720px){.nav-links a:not(.nav-cta){display:none}}
+/* No telefone a barra guarda apenas o seletor de idioma. O CTA "Falar comigo"
+   sai porque não cabe ao lado dele em 390px, e não se perde nada: o botão
+   flutuante de WhatsApp fica fixo na tela e a seção de contato continua no
+   final da página. */
+@media(max-width:720px){.nav-links a{display:none}}
 
 /* HERO */
 .hero{position:relative;padding:clamp(3.5rem,9vw,7rem) 0 clamp(2.5rem,6vw,4rem);text-align:center;overflow:hidden}
@@ -198,17 +227,18 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.08}
 </style>
 </head>
 <body>
-<a class="skip" href="#sobre">Pular para o conteúdo</a>
+<a class="skip" href="#sobre" data-i18n="nav.skip">Pular para o conteúdo</a>
 
 <!-- NAV -->
 <header class="nav">
   <div class="wrap nav-inner">
     <a class="brand" href="#top"><img src="assets/logo-icon.png" alt=""> SrChZ <em>Technologies</em></a>
     <nav class="nav-links">
-      <a href="#sobre">Sobre</a>
-      <a href="#metodo">Método</a>
-      <a href="#praticas">Práticas</a>
-      <a class="nav-cta" href="#contato">Falar comigo</a>
+      <a href="#sobre" data-i18n="nav.about">Sobre</a>
+      <a href="#metodo" data-i18n="nav.method">Método</a>
+      <a href="#praticas" data-i18n="nav.practices">Práticas</a>
+      <a class="nav-cta" href="#contato" data-i18n="nav.cta">Falar comigo</a>
+      <span data-i18n-switcher></span>
     </nav>
   </div>
 </header>
@@ -218,31 +248,31 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.08}
   <div class="hero-glow"></div>
   <div class="wrap hero-inner">
     <img class="medallion" src="assets/logo-mark.png" alt="SrChZ Technologies">
-    <p class="hero-kicker">⚜&nbsp;&nbsp;Solutions Strategist&nbsp;&nbsp;⚜</p>
+    <p class="hero-kicker">⚜&nbsp;&nbsp;<span data-i18n="hero.role">Solutions Strategist</span>&nbsp;&nbsp;⚜</p>
     <h1 class="hero-name gold-text">RAFAEL CORDEIRO</h1>
-    <p class="hero-title">Estrategista de Soluções</p>
-    <p class="hero-line">Resolvo o que os outros ignoram — na fronteira entre <b>tecnologia, marca e engenharia</b>, e o jeito real como as pessoas pensam, aprendem e decidem. Do crescimento digital à inspeção industrial: <b>domínios diferentes, um só sistema.</b></p>
+    <p class="hero-title" data-i18n="hero.title">Estrategista de Soluções</p>
+    <p class="hero-line" data-i18n-html="hero.lead">Resolvo o que os outros ignoram — na fronteira entre <b>tecnologia, marca e engenharia</b>, e o jeito real como as pessoas pensam, aprendem e decidem. Do crescimento digital à inspeção industrial: <b>domínios diferentes, um só sistema.</b></p>
     <p class="hero-sign">Solving what most people overlook.</p>
 
-    <h2 class="sr-only">Práticas</h2>
+    <h2 class="sr-only" data-i18n="nav.practices">Práticas</h2>
     <div class="doors">
       <a class="door" href="growth/">
-        <span class="d-n">01 · Prática</span>
-        <h3 class="gold-text">Branding &amp; Growth</h3>
-        <p>Tráfego, marca, produção de vídeo e Portal do Cliente. Ecossistemas de alta performance.</p>
-        <span class="d-go">Entrar <span aria-hidden="true">→</span></span>
+        <span class="d-n" data-i18n="doors.n1">01 · Prática</span>
+        <h3 class="gold-text" data-i18n="doors.growth.name">Branding &amp; Growth</h3>
+        <p data-i18n="doors.growth.desc">Tráfego, marca, produção de vídeo e Portal do Cliente. Ecossistemas de alta performance.</p>
+        <span class="d-go"><span data-i18n="doors.enter">Entrar</span> <span aria-hidden="true">→</span></span>
       </a>
       <a class="door" href="end/">
-        <span class="d-n">02 · Prática</span>
-        <h3 class="gold-text">Engenharia &amp; END</h3>
-        <p>Inspeção por ultrassom, ferrovia, espessura e LP — com laudo conforme norma. E os guias de certificação.</p>
-        <span class="d-go">Entrar <span aria-hidden="true">→</span></span>
+        <span class="d-n" data-i18n="doors.n2">02 · Prática</span>
+        <h3 class="gold-text" data-i18n="doors.end.name">Engenharia &amp; END</h3>
+        <p data-i18n="doors.end.desc">Inspeção por ultrassom, ferrovia, espessura e LP — com laudo conforme norma. E os guias de certificação.</p>
+        <span class="d-go"><span data-i18n="doors.enter">Entrar</span> <span aria-hidden="true">→</span></span>
       </a>
       <a class="door" href="tech/">
-        <span class="d-n">03 · Prática</span>
-        <h3 class="gold-text">Tecnologia &amp; Dados/IA</h3>
-        <p>Web, portais, automação, Customer Experience e inteligência de dados aplicada.</p>
-        <span class="d-go">Entrar <span aria-hidden="true">→</span></span>
+        <span class="d-n" data-i18n="doors.n3">03 · Prática</span>
+        <h3 class="gold-text" data-i18n="doors.tech.name">Tecnologia &amp; Dados/IA</h3>
+        <p data-i18n="doors.tech.desc">Web, portais, automação, Customer Experience e inteligência de dados aplicada.</p>
+        <span class="d-go"><span data-i18n="doors.enter">Entrar</span> <span aria-hidden="true">→</span></span>
       </a>
     </div>
   </div>
@@ -252,24 +282,24 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.08}
 <section class="section" id="sobre">
   <div class="wrap">
     <div class="sec-head">
-      <span class="eyebrow">Quem sou</span>
-      <h2 class="sec-title">A área muda. <span class="gold-text">O método não.</span></h2>
+      <span class="eyebrow" data-i18n="about.eyebrow">Quem sou</span>
+      <h2 class="sec-title" data-i18n-html="about.title">A área muda. <span class="gold-text">O método não.</span></h2>
     </div>
     <div class="about-grid">
       <div class="about-body">
-        <p>Me chamam pra resolver <b>o que ninguém mais consegue destravar</b> — seja qual for a área. Já trabalhei em engenharia industrial e ferroviária, tecnologia, marketing e tráfego pago, produção visual e experiência do cliente internacional.</p>
-        <p class="pull">Não me defino pelo que faço; me defino pelo que entendo. Cargos são ferramentas — o que eu entrego é a solução.</p>
-        <p>Meu diferencial é <b>enxergar o que a maioria ignora</b>. Pego problemas ambíguos, quebro o mecanismo até a causa-raiz e devolvo uma solução clara — principalmente no espaço digital e de tecnologia, onde análise, estratégia e estética se encontram.</p>
-        <p>Tem algo travado que ninguém resolve? Estratégia, tecnologia, produção visual, dados &amp; IA — eu trago o mesmo método pra qualquer campo. Se você precisa de alguém que <b>pensa antes de executar</b>, me chama.</p>
+        <p data-i18n-html="about.p1">Me chamam pra resolver <b>o que ninguém mais consegue destravar</b> — seja qual for a área. Já trabalhei em engenharia industrial e ferroviária, tecnologia, marketing e tráfego pago, produção visual e experiência do cliente internacional.</p>
+        <p class="pull" data-i18n="about.pull">Não me defino pelo que faço; me defino pelo que entendo. Cargos são ferramentas — o que eu entrego é a solução.</p>
+        <p data-i18n-html="about.p2">Meu diferencial é <b>enxergar o que a maioria ignora</b>. Pego problemas ambíguos, quebro o mecanismo até a causa-raiz e devolvo uma solução clara — principalmente no espaço digital e de tecnologia, onde análise, estratégia e estética se encontram.</p>
+        <p data-i18n-html="about.p3">Tem algo travado que ninguém resolve? Estratégia, tecnologia, produção visual, dados &amp; IA — eu trago o mesmo método pra qualquer campo. Se você precisa de alguém que <b>pensa antes de executar</b>, me chama.</p>
       </div>
       <aside class="about-card">
         <h3 class="gold-text">SrChZ Technologies</h3>
-        <p>"A Ordem do Caos" — consultoria estratégica que une engenharia, psicanálise e estética high-end. Fundada por Rafael Cordeiro.</p>
+        <p data-i18n="about.card">"A Ordem do Caos" — consultoria estratégica que une engenharia, psicanálise e estética high-end. Fundada por Rafael Cordeiro.</p>
         <div class="chips">
-          <span class="chip">Trilíngue · <b>PT · EN C2 · JP B1</b></span>
-          <span class="chip">Eng. Computação + <b>Psicanálise</b></span>
-          <span class="chip">Inspetor <b>END Nível 2</b></span>
-          <span class="chip"><b>Customer Experience</b> internacional</span>
+          <span class="chip" data-i18n-html="about.chip1">Trilíngue · <b>PT · EN C2 · JP B1</b></span>
+          <span class="chip" data-i18n-html="about.chip2">Eng. Computação + <b>Psicanálise</b></span>
+          <span class="chip" data-i18n-html="about.chip3">Inspetor <b>END Nível 2</b></span>
+          <span class="chip" data-i18n-html="about.chip4"><b>Customer Experience</b> internacional</span>
         </div>
       </aside>
     </div>
@@ -280,15 +310,15 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.08}
 <section class="section section-alt" id="metodo">
   <div class="wrap">
     <div class="sec-head">
-      <span class="eyebrow">Como eu trabalho</span>
-      <h2 class="sec-title">Um método, qualquer campo.</h2>
-      <p class="sec-lede">O mesmo processo que aplico numa solda ferroviária, numa campanha de tráfego ou num sistema digital. É o que mantém o resultado consistente entre áreas tão diferentes.</p>
+      <span class="eyebrow" data-i18n="method.eyebrow">Como eu trabalho</span>
+      <h2 class="sec-title" data-i18n="method.title">Um método, qualquer campo.</h2>
+      <p class="sec-lede" data-i18n="method.lede">O mesmo processo que aplico numa solda ferroviária, numa campanha de tráfego ou num sistema digital. É o que mantém o resultado consistente entre áreas tão diferentes.</p>
     </div>
     <div class="steps">
-      <div class="step"><span class="s-k">01</span><h3>Leio padrões</h3><p>Observo o problema até enxergar o mecanismo por trás — o que a maioria não vê.</p></div>
-      <div class="step"><span class="s-k">02</span><h3>Comparo cenários</h3><p>Coloco as hipóteses lado a lado e testo o caminho de menor atrito e maior efeito.</p></div>
-      <div class="step"><span class="s-k">03</span><h3>Construo a estratégia</h3><p>Desço até a causa-raiz e desenho a solução clara, com começo, meio e fim.</p></div>
-      <div class="step"><span class="s-k">04</span><h3>Executo com estética</h3><p>Entrego com padrão high-end — porque a forma também comunica confiança.</p></div>
+      <div class="step"><span class="s-k">01</span><h3 data-i18n="method.s1.t">Leio padrões</h3><p data-i18n="method.s1.d">Observo o problema até enxergar o mecanismo por trás — o que a maioria não vê.</p></div>
+      <div class="step"><span class="s-k">02</span><h3 data-i18n="method.s2.t">Comparo cenários</h3><p data-i18n="method.s2.d">Coloco as hipóteses lado a lado e testo o caminho de menor atrito e maior efeito.</p></div>
+      <div class="step"><span class="s-k">03</span><h3 data-i18n="method.s3.t">Construo a estratégia</h3><p data-i18n="method.s3.d">Desço até a causa-raiz e desenho a solução clara, com começo, meio e fim.</p></div>
+      <div class="step"><span class="s-k">04</span><h3 data-i18n="method.s4.t">Executo com estética</h3><p data-i18n="method.s4.d">Entrego com padrão high-end — porque a forma também comunica confiança.</p></div>
     </div>
   </div>
 </section>
@@ -297,28 +327,28 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.08}
 <section class="section" id="praticas">
   <div class="wrap">
     <div class="sec-head">
-      <span class="eyebrow">O que ofereço</span>
-      <h2 class="sec-title">Escolha a porta certa.</h2>
-      <p class="sec-lede">Cada prática tem sua própria linguagem, seu portfólio e seu jeito de começar. Entre pela que resolve a sua dor de agora.</p>
+      <span class="eyebrow" data-i18n="practices.eyebrow">O que ofereço</span>
+      <h2 class="sec-title" data-i18n="practices.title">Escolha a porta certa.</h2>
+      <p class="sec-lede" data-i18n="practices.lede">Cada prática tem sua própria linguagem, seu portfólio e seu jeito de começar. Entre pela que resolve a sua dor de agora.</p>
     </div>
     <div class="doors" style="margin-top:1.8rem">
       <a class="door" href="growth/">
         <span class="d-n">Visual Branding</span>
-        <h3 class="gold-text">Branding &amp; Growth</h3>
-        <p>Tráfego pago (Meta Ads), branding, produção de vídeo cinematográfica e Portal do Cliente próprio.</p>
-        <span class="d-go">Ver a prática <span aria-hidden="true">→</span></span>
+        <h3 class="gold-text" data-i18n="doors.growth.name">Branding &amp; Growth</h3>
+        <p data-i18n="practices.growth.desc">Tráfego pago (Meta Ads), branding, produção de vídeo cinematográfica e Portal do Cliente próprio.</p>
+        <span class="d-go"><span data-i18n="practices.see">Ver a prática</span> <span aria-hidden="true">→</span></span>
       </a>
       <a class="door" href="end/">
         <span class="d-n">Engineering</span>
-        <h3 class="gold-text">Engenharia &amp; END</h3>
-        <p>Ensaio por ultrassom Nível II, inspeção de soldas e trilhos, e o guia de certificação publicado.</p>
-        <span class="d-go">Ver a prática <span aria-hidden="true">→</span></span>
+        <h3 class="gold-text" data-i18n="doors.end.name">Engenharia &amp; END</h3>
+        <p data-i18n="practices.end.desc">Ensaio por ultrassom Nível II, inspeção de soldas e trilhos, e o guia de certificação publicado.</p>
+        <span class="d-go"><span data-i18n="practices.see">Ver a prática</span> <span aria-hidden="true">→</span></span>
       </a>
       <a class="door" href="tech/">
         <span class="d-n">Technologies · Data AI</span>
-        <h3 class="gold-text">Tecnologia &amp; Dados/IA</h3>
-        <p>Desenvolvimento web, portais e web apps, automação, CX e inteligência de dados com IA.</p>
-        <span class="d-go">Ver a prática <span aria-hidden="true">→</span></span>
+        <h3 class="gold-text" data-i18n="doors.tech.name">Tecnologia &amp; Dados/IA</h3>
+        <p data-i18n="practices.tech.desc">Desenvolvimento web, portais e web apps, automação, CX e inteligência de dados com IA.</p>
+        <span class="d-go"><span data-i18n="practices.see">Ver a prática</span> <span aria-hidden="true">→</span></span>
       </a>
     </div>
   </div>
@@ -328,12 +358,12 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.08}
 <section class="section section-alt" id="contato">
   <div class="wrap">
     <div class="cta">
-      <span class="eyebrow">Vamos conversar</span>
-      <h2 class="gold-text">Tem algo travado que ninguém resolve?</h2>
-      <p>Me manda o problema — seja de marca, engenharia, tecnologia ou dados. Se precisa de alguém que pensa antes de executar, é só chamar.</p>
+      <span class="eyebrow" data-i18n="contact.eyebrow">Vamos conversar</span>
+      <h2 class="gold-text" data-i18n="contact.title">Tem algo travado que ninguém resolve?</h2>
+      <p data-i18n="contact.lede">Me manda o problema — seja de marca, engenharia, tecnologia ou dados. Se precisa de alguém que pensa antes de executar, é só chamar.</p>
       <div class="btns">
-        <a class="btn btn-gold" href="https://wa.me/5511996869309?text=Ol%C3%A1%20Rafael%2C%20vim%20pelo%20site%20SrChZ." target="_blank" rel="noopener">Chamar no WhatsApp</a>
-        <a class="btn btn-ghost" href="mailto:rafaelhenriquecsantosz@gmail.com?subject=Contato%20SrChZ">Enviar e-mail</a>
+        <a class="btn btn-gold" href="https://wa.me/5511996869309?text=Ol%C3%A1%20Rafael%2C%20vim%20pelo%20site%20SrChZ." target="_blank" rel="noopener" data-i18n="contact.wa" data-i18n-wa="wa.home">Chamar no WhatsApp</a>
+        <a class="btn btn-ghost" href="mailto:rafaelhenriquecsantosz@gmail.com?subject=Contato%20SrChZ" data-i18n="contact.mail">Enviar e-mail</a>
         <a class="btn btn-ghost" href="https://www.linkedin.com/in/websrchz/" target="_blank" rel="noopener">LinkedIn</a>
       </div>
     </div>
@@ -345,11 +375,11 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.08}
   <div class="wrap footer-inner">
     <div>
       <span class="brand-txt">SrChZ <em style="font-style:normal;color:var(--muted)">Technologies</em></span>
-      <div style="margin-top:.2rem">Solutions Strategist · Perception · Strategy · Execution</div>
+      <div style="margin-top:.2rem" data-i18n="footer.tagline">Solutions Strategist · Perception · Strategy · Execution</div>
     </div>
     <div style="text-align:right">
       <a href="mailto:rafaelhenriquecsantosz@gmail.com">rafaelhenriquecsantosz@gmail.com</a><br>
-      <a href="privacidade.html">Política de Privacidade</a><br>
+      <a href="privacidade.html" data-i18n="footer.privacy">Política de Privacidade</a><br>
       <span>© 2026 SrChZ Technologies</span><br>
       <span>CNPJ 68.371.698/0001-95</span>
     </div>
@@ -362,7 +392,7 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.08}
   </div>
 </footer>
 
-<a class="wa" href="https://wa.me/5511996869309?text=Ol%C3%A1%20Rafael%2C%20vim%20pelo%20site%20SrChZ." target="_blank" rel="noopener" aria-label="WhatsApp">
+<a class="wa" href="https://wa.me/5511996869309?text=Ol%C3%A1%20Rafael%2C%20vim%20pelo%20site%20SrChZ." target="_blank" rel="noopener" aria-label="WhatsApp" data-i18n-wa="wa.home">
   <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 .4C7.4.4.5 7.3.5 15.9c0 2.8.7 5.5 2.1 7.9L.4 31.6l8-2.1c2.3 1.3 4.9 1.9 7.6 1.9 8.6 0 15.5-6.9 15.5-15.5S24.6.4 16 .4zm0 28.3c-2.4 0-4.7-.6-6.7-1.8l-.5-.3-4.7 1.2 1.3-4.6-.3-.5c-1.3-2.1-2-4.5-2-7C3.4 8.9 9 3.3 16 3.3S28.6 8.9 28.6 16 23 28.7 16 28.7zm7.1-9.4c-.4-.2-2.3-1.1-2.6-1.3-.3-.1-.6-.2-.9.2s-1 1.3-1.2 1.5c-.2.2-.4.3-.8.1-.4-.2-1.6-.6-3.1-1.9-1.1-1-1.9-2.3-2.1-2.7-.2-.4 0-.6.2-.8.2-.2.4-.4.5-.7.2-.2.2-.4.4-.6.1-.3 0-.5 0-.7-.1-.2-.9-2.1-1.2-2.9-.3-.8-.6-.6-.9-.7h-.7c-.2 0-.6.1-.9.4-.3.4-1.2 1.2-1.2 2.9s1.2 3.4 1.4 3.6c.2.2 2.5 3.8 6 5.3.8.4 1.5.6 2 .8.8.3 1.6.2 2.2.1.7-.1 2.3-.9 2.6-1.8.3-.9.3-1.6.2-1.8-.1-.2-.3-.2-.7-.4z"/></svg>
 </a>
 
