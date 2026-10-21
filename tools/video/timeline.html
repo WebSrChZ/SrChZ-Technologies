@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>SrChZ — timeline</title>
+<style>
+  :root{
+    --bg:#09090b; --ink:#f6f2e9; --soft:#cbc4b6; --muted:#8b8576;
+    --gold:#c9a24b; --gold-2:#ead29a;
+    --gold-grad:linear-gradient(180deg,#f6e4ad,#cda74f 55%,#9a7833);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg)}
+  body{font-family:"Inter",sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+
+  #stage{position:relative;width:1080px;height:1920px;overflow:hidden;background:var(--bg)}
+  .scene{position:absolute;inset:0;opacity:0;will-change:opacity,transform}
+
+  /* brilho de fundo, o mesmo clima do site */
+  #glow{position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(760px 620px at 76% 6%, rgba(201,162,75,.18), transparent 62%),
+      radial-gradient(700px 540px at 10% 96%, rgba(201,162,75,.10), transparent 60%);}
+  #vignette{position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(142% 86% at 50% 42%, transparent 62%, rgba(0,0,0,.42) 100%)}
+  #grain{position:absolute;inset:-50%;pointer-events:none;opacity:.045;mix-blend-mode:overlay}
+
+  .g{background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .serif{font-family:"EB Garamond",Georgia,serif}
+
+  .eyebrow{font-size:25px;letter-spacing:.34em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  .rule{height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);transform-origin:50% 50%}
+
+  /* ---- cena: capa ---- */
+  #s_open{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px}
+  #openMark{font-family:"EB Garamond",Georgia,serif;font-weight:700;font-size:210px;line-height:1;letter-spacing:-.02em}
+  #openName{font-size:30px;letter-spacing:.42em;text-transform:uppercase;color:var(--soft);font-weight:600}
+  #openRule{width:420px}
+
+  /* ---- cena: tese ---- */
+  #s_thesis{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}
+  .thesisLine{font-family:"EB Garamond",Georgia,serif;font-weight:700;font-size:138px;line-height:1.02;letter-spacing:-.015em;overflow:hidden}
+  .thesisLine span{display:block}
+
+  /* ---- moldura do aparelho (usada nas cenas com site) ---- */
+  .phone{position:absolute;left:50%;top:118px;width:644px;height:1144px;transform:translateX(-50%);
+    border-radius:34px;overflow:hidden;background:#000;
+    box-shadow:0 60px 130px -40px rgba(0,0,0,.92), 0 0 0 1px rgba(201,162,75,.26), 0 0 90px -30px rgba(201,162,75,.30)}
+  .phone .vp{position:absolute;inset:0;overflow:hidden}
+  .phone .vp img{position:absolute;left:0;top:0;width:644px;display:block}
+
+  /* ---- selo de idioma ---- */
+  #langChip{position:absolute;left:50%;transform:translateX(-50%);
+    display:flex;align-items:center;gap:16px;
+    padding:20px 42px;border:1px solid rgba(201,162,75,.5);border-radius:999px;
+    background:rgba(9,9,11,.82);backdrop-filter:blur(8px);
+    font-size:40px;font-weight:700;letter-spacing:.06em}
+  #langChip .dot{width:14px;height:14px;border-radius:50%;background:var(--gold-2)}
+
+  /* ---- cena: portas ---- */
+  .doorLabel{position:absolute;left:84px;right:84px;text-align:left}
+  .doorKicker{font-size:24px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-2);font-weight:700;margin-bottom:18px}
+  .doorTitle{font-family:"EB Garamond",Georgia,serif;font-weight:700;font-size:92px;line-height:1.0;letter-spacing:-.015em}
+  .doorSub{font-size:31px;line-height:1.42;color:var(--soft);font-weight:300;margin-top:20px;max-width:21ch}
+
+  /* ---- cena: síntese ---- */
+  #s_stats{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0}
+  .statRow{display:flex;align-items:baseline;gap:26px;margin:14px 0}
+  .statNum{font-family:"EB Garamond",Georgia,serif;font-weight:700;font-size:150px;line-height:1;letter-spacing:-.02em}
+  .statLbl{font-size:36px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600}
+
+  /* ---- cena: fecho ---- */
+  #s_cta{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:40px}
+  #ctaDomain{font-family:"EB Garamond",Georgia,serif;font-weight:700;font-size:82px;letter-spacing:-.01em}
+  #ctaHandle{font-size:38px;letter-spacing:.12em;color:var(--soft);font-weight:600}
+  #ctaLangs{display:flex;gap:30px;margin-top:10px}
+  #ctaLangs span{font-size:30px;letter-spacing:.2em;color:var(--muted);font-weight:600}
+
+  /* ---- limpa-tela dourado ---- */
+  #wipe{position:absolute;inset:0;background:var(--gold-grad);transform:translateY(100%)}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="glow"></div>
+
+  <!-- 1. capa -->
+  <div class="scene" id="s_open">
+    <div id="openMark" class="g">Z</div>
+    <div class="rule" id="openRule"></div>
+    <div id="openName">SrChZ Technologies</div>
+  </div>
+
+  <!-- 2. tese -->
+  <div class="scene" id="s_thesis">
+    <div class="thesisLine"><span id="th1">Um site.</span></div>
+    <div class="thesisLine"><span id="th2" class="g">Quatro idiomas.</span></div>
+  </div>
+
+  <!-- 3. a troca de idioma -->
+  <div class="scene" id="s_lang">
+    <div class="phone"><div class="vp"><img id="langImg" src=""></div></div>
+    <div id="langChip"><span class="dot"></span><span id="langTxt">PT</span></div>
+  </div>
+
+  <!-- 4. as portas -->
+  <div class="scene" id="s_door">
+    <div class="phone"><div class="vp"><img id="doorImg" src=""></div></div>
+    <div class="doorLabel" id="doorLabel">
+      <div class="doorKicker" id="doorKicker"></div>
+      <div class="doorTitle" id="doorTitle"></div>
+      <div class="doorSub" id="doorSub"></div>
+    </div>
+  </div>
+
+  <!-- 5. síntese -->
+  <div class="scene" id="s_stats">
+    <div class="statRow"><span class="statNum g" id="n1">11</span><span class="statLbl">páginas</span></div>
+    <div class="rule" style="width:520px" id="statRule"></div>
+    <div class="statRow"><span class="statNum g" id="n2">4</span><span class="statLbl">idiomas</span></div>
+    <div class="statRow" style="margin-top:34px"><span class="statLbl" id="n3" style="letter-spacing:.1em">uma fonte só, sem duplicar página</span></div>
+  </div>
+
+  <!-- 6. fecho -->
+  <div class="scene" id="s_cta">
+    <div class="eyebrow" id="ctaEyebrow">⚜&nbsp;&nbsp;Agora no ar&nbsp;&nbsp;⚜</div>
+    <div id="ctaDomain" class="g">srchz-technologies.com.br</div>
+    <div class="rule" style="width:460px" id="ctaRule"></div>
+    <div id="ctaHandle">@srchztechnologies</div>
+    <div id="ctaLangs"><span>PT</span><span>EN</span><span>ES</span><span>日本語</span></div>
+  </div>
+
+  <div id="wipe"></div>
+  <div id="vignette"></div>
+  <canvas id="grain" width="300" height="300"></canvas>
+</div>
+
+<script>
+/* ---------- utilidades de animação ---------- */
+const clamp = (v,a,b) => v<a?a:v>b?b:v;
+const inv   = (t,a,b) => clamp((t-a)/(b-a), 0, 1);           // normaliza para 0..1
+const outC  = p => 1 - Math.pow(1-p, 3);                      // cubic out
+const outQ  = p => 1 - Math.pow(1-p, 5);                      // quint out — saída macia
+const inOut = p => p<.5 ? 4*p*p*p : 1 - Math.pow(-2*p+2,3)/2;
+const lerp  = (a,b,p) => a + (b-a)*p;
+
+const $ = s => document.querySelector(s);
+const scenes = ['s_open','s_thesis','s_lang','s_door','s_stats','s_cta'];
+const hideAll = () => scenes.forEach(id => { $('#'+id).style.opacity = 0; });
+
+/* ---------- grão: ruído fixo, só para tirar o "liso" do degradê ---------- */
+(function grain(){
+  const c = $('#grain'), x = c.getContext('2d');
+  const img = x.createImageData(300,300);
+  let seed = 7;
+  const rnd = () => (seed = (seed*1103515245 + 12345) & 0x7fffffff) / 0x7fffffff;
+  for (let i=0;i<img.data.length;i+=4){
+    const v = 120 + rnd()*135;
+    img.data[i]=img.data[i+1]=img.data[i+2]=v; img.data[i+3]=255;
+  }
+  x.putImageData(img,0,0);
+})();
+
+/* ---------- conteúdo das cenas ---------- */
+const LANGS = [
+  { code:'PT',    img:'home-pt.png' },
+  { code:'EN',    img:'home-en.png' },
+  { code:'ES',    img:'home-es.png' },
+  { code:'日本語', img:'home-ja.png' }
+];
+
+const DOORS = [
+  { img:'growth.png', kicker:'Porta 01', title:'Branding<br>& Growth',
+    sub:'Posicionamento, conteúdo e aquisição — um motor só.' },
+  { img:'end.png',    kicker:'Porta 02', title:'Engenharia<br>& END',
+    sub:'Ensaios não destrutivos, laudo e norma.' },
+  { img:'tech.png',   kicker:'Porta 03', title:'Tecnologia<br>& Dados / IA',
+    sub:'Portais, automação, CX e dados que sustentam decisão.' }
+];
+
+const TOOLS = [
+  { img:'calc.png',  kicker:'Ferramenta gratuita', title:'Calculadora<br>de caminho<br>do som',
+    sub:'Para inspetor de ultrassom — aberta, sem cadastro.' },
+  { img:'kl-ja.png', kicker:'Caso de cliente', title:'Catálogo<br>KL Sports',
+    sub:'Em japonês. O orçamento ainda chega em português para a equipe.' }
+];
+
+/* ---------- roteiro: cada cena com início e fim em ms ---------- */
+const T = {
+  open:   [0,     2800],
+  thesis: [2800,  5800],
+  lang:   [5800,  12600],
+  doors:  [12600, 20800],
+  tools:  [20800, 26200],
+  stats:  [26200, 29000],
+  cta:    [29000, 32000]
+};
+const DUR = 32000;
+
+function render(t){
+  hideAll();
+  $('#wipe').style.transform = 'translateY(100%)';
+  const glowDrift = Math.sin(t/4200) * 14;
+  $('#glow').style.transform = `translate3d(${glowDrift}px, ${glowDrift*0.6}px, 0)`;
+
+  // ===== 1. capa =====
+  if (t < T.open[1]) {
+    const s = $('#s_open'); s.style.opacity = 1;
+    const p = inv(t, 0, 1200);
+    const mark = $('#openMark');
+    mark.style.opacity = outC(p);
+    mark.style.transform = `scale(${lerp(1.22, 1, outQ(p))})`;
+    mark.style.filter = `blur(${lerp(16, 0, outC(p))}px)`;
+
+    const pr = inv(t, 700, 1700);
+    $('#openRule').style.transform = `scaleX(${outC(pr)})`;
+
+    const pn = inv(t, 1000, 2000);
+    const n = $('#openName');
+    n.style.opacity = outC(pn);
+    n.style.transform = `translateY(${lerp(26, 0, outQ(pn))}px)`;
+    n.style.letterSpacing = `${lerp(0.62, 0.42, outC(pn))}em`;
+
+    // saída
+    const po = inv(t, 2400, 2800);
+    s.style.opacity = 1 - po;
+    s.style.transform = `scale(${lerp(1, 1.06, po)})`;
+  }
+
+  // ===== 2. tese =====
+  if (t >= T.thesis[0] && t < T.thesis[1]) {
+    const s = $('#s_thesis'); s.style.opacity = 1; s.style.transform = 'none';
+    const lt = t - T.thesis[0];
+
+    const p1 = inv(lt, 150, 950);
+    $('#th1').style.transform = `translateY(${lerp(115, 0, outQ(p1))}%)`;
+    const p2 = inv(lt, 750, 1650);
+    $('#th2').style.transform = `translateY(${lerp(115, 0, outQ(p2))}%)`;
+
+    const po = inv(lt, 2500, 3000);
+    s.style.opacity = 1 - po;
+    s.style.transform = `translateY(${lerp(0,-54,outC(po))}px)`;
+  }
+
+  // ===== 3. troca de idioma =====
+  if (t >= T.lang[0] && t < T.lang[1]) {
+    const s = $('#s_lang'); s.style.opacity = 1;
+    const lt = t - T.lang[0];
+    const span = (T.lang[1]-T.lang[0]);
+
+    const idx = clamp(Math.floor(lt / 1550), 0, LANGS.length-1);
+    const L = LANGS[idx];
+    $('#langImg').src = 'shots/' + L.img;
+    $('#langTxt').textContent = L.code;
+
+    // rolagem lenta e contínua dentro do aparelho
+    const scroll = lerp(0, -980, inv(lt, 0, span));
+    $('#langImg').style.transform = `translateY(${scroll}px)`;
+
+    // o selo pulsa a cada troca
+    const local = (lt % 1550) / 1550;
+    const pop = local < .18 ? outQ(local/.18) : 1;
+    const chip = $('#langChip');
+    chip.style.top = '1356px';
+    chip.style.transform = `translateX(-50%) scale(${lerp(.82, 1, pop)})`;
+    chip.style.opacity = pop;
+
+    // entrada e saída da cena
+    const pin = inv(lt, 0, 520);
+    s.style.transform = `scale(${lerp(1.08, 1, outQ(pin))})`;
+    const po = inv(lt, span-420, span);
+    s.style.opacity = 1 - po;
+  }
+
+  // ===== 4+5. portas e ferramentas (mesmo layout) =====
+  const panels = [];
+  const dEach = (T.doors[1]-T.doors[0]) / DOORS.length;
+  DOORS.forEach((d,i) => panels.push({ ...d, a: T.doors[0]+i*dEach, b: T.doors[0]+(i+1)*dEach }));
+  const tEach = (T.tools[1]-T.tools[0]) / TOOLS.length;
+  TOOLS.forEach((d,i) => panels.push({ ...d, a: T.tools[0]+i*tEach, b: T.tools[0]+(i+1)*tEach }));
+
+  for (const p of panels) {
+    if (t < p.a || t >= p.b) continue;
+    const s = $('#s_door'); s.style.opacity = 1;
+    const lt = t - p.a, span = p.b - p.a;
+
+    $('#doorImg').src = 'shots/' + p.img;
+    $('#doorKicker').innerHTML = p.kicker;
+    $('#doorTitle').innerHTML = p.title;
+    $('#doorSub').innerHTML = p.sub;
+
+    // aparelho entra pela direita e rola
+    const pin = inv(lt, 0, 620);
+    const phone = s.querySelector('.phone');
+    phone.style.transform =
+      `translateX(-50%) translateX(${lerp(210,0,outQ(pin))}px) scale(${lerp(.95,1,outQ(pin))})`;
+    phone.style.transformOrigin = '50% 18%';
+    phone.style.opacity = outC(inv(lt, 0, 420));
+
+    const scroll = lerp(-40, -1500, inv(lt, 200, span));
+    $('#doorImg').style.transform = `translateY(${scroll}px)`;
+
+    // rótulo sobe por cima, na parte de baixo
+    const lab = $('#doorLabel');
+    lab.style.top = '1372px';   // o aparelho acaba em 1262: sem sobreposicao
+    const pl = inv(lt, 320, 1150);
+    lab.style.opacity = outC(pl);
+    lab.style.transform = `translateY(${lerp(40, 0, outQ(pl))}px)`;
+
+    const po = inv(lt, span-380, span);
+    s.style.opacity = 1 - po;
+  }
+
+  // ===== 6. síntese =====
+  if (t >= T.stats[0] && t < T.stats[1]) {
+    const s = $('#s_stats'); s.style.opacity = 1;
+    const lt = t - T.stats[0];
+
+    const p1 = inv(lt, 80, 780);
+    const r1 = s.querySelectorAll('.statRow')[0];
+    r1.style.opacity = outC(p1);
+    r1.style.transform = `translateY(${lerp(34,0,outQ(p1))}px)`;
+
+    $('#statRule').style.transform = `scaleX(${outC(inv(lt, 420, 1150))})`;
+
+    const p2 = inv(lt, 520, 1250);
+    const r2 = s.querySelectorAll('.statRow')[1];
+    r2.style.opacity = outC(p2);
+    r2.style.transform = `translateY(${lerp(34,0,outQ(p2))}px)`;
+
+    const p3 = inv(lt, 950, 1700);
+    const r3 = s.querySelectorAll('.statRow')[2];
+    r3.style.opacity = outC(p3);
+    r3.style.transform = `translateY(${lerp(26,0,outQ(p3))}px)`;
+
+    const po = inv(lt, 2450, 2800);
+    s.style.opacity = 1 - po;
+  }
+
+  // ===== 7. fecho =====
+  if (t >= T.cta[0]) {
+    const s = $('#s_cta'); s.style.opacity = 1;
+    const lt = t - T.cta[0];
+
+    const pe = inv(lt, 60, 700);
+    $('#ctaEyebrow').style.opacity = outC(pe);
+
+    const pd = inv(lt, 240, 1150);
+    const d = $('#ctaDomain');
+    d.style.opacity = outC(pd);
+    d.style.transform = `translateY(${lerp(32,0,outQ(pd))}px)`;
+
+    $('#ctaRule').style.transform = `scaleX(${outC(inv(lt, 620, 1500))})`;
+
+    const ph = inv(lt, 820, 1650);
+    const h = $('#ctaHandle');
+    h.style.opacity = outC(ph);
+    h.style.transform = `translateY(${lerp(24,0,outQ(ph))}px)`;
+
+    const pls = inv(lt, 1150, 2100);
+    $('#ctaLangs').style.opacity = outC(pls);
+    [...$('#ctaLangs').children].forEach((el,i) => {
+      const pp = inv(lt, 1150 + i*140, 1800 + i*140);
+      el.style.opacity = outC(pp);
+      el.style.transform = `translateY(${lerp(18,0,outQ(pp))}px)`;
+    });
+  }
+
+  // ===== limpa-tela dourado nas duas viradas =====
+  for (const at of [T.lang[0]-260, T.stats[0]-240]) {
+    const w = inv(t, at, at+760);
+    if (w > 0 && w < 1) {
+      const el = $('#wipe');
+      const up = w < .5 ? inOut(w/.5) : 1;
+      const out = w >= .5 ? inOut((w-.5)/.5) : 0;
+      el.style.transform = `translateY(${lerp(100, 0, up) - lerp(0, 100, out)}%)`;
+    }
+  }
+}
+
+window.render = render;
+window.DUR = DUR;
+</script>
+</body>
+</html>
