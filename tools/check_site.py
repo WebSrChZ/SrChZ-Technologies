@@ -124,7 +124,12 @@ def main():
     html_files = []
     xml_files = []
     for dirpath, dirnames, filenames in os.walk(root):
-        dirnames[:] = [d for d in dirnames if d not in ('.git', 'node_modules')]
+        # 'tools' guarda ferramentas de build, nao paginas do site. O roteiro
+        # do video (tools/video/timeline.html) e um gabarito que so existe
+        # para ser fotografado quadro a quadro: cobrar dele meta description,
+        # canonical ou Open Graph seria cobrar o que ele nao e.
+        dirnames[:] = [d for d in dirnames
+                       if d not in ('.git', 'node_modules', 'tools')]
         for name in filenames:
             full = os.path.join(dirpath, name)
             if name.endswith('.html'):
