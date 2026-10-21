@@ -2,92 +2,130 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<title>SrChZ — timeline</title>
+<title>SrChZ — roteiro do vídeo vertical</title>
 <style>
   :root{
     --bg:#09090b; --ink:#f6f2e9; --soft:#cbc4b6; --muted:#8b8576;
     --gold:#c9a24b; --gold-2:#ead29a;
     --gold-grad:linear-gradient(180deg,#f6e4ad,#cda74f 55%,#9a7833);
+    --wa:#25D366;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg)}
   body{font-family:"Inter",sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
 
   #stage{position:relative;width:1080px;height:1920px;overflow:hidden;background:var(--bg)}
-  .scene{position:absolute;inset:0;opacity:0;will-change:opacity,transform}
+  .scene{position:absolute;inset:0;opacity:0}
 
-  /* brilho de fundo, o mesmo clima do site */
+  /* poeira dourada — a assinatura de fundo do modelo */
+  #dust{position:absolute;inset:0;pointer-events:none}
+  #halo{position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(560px 560px at 50% 42%, rgba(201,162,75,.22), transparent 66%)}
   #glow{position:absolute;inset:0;pointer-events:none;
     background:
-      radial-gradient(760px 620px at 76% 6%, rgba(201,162,75,.18), transparent 62%),
-      radial-gradient(700px 540px at 10% 96%, rgba(201,162,75,.10), transparent 60%);}
+      radial-gradient(820px 640px at 78% 4%, rgba(201,162,75,.14), transparent 62%),
+      radial-gradient(720px 560px at 8% 98%, rgba(201,162,75,.09), transparent 60%)}
   #vignette{position:absolute;inset:0;pointer-events:none;
-    background:radial-gradient(142% 86% at 50% 42%, transparent 62%, rgba(0,0,0,.42) 100%)}
-  #grain{position:absolute;inset:-50%;pointer-events:none;opacity:.045;mix-blend-mode:overlay}
+    background:radial-gradient(144% 88% at 50% 44%, transparent 60%, rgba(0,0,0,.52) 100%)}
 
   .g{background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
   .serif{font-family:"EB Garamond",Georgia,serif}
-
-  .eyebrow{font-size:25px;letter-spacing:.34em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  .eyebrow{font-size:26px;letter-spacing:.34em;text-transform:uppercase;color:var(--muted);font-weight:600}
   .rule{height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);transform-origin:50% 50%}
 
-  /* ---- cena: capa ---- */
-  #s_open{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px}
-  #openMark{font-family:"EB Garamond",Georgia,serif;font-weight:700;font-size:210px;line-height:1;letter-spacing:-.02em}
-  #openName{font-size:30px;letter-spacing:.42em;text-transform:uppercase;color:var(--soft);font-weight:600}
-  #openRule{width:420px}
+  /* ---- marca, com varredura de brilho ---- */
+  .markWrap{position:relative;display:inline-block}
+  .markWrap img{display:block}
+  /* A varredura precisa iluminar SÓ o ouro da marca, não o fundo. Por isso é
+     mascarada pelo alfa do próprio PNG: uma faixa clara percorrendo um
+     gradiente largo, recortada pela silhueta do logo. A primeira versão era
+     um retângulo por cima e aparecia como um bloco branco de borda dura. */
+  .shine{position:absolute;inset:0;pointer-events:none;opacity:0;
+    background:linear-gradient(104deg,
+      transparent 40%, rgba(255,255,255,.30) 46%, rgba(255,255,255,.92) 50%,
+      rgba(255,255,255,.30) 54%, transparent 60%);
+    background-size:260% 100%;
+    -webkit-mask-image:url(brand/srchz-mark.png); mask-image:url(brand/srchz-mark.png);
+    -webkit-mask-size:100% 100%; mask-size:100% 100%;
+    -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat;
+    mix-blend-mode:screen}
 
-  /* ---- cena: tese ---- */
-  #s_thesis{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}
-  .thesisLine{font-family:"EB Garamond",Georgia,serif;font-weight:700;font-size:138px;line-height:1.02;letter-spacing:-.015em;overflow:hidden}
+  /* ---- cena 1: abertura ---- */
+  #s_open{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:46px}
+  #openName{font-size:30px;letter-spacing:.44em;text-transform:uppercase;color:var(--soft);font-weight:600}
+
+  /* ---- cena 2: tese ---- */
+  #s_thesis{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px}
+  .thesisLine{font-family:"EB Garamond",Georgia,serif;font-weight:700;font-size:140px;line-height:1.02;letter-spacing:-.015em;overflow:hidden}
   .thesisLine span{display:block}
 
-  /* ---- moldura do aparelho (usada nas cenas com site) ---- */
-  .phone{position:absolute;left:50%;top:118px;width:644px;height:1144px;transform:translateX(-50%);
-    border-radius:34px;overflow:hidden;background:#000;
-    box-shadow:0 60px 130px -40px rgba(0,0,0,.92), 0 0 0 1px rgba(201,162,75,.26), 0 0 90px -30px rgba(201,162,75,.30)}
-  .phone .vp{position:absolute;inset:0;overflow:hidden}
-  .phone .vp img{position:absolute;left:0;top:0;width:644px;display:block}
+  /* ---- moldura de navegador (o modelo usa navegador, nao celular) ---- */
+  .browser{position:absolute;left:50%;top:150px;width:900px;height:1180px;
+    transform:translateX(-50%);border-radius:20px;overflow:hidden;background:#0c0c0f;
+    box-shadow:0 60px 140px -40px rgba(0,0,0,.95), 0 0 0 1px rgba(201,162,75,.22), 0 0 110px -36px rgba(201,162,75,.26)}
+  .chrome{position:absolute;left:0;right:0;top:0;height:76px;background:#141418;
+    border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;padding:0 24px;gap:18px}
+  .dots{display:flex;gap:10px}
+  .dots i{width:13px;height:13px;border-radius:50%;background:#2e2e34;display:block}
+  .urlbar{flex:1;height:44px;border-radius:999px;background:#0b0b0e;
+    border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;
+    justify-content:center;gap:12px;font-size:24px;color:#9a9486;letter-spacing:.01em}
+  .urlbar b{color:var(--soft);font-weight:600}
+  .viewport{position:absolute;left:0;right:0;top:76px;bottom:0;overflow:hidden}
+  .viewport img{position:absolute;left:0;top:0;width:900px;display:block}
 
   /* ---- selo de idioma ---- */
-  #langChip{position:absolute;left:50%;transform:translateX(-50%);
-    display:flex;align-items:center;gap:16px;
-    padding:20px 42px;border:1px solid rgba(201,162,75,.5);border-radius:999px;
-    background:rgba(9,9,11,.82);backdrop-filter:blur(8px);
-    font-size:40px;font-weight:700;letter-spacing:.06em}
-  #langChip .dot{width:14px;height:14px;border-radius:50%;background:var(--gold-2)}
+  #langChip{position:absolute;left:50%;top:1402px;transform:translateX(-50%);
+    display:flex;align-items:center;gap:18px;padding:22px 48px;
+    border:1px solid rgba(201,162,75,.52);border-radius:999px;
+    background:rgba(9,9,11,.86);font-size:44px;font-weight:700;letter-spacing:.06em}
+  #langChip .dot{width:15px;height:15px;border-radius:50%;background:var(--gold-2)}
+  #langSub{position:absolute;left:0;right:0;top:1510px;text-align:center;
+    font-size:27px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);font-weight:600}
 
-  /* ---- cena: portas ---- */
-  .doorLabel{position:absolute;left:84px;right:84px;text-align:left}
-  .doorKicker{font-size:24px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-2);font-weight:700;margin-bottom:18px}
-  .doorTitle{font-family:"EB Garamond",Georgia,serif;font-weight:700;font-size:92px;line-height:1.0;letter-spacing:-.015em}
-  .doorSub{font-size:31px;line-height:1.42;color:var(--soft);font-weight:300;margin-top:20px;max-width:21ch}
+  /* ---- rotulo das cenas de pagina ---- */
+  .panelLabel{position:absolute;left:90px;right:90px;top:1392px;text-align:left}
+  .panelKicker{font-size:25px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-2);font-weight:700;margin-bottom:18px}
+  .panelTitle{font-family:"EB Garamond",Georgia,serif;font-weight:700;font-size:88px;line-height:1.02;letter-spacing:-.015em}
+  .panelSub{font-size:31px;line-height:1.42;color:var(--soft);font-weight:300;margin-top:20px;max-width:22ch}
 
   /* ---- cena: síntese ---- */
-  #s_stats{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0}
-  .statRow{display:flex;align-items:baseline;gap:26px;margin:14px 0}
-  .statNum{font-family:"EB Garamond",Georgia,serif;font-weight:700;font-size:150px;line-height:1;letter-spacing:-.02em}
-  .statLbl{font-size:36px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  #s_stats{display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .statRow{display:flex;align-items:baseline;gap:28px;margin:16px 0}
+  .statNum{font-family:"EB Garamond",Georgia,serif;font-weight:700;font-size:152px;line-height:1;letter-spacing:-.02em}
+  .statLbl{font-size:37px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600}
 
-  /* ---- cena: fecho ---- */
-  #s_cta{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:40px}
-  #ctaDomain{font-family:"EB Garamond",Georgia,serif;font-weight:700;font-size:82px;letter-spacing:-.01em}
-  #ctaHandle{font-size:38px;letter-spacing:.12em;color:var(--soft);font-weight:600}
-  #ctaLangs{display:flex;gap:30px;margin-top:10px}
-  #ctaLangs span{font-size:30px;letter-spacing:.2em;color:var(--muted);font-weight:600}
+  /* ---- cena: fecho, no padrão do modelo ---- */
+  #s_cta{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0}
+  #ctaTitle{font-family:"EB Garamond",Georgia,serif;font-weight:700;font-size:92px;line-height:1.08;text-align:center;margin-top:44px}
+  #waBtn{display:flex;align-items:center;gap:20px;margin-top:52px;
+    background:var(--wa);color:#07210f;font-weight:700;font-size:40px;
+    padding:28px 60px;border-radius:999px;
+    box-shadow:0 0 70px -14px rgba(37,211,102,.72)}
+  #waBtn svg{width:46px;height:46px;fill:#07210f}
+  #ctaPhone{margin-top:34px;font-size:44px;font-weight:700;letter-spacing:.02em}
+  #ctaDomain{margin-top:12px;font-size:31px;color:var(--soft);letter-spacing:.04em}
+  #ctaLangs{display:flex;gap:30px;margin-top:30px}
+  #ctaLangs span{font-size:28px;letter-spacing:.2em;color:var(--muted);font-weight:600}
+  #swipe{position:absolute;left:0;right:0;bottom:92px;text-align:center;
+    font-size:25px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  #swipe .car{display:block;font-size:34px;margin-bottom:10px;color:var(--gold-2)}
 
-  /* ---- limpa-tela dourado ---- */
   #wipe{position:absolute;inset:0;background:var(--gold-grad);transform:translateY(100%)}
 </style>
 </head>
 <body>
 <div id="stage">
   <div id="glow"></div>
+  <canvas id="dust" width="1080" height="1920"></canvas>
+  <div id="halo"></div>
 
-  <!-- 1. capa -->
+  <!-- 1. abertura: a marca -->
   <div class="scene" id="s_open">
-    <div id="openMark" class="g">Z</div>
-    <div class="rule" id="openRule"></div>
+    <div class="markWrap" id="openMarkWrap">
+      <img id="openMark" src="brand/srchz-mark.png" width="720" height="494" alt="">
+      <div class="shine" id="openShine"></div>
+    </div>
     <div id="openName">SrChZ Technologies</div>
   </div>
 
@@ -97,289 +135,294 @@
     <div class="thesisLine"><span id="th2" class="g">Quatro idiomas.</span></div>
   </div>
 
-  <!-- 3. a troca de idioma -->
+  <!-- 3. troca de idioma, em navegador -->
   <div class="scene" id="s_lang">
-    <div class="phone"><div class="vp"><img id="langImg" src=""></div></div>
+    <div class="browser">
+      <div class="chrome">
+        <div class="dots"><i></i><i></i><i></i></div>
+        <div class="urlbar">🔒&nbsp; <b>srchz-technologies.com.br</b></div>
+      </div>
+      <div class="viewport"><img id="langImg" src=""></div>
+    </div>
     <div id="langChip"><span class="dot"></span><span id="langTxt">PT</span></div>
+    <div id="langSub">o mesmo site, um só código</div>
   </div>
 
-  <!-- 4. as portas -->
-  <div class="scene" id="s_door">
-    <div class="phone"><div class="vp"><img id="doorImg" src=""></div></div>
-    <div class="doorLabel" id="doorLabel">
-      <div class="doorKicker" id="doorKicker"></div>
-      <div class="doorTitle" id="doorTitle"></div>
-      <div class="doorSub" id="doorSub"></div>
+  <!-- 4+5. portas e ferramentas -->
+  <div class="scene" id="s_panel">
+    <div class="browser">
+      <div class="chrome">
+        <div class="dots"><i></i><i></i><i></i></div>
+        <div class="urlbar">🔒&nbsp; <b id="panelUrl">srchz-technologies.com.br</b></div>
+      </div>
+      <div class="viewport"><img id="panelImg" src=""></div>
+    </div>
+    <div class="panelLabel" id="panelLabel">
+      <div class="panelKicker" id="panelKicker"></div>
+      <div class="panelTitle" id="panelTitle"></div>
+      <div class="panelSub" id="panelSub"></div>
     </div>
   </div>
 
-  <!-- 5. síntese -->
+  <!-- 6. síntese -->
   <div class="scene" id="s_stats">
-    <div class="statRow"><span class="statNum g" id="n1">11</span><span class="statLbl">páginas</span></div>
-    <div class="rule" style="width:520px" id="statRule"></div>
-    <div class="statRow"><span class="statNum g" id="n2">4</span><span class="statLbl">idiomas</span></div>
-    <div class="statRow" style="margin-top:34px"><span class="statLbl" id="n3" style="letter-spacing:.1em">uma fonte só, sem duplicar página</span></div>
+    <div class="statRow"><span class="statNum g">11</span><span class="statLbl">páginas</span></div>
+    <div class="rule" style="width:540px" id="statRule"></div>
+    <div class="statRow"><span class="statNum g">4</span><span class="statLbl">idiomas</span></div>
+    <div class="statRow" style="margin-top:36px"><span class="statLbl" style="letter-spacing:.1em">uma fonte só, sem duplicar página</span></div>
   </div>
 
-  <!-- 6. fecho -->
+  <!-- 7. fecho -->
   <div class="scene" id="s_cta">
-    <div class="eyebrow" id="ctaEyebrow">⚜&nbsp;&nbsp;Agora no ar&nbsp;&nbsp;⚜</div>
-    <div id="ctaDomain" class="g">srchz-technologies.com.br</div>
-    <div class="rule" style="width:460px" id="ctaRule"></div>
-    <div id="ctaHandle">@srchztechnologies</div>
+    <div class="markWrap" id="ctaMarkWrap">
+      <img id="ctaMark" src="brand/srchz-mark.png" width="430" height="295" alt="">
+      <div class="shine" id="ctaShine"></div>
+    </div>
+    <div id="ctaTitle">Vamos construir o seu <span class="g">ecossistema</span>.</div>
+    <div id="waBtn">
+      <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8z"/><path d="M8.6 7.3c-.2-.4-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 2.9 2.9 0 0 0-.9 2.2c0 1.3.9 2.5 1 2.7.1.2 1.8 2.9 4.5 4 2.2.9 2.7.7 3.2.7s1.5-.6 1.7-1.2c.2-.6.2-1.1.2-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.9z"/></svg>
+      Falar no WhatsApp
+    </div>
+    <div id="ctaPhone">+55 11 99686-9309</div>
+    <div id="ctaDomain">srchz-technologies.com.br</div>
     <div id="ctaLangs"><span>PT</span><span>EN</span><span>ES</span><span>日本語</span></div>
+    <div id="swipe"><span class="car">⌃</span>arraste pra cima</div>
   </div>
 
   <div id="wipe"></div>
   <div id="vignette"></div>
-  <canvas id="grain" width="300" height="300"></canvas>
 </div>
 
 <script>
-/* ---------- utilidades de animação ---------- */
-const clamp = (v,a,b) => v<a?a:v>b?b:v;
-const inv   = (t,a,b) => clamp((t-a)/(b-a), 0, 1);           // normaliza para 0..1
-const outC  = p => 1 - Math.pow(1-p, 3);                      // cubic out
-const outQ  = p => 1 - Math.pow(1-p, 5);                      // quint out — saída macia
-const inOut = p => p<.5 ? 4*p*p*p : 1 - Math.pow(-2*p+2,3)/2;
-const lerp  = (a,b,p) => a + (b-a)*p;
+/* ---------- utilidades ---------- */
+const clamp=(v,a,b)=>v<a?a:v>b?b:v;
+const inv=(t,a,b)=>clamp((t-a)/(b-a),0,1);
+const outC=p=>1-Math.pow(1-p,3);
+const outQ=p=>1-Math.pow(1-p,5);
+const inOut=p=>p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2;
+const lerp=(a,b,p)=>a+(b-a)*p;
+const $=s=>document.querySelector(s);
+const scenes=['s_open','s_thesis','s_lang','s_panel','s_stats','s_cta'];
 
-const $ = s => document.querySelector(s);
-const scenes = ['s_open','s_thesis','s_lang','s_door','s_stats','s_cta'];
-const hideAll = () => scenes.forEach(id => { $('#'+id).style.opacity = 0; });
-
-/* ---------- grão: ruído fixo, só para tirar o "liso" do degradê ---------- */
-(function grain(){
-  const c = $('#grain'), x = c.getContext('2d');
-  const img = x.createImageData(300,300);
-  let seed = 7;
-  const rnd = () => (seed = (seed*1103515245 + 12345) & 0x7fffffff) / 0x7fffffff;
-  for (let i=0;i<img.data.length;i+=4){
-    const v = 120 + rnd()*135;
-    img.data[i]=img.data[i+1]=img.data[i+2]=v; img.data[i+3]=255;
-  }
-  x.putImageData(img,0,0);
+/* ---------- poeira dourada: deterministica, semeada ---------- */
+const DUST=(()=>{
+  let seed=20261021;
+  const rnd=()=>(seed=(seed*1103515245+12345)&0x7fffffff)/0x7fffffff;
+  return Array.from({length:150},()=>({
+    x:rnd()*1080, y:rnd()*1920,
+    r:.7+rnd()*2.6,
+    sp:4+rnd()*16,            // velocidade de subida, px/s
+    ph:rnd()*Math.PI*2,       // fase do cintilar
+    am:.22+rnd()*.72          // amplitude do brilho
+  }));
 })();
 
-/* ---------- conteúdo das cenas ---------- */
-const LANGS = [
-  { code:'PT',    img:'home-pt.png' },
-  { code:'EN',    img:'home-en.png' },
-  { code:'ES',    img:'home-es.png' },
-  { code:'日本語', img:'home-ja.png' }
+function drawDust(t){
+  const c=$('#dust'), x=c.getContext('2d');
+  x.clearRect(0,0,1080,1920);
+  const s=t/1000;
+  for(const p of DUST){
+    const y=((p.y - p.sp*s) % 1980 + 1980) % 1980 - 30;
+    const a=p.am*(0.45+0.55*Math.sin(s*1.5+p.ph));
+    x.beginPath();
+    x.fillStyle=`rgba(234,210,154,${a.toFixed(3)})`;
+    x.arc(p.x,y,p.r,0,6.2832);
+    x.fill();
+  }
+}
+
+/* ---------- conteúdo ---------- */
+const LANGS=[
+  {code:'PT',   img:'home-pt.png'},
+  {code:'EN',   img:'home-en.png'},
+  {code:'ES',   img:'home-es.png'},
+  {code:'日本語',img:'home-ja.png'}
 ];
 
-const DOORS = [
-  { img:'growth.png', kicker:'Porta 01', title:'Branding<br>& Growth',
-    sub:'Posicionamento, conteúdo e aquisição — um motor só.' },
-  { img:'end.png',    kicker:'Porta 02', title:'Engenharia<br>& END',
-    sub:'Ensaios não destrutivos, laudo e norma.' },
-  { img:'tech.png',   kicker:'Porta 03', title:'Tecnologia<br>& Dados / IA',
-    sub:'Portais, automação, CX e dados que sustentam decisão.' }
+const PANELS_DOORS=[
+  {img:'growth.png', url:'srchz-technologies.com.br/growth', kicker:'Porta 01',
+   title:'Branding<br>&amp; Growth', sub:'Posicionamento, conteúdo e aquisição — um motor só.'},
+  {img:'end.png', url:'srchz-technologies.com.br/end', kicker:'Porta 02',
+   title:'Engenharia<br>&amp; END', sub:'Ensaios não destrutivos, laudo conforme norma.'},
+  {img:'tech.png', url:'srchz-technologies.com.br/tech', kicker:'Porta 03',
+   title:'Tecnologia<br>&amp; Dados / IA', sub:'Portais, automação, CX e dados que sustentam decisão.'}
 ];
 
-const TOOLS = [
-  { img:'calc.png',  kicker:'Ferramenta gratuita', title:'Calculadora<br>de caminho<br>do som',
-    sub:'Para inspetor de ultrassom — aberta, sem cadastro.' },
-  { img:'kl-ja.png', kicker:'Caso de cliente', title:'Catálogo<br>KL Sports',
-    sub:'Em japonês. O orçamento ainda chega em português para a equipe.' }
+const PANELS_TOOLS=[
+  {img:'calc.png', url:'…/end/USN2/calculadora', kicker:'Ferramenta gratuita',
+   title:'Calculadora de<br>caminho do som', sub:'Para inspetor de ultrassom — aberta, sem cadastro.'},
+  {img:'kl-ja.png', url:'srchz-technologies.com.br/kl-sports', kicker:'Caso de cliente',
+   title:'Catálogo<br>KL Sports', sub:'Em japonês. O orçamento ainda chega em português para a equipe.'}
 ];
 
-/* ---------- roteiro: cada cena com início e fim em ms ---------- */
-const T = {
-  open:   [0,     2800],
-  thesis: [2800,  5800],
-  lang:   [5800,  12600],
-  doors:  [12600, 20800],
-  tools:  [20800, 26200],
-  stats:  [26200, 29000],
-  cta:    [29000, 32000]
+/* ---------- roteiro (ms) ---------- */
+const T={
+  open:   [0,     3600],
+  thesis: [3600,  6600],
+  lang:   [6600,  13800],
+  doors:  [13800, 21600],
+  tools:  [21600, 26600],
+  stats:  [26600, 29400],
+  cta:    [29400, 34000]
 };
-const DUR = 32000;
+const DUR=34000;
+
+/* varredura de brilho sobre a marca */
+function sweep(wrapSel, shineSel, p){
+  const sh=$(shineSel);
+  if(p<=0||p>=1){ sh.style.opacity=0; return; }
+  /* desloca o GRADIENTE dentro da máscara, não o elemento: assim a faixa
+     atravessa a marca e some nas bordas dela, em vez de passar por cima */
+  sh.style.opacity = Math.sin(p*Math.PI);          // entra e sai suave
+  sh.style.backgroundPosition = `${lerp(160, -60, p)}% 0`;
+}
 
 function render(t){
-  hideAll();
-  $('#wipe').style.transform = 'translateY(100%)';
-  const glowDrift = Math.sin(t/4200) * 14;
-  $('#glow').style.transform = `translate3d(${glowDrift}px, ${glowDrift*0.6}px, 0)`;
+  scenes.forEach(id=>{ const e=$('#'+id); e.style.opacity=0; e.style.transform='none'; });
+  $('#wipe').style.transform='translateY(100%)';
+  drawDust(t);
 
-  // ===== 1. capa =====
-  if (t < T.open[1]) {
-    const s = $('#s_open'); s.style.opacity = 1;
-    const p = inv(t, 0, 1200);
-    const mark = $('#openMark');
-    mark.style.opacity = outC(p);
-    mark.style.transform = `scale(${lerp(1.22, 1, outQ(p))})`;
-    mark.style.filter = `blur(${lerp(16, 0, outC(p))}px)`;
+  const drift=Math.sin(t/4600)*12;
+  $('#glow').style.transform=`translate3d(${drift}px,${drift*.6}px,0)`;
 
-    const pr = inv(t, 700, 1700);
-    $('#openRule').style.transform = `scaleX(${outC(pr)})`;
+  // halo só acompanha as cenas de marca
+  const haloOn = (t<T.open[1]) || (t>=T.cta[0]);
+  $('#halo').style.opacity = haloOn ? 1 : 0;
 
-    const pn = inv(t, 1000, 2000);
-    const n = $('#openName');
-    n.style.opacity = outC(pn);
-    n.style.transform = `translateY(${lerp(26, 0, outQ(pn))}px)`;
-    n.style.letterSpacing = `${lerp(0.62, 0.42, outC(pn))}em`;
-
-    // saída
-    const po = inv(t, 2400, 2800);
-    s.style.opacity = 1 - po;
-    s.style.transform = `scale(${lerp(1, 1.06, po)})`;
+  // ===== 1. abertura =====
+  if(t<T.open[1]){
+    const s=$('#s_open'); s.style.opacity=1;
+    const p=inv(t,0,1500);
+    const m=$('#openMark');
+    m.style.opacity=outC(p);
+    m.style.transform=`scale(${lerp(1.16,1,outQ(p))})`;
+    m.style.filter=`blur(${lerp(14,0,outC(p))}px) drop-shadow(0 0 46px rgba(201,162,75,.42))`;
+    sweep('#openMarkWrap','#openShine', inv(t,1250,2500));
+    const pn=inv(t,1450,2500);
+    const n=$('#openName');
+    n.style.opacity=outC(pn);
+    n.style.letterSpacing=`${lerp(.66,.44,outC(pn))}em`;
+    const po=inv(t,3150,3600);
+    s.style.opacity=1-po;
+    s.style.transform=`scale(${lerp(1,1.07,po)})`;
   }
 
   // ===== 2. tese =====
-  if (t >= T.thesis[0] && t < T.thesis[1]) {
-    const s = $('#s_thesis'); s.style.opacity = 1; s.style.transform = 'none';
-    const lt = t - T.thesis[0];
-
-    const p1 = inv(lt, 150, 950);
-    $('#th1').style.transform = `translateY(${lerp(115, 0, outQ(p1))}%)`;
-    const p2 = inv(lt, 750, 1650);
-    $('#th2').style.transform = `translateY(${lerp(115, 0, outQ(p2))}%)`;
-
-    const po = inv(lt, 2500, 3000);
-    s.style.opacity = 1 - po;
-    s.style.transform = `translateY(${lerp(0,-54,outC(po))}px)`;
+  if(t>=T.thesis[0]&&t<T.thesis[1]){
+    const s=$('#s_thesis'); s.style.opacity=1;
+    const lt=t-T.thesis[0];
+    $('#th1').style.transform=`translateY(${lerp(115,0,outQ(inv(lt,120,980)))}%)`;
+    $('#th2').style.transform=`translateY(${lerp(115,0,outQ(inv(lt,700,1620)))}%)`;
+    const po=inv(lt,2520,3000);
+    s.style.opacity=1-po;
+    s.style.transform=`translateY(${lerp(0,-52,outC(po))}px)`;
   }
 
   // ===== 3. troca de idioma =====
-  if (t >= T.lang[0] && t < T.lang[1]) {
-    const s = $('#s_lang'); s.style.opacity = 1;
-    const lt = t - T.lang[0];
-    const span = (T.lang[1]-T.lang[0]);
-
-    const idx = clamp(Math.floor(lt / 1550), 0, LANGS.length-1);
-    const L = LANGS[idx];
-    $('#langImg').src = 'shots/' + L.img;
-    $('#langTxt').textContent = L.code;
-
-    // rolagem lenta e contínua dentro do aparelho
-    const scroll = lerp(0, -980, inv(lt, 0, span));
-    $('#langImg').style.transform = `translateY(${scroll}px)`;
-
-    // o selo pulsa a cada troca
-    const local = (lt % 1550) / 1550;
-    const pop = local < .18 ? outQ(local/.18) : 1;
-    const chip = $('#langChip');
-    chip.style.top = '1356px';
-    chip.style.transform = `translateX(-50%) scale(${lerp(.82, 1, pop)})`;
-    chip.style.opacity = pop;
-
-    // entrada e saída da cena
-    const pin = inv(lt, 0, 520);
-    s.style.transform = `scale(${lerp(1.08, 1, outQ(pin))})`;
-    const po = inv(lt, span-420, span);
-    s.style.opacity = 1 - po;
+  if(t>=T.lang[0]&&t<T.lang[1]){
+    const s=$('#s_lang'); s.style.opacity=1;
+    const lt=t-T.lang[0], span=T.lang[1]-T.lang[0];
+    const each=span/LANGS.length;
+    const idx=clamp(Math.floor(lt/each),0,LANGS.length-1);
+    $('#langImg').src='shots/'+LANGS[idx].img;
+    $('#langTxt').textContent=LANGS[idx].code;
+    $('#langImg').style.transform=`translateY(${lerp(0,-1120,inv(lt,0,span))}px)`;
+    const local=(lt%each)/each;
+    const pop=local<.16?outQ(local/.16):1;
+    const chip=$('#langChip');
+    chip.style.transform=`translateX(-50%) scale(${lerp(.84,1,pop)})`;
+    chip.style.opacity=pop;
+    $('#langSub').style.opacity=outC(inv(lt,420,1200));
+    s.style.transform=`scale(${lerp(1.06,1,outQ(inv(lt,0,560)))})`;
+    s.style.opacity=1-inv(lt,span-420,span);
   }
 
-  // ===== 4+5. portas e ferramentas (mesmo layout) =====
-  const panels = [];
-  const dEach = (T.doors[1]-T.doors[0]) / DOORS.length;
-  DOORS.forEach((d,i) => panels.push({ ...d, a: T.doors[0]+i*dEach, b: T.doors[0]+(i+1)*dEach }));
-  const tEach = (T.tools[1]-T.tools[0]) / TOOLS.length;
-  TOOLS.forEach((d,i) => panels.push({ ...d, a: T.tools[0]+i*tEach, b: T.tools[0]+(i+1)*tEach }));
+  // ===== 4+5. painéis =====
+  const panels=[];
+  const dEach=(T.doors[1]-T.doors[0])/PANELS_DOORS.length;
+  PANELS_DOORS.forEach((d,i)=>panels.push({...d,a:T.doors[0]+i*dEach,b:T.doors[0]+(i+1)*dEach}));
+  const tEach=(T.tools[1]-T.tools[0])/PANELS_TOOLS.length;
+  PANELS_TOOLS.forEach((d,i)=>panels.push({...d,a:T.tools[0]+i*tEach,b:T.tools[0]+(i+1)*tEach}));
 
-  for (const p of panels) {
-    if (t < p.a || t >= p.b) continue;
-    const s = $('#s_door'); s.style.opacity = 1;
-    const lt = t - p.a, span = p.b - p.a;
+  for(const p of panels){
+    if(t<p.a||t>=p.b) continue;
+    const s=$('#s_panel'); s.style.opacity=1;
+    const lt=t-p.a, span=p.b-p.a;
+    $('#panelImg').src='shots/'+p.img;
+    $('#panelUrl').textContent=p.url;
+    $('#panelKicker').innerHTML=p.kicker;
+    $('#panelTitle').innerHTML=p.title;
+    $('#panelSub').innerHTML=p.sub;
 
-    $('#doorImg').src = 'shots/' + p.img;
-    $('#doorKicker').innerHTML = p.kicker;
-    $('#doorTitle').innerHTML = p.title;
-    $('#doorSub').innerHTML = p.sub;
+    const pin=inv(lt,0,640);
+    const br=s.querySelector('.browser');
+    br.style.transform=`translateX(-50%) translateX(${lerp(190,0,outQ(pin))}px) scale(${lerp(.955,1,outQ(pin))})`;
+    br.style.transformOrigin='50% 16%';
+    br.style.opacity=outC(inv(lt,0,440));
 
-    // aparelho entra pela direita e rola
-    const pin = inv(lt, 0, 620);
-    const phone = s.querySelector('.phone');
-    phone.style.transform =
-      `translateX(-50%) translateX(${lerp(210,0,outQ(pin))}px) scale(${lerp(.95,1,outQ(pin))})`;
-    phone.style.transformOrigin = '50% 18%';
-    phone.style.opacity = outC(inv(lt, 0, 420));
+    $('#panelImg').style.transform=`translateY(${lerp(-30,-1560,inv(lt,200,span))}px)`;
 
-    const scroll = lerp(-40, -1500, inv(lt, 200, span));
-    $('#doorImg').style.transform = `translateY(${scroll}px)`;
-
-    // rótulo sobe por cima, na parte de baixo
-    const lab = $('#doorLabel');
-    lab.style.top = '1372px';   // o aparelho acaba em 1262: sem sobreposicao
-    const pl = inv(lt, 320, 1150);
-    lab.style.opacity = outC(pl);
-    lab.style.transform = `translateY(${lerp(40, 0, outQ(pl))}px)`;
-
-    const po = inv(lt, span-380, span);
-    s.style.opacity = 1 - po;
+    const lab=$('#panelLabel');
+    const pl=inv(lt,340,1180);
+    lab.style.opacity=outC(pl);
+    lab.style.transform=`translateY(${lerp(38,0,outQ(pl))}px)`;
+    s.style.opacity=1-inv(lt,span-380,span);
   }
 
   // ===== 6. síntese =====
-  if (t >= T.stats[0] && t < T.stats[1]) {
-    const s = $('#s_stats'); s.style.opacity = 1;
-    const lt = t - T.stats[0];
-
-    const p1 = inv(lt, 80, 780);
-    const r1 = s.querySelectorAll('.statRow')[0];
-    r1.style.opacity = outC(p1);
-    r1.style.transform = `translateY(${lerp(34,0,outQ(p1))}px)`;
-
-    $('#statRule').style.transform = `scaleX(${outC(inv(lt, 420, 1150))})`;
-
-    const p2 = inv(lt, 520, 1250);
-    const r2 = s.querySelectorAll('.statRow')[1];
-    r2.style.opacity = outC(p2);
-    r2.style.transform = `translateY(${lerp(34,0,outQ(p2))}px)`;
-
-    const p3 = inv(lt, 950, 1700);
-    const r3 = s.querySelectorAll('.statRow')[2];
-    r3.style.opacity = outC(p3);
-    r3.style.transform = `translateY(${lerp(26,0,outQ(p3))}px)`;
-
-    const po = inv(lt, 2450, 2800);
-    s.style.opacity = 1 - po;
+  if(t>=T.stats[0]&&t<T.stats[1]){
+    const s=$('#s_stats'); s.style.opacity=1;
+    const lt=t-T.stats[0];
+    const rows=s.querySelectorAll('.statRow');
+    [[80,780],[520,1250],[950,1700]].forEach(([a,b],i)=>{
+      const p=inv(lt,a,b);
+      rows[i].style.opacity=outC(p);
+      rows[i].style.transform=`translateY(${lerp(32,0,outQ(p))}px)`;
+    });
+    $('#statRule').style.transform=`scaleX(${outC(inv(lt,420,1150))})`;
+    s.style.opacity=1-inv(lt,2450,2800);
   }
 
   // ===== 7. fecho =====
-  if (t >= T.cta[0]) {
-    const s = $('#s_cta'); s.style.opacity = 1;
-    const lt = t - T.cta[0];
+  if(t>=T.cta[0]){
+    const s=$('#s_cta'); s.style.opacity=1;
+    const lt=t-T.cta[0];
+    const pm=inv(lt,0,1000);
+    const m=$('#ctaMark');
+    m.style.opacity=outC(pm);
+    m.style.transform=`scale(${lerp(1.12,1,outQ(pm))})`;
+    m.style.filter='drop-shadow(0 0 40px rgba(201,162,75,.4))';
+    sweep('#ctaMarkWrap','#ctaShine', inv(lt,900,2100));
 
-    const pe = inv(lt, 60, 700);
-    $('#ctaEyebrow').style.opacity = outC(pe);
-
-    const pd = inv(lt, 240, 1150);
-    const d = $('#ctaDomain');
-    d.style.opacity = outC(pd);
-    d.style.transform = `translateY(${lerp(32,0,outQ(pd))}px)`;
-
-    $('#ctaRule').style.transform = `scaleX(${outC(inv(lt, 620, 1500))})`;
-
-    const ph = inv(lt, 820, 1650);
-    const h = $('#ctaHandle');
-    h.style.opacity = outC(ph);
-    h.style.transform = `translateY(${lerp(24,0,outQ(ph))}px)`;
-
-    const pls = inv(lt, 1150, 2100);
-    $('#ctaLangs').style.opacity = outC(pls);
-    [...$('#ctaLangs').children].forEach((el,i) => {
-      const pp = inv(lt, 1150 + i*140, 1800 + i*140);
-      el.style.opacity = outC(pp);
-      el.style.transform = `translateY(${lerp(18,0,outQ(pp))}px)`;
-    });
+    const steps=[['#ctaTitle',380,1250,30],['#waBtn',760,1600,26],
+                 ['#ctaPhone',1030,1800,22],['#ctaDomain',1180,1950,20],
+                 ['#ctaLangs',1340,2150,18]];
+    for(const [sel,a,b,dy] of steps){
+      const p=inv(lt,a,b);
+      const el=$(sel);
+      el.style.opacity=outC(p);
+      el.style.transform=`translateY(${lerp(dy,0,outQ(p))}px)`;
+    }
+    // o botão respira, como no modelo
+    const breathe=1+Math.sin(lt/560)*.022;
+    $('#waBtn').style.transform=
+      `translateY(${lerp(26,0,outQ(inv(lt,760,1600)))}px) scale(${breathe})`;
+    const ps=inv(lt,1700,2500);
+    $('#swipe').style.opacity=outC(ps)*(0.62+0.38*Math.sin(lt/420));
   }
 
-  // ===== limpa-tela dourado nas duas viradas =====
-  for (const at of [T.lang[0]-260, T.stats[0]-240]) {
-    const w = inv(t, at, at+760);
-    if (w > 0 && w < 1) {
-      const el = $('#wipe');
-      const up = w < .5 ? inOut(w/.5) : 1;
-      const out = w >= .5 ? inOut((w-.5)/.5) : 0;
-      el.style.transform = `translateY(${lerp(100, 0, up) - lerp(0, 100, out)}%)`;
+  // ===== limpa-tela nas viradas =====
+  for(const at of [T.lang[0]-280, T.stats[0]-240]){
+    const w=inv(t,at,at+780);
+    if(w>0&&w<1){
+      const up=w<.5?inOut(w/.5):1, out=w>=.5?inOut((w-.5)/.5):0;
+      $('#wipe').style.transform=`translateY(${lerp(100,0,up)-lerp(0,100,out)}%)`;
     }
   }
 }
 
-window.render = render;
-window.DUR = DUR;
+window.render=render;
+window.DUR=DUR;
 </script>
 </body>
 </html>

@@ -8,6 +8,7 @@ const path = require('path');
 const { execFileSync } = require('child_process');
 
 const DIR  = __dirname;                       // timeline.html mora aqui
+const SITE = process.env.SITE_ROOT || path.join(DIR, '..', '..');  // p/ assets/brand
 /* Pasta de trabalho FORA do repositorio: guarda as capturas, os recortes e os
    ~960 quadros intermediarios (uns 300 MB). Nada disso e versionado — o que
    se versiona e o roteiro (timeline.html) e o mp4 final. */
@@ -38,6 +39,7 @@ const server = http.createServer((q, r) => {
   const rel = decodeURIComponent(q.url.split('?')[0]);
   let f;
   if (rel.startsWith('/shots/'))      f = path.join(WORK, 'crop', rel.slice(7));
+  else if (rel.startsWith('/brand/')) f = path.join(SITE, 'assets', 'brand', rel.slice(7));
   else if (rel.startsWith('/fonts/')) f = path.join(FONTS, rel.slice(7));
   else                                f = path.join(DIR, rel === '/' ? 'timeline.html' : rel);
   if (!fs.existsSync(f) || fs.statSync(f).isDirectory()) { r.writeHead(404); r.end('404'); return; }
