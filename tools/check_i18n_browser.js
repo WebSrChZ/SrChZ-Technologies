@@ -188,6 +188,17 @@ async function checkPage(browser, spec, lang) {
       .test(document.body.innerText));
   ok(!raw, `${spec.id}/${lang}: nenhuma chave crua na tela`);
 
+  /* Entidade HTML escrita por extenso. `data-i18n` usa textContent, que nao
+     decodifica, entao "Branding &amp; Growth" foi ao ar com o &amp; a vista
+     em ingles e espanhol. A checagem de chave crua acima nao pega isso: o
+     texto estava traduzido e correto, so que escapado duas vezes. */
+  const ent = await page.evaluate(() => {
+    const m = document.body.innerText.match(/&(amp|lt|gt|quot|apos|nbsp|#\d+);/i);
+    return m ? m[0] : null;
+  });
+  ok(!ent, `${spec.id}/${lang}: nenhuma entidade HTML literal na tela` +
+     (ent ? ` — encontrou "${ent}"` : ''));
+
   if (!spec.noDesc) {
     const desc = await page.evaluate(() => {
       const el = document.querySelector('meta[name="description"]');
