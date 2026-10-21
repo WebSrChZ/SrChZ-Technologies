@@ -40,6 +40,19 @@ jobs:
       - name: Traducao completa em todos os idiomas
         run: node tools/check_i18n.js .
 
+      # O check acima le arquivos e nao alcanca a classe de defeito que mais
+      # apareceu na traducao: a chave existe, o texto esta certo, e o visitante
+      # mesmo assim nao consegue usar a pagina — rotulo do seletor desenhado na
+      # barra de navegacao, seletor parado fora da area visivel, navegacao mais
+      # larga que a tela. Isso so se ve medindo a pagina renderizada.
+      #
+      # playwright-core nao baixa navegador: usa o Chrome que ja vem na imagem
+      # do runner, achado por tools/check_i18n_browser.js em /usr/bin.
+      - name: Layout, troca de idioma e tipografia CJK no navegador
+        run: |
+          npm install --no-save --no-audit --no-fund playwright-core@1.49.1
+          node tools/check_i18n_browser.js .
+
       - name: Service worker com versao de cache propria
         run: |
           # O sw.js cacheia index.html, css e js. Se a versao nao e bumpada no

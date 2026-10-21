@@ -44,17 +44,52 @@ As **portas** da home levam a: **Branding &amp; Growth** (`/growth/`), **Engenha
 ## ✅ Verificação antes do merge
 
 O deploy é o próprio repositório: o que entra na `main` vai ao ar. O workflow
-`.github/workflows/pr-checks.yml` roda em todo PR e barra quatro coisas que
-quebrariam em produção — HTML malformado, JSON-LD inválido (o Google descarta o
-bloco em silêncio), XML/manifest inválido e link ou asset interno apontando
-para arquivo inexistente. Também exige o bump do `CACHE` em `growth/sw.js`
-quando `growth/` muda, senão visitantes recorrentes continuam na versão antiga.
+`.github/workflows/pr-checks.yml` roda em todo PR, em três camadas.
 
-Mesma verificação, localmente:
+**1. Estrutura — `tools/check_site.py`** (só stdlib do Python)
+HTML malformado, JSON-LD inválido (o Google descarta o bloco em silêncio),
+XML/manifest inválido, link ou asset interno apontando para arquivo
+inexistente, página sem `<meta name="description">`. Também exige o bump do
+`CACHE` em `growth/sw.js` quando `growth/` muda, senão visitantes recorrentes
+continuam na versão antiga. Mais `node --check` em todo JavaScript.
+
+**2. Tradução — `tools/check_i18n.js`** (só stdlib do Node)
+Chave usada no HTML que falta em algum idioma, idiomas que divergiram entre si,
+página que usa `data-i18n` sem carregar o motor / sem `[data-i18n-switcher]` /
+sem `data-i18n-page`, `_meta.pages` sem título ou descrição, chave órfã. No
+catálogo da KL Sports, onde as chaves são montadas em tempo de execução, exige
+`name`, `finish` e `desc` nos três idiomas para **todo** `slug` do array — e
+reclama de tradução sobrando para produto que saiu do catálogo.
+
+**3. O que só o navegador vê — `tools/check_i18n_browser.js`**
+As duas camadas acima leem arquivos, e a classe de defeito que mais apareceu na
+tradução passa ilesa por elas: a chave existe, o texto está certo, e mesmo
+assim o visitante não consegue usar a página. Foi assim que *"Idioma /
+Language"* ficou **escrito na barra de navegação** de quatro páginas, que o
+seletor do USN2 ficou parado 156px acima da área visível dentro de uma gaveta
+fechada, e que a calculadora passou a vida com o menu inalcançável no celular.
+Esta camada abre as 11 páginas nos 4 idiomas e mede: idioma do `<html>`, título
+por página, corpo revelado, propagação de `?lang=` nos links, zero scroll
+lateral a 390px, **seletor que o dedo alcança de fato** (centro dentro da
+viewport + hit-test, não só a caixa), rótulo do seletor que não é desenhado,
+tipografia CJK sem espaçamento latino nem itálico sintetizado, e console limpo.
+Mais a regra de negócio do catálogo: **a tela segue o idioma do visitante, mas
+o orçamento chega à equipe em português**, com o SKU que ela reconhece.
+
+Localmente:
 
 ```bash
 python3 tools/check_site.py .
+node tools/check_i18n.js .
+
+# a camada de navegador precisa do playwright e de um Chrome/Chromium:
+npm i --no-save playwright-core
+node tools/check_i18n_browser.js .        # use $CHROME_PATH se não achar sozinho
 ```
+
+Sem playwright instalado, a terceira camada avisa e sai com 0 — para não travar
+quem só quer corrigir um texto. Dentro do CI, o mesmo caso é **erro**: um check
+que silenciosamente deixa de rodar não está protegendo nada.
 
 ## 🚀 Rodar localmente
 ```bash
