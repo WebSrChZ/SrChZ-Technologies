@@ -115,6 +115,19 @@
   .dfill{fill:rgba(201,162,75,.10)}
   .dtxt{fill:var(--muted);font-family:"Inter",sans-serif;font-weight:600;letter-spacing:.14em}
 
+  /* ---------- plano de detalhe ----------
+     Um recorte ampliado da propria captura, sangrando no quadro. E o que
+     quebra a monotonia de escala: entre dois planos medios da moldura,
+     meio segundo de close muda o ritmo sem material novo. */
+  #sd{overflow:hidden;background:var(--bg)}
+  #dimg{position:absolute;left:0;top:0;display:block}
+  /* Vinheta forte, nao decorativa: no close a pagina e mais larga que o
+     quadro e o texto corrido sai cortado nas duas pontas. Escurecendo antes
+     da borda, a palavra cortada some no escuro em vez de ser fatiada. */
+  #dmask{position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(76% 50% at 50% 50%, transparent 0%,
+      rgba(9,9,11,.12) 40%, rgba(9,9,11,.84) 76%, rgba(9,9,11,.98) 100%)}
+
   /* ---------- fecho ---------- */
   #waBtn{display:flex;align-items:center;gap:16px;background:var(--wa);color:#07210f;
     font-weight:700;border-radius:999px;box-shadow:0 0 70px -16px rgba(37,211,102,.7)}
@@ -160,7 +173,6 @@
       <!-- duas camadas: na troca de idioma a de baixo segura o print
            anterior enquanto a de cima entra, para o corte nao piscar -->
       <div class="vp" id="vp"><img id="shotB" src=""><img id="shot" src=""></div>
-      <div id="cursor"></div>
     </div>
     <div id="panelTxt" style="position:absolute">
       <div class="kick" id="pKick"></div>
@@ -172,6 +184,9 @@
     <div id="tech-dia"></div>
     <div id="graph"></div>
   </div>
+
+  <!-- plano de detalhe: recorte ampliado da captura -->
+  <div class="scene" id="sd"><img id="dimg" src=""><div id="dmask"></div></div>
 
   <!-- 07 ONE SYSTEM -->
   <div class="scene center" id="s7">
@@ -286,7 +301,7 @@ function layout(){
 
   // texto do painel
   const p=$('#panelTxt');
-  if(V){ p.style.left='90px'; p.style.right='90px'; p.style.top='1312px'; p.style.textAlign='left'; }
+  if(V){ p.style.left='90px'; p.style.right='90px'; p.style.top='1296px'; p.style.textAlign='left'; }
   else { p.style.left='1180px'; p.style.right='90px'; p.style.top='186px'; p.style.textAlign='left'; }
   $('#pKick').style.fontSize=px(V?25:24);
   $('#pKick').style.marginBottom=px(16);
@@ -403,46 +418,141 @@ function buildGraph(){
 }
 buildGraph();
 
-/* ===================== conteúdo dos painéis ===================== */
+/* ===================== conteúdo ===================== */
 const SHOT=(id)=>`film/${FMT}-${id}.png`;
 const VPW=V?900:1010, VPH=(V?1120:840)-(V?74:64);
 
-/* scroll em fracao do que a captura tem de sobra, nao em pixel: a mesma
-   pagina entra no quadro com escalas diferentes nos dois formatos, e um
-   valor fixo em pixel passaria do fim da imagem num deles. */
-const PANELS=[
-  // 03 THE INTERFACE
-  { a:12000,b:18600, shot:'home', url:'srchz-technologies.com.br',
-    kick:'As três portas', title:'Um site.<br>Três entradas.',
-    sub:'Branding &amp; Growth · Engenharia &amp; END · Tecnologia &amp; Dados/IA',
-    scroll:[0,.40], cursor:true },
-  // 04 BRANDING & GROWTH
-  { a:18600,b:26000, shot:'growth', url:'srchz-technologies.com.br/growth',
-    kick:'01 — Branding &amp; Growth', title:'Percepção<br>gera desejo.',
-    sub:'Estratégia transforma atenção em oportunidade.',
-    chips:['Tráfego pago','Branding','Produção de vídeo','Social media','Web','Portal do Cliente'],
-    scroll:[.02,.52] },
-  // 05 ENGINEERING & NDT
-  { a:26000,b:33000, shot:'end', url:'srchz-technologies.com.br/end',
-    kick:'02 — Engenharia &amp; END', title:'Precisão para<br>enxergar o que<br>outros deixam passar.',
-    sub:'', chips:['Ultrassom N2','Soldas','Trilhos','Espessura','Líquido penetrante'],
-    scroll:[.01,.46], diagram:true },
-  // 06 TECHNOLOGY & DATA / AI
-  { a:33000,b:40000, shot:'tech', url:'srchz-technologies.com.br/tech',
-    kick:'03 — Tecnologia &amp; Dados/IA', title:'Conecta o que<br>antes estava<br>fragmentado.',
-    sub:'', chips:['Web','Portais','Web apps','Automação','CX','Dados &amp; IA'],
-    scroll:[.01,.48], graph:true },
-  // 07 ALCANCE — a mesma home trocando de lingua debaixo do mesmo layout
-  { a:40000,b:45000, shot:'home', url:'srchz-technologies.com.br',
-    kick:'Alcance', title:'Quatro idiomas.<br>Entrega internacional.',
-    sub:'', scroll:[.05,.11],
-    langs:[[0,'home','PT','Português'],[1150,'home-en','EN','English'],
-           [2300,'home-es','ES','Español'],[3450,'home-ja','JA','日本語']] },
-  // 09 CONVERSION (volta ao site, no pe da pagina)
-  { a:52000,b:55400, shot:'home', url:'srchz-technologies.com.br',
-    kick:'Fale comigo', title:'Começa com<br>uma conversa.',
-    sub:'Sem compromisso.', scroll:[.62,.82], cursor:true }
+/* ===================== a montagem =====================
+   A primeira versao deste filme tinha nove cenas de 5 a 7s que dissolviam
+   umas nas outras. Medido quadro a quadro, nao havia UM corte em 60s e a
+   mudanca visual mediana era 0.0003 — uma imagem praticamente parada. Seis
+   das nove cenas eram o mesmo plano com conteudo trocado.
+
+   Entao a unidade aqui deixou de ser a cena e passou a ser o PLANO. Sao 52,
+   com duracao medida em tempos de 600ms (100 BPM), e o corte e seco. A
+   duracao varia de meio tempo a doze: e a variacao que da ritmo, nao a
+   velocidade media. O audio sai desta mesma lista, entao corte e batida
+   nunca saem de sincronia.
+
+   b = tempos (1 tempo = 600ms) */
+const BPM=100, BEAT=60000/BPM;
+
+const G_CHIPS=['Tráfego pago','Branding','Produção de vídeo','Social media','Web','Portal do Cliente'];
+const E_CHIPS=['Ultrassom N2','Soldas','Trilhos','Espessura','Líquido penetrante'];
+const T_CHIPS=['Web','Portais','Web apps','Automação','CX','Dados &amp; IA'];
+const U_HOME='srchz-technologies.com.br';
+
+const SHOTS=[
+  /* ---- ATO 1 · O SINAL (12 tempos) ---- */
+  {k:'chaos',  b:2, p:[0,.34]},
+  {k:'chaos',  b:2, p:[.34,.62]},
+  {k:'chaos',  b:1, p:[.62,.82]},
+  {k:'chaos',  b:1, p:[.82,1]},
+  {k:'impact', b:1},
+  {k:'logo',   b:3},
+  {k:'quote',  b:2, tx:'“O problema raramente é o que parece.”'},
+
+  /* ---- ATO 2 · O MÉTODO (7 tempos) ---- */
+  {k:'type',   b:2, a:'A área muda.'},
+  {k:'type',   b:2, a:'A área muda.', c:'O método não.'},
+  {k:'psx',    b:3},
+
+  /* ---- ATO 3 · AS TRÊS PORTAS (6 tempos) ---- */
+  {k:'panel',  b:2, shot:'home', url:U_HOME, kick:'As três portas',
+                    title:'Um site.<br>Três entradas.', scroll:[.01,.05]},
+  /* Os pontos de foco dos closes nao sao chute: saem de uma medicao de
+     densidade de dourado linha a linha em cada captura — no site, titulo e
+     borda sao dourados, entao o pico de dourado e onde esta o titulo. Antes
+     disso varios closes caiam no meio de um paragrafo e cortavam palavra ao
+     meio, que le como acidente, nao como escolha. */
+  {k:'detail', b:1, shot:'home', at:[.5,.202], z:2.2},
+  {k:'detail', b:1, shot:'home', at:[.5,.514], z:2.4},
+  {k:'panel',  b:2, shot:'home', url:U_HOME, kick:'As três portas',
+                    title:'Um site.<br>Três entradas.',
+                    sub:'Branding &amp; Growth · Engenharia &amp; END · Tecnologia &amp; Dados/IA',
+                    scroll:[.22,.30]},
+
+  /* ---- ATO 4 · BRANDING & GROWTH (11 tempos) ---- */
+  {k:'panel',  b:2, shot:'growth', url:U_HOME+'/growth', kick:'01 — Branding &amp; Growth',
+                    title:'Percepção<br>gera desejo.', scroll:[.02,.07]},
+  {k:'detail', b:1, shot:'growth', at:[.5,.102], z:2.3},
+  {k:'panel',  b:3, shot:'growth', url:U_HOME+'/growth', kick:'01 — Branding &amp; Growth',
+                    title:'Percepção<br>gera desejo.',
+                    sub:'Estratégia transforma atenção em oportunidade.',
+                    chips:G_CHIPS, scroll:[.18,.28]},
+  {k:'detail', b:1, shot:'growth', at:[.5,.182], z:2.2},
+  {k:'panel',  b:2, shot:'growth', url:U_HOME+'/growth', kick:'01 — Branding &amp; Growth',
+                    title:'Percepção<br>gera desejo.', chips:G_CHIPS, scroll:[.42,.50]},
+  {k:'detail', b:2, shot:'growth', at:[.5,.264], z:2.0},
+
+  /* ---- ATO 5 · ENGENHARIA & END (13 tempos) ---- */
+  {k:'panel',  b:2, shot:'end', url:U_HOME+'/end', kick:'02 — Engenharia &amp; END',
+                    title:'Precisão para<br>enxergar o que<br>outros deixam passar.',
+                    scroll:[.01,.06]},
+  {k:'detail', b:1, shot:'end', at:[.5,.238], z:2.3},
+  {k:'dia',    b:5},
+  {k:'panel',  b:3, shot:'end', url:U_HOME+'/end', kick:'02 — Engenharia &amp; END',
+                    title:'Precisão para<br>enxergar o que<br>outros deixam passar.',
+                    chips:E_CHIPS, scroll:[.26,.36]},
+  {k:'detail', b:2, shot:'end', at:[.5,.404], z:2.1},
+
+  /* ---- ATO 6 · TECNOLOGIA & DADOS/IA (12 tempos) ---- */
+  {k:'panel',  b:2, shot:'tech', url:U_HOME+'/tech', kick:'03 — Tecnologia &amp; Dados/IA',
+                    title:'Conecta o que<br>antes estava<br>fragmentado.', scroll:[.01,.06]},
+  {k:'detail', b:1, shot:'tech', at:[.5,.220], z:2.3},
+  {k:'graph',  b:4},
+  {k:'panel',  b:3, shot:'tech', url:U_HOME+'/tech', kick:'03 — Tecnologia &amp; Dados/IA',
+                    title:'Conecta o que<br>antes estava<br>fragmentado.',
+                    chips:T_CHIPS, scroll:[.28,.38]},
+  {k:'detail', b:2, shot:'tech', at:[.5,.418], z:2.1},
+
+  /* ---- ATO 7 · ALCANCE (10 tempos) ---- */
+  {k:'lang',   b:1, li:0},
+  {k:'lang',   b:1, li:1},
+  {k:'lang',   b:1, li:2},
+  {k:'lang',   b:1, li:3},
+  {k:'lang',   b:2, li:3, hold:true},
+  {k:'type',   b:4, a:'Quatro idiomas.', c:'Entrega internacional.'},
+
+  /* ---- ATO 8 · ACELERANDO (7 tempos) ----
+     Doze planos encurtando. E aqui que o filme ganha velocidade, e e por
+     isso que o fecho pode parar: sem a aceleracao, parar nao significa nada. */
+  {k:'detail', b:1,    shot:'calc',    at:[.5,.122], z:2.2},
+  {k:'detail', b:1,    shot:'usn2',    at:[.5,.264], z:2.3},
+  {k:'detail', b:.75,  shot:'tech',    at:[.5,.776], z:2.4},
+  {k:'detail', b:.75,  shot:'growth',  at:[.5,.264], z:2.4},
+  {k:'detail', b:.5,   shot:'end',     at:[.5,.514], z:2.5},
+  {k:'detail', b:.5,   shot:'tech',    at:[.5,.528], z:2.5},
+  {k:'detail', b:.5,   shot:'home-en', at:[.5,.202], z:2.6},
+  {k:'detail', b:.5,   shot:'home-ja', at:[.5,.274], z:2.6},
+  {k:'detail', b:.375, shot:'calc',    at:[.5,.732], z:2.7},
+  {k:'detail', b:.375, shot:'usn2',    at:[.5,.382], z:2.7},
+  {k:'detail', b:.375, shot:'end',     at:[.5,.624], z:2.6},
+  {k:'detail', b:.375, shot:'home',    at:[.5,.108], z:2.8},
+
+  /* ---- ATO 9 · UM SISTEMA (10 tempos) ---- */
+  {k:'sys',    b:3, n:1},
+  {k:'sys',    b:3, n:2},
+  {k:'sys',    b:4, n:3},
+
+  /* ---- ATO 10 · O FECHO (12 tempos) ----
+     O plano mais longo do filme, logo depois do mais curto. */
+  {k:'card',   b:12}
 ];
+
+/* tempos absolutos e continuidade: um plano "fresco" reanima a entrada;
+   dois paineis seguidos da mesma pagina apenas continuam a rolagem */
+let _acc=0;
+/* t0/t1, nao a/z: o roteiro ja usa 'a' para a linha de texto e 'z' para o
+   zoom do detalhe. Quando os tempos se chamavam a/z, o laco sobrescrevia
+   os dois — a frase virava o numero do milissegundo e o detalhe saia preto
+   com zoom de 13200x. */
+SHOTS.forEach((s,i)=>{
+  s.t0=_acc; s.d=s.b*BEAT; _acc+=s.d; s.t1=_acc; s.i=i;
+  const pv=SHOTS[i-1];
+  s.fresh = !pv || pv.k!==s.k || (s.shot&&pv.shot!==s.shot);
+});
+const DUR=_acc;
 
 /* ===================== legendas =====================
    O filme nao tem narracao, entao nao ha fala para legendar: estas linhas
@@ -451,63 +561,73 @@ const PANELS=[
    cairiam sobre os chips) — saem em .srt ao lado do mp4, e quem quiser
    queimar usa o comando do README. */
 const CAPS=[
-  [600,  5200,  'O problema raramente é o que parece.'],
-  [5800, 8600,  'A área muda. O método não.'],
-  [8800, 11800, 'Perception · Strategy · Execution'],
-  [12200,15200, 'Um site. Três entradas.'],
-  [15300,18400, 'Branding & Growth · Engenharia & END · Tecnologia & Dados/IA'],
-  [18900,25600, 'Percepção gera desejo.\nEstratégia transforma atenção em oportunidade.'],
-  [26300,32600, 'Precisão para enxergar o que outros deixam passar.'],
-  [33300,39600, 'Tecnologia que conecta o que antes estava fragmentado.'],
-  [40300,44600, 'Quatro idiomas. Entrega internacional.\nPortuguês · English · Español · 日本語'],
-  [45300,51600, 'Três práticas. Um método.\nResolvo o que os outros ignoram.'],
-  [52300,55300, 'Começa com uma conversa. Sem compromisso.'],
-  [55700,59600, 'Tem algo travado que ninguém resolve?\nAgende seu diagnóstico gratuito.']
+  [400,  7100,  'O problema raramente é o que parece.'],
+  [7300, 9500,  'A área muda. O método não.'],
+  [9700, 11300, 'Perception · Strategy · Execution'],
+  [11500,14900, 'Um site. Três entradas.'],
+  [15100,21500, 'Percepção gera desejo.\nEstratégia transforma atenção em oportunidade.'],
+  [21700,29300, 'Precisão para enxergar o que outros deixam passar.'],
+  [29500,36500, 'Tecnologia que conecta o que antes estava fragmentado.'],
+  [36700,42500, 'Quatro idiomas. Entrega internacional.\nPortuguês · English · Español · 日本語'],
+  [46900,52700, 'Três práticas. Um método.\nResolvo o que os outros ignoram.'],
+  [52900,59600, 'Tem algo travado que ninguém resolve?\nAgende seu diagnóstico gratuito.']
 ];
 window.CAPS=CAPS;
 
 /* ===================== marcas de som =====================
-   Lidas por film-audio.py. Ficam aqui, e nao no script de audio, para o
-   som nao sair do lugar quando uma cena mudar de duracao: a imagem e o
-   desenho de som saem da mesma tabela.
-   [ms, tipo, forca]  tipos: sub whoosh impact riser tick bell ping tail */
-const CUES=[
-  [   0,'sub',   .50],                        // o drone nasce com o filme
-  [ 150,'riser', .30],                        // a linha sendo tracada
-  [1400,'whoosh',.45],                        // as palavras convergindo
-  [2600,'riser', .80],
-  [3500,'impact',1.0],                        // o estouro e a marca
-  [4150,'bell',  .40],                        // o brilho passando
-  [5500,'whoosh',.60], [5700,'tick',.5], [6220,'tick',.5],
-  [8000,'tick',.45], [8560,'tick',.45], [9120,'tick',.45],
-  [12000,'whoosh',.55], [12000,'sub',.60],
-  [18600,'whoosh',.55],
-  [19500,'tick',.35],[19650,'tick',.35],[19800,'tick',.35],
-  [19950,'tick',.35],[20100,'tick',.35],[20250,'tick',.35],
-  [26000,'whoosh',.55],
-  [27300,'ping',.75], [28700,'ping',.60], [30100,'ping',.45],   // o ensaio
-  [33000,'whoosh',.55],
-  [34400,'tick',.3],[34600,'tick',.3],[34800,'tick',.3],[35000,'tick',.3],
-  [40000,'whoosh',.60], [40000,'sub',.70],
-  [41150,'bell',.45], [42300,'bell',.45], [43450,'bell',.45],   // as linguas
-  [45000,'impact',.75], [45000,'sub',.80],
-  [52000,'whoosh',.50],
-  [55400,'impact',.90], [55400,'sub',1.0],
-  [56300,'bell',.50],
-  [58200,'tail',1.0]
-];
-window.CUES=CUES;
+   Derivadas da lista de planos, nao escritas a mao. Cada corte vira um
+   evento, e o pulso sai do mesmo BPM que mede os planos — e assim que
+   corte e batida ficam juntos sem ninguem alinhar na unha. Lidas por
+   film-audio.py.
+   [ms, tipo, forca]  tipos: sub pulse whoosh impact riser tick bell ping tail */
+const CUES=(()=>{
+  const c=[];
+  const push=(t,k,f)=>c.push([Math.round(t),k,+f.toFixed(2)]);
 
-const T={ s1:[0,5500], s2:[5500,12000], panels:[12000,45000], s7:[45000,52000], s8:[52000,60000] };
-const DUR=60000;
+  /* leito: respira junto com os atos */
+  push(0,'sub',.45); push(7200,'sub',.55); push(15000,'sub',.65);
+  push(29400,'sub',.75); push(42600,'sub',.95); push(46800,'sub',.70);
+  push(52800,'sub',1.0);
+
+  /* pulso: entra no primeiro painel, cresce ate o acelerando e sai no
+     fecho. O silencio ritmico do fim e o que faz o cartao final parar. */
+  push(0,'pulse',0); push(11400,'pulse',.30); push(21600,'pulse',.50);
+  push(29400,'pulse',.68); push(42600,'pulse',1.0); push(46700,'pulse',1.0);
+  push(46800,'pulse',0);
+
+  /* um evento por corte: plano curto pede tique, plano longo pede corte de ar */
+  for(const s of SHOTS){
+    if(s.i===0) continue;
+    if(s.k==='impact' || s.k==='card') continue;     // tem evento proprio
+    push(s.t0, s.b<=.75 ? 'tick' : 'whoosh', s.b<=1 ? .42 : .55);
+  }
+
+  /* marcos */
+  push(2400,'riser',.85);
+  const imp=SHOTS.find(s=>s.k==='impact');
+  push(imp.t0,'impact',1.0); push(imp.t0+620,'bell',.42);
+  for(const s of SHOTS) if(s.k==='lang' && !s.hold) push(s.t0,'bell',.45);
+  const dia=SHOTS.find(s=>s.k==='dia');
+  push(dia.t0+500,'ping',.80); push(dia.t0+1700,'ping',.62); push(dia.t0+2900,'ping',.48);
+  const card=SHOTS.find(s=>s.k==='card');
+  push(card.t0,'impact',.95); push(card.t0+900,'bell',.5);
+  push(DUR-1800,'tail',1.0);
+  push(DUR,'end',0);          // quem le as marcas descobre a duracao daqui
+
+  return c.sort((x,y)=>x[0]-y[0]);
+})();
+window.CUES=CUES;
+window.BPM=BPM;
 
 /* Pre-carrega as capturas e guarda o tamanho natural de cada uma. A rolagem
    e calculada em fracao do que sobra abaixo da janela, e isso depende da
    altura real do print. Quem renderiza espera por window.ready() antes do
    primeiro quadro — assim nenhum corte sai em branco. */
+const LANGS=[['home','Português'],['home-en','English'],
+             ['home-es','Español'],['home-ja','日本語']];
 const SZ={};
-const ALLSHOTS=PANELS.flatMap(p=>
-  [SHOT(p.shot), ...(p.langs||[]).map(l=>SHOT(l[1]))]);
+const ALLSHOTS=[...SHOTS.filter(s=>s.shot).map(s=>SHOT(s.shot)),
+                ...LANGS.map(l=>SHOT(l[0]))];
 window.ready=()=>Promise.all(
   [...new Set(ALLSHOTS)].map(src=>new Promise(res=>{
     const im=new Image();
@@ -524,252 +644,314 @@ function sweep(sel,p){const sh=$(sel);
   sh.style.opacity=Math.sin(p*Math.PI);
   sh.style.backgroundPosition=`${lerp(160,-60,p)}% 0`;}
 
-/* ===================== render ===================== */
+/* ===================== render =====================
+   Um plano por vez, corte seco. Cada desenho recebe lt (ms dentro do plano)
+   e u (0..1 do plano), para a entrada caber na duracao: o mesmo texto que
+   leva 400ms para assentar num plano de 2 tempos assenta em 160ms num de
+   meio tempo, sem ninguem reescrever o tempo na mao. */
+function shotAt(t){
+  let lo=0, hi=SHOTS.length-1;
+  while(lo<hi){ const m=(lo+hi+1)>>1; if(SHOTS[m].t0<=t) lo=m; else hi=m-1; }
+  return SHOTS[lo];
+}
+/* entrada rapida: 35% do plano, no maximo 420ms */
+const ein=(s,lt)=>inv(lt,0,Math.min(420,s.d*.35));
+
 function render(t){
-  ['s1','s2','sp','s7','s8'].forEach(id=>{const e=$('#'+id);e.style.opacity=0;e.style.transform='none';});
+  t=clamp(t,0,DUR-1);
+  ['s1','s2','sp','sd','s7','s8'].forEach(id=>{
+    const e=$('#'+id); e.style.opacity=0; e.style.transform='none';
+  });
   $('#flash').style.opacity=0;
   $('#tech-dia').style.opacity=0;
   $('#graph').style.opacity=0;
-  $('#cursor').style.opacity=0;
   drawDust(t);
 
+  const s=shotAt(t), lt=t-s.t0, u=clamp(lt/s.d,0,1);
+
   // barras cinematográficas entram no primeiro segundo e saem no último
-  $('#bars').style.opacity = V ? outC(inv(t,200,1200))*(1-inv(t,53800,54800)) : 0;
+  $('#bars').style.opacity = V ? outC(inv(t,200,1200))*(1-inv(t,DUR-1400,DUR-500)) : 0;
 
   const drift=Math.sin(t/5200)*10;
   $('#glow').style.transform=`translate3d(${drift}px,${drift*.6}px,0)`;
-  $('#halo').style.opacity = (t<T.s1[1]||t>=T.s8[0]) ? 1 : .35;
+  $('#halo').style.opacity = (s.k==='panel'||s.k==='lang'||s.k==='detail') ? .35 : 1;
+  if(s.k!=='chaos'&&s.k!=='impact'&&s.k!=='logo'&&s.k!=='quote'&&s.k!=='sys') drawNet(t,1,0);
 
-  /* ---------- 01 THE SIGNAL ---------- */
-  if(t<T.s1[1]){
-    const s=$('#s1'); s.style.opacity=1;
-    // linha fina nasce
-    const pl=inv(t,150,1500);
-    $('#s1line').style.width=lerp(0,W*.74,outQ(pl))+'px';
-    $('#s1line').style.opacity=1-inv(t,2600,3400);
-
-    // palavras do caos entram soltas, depois convergem
-    const conv=inv(t,2200,3700);
-    chaosEl.forEach((el,i)=>{
-      const [bx,by]=CHAOS_POS[i];
-      const pin=inv(t,320+i*180,1180+i*180);
-      const cx=lerp(bx,.5,inOutC(conv)), cy=lerp(by,.5,inOutC(conv));
-      el.style.left=(cx*W)+'px'; el.style.top=(cy*H)+'px';
-      el.style.transform=`translate(-50%,-50%) scale(${lerp(.86,1,outQ(pin))*lerp(1,.5,conv)})`;
-      el.style.opacity=outC(pin)*(1-inv(t,2900,3650));
-      el.style.filter=`blur(${lerp(9,0,outC(pin))}px)`;
-    });
-
-    // rede: aparece e aperta
-    drawNet(t, inOutC(inv(t,1400,3700)), outC(inv(t,1000,2000))*(1-inv(t,3300,4000)));
-
-    // impacto e revelação da marca
-    const fl=inv(t,3480,3800);
-    if(fl>0&&fl<1) $('#flash').style.opacity=Math.sin(fl*Math.PI)*.9;
-    const pm=inv(t,3620,4700);
-    const mk=$('#s1mark');
-    mk.style.opacity=outC(pm);
-    mk.style.transform=`translate(-50%,-50%) scale(${lerp(1.22,1,outQ(pm))})`;
-    mk.querySelector('img').style.filter=`blur(${lerp(16,0,outC(pm))}px) drop-shadow(0 0 48px rgba(201,162,75,.45))`;
-    sweep('#s1shine', inv(t,4150,5200));
-
-    const pq=inv(t,4350,5100);
-    $('#s1quote').style.opacity=outC(pq)*(1-inv(t,5250,5500));
-    $('#s1quote').style.transform=`translateY(${lerp(22,0,outQ(pq))}px)`;
-
-    s.style.opacity=1-inv(t,5280,5500);
-  } else { drawNet(t,1,0); }
-
-  /* ---------- 02 THE METHOD ---------- */
-  if(t>=T.s2[0]&&t<T.s2[1]){
-    const s=$('#s2'); s.style.opacity=1;
-    const lt=t-T.s2[0];
-    // a câmera "atravessa" a marca: entra ampliado e assenta
-    s.style.transform=`scale(${lerp(1.16,1,outQ(inv(lt,0,1400)))})`;
-    $('#s2a').style.transform=`translateY(${lerp(118,0,outQ(inv(lt,160,1080)))}%)`;
-    $('#s2b').style.transform=`translateY(${lerp(118,0,outQ(inv(lt,620,1620)))}%)`;
-    const psEls=['#ps1','#ps2','#ps3'];
-    psEls.forEach((sel,i)=>{
-      const p=inv(lt,2500+i*560,3400+i*560);
-      const el=$(sel);
-      el.style.opacity=outC(p)*(1-inv(lt,5900,6400));
-      el.style.letterSpacing=`${lerp(.78,.42,outC(p))}em`;
-      el.style.transform=`translateY(${lerp(16,0,outQ(p))}px)`;
-    });
-    s.style.opacity=1-inv(lt,6150,6500);
-  }
-
-  /* ---------- 03..06 e 08: painéis com o site ---------- */
-  for(const p of PANELS){
-    if(t<p.a||t>=p.b) continue;
-    const s=$('#sp'); s.style.opacity=1;
-    const lt=t-p.a, span=p.b-p.a;
-
-    /* qual print esta no ar. Na cena de idiomas sao quatro, e o de baixo
-       segura o anterior durante o cruzamento. */
-    let src=SHOT(p.shot), under=null, fade=1, li=0;
-    if(p.langs){
-      for(let i=0;i<p.langs.length;i++) if(lt>=p.langs[i][0]) li=i;
-      src=SHOT(p.langs[li][1]);
-      if(li>0){ under=SHOT(p.langs[li-1][1]); fade=outC(inv(lt,p.langs[li][0],p.langs[li][0]+280)); }
-    }
-    setSrc($('#shot'),src);
-    $('#shot').style.opacity=fade;
-    if(under){ setSrc($('#shotB'),under); $('#shotB').style.opacity=1; }
-    else $('#shotB').style.opacity=0;
-
-    $('#urlTxt').textContent=p.url;
-    $('#pKick').innerHTML=p.kick||'';
-    $('#pTitle').innerHTML=p.title||'';
-    $('#pSub').innerHTML=p.sub||'';
-
-    // linha das quatro linguas: a do print no ar fica dourada
-    const lr=$('#langRow');
-    if(p.langs){
-      if(lr.dataset.for!==String(p.a)){
-        lr.dataset.for=String(p.a);
-        lr.innerHTML=p.langs.map(l=>`<span>${l[3]}</span>`).join('');
-      }
-      lr.style.display='flex';
-      lr.style.opacity=outC(inv(lt,700,1500));
-      $$('#langRow span').forEach((el,i)=>el.classList.toggle('on',i===li));
-    } else {
-      /* display:none, nao opacity:0 — vazio ele ainda somaria a margem a
-         altura do bloco, e os chips desceriam para fora do quadro */
-      lr.style.display='none'; lr.style.opacity=0; lr.dataset.for='';
-    }
-
-    // moldura entra com leve parallax
-    const pin=inv(lt,0,700);
-    const b=$('#brw');
-    const dx=V?lerp(150,0,outQ(pin)):lerp(-150,0,outQ(pin));
-    b.style.transform=`translateX(${dx}px) scale(${lerp(.955,1,outQ(pin))})`;
-    b.style.opacity=outC(inv(lt,0,480));
-
-    // rolagem cinematográfica + leve zoom
-    const sp=inv(lt,180,span-200);
-    /* Na cena de idiomas a referencia e sempre o primeiro print. As quatro
-       paginas tem alturas um pouco diferentes (o texto em japones ocupa
-       menos linha), e usar a altura de cada uma faria o quadro pular de
-       posicao a cada troca — o argumento e o mesmo site, nao quatro telas. */
-    const nat=SZ[p.langs ? SHOT(p.langs[0][1]) : src];
-    const dispH=nat ? nat.h*(VPW/nat.w) : VPH;
-    const maxS=Math.max(0,dispH-VPH);
-    const tr=`translateY(${-maxS*lerp(p.scroll[0],p.scroll[1],inOutC(sp))}px) scale(${lerp(1,1.04,sp)})`;
-    /* as duas camadas rolam juntas: no cruzamento, uma parada atras da
-       outra entregaria a troca */
-    for(const el of [$('#shot'),$('#shotB')]){
-      el.style.transform=tr; el.style.transformOrigin='50% 0';
-    }
-
-    // texto
-    const tx=$('#panelTxt');
-    const pt=inv(lt,380,1280);
-    tx.style.opacity=outC(pt);
-    tx.style.transform=`translateY(${lerp(34,0,outQ(pt))}px)`;
-
-    // chips entram em cascata, logo abaixo do texto que acabou de medir
-    const cw=$('#pChips');
-    if(p.chips){
-      if(cw.dataset.for!==p.shot+p.a){
-        cw.dataset.for=p.shot+p.a;
-        cw.innerHTML=p.chips.map(c=>`<span class="chip">${c}</span>`).join('');
-        $$('#pChips .chip').forEach(el=>{
-          el.style.fontSize=px(26); el.style.padding=px(13)+' '+px(26);
-        });
-      }
-      cw.style.top=(tx.offsetTop+tx.offsetHeight+(V?26:24))+'px';
-      $$('#pChips .chip').forEach((el,i)=>{
-        const pc=inv(lt,900+i*150,1700+i*150);
-        el.style.opacity=outC(pc);
-        el.style.transform=`translateY(${lerp(18,0,outQ(pc))}px)`;
-      });
-    } else { cw.innerHTML=''; cw.dataset.for=''; }
-
-    // diagrama técnico: traços se desenham
-    if(p.diagram){
-      const d=$('#tech-dia');
-      d.style.opacity=outC(inv(lt,1100,1900));
-      d.querySelectorAll('#bead,#beam').forEach((pa,i)=>{
-        const L=+pa.dataset.len;
-        pa.style.strokeDashoffset=L*(1-outC(inv(lt,1300+i*500,2900+i*500)));
-      });
-      const probe=d.querySelector('#probe');
-      if(probe) probe.setAttribute('opacity', outC(inv(lt,2400,3000)));
-    }
-
-    // grafo de dados: nós e arestas acendem
-    if(p.graph){
-      const g=$('#graph');
-      g.style.opacity=outC(inv(lt,1100,1900));
-      g.querySelectorAll('.gl').forEach((l,i)=>{
-        l.setAttribute('opacity', outC(inv(lt,1400+i*55,2300+i*55)));
-      });
-      g.querySelectorAll('.gn').forEach((n,i)=>{
-        const pn=inv(lt,1200+i*90,2000+i*90);
-        n.setAttribute('opacity', outC(pn));
-        n.setAttribute('r', lerp(1, 5+(i%3)*2, outQ(pn)));
-      });
-    }
-
-    // cursor indo até o botão, na cena de conversão
-    if(p.cursor){
-      const pc=inv(lt,1500,2600);
-      const cur=$('#cursor');
-      if(pc>0){
-        cur.style.opacity=outC(pc)*(1-inv(lt,3100,3400));
-        const bw=parseFloat(b.style.width), bh=parseFloat(b.style.height);
-        cur.style.left=lerp(bw*.18,bw*.46,inOutC(pc))+'px';
-        cur.style.top =lerp(bh*.74,bh*.52,inOutC(pc))+'px';
-        const click=inv(lt,2500,2800);
-        cur.style.transform=`scale(${click>0&&click<1?lerp(1,.68,Math.sin(click*Math.PI)):1})`;
-      }
-    }
-
-    s.style.opacity=1-inv(lt,span-360,span);
-  }
-
-  /* ---------- 07 ONE SYSTEM ---------- */
-  if(t>=T.s7[0]&&t<T.s7[1]){
-    const s=$('#s7'); s.style.opacity=1;
-    const lt=t-T.s7[0];
-    s.style.transform=`scale(${lerp(1.08,1,outQ(inv(lt,0,1600)))})`;
-    $('#s7a').style.transform=`translateY(${lerp(118,0,outQ(inv(lt,200,1200)))}%)`;
-    $('#s7b').style.transform=`translateY(${lerp(118,0,outQ(inv(lt,640,1700)))}%)`;
-    $('#s7rule').style.transform=`scaleX(${outC(inv(lt,1500,2500))})`;
-    const pc=inv(lt,2100,3200);
-    $('#s7c').style.opacity=outC(pc);
-    $('#s7c').style.transform=`translateY(${lerp(22,0,outQ(pc))}px)`;
-    // rede volta, agora organizada
-    drawNet(t, 1, outC(inv(lt,300,1600))*.5*(1-inv(lt,5600,6400)));
-    s.style.opacity=1-inv(lt,6500,7000);
-  }
-
-  /* ---------- 08 CONVERSION ---------- */
-  if(t>=T.s8[0]+3400){
-    const s=$('#s8'); s.style.opacity=1;
-    const lt=t-(T.s8[0]+3400);
-    const pm=inv(lt,0,900);
-    $('#s8img').style.opacity=outC(pm);
-    $('#s8img').style.transform=`scale(${lerp(1.1,1,outQ(pm))})`;
-    $('#s8img').style.filter='drop-shadow(0 0 40px rgba(201,162,75,.42))';
-    sweep('#s8shine', inv(lt,800,1900));
-    const steps=[['#s8q',320,1180,28],['#s8s',620,1500,22],['#waBtn',900,1850,24],
-                 ['#s8url',1250,2200,20],['#s8sig',1500,2500,16]];
-    for(const [sel,a,b,dy] of steps){
-      const p=inv(lt,a,b);
-      $(sel).style.opacity=outC(p);
-      $(sel).style.transform=`translateY(${lerp(dy,0,outQ(p))}px)`;
-    }
-    const br=1+Math.sin(lt/560)*.02;
-    $('#waBtn').style.transform=
-      `translateY(${lerp(24,0,outQ(inv(lt,900,1850)))}px) scale(${br})`;
-  }
-
+  DRAW[s.k](s,lt,u,t);
 }
+
+/* ===================== os planos ===================== */
+const DRAW={};
+
+/* --- o caos ganhando estrutura. cp vai de 0 a 1 ao longo dos quatro planos --- */
+DRAW.chaos=(s,lt,u)=>{
+  const sc=$('#s1'); sc.style.opacity=1;
+  const cp=lerp(s.p[0],s.p[1],u);
+  $('#s1mark').style.opacity=0;
+  $('#s1quote').style.opacity=0;
+
+  $('#s1line').style.width=lerp(0,W*.74,outQ(inv(cp,.02,.30)))+'px';
+  $('#s1line').style.opacity=1-inv(cp,.62,.86);
+
+  const conv=inv(cp,.55,1);
+  chaosEl.forEach((el,i)=>{
+    const [bx,by]=CHAOS_POS[i];
+    const pin=inv(cp,.05+i*.09,.22+i*.09);
+    const cx=lerp(bx,.5,inOutC(conv)), cy=lerp(by,.5,inOutC(conv));
+    el.style.left=(cx*W)+'px'; el.style.top=(cy*H)+'px';
+    el.style.transform=`translate(-50%,-50%) scale(${lerp(.86,1,outQ(pin))*lerp(1,.52,conv)})`;
+    el.style.opacity=outC(pin)*(1-inv(cp,.72,.98));
+    el.style.filter=`blur(${lerp(9,0,outC(pin))}px)`;
+  });
+  drawNet(0, inOutC(inv(cp,.20,1)), outC(inv(cp,.14,.40))*(1-inv(cp,.88,1)));
+};
+
+/* --- o estouro e a marca nascendo dele --- */
+DRAW.impact=(s,lt,u)=>{
+  const sc=$('#s1'); sc.style.opacity=1;
+  chaosEl.forEach(el=>el.style.opacity=0);
+  $('#s1line').style.opacity=0; $('#s1quote').style.opacity=0;
+  drawNet(0,1,0);
+  $('#flash').style.opacity=Math.sin(clamp(u*1.15,0,1)*Math.PI)*.9;
+  const mk=$('#s1mark'), p=inv(lt,60,s.d);
+  mk.style.opacity=outC(p);
+  mk.style.transform=`translate(-50%,-50%) scale(${lerp(1.26,1.02,outQ(p))})`;
+  mk.querySelector('img').style.filter=
+    `blur(${lerp(18,0,outC(p))}px) drop-shadow(0 0 48px rgba(201,162,75,.45))`;
+};
+
+/* --- a marca firme, com o brilho passando --- */
+DRAW.logo=(s,lt,u)=>{
+  const sc=$('#s1'); sc.style.opacity=1;
+  chaosEl.forEach(el=>el.style.opacity=0);
+  $('#s1line').style.opacity=0; $('#s1quote').style.opacity=0;
+  drawNet(0,1,0);
+  const mk=$('#s1mark');
+  mk.style.opacity=1;
+  mk.style.transform=`translate(-50%,-50%) scale(${lerp(1.02,1,outQ(u))})`;
+  mk.querySelector('img').style.filter='drop-shadow(0 0 48px rgba(201,162,75,.45))';
+  sweep('#s1shine', inv(lt,180,s.d*.8));
+};
+
+/* --- a frase, com a marca recuando --- */
+DRAW.quote=(s,lt,u)=>{
+  const sc=$('#s1'); sc.style.opacity=1;
+  chaosEl.forEach(el=>el.style.opacity=0);
+  $('#s1line').style.opacity=0;
+  drawNet(0,1,0);
+  const mk=$('#s1mark');
+  mk.style.opacity=1;
+  mk.style.transform=`translate(-50%,-50%) scale(${lerp(1,.88,outC(u))})`;
+  mk.querySelector('img').style.filter='drop-shadow(0 0 40px rgba(201,162,75,.35))';
+  $('#s1shine').style.opacity=0;
+  const q=$('#s1quote'), p=ein(s,lt);
+  q.textContent=s.tx;
+  q.style.opacity=outC(p);
+  q.style.transform=`translateY(${lerp(20,0,outQ(p))}px)`;
+};
+
+/* Encolhe a linha ate caber no quadro. "Entrega internacional." no corpo
+   cheio passa de 1080px no 9:16; sem isto a frase sai cortada nas duas
+   pontas, que foi exatamente o que a checagem pegou. */
+function fit(el,base,maxW){
+  el.style.fontSize=base+'px';
+  const w=el.scrollWidth;
+  if(w>maxW) el.style.fontSize=Math.floor(base*maxW/w)+'px';
+}
+const BIG_FS=Math.round((V?124:112)*KT), BIG_MAX=W-140;
+
+/* --- tipografia cinetica: uma ou duas linhas subindo da mascara --- */
+DRAW.type=(s,lt,u)=>{
+  const sc=$('#s2'); sc.style.opacity=1;
+  sc.style.transform=`scale(${lerp(1.05,1,outQ(inv(lt,0,s.d*.9)))})`;
+  $('#s2a').textContent=s.a_||s.a;
+  $('#s2b').textContent=s.c||'';
+  fit($('#s2a'),BIG_FS,BIG_MAX);
+  if(s.c) fit($('#s2b'),BIG_FS,BIG_MAX);
+  $('#s2b').parentElement.style.display=s.c?'block':'none';
+  $('#s2a').style.transform=`translateY(${lerp(118,0,outQ(inv(lt,0,Math.min(520,s.d*.5))))}%)`;
+  if(s.c) $('#s2b').style.transform=
+    `translateY(${lerp(118,0,outQ(inv(lt,Math.min(160,s.d*.2),Math.min(680,s.d*.62))))}%)`;
+  $('#s2ps').style.display='none';
+};
+
+/* --- Perception · Strategy · Execution, uma por tempo --- */
+DRAW.psx=(s,lt,u)=>{
+  const sc=$('#s2'); sc.style.opacity=1; sc.style.transform='none';
+  $('#s2a').textContent='A área muda.';
+  $('#s2b').textContent='O método não.';
+  fit($('#s2a'),BIG_FS,BIG_MAX); fit($('#s2b'),BIG_FS,BIG_MAX);
+  $('#s2b').parentElement.style.display='block';
+  $('#s2a').style.transform='translateY(0%)';
+  $('#s2b').style.transform='translateY(0%)';
+  $('#s2ps').style.display='flex';
+  ['#ps1','#ps2','#ps3'].forEach((sel,i)=>{
+    const p=inv(lt,i*BEAT*.8,i*BEAT*.8+460);
+    const el=$(sel);
+    el.style.opacity=outC(p);
+    el.style.letterSpacing=`${lerp(.78,.42,outC(p))}em`;
+    el.style.transform=`translateY(${lerp(16,0,outQ(p))}px)`;
+  });
+};
+
+/* --- a moldura com o site, e a coluna de texto --- */
+function panelCommon(s,lt,u,langIdx){
+  const sc=$('#sp'); sc.style.opacity=1;
+  sc.style.transform=`scale(${lerp(1,1.022,u)})`;
+
+  const src = langIdx!=null ? SHOT(LANGS[langIdx][0]) : SHOT(s.shot);
+  setSrc($('#shot'),src); $('#shot').style.opacity=1; $('#shotB').style.opacity=0;
+  $('#urlTxt').textContent=s.url||U_HOME;
+  $('#pKick').innerHTML=s.kick||'';
+  $('#pTitle').innerHTML=s.title||'';
+  $('#pSub').innerHTML=s.sub||'';
+
+  const b=$('#brw');
+  const p0=s.fresh?ein(s,lt):1;
+  const dx=(V?1:-1)*lerp(60,0,outQ(p0));
+  b.style.transform=`translateX(${dx}px) scale(${lerp(.985,1,outQ(p0))})`;
+  b.style.opacity=s.fresh?outC(inv(lt,0,Math.min(200,s.d*.2))):1;
+
+  /* rolagem: fracao do que sobra abaixo da janela. Na cena de idiomas a
+     referencia e sempre o primeiro print — as paginas tem alturas um pouco
+     diferentes e o quadro pularia de posicao a cada troca. */
+  const ref=SZ[langIdx!=null?SHOT(LANGS[0][0]):src];
+  const dispH=ref ? ref.h*(VPW/ref.w) : VPH;
+  const maxS=Math.max(0,dispH-VPH);
+  const sr=s.scroll||[.05,.08];
+  const tr=`translateY(${-maxS*lerp(sr[0],sr[1],inOutC(u))}px) scale(${lerp(1,1.015,u)})`;
+  for(const el of [$('#shot'),$('#shotB')]){ el.style.transform=tr; el.style.transformOrigin='50% 0'; }
+
+  const tx=$('#panelTxt'), pt=ein(s,lt);
+  tx.style.opacity=outC(pt);
+  tx.style.transform=`translateY(${lerp(22,0,outQ(pt))}px)`;
+  return tx;
+}
+
+DRAW.panel=(s,lt,u)=>{
+  $('#langRow').style.display='none';
+  const tx=panelCommon(s,lt,u,null);
+  const cw=$('#pChips');
+  if(s.chips){
+    if(cw.dataset.for!==String(s.i)){
+      cw.dataset.for=String(s.i);
+      cw.innerHTML=s.chips.map(c=>`<span class="chip">${c}</span>`).join('');
+      $$('#pChips .chip').forEach(el=>{
+        el.style.fontSize=px(26); el.style.padding=px(13)+' '+px(26);
+      });
+    }
+    cw.style.top=(tx.offsetTop+tx.offsetHeight+(V?26:24))+'px';
+    $$('#pChips .chip').forEach((el,i)=>{
+      const pc=inv(lt,180+i*90,620+i*90);
+      el.style.opacity=outC(pc);
+      el.style.transform=`translateY(${lerp(14,0,outQ(pc))}px)`;
+    });
+  } else { cw.innerHTML=''; cw.dataset.for=''; }
+};
+
+/* --- a mesma home trocando de lingua debaixo do mesmo layout --- */
+DRAW.lang=(s,lt,u)=>{
+  const sh={...s, url:U_HOME, kick:'Alcance',
+            title:'Quatro idiomas.<br>Entrega internacional.', scroll:[.05,.07]};
+  const tx=panelCommon(sh,lt,u,s.li);
+  $('#pChips').innerHTML=''; $('#pChips').dataset.for='';
+  const lr=$('#langRow');
+  if(lr.dataset.for!=='1'){
+    lr.dataset.for='1';
+    lr.innerHTML=LANGS.map(l=>`<span>${l[1]}</span>`).join('');
+  }
+  lr.style.display='flex'; lr.style.opacity=1;
+  $$('#langRow span').forEach((el,i)=>el.classList.toggle('on',i===s.li));
+};
+
+/* --- recorte ampliado da captura, sangrando no quadro --- */
+DRAW.detail=(s,lt,u)=>{
+  const sc=$('#sd'); sc.style.opacity=1;
+  const src=SHOT(s.shot);
+  setSrc($('#dimg'),src);
+  const nat=SZ[src]; if(!nat) return;
+  const z=s.z*lerp(1,1.035,u);                    // empurra devagar dentro do plano
+  const dw=W*z, dh=dw*nat.h/nat.w;
+  $('#dimg').style.width=dw+'px';
+  $('#dimg').style.left=(W/2-s.at[0]*dw)+'px';
+  $('#dimg').style.top =(H/2-s.at[1]*dh)+'px';
+  sc.style.opacity=outC(inv(lt,0,Math.min(90,s.d*.25)));
+};
+
+/* --- cartao tecnico em tela cheia --- */
+function fullCard(el,s,lt,u,scale){
+  const ow=CARD.w+28, oh=CARD.h+20;
+  el.style.left=Math.round((W-ow)/2)+'px';
+  el.style.top =Math.round((H-oh)/2)+'px';
+  el.style.transformOrigin='50% 50%';
+  el.style.transform=`scale(${scale*lerp(.985,1.01,u)})`;
+  el.style.opacity=outC(ein(s,lt));
+  $('#sp').style.opacity=1; $('#sp').style.transform='none';
+  $('#brw').style.opacity=0;
+  $('#panelTxt').style.opacity=0;
+  $('#pChips').innerHTML=''; $('#pChips').dataset.for='';
+}
+DRAW.dia=(s,lt,u)=>{
+  const d=$('#tech-dia');
+  fullCard(d,s,lt,u, V?1.14:1.92);
+  d.querySelectorAll('#bead,#beam').forEach((pa,i)=>{
+    const L=+pa.dataset.len;
+    pa.style.strokeDashoffset=L*(1-outC(inv(lt,260+i*520,1500+i*520)));
+  });
+  const probe=d.querySelector('#probe');
+  if(probe) probe.setAttribute('opacity', outC(inv(lt,1400,1900)));
+};
+DRAW.graph=(s,lt,u)=>{
+  const g=$('#graph');
+  fullCard(g,s,lt,u, V?1.14:1.92);
+  g.querySelectorAll('.gl').forEach((l,i)=>
+    l.setAttribute('opacity', outC(inv(lt,240+i*46,900+i*46))));
+  g.querySelectorAll('.gn').forEach((n,i)=>{
+    const pn=inv(lt,180+i*70,760+i*70);
+    n.setAttribute('opacity', outC(pn));
+    n.setAttribute('r', lerp(1, 5+(i%3)*2, outQ(pn)));
+  });
+};
+
+/* --- tres praticas, um metodo --- */
+DRAW.sys=(s,lt,u)=>{
+  const sc=$('#s7'); sc.style.opacity=1;
+  sc.style.transform=`scale(${lerp(1.03,1,outQ(inv(lt,0,s.d*.8)))})`;
+  const p1=s.n>=1?ein(s,lt):0;
+  $('#s7a').style.transform=`translateY(${lerp(118,0,outQ(s.n>1?1:p1))}%)`;
+  $('#s7b').style.transform=`translateY(${lerp(118,0,outQ(s.n>2?1:(s.n===2?ein(s,lt):0)))}%)`;
+  $('#s7rule').style.transform=`scaleX(${s.n>=3?outC(inv(lt,0,500)):0})`;
+  const pc=s.n>=3?inv(lt,260,900):0;
+  $('#s7c').style.opacity=outC(pc);
+  $('#s7c').style.transform=`translateY(${lerp(18,0,outQ(pc))}px)`;
+  drawNet(0,1,.42*outC(inv(lt,0,900)));
+};
+
+/* --- o fecho: o plano mais longo, logo depois do mais curto --- */
+DRAW.card=(s,lt,u)=>{
+  const sc=$('#s8'); sc.style.opacity=1;
+  const pm=inv(lt,0,700);
+  $('#s8img').style.opacity=outC(pm);
+  $('#s8img').style.transform=`scale(${lerp(1.08,1,outQ(pm))})`;
+  $('#s8img').style.filter='drop-shadow(0 0 40px rgba(201,162,75,.42))';
+  sweep('#s8shine', inv(lt,600,1700));
+  const steps=[['#s8q',260,1000,26],['#s8s',520,1300,20],['#waBtn',800,1600,22],
+               ['#s8url',1100,1900,18],['#s8sig',1350,2200,14]];
+  for(const [sel,a,b,dy] of steps){
+    const p=inv(lt,a,b);
+    $(sel).style.opacity=outC(p);
+    $(sel).style.transform=`translateY(${lerp(dy,0,outQ(p))}px)`;
+  }
+  const br=1+Math.sin(lt/560)*.02;
+  $('#waBtn').style.transform=
+    `translateY(${lerp(22,0,outQ(inv(lt,800,1600)))}px) scale(${br})`;
+};
 
 window.render=render;
 window.DUR=DUR;
+/* quem confere a geometria amostra cada plano daqui, em vez de uma lista
+   fixa de instantes: plano novo entra na checagem sozinho */
+window.SHOTS=SHOTS.map(s=>({k:s.k,a:s.t0,z:s.t1,d:s.d,i:s.i}));
 </script>
 </body>
 </html>

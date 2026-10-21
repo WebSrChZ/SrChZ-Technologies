@@ -33,22 +33,22 @@ OUT = os.environ.get('VIDEO_OUT') or os.path.join(SITE, 'assets', 'video')
 # ---------------------------------------------------------------- roteiro
 
 def read_cues():
-    """Le CUES e DUR de film.html. O roteiro manda; este arquivo obedece."""
-    src = open(os.path.join(DIR, 'film.html'), encoding='utf-8').read()
-    m = re.search(r'const CUES=(\[[\s\S]*?\n\]);', src)
-    if not m:
-        sys.exit('ERRO: nao achei CUES em film.html.')
-    # a tabela vira JSON valido com tres ajustes: fora os comentarios,
-    # aspas simples viram duplas, e .5 vira 0.5 (JSON exige o zero)
-    body = re.sub(r'//[^\n]*', '', m.group(1))
-    body = body.replace("'", '"')
-    body = re.sub(r'(?<=[\s,\[])\.(\d)', r'0.\1', body)
-    body = re.sub(r',(\s*\])', r'\1', body)
-    cues = json.loads(body)
-    d = re.search(r'const DUR=(\d+);', src)
-    if not d:
-        sys.exit('ERRO: nao achei DUR em film.html.')
-    return cues, int(d.group(1))
+    """Pergunta ao roteiro, em vez de adivinhar lendo a fonte.
+
+    CUES deixou de ser tabela escrita a mao: hoje sai da lista de planos,
+    com um evento por corte e o pulso no mesmo BPM que mede os planos. Ler
+    isso com expressao regular seria refazer a conta aqui e deixar os dois
+    lados divergirem na primeira mudanca de montagem.
+    """
+    import subprocess
+    r = subprocess.run(['node', os.path.join(DIR, 'film-data.js')],
+                       capture_output=True, text=True)
+    if r.returncode != 0 or not r.stdout.strip():
+        sys.exit('ERRO: film-data.js nao devolveu os dados do roteiro.\n'
+                 + (r.stderr[-800:] or '(sem saida)'))
+    d = json.loads(r.stdout)
+    return d['CUES'], int(d['DUR']), int(d['BPM'])
+
 
 # -------------------------------------------------------------- utilidades
 
@@ -171,6 +171,71 @@ def ev_bell(force, _noise):
     return out
 
 
+def ev_kick(force, noise):
+    """A batida do pulso: seno caindo de 92 para 48 Hz em 140ms, com um
+    toque de corpo. Curta de proposito — e marcacao de tempo, nao bumbo."""
+    n = int(SR * 0.26)
+    out = []
+    ph = 0.0
+    for i in range(n):
+        p = i / n
+        f = 48 + 44 * math.exp(-13 * p)
+        ph += 2 * math.pi * f / SR
+        env = math.exp(-9.5 * p)
+        out.append(math.sin(ph) * env * 0.85 * force)
+    return out
+
+
+def ev_hat(force, noise):
+    """Contratempo: ruido agudo bem curto. So entra quando o pulso ja esta
+    forte — e o que faz o acelerando soar mais rapido sem mudar o andamento."""
+    n = int(SR * 0.05)
+    out = []
+    hp = lp = 0.0
+    for i in range(n):
+        p = i / n
+        x = noise()
+        lp += 0.55 * (x - lp)
+        hp = x - lp
+        out.append(hp * math.exp(-40 * p) * 0.30 * force)
+    return out
+
+
+def pulse(buf, cues, total, bpm):
+    """Marca o tempo do filme. Os cortes da imagem caem nos mesmos tempos
+    porque a lista de planos e medida em tempos deste mesmo BPM — ninguem
+    alinha nada na mao."""
+    marks = [(c[0], c[2]) for c in cues if c[1] == 'pulse']
+    if not marks:
+        return 0
+    beat = 60000.0 / bpm
+    noise = Noise(31337)
+    dur_ms = total * 1000.0 / SR
+    ms = 0.0
+    n = 0
+    while ms < dur_ms:
+        lvl = 0.0
+        for i, (a, v) in enumerate(marks):
+            if ms >= a:
+                lvl = v
+                if i + 1 < len(marks):
+                    b, v2 = marks[i + 1]
+                    if b > a:
+                        q = min(1.0, max(0.0, (ms - a) / (b - a)))
+                        lvl = v + (v2 - v) * q
+        if lvl > 0.02:
+            at = int(SR * ms / 1000.0)
+            # o primeiro tempo de cada compasso pesa mais
+            down = 1.0 if (n % 4) == 0 else 0.72
+            mix(buf, at, ev_kick(lvl * down, noise), 1.0, 1.0)
+            if lvl > 0.55:
+                mix(buf, at + int(SR * beat / 2000.0),
+                    ev_hat(lvl, noise), 1.0 - 0.3, 1.0 + 0.0)
+        ms += beat
+        n += 1
+    return n
+
+
 def ev_ping(force, _noise):
     """O ping do ensaio: pulso curto de 2,25 kHz com um eco no fundo —
     a ida e a volta do feixe. Nao e gravacao de equipamento; e o gesto."""
@@ -230,11 +295,12 @@ def bed(buf, cues, total):
 # --------------------------------------------------------------------- main
 
 def main():
-    cues, dur_ms = read_cues()
+    cues, dur_ms, bpm = read_cues()
     total = int(SR * dur_ms / 1000.0)
     buf = array.array('d', bytes(8 * total * CH))
 
     bed(buf, cues, total)
+    nb = pulse(buf, cues, total, bpm)
 
     noise = Noise()
     makers = {'whoosh': ev_whoosh, 'impact': ev_impact, 'riser': ev_riser,
@@ -244,7 +310,7 @@ def main():
             'riser': 0.15, 'impact': 0.0}
     side = 0
     for ms, kind, force in cues:
-        if kind in ('sub', 'tail'):
+        if kind in ('sub', 'tail', 'pulse', 'end'):
             continue
         fn = makers.get(kind)
         if not fn:
@@ -273,8 +339,9 @@ def main():
         w.setsampwidth(2)
         w.setframerate(SR)
         w.writeframes(pcm.tobytes())
-    n_ev = len([c for c in cues if c[1] not in ('sub', 'tail')])
-    print('  %.1fs · %d Hz · estereo · %d eventos' % (dur_ms / 1000.0, SR, n_ev))
+    n_ev = len([c for c in cues if c[1] not in ('sub', 'tail', 'pulse', 'end')])
+    print('  %.1fs · %d Hz · estereo · %d eventos · %d BPM (%d tempos)'
+          % (dur_ms / 1000.0, SR, n_ev, bpm, nb))
 
     master(raw, path)
     os.remove(raw)

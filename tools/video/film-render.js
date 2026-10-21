@@ -77,14 +77,22 @@ const FONT_CSS = `
   src:local("IPAGothic"),local("IPAPGothic"),local("Noto Sans CJK JP")}
 `;
 
-/* instantes que valem conferir: entrada e saida de cada cena, e o meio de
-   cada painel, onde o texto esta todo no quadro ao mesmo tempo */
-const MARKS = [1200, 2800, 3700, 4900, 6200, 9200, 11600,
-  12900, 15500, 18000, 19500, 22000, 25400, 27200, 30000, 32600,
-  34200, 36500, 39600, 40500, 41700, 42900, 44000,
-  46200, 48500, 51600, 52600, 54500, 56200, 58000, 59800];
+/* Os instantes a conferir saem da propria lista de planos: o meio de cada
+   um, mais um ponto logo depois da entrada. Plano novo entra na checagem
+   sem ninguem lembrar de acrescentar um numero aqui. */
+async function marksFor(page) {
+  const shots = await page.evaluate(() => window.SHOTS);
+  const out = [];
+  for (const s of shots) {
+    out.push(Math.round(s.a + Math.min(s.d * 0.5, 300)));   // logo apos a entrada
+    if (s.d > 800) out.push(Math.round(s.a + s.d * 0.75));  // plano longo: mais um
+  }
+  return [...new Set(out)].sort((a, b) => a - b);
+}
 
-/* o que nao pode se sobrepor nem sair do quadro */
+/* o que nao pode se sobrepor nem sair do quadro.
+   #dimg fica de fora de proposito: o plano de detalhe sangra no quadro,
+   e e justamente esse o efeito. */
 const BOXES = ['#brw','#panelTxt','#pChips','#langRow','#tech-dia','#graph',
   '#s1mark','#s1quote','#s2a','#s2b','#s2ps','#s7a','#s7b','#s7c',
   '#s8mark','#s8q','#s8s','#waBtn','#s8url','#s8sig'];
@@ -117,6 +125,7 @@ async function check(browser) {
   for (const fmt of FORMATS) {
     const { page, W, H } = await openPage(browser, fmt);
     const bar = fmt === 'v' ? 92 : 0;   // tarja cinematografica, so no vertical
+    const MARKS = await marksFor(page);
 
     for (const t of MARKS) {
       await page.evaluate(ms => window.render(ms), t);
