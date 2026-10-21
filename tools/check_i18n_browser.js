@@ -255,13 +255,22 @@ async function checkPage(browser, spec, lang) {
      O catalogo da KL Sports e a excecao deliberada: la quem recebe e a equipe
      do cliente, que so le portugues, e isso tem teste proprio mais abaixo. */
   if (lang !== 'pt' && spec.id !== 'kl') {
-    const ptMsgs = await page.evaluate(() =>
+    /* Le o endereco CRU, nao via searchParams. O getter decodifica "+" como
+       espaco e com isso esconde justamente o defeito que importa aqui: quem
+       monta o endereco com URLSearchParams serializa em formato de formulario
+       e troca os espacos por "+", que o wa.me entrega literal ao visitante.
+       Pelo getter os dois casos pareciam identicos. */
+    const bad = await page.evaluate(() =>
       [...document.querySelectorAll('a[href*="wa.me/"]')]
-        .map((a) => { try { return decodeURIComponent(new URL(a.href).searchParams.get('text') || ''); }
-                      catch (e) { return ''; } })
-        .filter((m) => /Olá Rafael/.test(m)));
-    ok(ptMsgs.length === 0, `${spec.id}/${lang}: mensagens de WhatsApp traduzidas` +
-       (ptMsgs.length ? ` — ${ptMsgs.length} ainda em portugues: ${JSON.stringify(ptMsgs[0].slice(0, 60))}` : ''));
+        .map((a) => {
+          const raw = (a.getAttribute('href') || '').split('text=')[1] || '';
+          let text = '';
+          try { text = decodeURIComponent(raw); } catch (e) { text = raw; }
+          return { raw, text };
+        })
+        .filter((m) => /Olá Rafael/.test(m.text) || m.raw.indexOf('+') !== -1));
+    ok(bad.length === 0, `${spec.id}/${lang}: mensagens de WhatsApp traduzidas e bem codificadas` +
+       (bad.length ? ` — ${bad.length} com problema: ${JSON.stringify(bad[0].text.slice(0, 60))}` : ''));
   }
 
   /* Links de pagina carregam o idioma; PDF, imagem e download nao — o motor os

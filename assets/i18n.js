@@ -327,11 +327,13 @@
       var a = links[i];
       var msg = dict[a.getAttribute('data-i18n-wa')];
       if (!msg) continue;
-      try {
-        var url = new URL(a.href, location.href);
-        url.searchParams.set('text', msg);
-        a.setAttribute('href', url.toString());
-      } catch (e) { /* endereco fora do padrao: melhor deixar como estava */ }
+      /* encodeURIComponent, e NAO URLSearchParams: o segundo serializa em
+         formato de formulario, trocando espaco por "+". O wa.me nao desfaz
+         essa troca, entao o visitante receberia "Hi+Rafael,+I+came+from+the"
+         escrito assim, com os sinais a vista. Os enderecos em portugues ja
+         usam %20; aqui se escreve do mesmo jeito. */
+      var base = a.href.split('?')[0];
+      a.setAttribute('href', base + '?text=' + encodeURIComponent(msg));
     }
   }
 
