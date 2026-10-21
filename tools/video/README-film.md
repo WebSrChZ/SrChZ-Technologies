@@ -14,22 +14,34 @@ Gera dois masters do mesmo filme, 60s, 30fps, H.264 com som:
 páginas deste repositório. Mudar o texto do site muda o filme na próxima
 renderização.
 
-## As nove cenas
+## Como o filme é montado
 
-| # | t | cena | o que carrega |
-|---|---|---|---|
-| 01 | 0–5,5s | o sinal | BRAND / ENGINEERING / DATA / STRATEGY soltos, a rede apertando, a marca |
-| 02 | 5,5–12s | o método | "A área muda. O método não." + Perception · Strategy · Execution |
-| 03 | 12–18,6s | a interface | a home rolando: um site, três entradas |
-| 04 | 18,6–26s | Branding & Growth | a página /growth e os serviços |
-| 05 | 26–33s | Engenharia & END | a página /end e o diagrama de ensaio |
-| 06 | 33–40s | Tecnologia & Dados/IA | a página /tech e o grafo de sistemas |
-| 07 | 40–45s | alcance | a mesma home em pt, en, es e ja — quatro idiomas |
-| 08 | 45–52s | um sistema | "Três práticas. Um método." |
-| 09 | 52–60s | conversão | volta ao site, e o cartão final com o WhatsApp |
+A unidade não é a cena: é o **plano**. São 52, medidos em tempos de 600ms
+(100 BPM), com corte seco entre eles. A duração varia de meio tempo a doze —
+é a variação que dá ritmo, não a velocidade média. O plano mais longo é o
+cartão final, logo depois do mais curto.
 
-Os tempos estão no objeto `T` e no array `PANELS`, no fim de `film.html`.
-Mudar uma frase, reordenar ou esticar uma cena é editar texto e renderizar de
+A lista está em `SHOTS`, no fim de `film.html`. Cada entrada diz o tipo
+(`k`), a duração em tempos (`b`) e os parâmetros do tipo. Acrescentar um
+plano é acrescentar uma linha; os tempos absolutos, as marcas de som e os
+instantes que a checagem amostra saem todos dali.
+
+### Os atos
+
+| ato | t | o que carrega |
+|---|---|---|
+| 01 · o sinal | 0–7,2s | BRAND / ENGINEERING / DATA / STRATEGY soltos, a rede apertando, a marca |
+| 02 · o método | 7,2–11,4s | "A área muda. O método não." + Perception · Strategy · Execution |
+| 03 · as três portas | 11,4–15s | a home e dois closes |
+| 04 · Branding & Growth | 15–21,6s | a página /growth, os serviços, três closes |
+| 05 · Engenharia & END | 21,6–29,4s | a página /end e o diagrama do ensaio em tela cheia |
+| 06 · Tecnologia & Dados/IA | 29,4–36,6s | a página /tech e o grafo em tela cheia |
+| 07 · alcance | 36,6–42,6s | a mesma home em pt, en, es e ja |
+| 08 · acelerando | 42,6–46,8s | doze planos encurtando |
+| 09 · um sistema | 46,8–52,8s | "Três práticas. Um método." |
+| 10 · o fecho | 52,8–60s | o cartão final com o WhatsApp |
+
+Mudar uma frase, reordenar ou esticar um plano é editar texto e renderizar de
 novo — não é retrabalho de vídeo.
 
 ## Rodar
@@ -53,8 +65,11 @@ node tools/video/film-render.js --check
 # 4. o som (precisa vir antes: o render embute o wav que encontrar)
 python3 tools/video/film-audio.py
 
-# 5. renderizar os dois masters (ou --fmt v / --fmt h para um só)
-node tools/video/film-render.js
+# 5. renderizar os dois masters
+#    --mb 3   desfoque de movimento (3x o tempo; use 1 enquanto itera)
+#    --fmt v  um formato só
+#    --secs N só os primeiros N segundos, para testar o caminho inteiro
+node tools/video/film-render.js --mb 3
 
 # 6. legendas
 node tools/video/film-subs.js
@@ -159,3 +174,41 @@ diferentes.
 seja da empresa. A cena 05 resolve isso com o diagrama do próprio ensaio —
 feixe angular, salto, perna, espessura — em vez de uma foto genérica de
 indústria que diria menos e fingiria mais.
+
+## Por que tem movimento o tempo todo
+
+A primeira montagem era de nove cenas de 5 a 7s que dissolviam umas nas
+outras. Medida quadro a quadro, não havia **um** corte em 60s e a mudança
+visual mediana era 0,0003 — imagem praticamente parada.
+
+Medindo cinco Reels usados como referência com o mesmo teste, o resultado foi
+contraintuitivo: quatro delas **quase não cortam** (zero cortes em 14s, zero
+em 21s, um em 73s), e mesmo assim a mudança mediana por quadro é 3 a 20x
+maior. O que prende atenção não é o corte — é que a imagem nunca está parada,
+e tem profundidade.
+
+Daí três coisas no desenho:
+
+**A câmera nunca para.** Três senóides de períodos primos entre si movem o
+mundo inteiro em 3D. A combinação não se repete dentro do filme, então não
+existe quadro igual ao anterior.
+
+**A moldura fica de três-quartos** e gira devagar ao longo do plano. Parada de
+frente ela é um retângulo chapado, e era disso que o filme era feito.
+
+**O desfoque de movimento é real**, não filtro: `--mb N` desenha N subquadros
+por quadro e o ffmpeg funde cada grupo com `tmix`. O obturador é de 180 graus
+— os subquadros cobrem metade do intervalo do quadro, não o intervalo inteiro.
+Cobrindo tudo, o rastro dobra de tamanho e a imagem fica permanentemente mole.
+
+## O que este pipeline não faz
+
+Ele renderiza DOM num navegador, quadro a quadro. Isso dá perspectiva,
+desfoque de movimento e profundidade por camada. **Não dá geometria 3D nem
+material** — tipografia com volume e reflexo, como se vê em peça feita em
+After Effects ou Cinema 4D, está fora do alcance. Também não há filmagem:
+não há câmera nem objeto real a filmar.
+
+Se um dia o filme precisar daquele acabamento, o caminho é produzir em AE — e
+o que está aqui serve de roteiro, com os tempos, os textos e as capturas
+prontos.
