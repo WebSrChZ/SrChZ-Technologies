@@ -203,7 +203,7 @@ window.SRCHZ_I18N.es = {
   'tech.form.messageLabel': 'Mensaje',
   'tech.form.consent': 'Autorizo el contacto y el tratamiento de mis datos conforme a la <a href="../privacidade.html">Política de Privacidad</a>.',
   'tech.form.submit': 'Enviar',
-  'tech.form.alt': 'O háblame directo: <a href="https://wa.me/5511996869309?text=Ol%C3%A1%20Rafael%2C%20vim%20pelo%20hub%20de%20Tecnologia%20%26%20Dados%2FIA." target="_blank" rel="noopener">WhatsApp →</a>',
+  'tech.form.alt': 'O háblame directo: <a href="https://wa.me/5511996869309?text=Ol%C3%A1%20Rafael%2C%20vim%20pelo%20hub%20de%20Tecnologia%20%26%20Dados%2FIA." target="_blank" rel="noopener" data-i18n-wa="wa.techHub">WhatsApp →</a>',
   'tech.form.errFields': 'Completa un nombre y un contacto válido.',
   'tech.form.errConsent': 'Marca la autorización de contacto para enviar.',
   'tech.form.sending': 'Enviando…',
@@ -932,5 +932,13 @@ window.SRCHZ_I18N.es = {
   'kl.p.suporte-halter-torre.finish': 'Torre, 10 Pares',
   'kl.p.suporte-halter-torre.spec0': 'Capacidad',
   'kl.p.suporte-halter-torre.spec1': '10 pares',
-  'kl.p.suporte-halter-torre.desc': 'El accesorio ideal para organizar tus mancuernas. Elaborada en tubo de acero cuadrado con pintura electrostática, destaca por su calidad y durabilidad.'
+  'kl.p.suporte-halter-torre.desc': 'El accesorio ideal para organizar tus mancuernas. Elaborada en tubo de acero cuadrado con pintura electrostática, destaca por su calidad y durabilidad.',
+
+  // ---- mensagens prontas do WhatsApp --------------------------------------
+  'wa.home': 'Hola Rafael, vengo del sitio de SrChZ.',
+  'wa.site': 'Hola Rafael, vengo del sitio.',
+  'wa.growth': 'Hola Rafael, vengo del sitio y quiero un diagnóstico de Growth & Branding.',
+  'wa.tech': 'Hola Rafael, quiero hablar sobre un proyecto de Tecnología y Datos/IA.',
+  'wa.techHub': 'Hola Rafael, vengo del hub de Tecnología y Datos/IA.',
+  'wa.end': 'Hola Rafael, necesito una inspección de END (ensayos no destructivos).'
 };

@@ -69,6 +69,11 @@ for (const file of pages) {
       if (parts.length >= 2 && parts[1].trim()) keys.add(parts[1].trim());
     }
   }
+  /* Mensagem pronta de um link de WhatsApp. Vive no endereco, nao no texto do
+     elemento, entao nenhuma das varreduras acima a alcancaria. O nome e
+     `data-i18n-wa` porque o catalogo da KL Sports ja usa `data-wa-msg` para a
+     sua mensagem literal em portugues — que, de proposito, nao se traduz. */
+  for (const m of html.matchAll(/data-i18n-wa="([^"]+)"/g)) keys.add(m[1]);
 
   if (!keys.size) continue;
   instrumented.push(rel);

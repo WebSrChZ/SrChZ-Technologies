@@ -241,6 +241,29 @@ async function checkPage(browser, spec, lang) {
     }
   }
 
+  /* Um link de WhatsApp leva a mensagem pronta dentro do endereco. O rotulo do
+     botao e traduzido; a mensagem tambem precisa ser, senao o visitante clica
+     em "Message us on WhatsApp" e o aplicativo abre com uma frase em portugues
+     que ele nao le, prestes a sair em nome dele.
+
+     A checagem varre TODO link de wa.me, nao so os marcados com data-i18n-wa —
+     e essa diferenca que importa. Um dos links vive dentro de um bloco
+     data-i18n-html, entao a traducao substitui o elemento inteiro e leva o
+     atributo junto; olhando so os marcados, aquele link sumia da conta e
+     continuava despachando portugues sem ninguem notar.
+
+     O catalogo da KL Sports e a excecao deliberada: la quem recebe e a equipe
+     do cliente, que so le portugues, e isso tem teste proprio mais abaixo. */
+  if (lang !== 'pt' && spec.id !== 'kl') {
+    const ptMsgs = await page.evaluate(() =>
+      [...document.querySelectorAll('a[href*="wa.me/"]')]
+        .map((a) => { try { return decodeURIComponent(new URL(a.href).searchParams.get('text') || ''); }
+                      catch (e) { return ''; } })
+        .filter((m) => /Olá Rafael/.test(m)));
+    ok(ptMsgs.length === 0, `${spec.id}/${lang}: mensagens de WhatsApp traduzidas` +
+       (ptMsgs.length ? ` — ${ptMsgs.length} ainda em portugues: ${JSON.stringify(ptMsgs[0].slice(0, 60))}` : ''));
+  }
+
   /* Links de pagina carregam o idioma; PDF, imagem e download nao — o motor os
      ignora de proposito, entao cobrar deles nao faria sentido. */
   if (lang !== 'pt') {

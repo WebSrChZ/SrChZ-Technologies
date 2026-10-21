@@ -208,7 +208,7 @@ window.SRCHZ_I18N.ja = {
   'tech.form.messageLabel': 'メッセージ',
   'tech.form.consent': '<a href="../privacidade.html">プライバシーポリシー</a>に基づく連絡および個人データの取り扱いに同意します。',
   'tech.form.submit': '送信',
-  'tech.form.alt': '直接のご連絡はこちら：<a href="https://wa.me/5511996869309?text=Ol%C3%A1%20Rafael%2C%20vim%20pelo%20hub%20de%20Tecnologia%20%26%20Dados%2FIA." target="_blank" rel="noopener">WhatsApp →</a>',
+  'tech.form.alt': '直接のご連絡はこちら：<a href="https://wa.me/5511996869309?text=Ol%C3%A1%20Rafael%2C%20vim%20pelo%20hub%20de%20Tecnologia%20%26%20Dados%2FIA." target="_blank" rel="noopener" data-i18n-wa="wa.techHub">WhatsApp →</a>',
   'tech.form.errFields': 'お名前と有効なご連絡先をご入力ください。',
   'tech.form.errConsent': '送信するには連絡への同意にチェックを入れてください。',
   'tech.form.sending': '送信中…',
@@ -937,5 +937,13 @@ window.SRCHZ_I18N.ja = {
   'kl.p.suporte-halter-torre.finish': 'タワー型・10ペア',
   'kl.p.suporte-halter-torre.spec0': '収納数',
   'kl.p.suporte-halter-torre.spec1': '10 ペア',
-  'kl.p.suporte-halter-torre.desc': 'ダンベルを整理するのに最適な一台。角形鋼管に静電粉体塗装を施し、品質と耐久性で際立ちます。'
+  'kl.p.suporte-halter-torre.desc': 'ダンベルを整理するのに最適な一台。角形鋼管に静電粉体塗装を施し、品質と耐久性で際立ちます。',
+
+  // ---- mensagens prontas do WhatsApp --------------------------------------
+  'wa.home': 'SrChZ のサイトから来ました。ご相談したいことがあります。',
+  'wa.site': 'サイトから来ました。ご相談したいことがあります。',
+  'wa.growth': 'サイトから来ました。Growth & Branding の診断をお願いしたいです。',
+  'wa.tech': 'テクノロジー・データ/AI のプロジェクトについてご相談したいです。',
+  'wa.techHub': 'テクノロジー・データ/AI のページから来ました。',
+  'wa.end': '非破壊検査（NDT）の依頼についてご相談したいです。'
 };

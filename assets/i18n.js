@@ -308,10 +308,38 @@
 
   // ---- orquestracao --------------------------------------------------------
 
+  /* Um link de WhatsApp carrega a mensagem pronta dentro do proprio endereco.
+     O ROTULO do botao ja era traduzido; a mensagem, nao — entao o visitante
+     estrangeiro clicava em "Message us on WhatsApp" e o aplicativo abria com
+     uma frase em portugues que ele nao le, prestes a sair em nome dele.
+
+     Aqui o destinatario e o proprio Rafael, que quer cliente de fora: a
+     mensagem vai no idioma do visitante. Isso e o OPOSTO do que o catalogo da
+     KL Sports faz, e de proposito — la o destinatario e a equipe do cliente,
+     que so le portugues, e o orcamento tem de chegar em portugues. Por isso o
+     ajuste e por adesao (`data-wa-msg`) e nao varre todo link de WhatsApp. */
+  function translateWaLinks(dict) {
+    /* `data-i18n-wa`, e nao `data-wa-msg`: o catalogo da KL Sports ja usa esse
+       outro nome para carregar a mensagem literal em portugues das suas CTAs.
+       Reaproveitar o nome faria as duas coisas disputarem o mesmo atributo. */
+    var links = document.querySelectorAll('a[data-i18n-wa]');
+    for (var i = 0; i < links.length; i++) {
+      var a = links[i];
+      var msg = dict[a.getAttribute('data-i18n-wa')];
+      if (!msg) continue;
+      try {
+        var url = new URL(a.href, location.href);
+        url.searchParams.set('text', msg);
+        a.setAttribute('href', url.toString());
+      } catch (e) { /* endereco fora do padrao: melhor deixar como estava */ }
+    }
+  }
+
   function run(dict) {
     try {
       applyMeta(dict);
       applyNodes(dict);
+      translateWaLinks(dict);
     } catch (e) {
       if (window.console && console.error) console.error('[i18n]', e);
     }

@@ -203,7 +203,7 @@ window.SRCHZ_I18N.en = {
   'tech.form.messageLabel': 'Message',
   'tech.form.consent': 'I agree to be contacted and to the processing of my data under the <a href="../privacidade.html">Privacy Policy</a>.',
   'tech.form.submit': 'Send',
-  'tech.form.alt': 'Or reach me directly: <a href="https://wa.me/5511996869309?text=Ol%C3%A1%20Rafael%2C%20vim%20pelo%20hub%20de%20Tecnologia%20%26%20Dados%2FIA." target="_blank" rel="noopener">WhatsApp →</a>',
+  'tech.form.alt': 'Or reach me directly: <a href="https://wa.me/5511996869309?text=Ol%C3%A1%20Rafael%2C%20vim%20pelo%20hub%20de%20Tecnologia%20%26%20Dados%2FIA." target="_blank" rel="noopener" data-i18n-wa="wa.techHub">WhatsApp →</a>',
   'tech.form.errFields': 'Please fill in a name and a valid contact.',
   'tech.form.errConsent': 'Please tick the contact authorisation to send.',
   'tech.form.sending': 'Sending…',
@@ -932,5 +932,13 @@ window.SRCHZ_I18N.en = {
   'kl.p.suporte-halter-torre.finish': 'Tower, 10 Pairs',
   'kl.p.suporte-halter-torre.spec0': 'Capacity',
   'kl.p.suporte-halter-torre.spec1': '10 pairs',
-  'kl.p.suporte-halter-torre.desc': 'The right accessory for keeping your dumbbells in order. Built from square steel tubing with an electrostatic powder coat, it stands out for quality and durability.'
+  'kl.p.suporte-halter-torre.desc': 'The right accessory for keeping your dumbbells in order. Built from square steel tubing with an electrostatic powder coat, it stands out for quality and durability.',
+
+  // ---- mensagens prontas do WhatsApp --------------------------------------
+  'wa.home': 'Hi Rafael, I came from the SrChZ site.',
+  'wa.site': 'Hi Rafael, I came from the site.',
+  'wa.growth': 'Hi Rafael, I came from the site and I would like a Growth & Branding diagnostic.',
+  'wa.tech': 'Hi Rafael, I would like to talk about a Technology & Data/AI project.',
+  'wa.techHub': 'Hi Rafael, I came from the Technology & Data/AI hub.',
+  'wa.end': 'Hi Rafael, I need an NDT inspection.'
 };
