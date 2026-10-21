@@ -1,4 +1,4 @@
-# Post Instagram — @websrchz — NA-001 / Ultrassom N2
+# Post Instagram — @srchztechnologies — NA-001 / Ultrassom N2
 
 **Formato:** carrossel, 8 slides (4:5 — 1080×1350)
 **Status:** rascunho para aprovação. Nada publicado.

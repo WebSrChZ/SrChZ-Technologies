@@ -155,7 +155,7 @@ function html(s) {
       .brand{font-size:25px; color:var(--muted); letter-spacing:.14em; text-transform:uppercase; font-weight:600}
     </style>`;
 
-  const foot = (right = '@websrchz') =>
+  const foot = (right = '@srchztechnologies') =>
     `<div class="footline"><span class="brand">SrChZ Technologies</span><span>${right}</span></div>`;
 
   if (s.kind === 'capa') {
