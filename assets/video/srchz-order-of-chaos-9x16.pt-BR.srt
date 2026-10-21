@@ -1,51 +1,43 @@
 1
-00:00:00,600 --> 00:00:05,200
+00:00:00,400 --> 00:00:07,100
 O problema raramente é o que parece.
 
 2
-00:00:05,800 --> 00:00:08,600
+00:00:07,300 --> 00:00:09,500
 A área muda. O método não.
 
 3
-00:00:08,800 --> 00:00:11,800
+00:00:09,700 --> 00:00:11,300
 Perception · Strategy · Execution
 
 4
-00:00:12,200 --> 00:00:15,200
+00:00:11,500 --> 00:00:14,900
 Um site. Três entradas.
 
 5
-00:00:15,300 --> 00:00:18,400
-Branding & Growth · Engenharia & END · Tecnologia & Dados/IA
-
-6
-00:00:18,900 --> 00:00:25,600
+00:00:15,100 --> 00:00:21,500
 Percepção gera desejo.
 Estratégia transforma atenção em oportunidade.
 
-7
-00:00:26,300 --> 00:00:32,600
+6
+00:00:21,700 --> 00:00:29,300
 Precisão para enxergar o que outros deixam passar.
 
-8
-00:00:33,300 --> 00:00:39,600
+7
+00:00:29,500 --> 00:00:36,500
 Tecnologia que conecta o que antes estava fragmentado.
 
-9
-00:00:40,300 --> 00:00:44,600
+8
+00:00:36,700 --> 00:00:42,500
 Quatro idiomas. Entrega internacional.
 Português · English · Español · 日本語
 
-10
-00:00:45,300 --> 00:00:51,600
+9
+00:00:46,900 --> 00:00:52,700
 Três práticas. Um método.
 Resolvo o que os outros ignoram.
 
-11
-00:00:52,300 --> 00:00:55,300
-Começa com uma conversa. Sem compromisso.
-
-12
-00:00:55,700 --> 00:00:59,600
+10
+00:00:52,900 --> 00:00:59,600
 Tem algo travado que ninguém resolve?
 Agende seu diagnóstico gratuito.
