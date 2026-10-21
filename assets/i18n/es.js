@@ -92,11 +92,13 @@ window.SRCHZ_I18N.es = {
   'about.pull': 'No me defino por lo que hago; me defino por lo que entiendo. Los cargos son herramientas — lo que entrego es la solución.',
   'about.p2': 'Mi diferencial es <b>ver lo que la mayoría ignora</b>. Tomo problemas ambiguos, desarmo el mecanismo hasta la causa raíz y devuelvo una solución clara — sobre todo en el espacio digital y tecnológico, donde se encuentran análisis, estrategia y estética.',
   'about.p3': '¿Tienes algo atascado que nadie resuelve? Estrategia, tecnología, producción visual, datos e IA — llevo el mismo método a cualquier campo. Si necesitas a alguien que <b>piensa antes de ejecutar</b>, escríbeme.',
+  'about.p4': 'Las tres prácticas se entregan internacionalmente. La única excepción es la grabación cinematográfica, que exige captación presencial y se acuerda por proyecto.',
   'about.card': '"El Orden del Caos" — consultoría estratégica que une ingeniería, psicoanálisis y estética high-end. Fundada por Rafael Cordeiro.',
   'about.chip1': 'Trilingüe · <b>PT · EN C2 · JP B1</b>',
   'about.chip2': 'Ing. Informática + <b>Psicoanálisis</b>',
   'about.chip3': 'Inspector <b>END Nivel 2</b>',
   'about.chip4': '<b>Customer Experience</b> internacional',
+  'about.chip5': '<b>Entrega internacional</b>',
 
   'method.eyebrow': 'Cómo trabajo',
   'method.title': 'Un método, cualquier campo.',
@@ -449,7 +451,7 @@ window.SRCHZ_I18N.es = {
   'gr.f.q4': '¿Cómo funciona el Portal del Cliente?',
   'gr.f.a4': 'Es una web app propia donde sigues todo en tiempo real — cronograma, estado de cada video, aprobación de guiones y métricas — sincronizada entre dispositivos e instalable como app. Transparencia total, del briefing a la publicación.',
   'gr.f.q5': '¿Trabajan con clientes fuera de Brasil?',
-  'gr.f.a5': 'Sí. Todo lo digital — medios pagados, branding, web, portales, datos y consultoría — se entrega en remoto, estés donde estés, y trabajo en español, inglés y portugués. Las grabaciones presenciales de video y foto son la única excepción: se acuerdan por proyecto y, en la práctica, ocurren en Brasil.',
+  'gr.f.a5': 'Sí. Medios pagados, branding, web, el Portal del Cliente y la consultoría se entregan en remoto, estés donde estés. La excepción es la grabación cinematográfica: las captaciones presenciales de video y foto dependen de desplazamiento y se acuerdan por proyecto.',
   'gr.f.q6': '¿Cómo empiezo?',
   'gr.f.a6': 'Con un diagnóstico gratuito: leo tu ecosistema actual, señalo los cuellos de botella y diseño una propuesta a medida. Sin compromiso — solo escríbeme.',
 
