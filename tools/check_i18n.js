@@ -54,6 +54,7 @@ const pages = walk(ROOT);
 const usedBy = new Map();                  // chave -> [paginas]
 const instrumented = [];
 const pageIds = new Set();                 // valores de data-i18n-page
+const textKeys = new Set();                // chaves escritas via textContent
 
 for (const file of pages) {
   const html = fs.readFileSync(file, 'utf8');
@@ -62,6 +63,10 @@ for (const file of pages) {
 
   for (const m of html.matchAll(/data-i18n(?:-html)?="([^"]*)"/g)) {
     if (m[1]) keys.add(m[1]);
+  }
+  // `data-i18n` (sem -html) escreve em textContent: entidade ali sai literal
+  for (const m of html.matchAll(/data-i18n="([^"]*)"/g)) {
+    if (m[1]) textKeys.add(m[1]);
   }
   for (const m of html.matchAll(/data-i18n-attr="([^"]*)"/g)) {
     for (const pair of m[1].split(';')) {
@@ -239,6 +244,23 @@ for (const code of langs) {
   for (const [k, v] of Object.entries(d)) {
     if (k === '_meta') continue;
     if (typeof v !== 'string' || !v.trim()) fail(`[${code}] valor vazio ou nao-texto: ${k}`);
+  }
+
+  /* Entidade HTML num valor aplicado como TEXTO aparece literal na tela.
+     `data-i18n` escreve em textContent, que nao decodifica nada — entao
+     "Branding &amp; Growth" foi ao ar escrito exatamente assim, com o &amp;
+     a vista, em ingles e espanhol, em cinco paginas. Veio de copiar o texto
+     do HTML (onde o & PRECISA ser escrito &amp;) para dentro de uma string
+     JS, onde ele e so uma sequencia de cinco caracteres.
+     Em `data-i18n-html` a entidade e legitima: aquilo passa por innerHTML. */
+  for (const [k, v] of Object.entries(d)) {
+    if (k === '_meta' || typeof v !== 'string') continue;
+    if (!textKeys.has(k)) continue;
+    const m = v.match(/&(amp|lt|gt|quot|apos|nbsp|#\d+|#x[0-9a-f]+);/i);
+    if (m) {
+      fail(`[${code}] ${k} e aplicada como texto e traz a entidade "${m[0]}", ` +
+           `que apareceria literal na tela: ${JSON.stringify(v.slice(0, 60))}`);
+    }
   }
 }
 
