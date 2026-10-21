@@ -1,0 +1,685 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>SrChZ — The Order of Chaos</title>
+<style>
+  :root{
+    --bg:#09090b; --ink:#f6f2e9; --soft:#cbc4b6; --muted:#8b8576;
+    --gold:#c9a24b; --gold-2:#ead29a;
+    --gold-grad:linear-gradient(180deg,#f6e4ad,#cda74f 55%,#9a7833);
+    --wa:#25D366;
+    /* a unidade de escala muda entre formatos; tudo deriva dela */
+    --u:1px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{overflow:hidden;background:var(--bg)}
+  body{font-family:"Inter",sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+
+  #stage{position:relative;overflow:hidden;background:var(--bg)}
+  body[data-fmt="v"] #stage,body[data-fmt="v"] html,body[data-fmt="v"]{width:1080px;height:1920px}
+  body[data-fmt="h"] #stage,body[data-fmt="h"] html,body[data-fmt="h"]{width:1920px;height:1080px}
+
+  .scene{position:absolute;inset:0;opacity:0}
+  #dust{position:absolute;inset:0;pointer-events:none}
+  #net{position:absolute;inset:0;pointer-events:none}
+  #halo{position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(60% 46% at 50% 46%, rgba(201,162,75,.20), transparent 68%)}
+  #glow{position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(70% 52% at 78% 6%, rgba(201,162,75,.13), transparent 62%),
+               radial-gradient(64% 46% at 8% 96%, rgba(201,162,75,.08), transparent 60%)}
+  #vignette{position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(142% 86% at 50% 46%, transparent 58%, rgba(0,0,0,.56) 100%)}
+  #grade{position:absolute;inset:0;pointer-events:none;mix-blend-mode:soft-light;
+    background:linear-gradient(176deg, rgba(201,162,75,.12), transparent 42%, rgba(10,14,30,.22))}
+  /* o impacto e um estouro de luz no centro, nao um estrobo de quadro
+     cheio: no telefone, tela branca inteira em 30fps incomoda */
+  #flash{position:absolute;inset:0;pointer-events:none;opacity:0;
+    background:radial-gradient(42% 32% at 50% 48%, rgba(255,246,224,.95),
+      rgba(201,162,75,.38) 58%, transparent 76%)}
+  #bars{position:absolute;inset:0;pointer-events:none;opacity:0}
+  #bars i{position:absolute;left:0;right:0;height:92px;background:#000;display:block}
+  #bars i:first-child{top:0} #bars i:last-child{bottom:0}
+
+  .g{background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .serif{font-family:"EB Garamond",Georgia,serif}
+  .rule{height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);transform-origin:50% 50%}
+
+  .center{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+
+  /* ---------- cena 1: o sinal ---------- */
+  .chaosWord{position:absolute;font-family:"Inter",sans-serif;font-weight:700;
+    letter-spacing:.2em;text-transform:uppercase;color:var(--soft);white-space:nowrap}
+  #s1line{position:absolute;left:50%;top:50%;height:1px;width:0;
+    background:linear-gradient(90deg,transparent,var(--gold-2),transparent);transform:translate(-50%,-50%)}
+  #s1quote{position:absolute;left:80px;right:80px;text-align:center;
+    font-family:"EB Garamond",Georgia,serif;font-style:italic;color:var(--soft)}
+
+  /* ---------- marca ---------- */
+  .markWrap{position:relative;display:inline-block}
+  .markWrap img{display:block}
+  .shine{position:absolute;inset:0;pointer-events:none;opacity:0;
+    background:linear-gradient(104deg,transparent 40%,rgba(255,255,255,.30) 46%,
+      rgba(255,255,255,.92) 50%,rgba(255,255,255,.30) 54%,transparent 60%);
+    background-size:260% 100%;
+    -webkit-mask-image:url(brand/srchz-mark.png);mask-image:url(brand/srchz-mark.png);
+    -webkit-mask-size:100% 100%;mask-size:100% 100%;
+    -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;mix-blend-mode:screen}
+
+  /* ---------- tipografia cinética ---------- */
+  .kLine{overflow:hidden}
+  .kLine span{display:block}
+  .big{font-family:"EB Garamond",Georgia,serif;font-weight:700;line-height:1.02;letter-spacing:-.015em}
+  .mid{font-family:"EB Garamond",Georgia,serif;font-weight:700;line-height:1.06;letter-spacing:-.01em}
+  .kick{letter-spacing:.3em;text-transform:uppercase;color:var(--gold-2);font-weight:700}
+  .sub{color:var(--soft);font-weight:300;line-height:1.45}
+  .psx{letter-spacing:.42em;text-transform:uppercase;color:var(--muted);font-weight:600}
+
+  /* ---------- moldura de navegador ---------- */
+  .browser{position:absolute;border-radius:18px;overflow:hidden;background:#0c0c0f;
+    box-shadow:0 60px 140px -44px rgba(0,0,0,.95),0 0 0 1px rgba(201,162,75,.22),
+               0 0 120px -40px rgba(201,162,75,.26)}
+  .chrome{position:absolute;left:0;right:0;top:0;background:#141418;
+    border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;gap:16px}
+  .dots{display:flex;gap:9px}
+  .dots i{border-radius:50%;background:#2e2e34;display:block}
+  .urlbar{flex:1;border-radius:999px;background:#0b0b0e;border:1px solid rgba(255,255,255,.08);
+    display:flex;align-items:center;justify-content:center;gap:10px;color:#9a9486}
+  .urlbar b{color:var(--soft);font-weight:600}
+  .vp{position:absolute;left:0;right:0;bottom:0;overflow:hidden}
+  .vp img{position:absolute;left:0;top:0;display:block}
+  #cursor{position:absolute;width:30px;height:30px;opacity:0;pointer-events:none;
+    border-radius:50%;background:rgba(234,210,154,.18);border:2px solid var(--gold-2);
+    box-shadow:0 0 22px rgba(201,162,75,.6)}
+
+  /* ---------- chips de serviço ---------- */
+  .chips{position:absolute;display:flex;flex-wrap:wrap;gap:14px}
+  .chip{border:1px solid rgba(201,162,75,.42);border-radius:999px;color:var(--soft);
+    background:rgba(9,9,11,.6);white-space:nowrap;opacity:0}
+
+  /* ---------- cartoes tecnicos (cenas 05 e 06) ----------
+     Ficam por cima da moldura, na parte de baixo: a coluna de texto nao tem
+     altura sobrando em nenhum dos dois formatos, e por cima da pagina o
+     desenho le como instrumento sobreposto, nao como ilustracao solta. */
+  #tech-dia,#graph{position:absolute;opacity:0;padding:10px 14px;border-radius:14px;
+    background:rgba(9,9,11,.88);border:1px solid rgba(201,162,75,.30);
+    box-shadow:0 30px 70px -30px rgba(0,0,0,.9)}
+  #tech-dia svg,#graph svg{display:block}
+  .dl{fill:none;stroke:var(--gold-2);stroke-width:2;stroke-linecap:round}
+  .dl2{fill:none;stroke:rgba(201,162,75,.42);stroke-width:1.5;stroke-dasharray:7 7}
+  .dfill{fill:rgba(201,162,75,.10)}
+  .dtxt{fill:var(--muted);font-family:"Inter",sans-serif;font-weight:600;letter-spacing:.14em}
+
+  /* ---------- fecho ---------- */
+  #waBtn{display:flex;align-items:center;gap:16px;background:var(--wa);color:#07210f;
+    font-weight:700;border-radius:999px;box-shadow:0 0 70px -16px rgba(37,211,102,.7)}
+  #waBtn svg{fill:#07210f}
+</style>
+</head>
+<body data-fmt="v">
+<div id="stage">
+  <div id="glow"></div>
+  <canvas id="dust"></canvas>
+  <canvas id="net"></canvas>
+  <div id="halo"></div>
+
+  <!-- 01 THE SIGNAL -->
+  <div class="scene" id="s1">
+    <div id="s1line"></div>
+    <div id="chaos"></div>
+    <div class="markWrap" id="s1mark" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)">
+      <img src="brand/srchz-mark.png" alt="">
+      <div class="shine" id="s1shine"></div>
+    </div>
+    <div id="s1quote" class="serif">“O problema raramente é o que parece.”</div>
+  </div>
+
+  <!-- 02 THE METHOD -->
+  <div class="scene center" id="s2">
+    <div class="kLine"><span id="s2a" class="big">A área muda.</span></div>
+    <div class="kLine"><span id="s2b" class="big g">O método não.</span></div>
+    <div id="s2ps" style="display:flex;gap:0;flex-direction:column;align-items:center">
+      <div class="psx" id="ps1">Perception</div>
+      <div class="psx" id="ps2">Strategy</div>
+      <div class="psx" id="ps3">Execution</div>
+    </div>
+  </div>
+
+  <!-- 03..08 painel com o site -->
+  <div class="scene" id="sp">
+    <div class="browser" id="brw">
+      <div class="chrome" id="chrome">
+        <div class="dots"><i></i><i></i><i></i></div>
+        <div class="urlbar" id="url">🔒 <b id="urlTxt">srchz-technologies.com.br</b></div>
+      </div>
+      <div class="vp" id="vp"><img id="shot" src=""></div>
+      <div id="cursor"></div>
+    </div>
+    <div id="panelTxt" style="position:absolute">
+      <div class="kick" id="pKick"></div>
+      <div class="mid" id="pTitle"></div>
+      <div class="sub" id="pSub"></div>
+    </div>
+    <div class="chips" id="pChips"></div>
+    <div id="tech-dia"></div>
+    <div id="graph"></div>
+  </div>
+
+  <!-- 07 ONE SYSTEM -->
+  <div class="scene center" id="s7">
+    <div class="kLine"><span id="s7a" class="mid">Três práticas. Um método.</span></div>
+    <div class="kLine"><span id="s7b" class="mid g">Soluções que fazem sentido.</span></div>
+    <div class="rule" id="s7rule"></div>
+    <div id="s7c" class="serif" style="font-style:italic;color:var(--soft)">“Resolvo o que os outros ignoram.”</div>
+  </div>
+
+  <!-- 08 CONVERSION -->
+  <div class="scene center" id="s8">
+    <div class="markWrap" id="s8mark"><img id="s8img" src="brand/srchz-mark.png" alt=""><div class="shine" id="s8shine"></div></div>
+    <div class="mid" id="s8q">Tem algo travado que <span class="g">ninguém resolve</span>?</div>
+    <div class="sub" id="s8s">Vamos encontrar o caminho.</div>
+    <div id="waBtn"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8z"/><path d="M8.6 7.3c-.2-.4-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 2.9 2.9 0 0 0-.9 2.2c0 1.3.9 2.5 1 2.7.1.2 1.8 2.9 4.5 4 2.2.9 2.7.7 3.2.7s1.5-.6 1.7-1.2c.2-.6.2-1.1.2-1.2-.1-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.9z"/></svg><span id="waTxt">Agende seu diagnóstico gratuito</span></div>
+    <div id="s8url" class="g">www.srchz-technologies.com.br</div>
+    <div class="psx" id="s8sig">Perception · Strategy · Execution</div>
+  </div>
+
+  <div id="grade"></div>
+  <div id="vignette"></div>
+  <div id="bars"><i></i><i></i></div>
+  <div id="flash"></div>
+</div>
+
+<script>
+/* ===================== base ===================== */
+const clamp=(v,a,b)=>v<a?a:v>b?b:v;
+const inv=(t,a,b)=>clamp((t-a)/(b-a),0,1);
+const outC=p=>1-Math.pow(1-p,3);
+const outQ=p=>1-Math.pow(1-p,5);
+const inOutC=p=>p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2;
+const lerp=(a,b,p)=>a+(b-a)*p;
+const $=s=>document.querySelector(s);
+const $$=s=>[...document.querySelectorAll(s)];
+
+const FMT=new URLSearchParams(location.search).get('fmt')||'v';
+document.body.dataset.fmt=FMT;
+const V = FMT==='v';
+const W = V?1080:1920, H = V?1920:1080;
+/* Duas escalas. K vale onde a largura e que aperta — a coluna de texto ao
+   lado da moldura, que no 16:9 tem 650px. KT vale para as cenas de tipo
+   cheio, onde o 16:9 tem largura de sobra e encolher so deixa o quadro vazio. */
+const K  = V?1:0.82;
+const KT = V?1:0.95;
+
+const stage=$('#stage');
+stage.style.width=W+'px'; stage.style.height=H+'px';
+document.documentElement.style.width=W+'px';
+document.documentElement.style.height=H+'px';
+document.body.style.width=W+'px';
+document.body.style.height=H+'px';
+for(const c of ['#dust','#net']){ const el=$(c); el.width=W; el.height=H; }
+
+/* ===================== partículas ===================== */
+const DUST=(()=>{let s=20261021;const r=()=>(s=(s*1103515245+12345)&0x7fffffff)/0x7fffffff;
+  return Array.from({length:170},()=>({x:r()*W,y:r()*H,r:.7+r()*2.5,sp:4+r()*17,ph:r()*6.283,am:.2+r()*.7}));})();
+function drawDust(t){const x=$('#dust').getContext('2d');x.clearRect(0,0,W,H);const s=t/1000;
+  for(const p of DUST){const y=((p.y-p.sp*s)%(H+60)+(H+60))%(H+60)-30;
+    const a=p.am*(.45+.55*Math.sin(s*1.5+p.ph));
+    x.beginPath();x.fillStyle=`rgba(234,210,154,${a.toFixed(3)})`;x.arc(p.x,y,p.r,0,6.2832);x.fill();}}
+
+/* rede de conexões da cena 1 — o caos ganhando estrutura */
+const NODES=(()=>{let s=77003;const r=()=>(s=(s*1103515245+12345)&0x7fffffff)/0x7fffffff;
+  return Array.from({length:22},()=>({x:r(),y:r(),tx:.5+(r()-.5)*.30,ty:.5+(r()-.5)*.24}));})();
+function drawNet(t,p,alpha){
+  const x=$('#net').getContext('2d');x.clearRect(0,0,W,H);
+  if(alpha<=0) return;
+  const pts=NODES.map(n=>({x:lerp(n.x,n.tx,p)*W, y:lerp(n.y,n.ty,p)*H}));
+  x.lineWidth=1;
+  for(let i=0;i<pts.length;i++){
+    for(let j=i+1;j<pts.length;j++){
+      const dx=pts[i].x-pts[j].x, dy=pts[i].y-pts[j].y;
+      const d=Math.hypot(dx,dy);
+      const lim=lerp(170,330,p);
+      if(d<lim){
+        x.strokeStyle=`rgba(201,162,75,${(alpha*(1-d/lim)*0.5).toFixed(3)})`;
+        x.beginPath();x.moveTo(pts[i].x,pts[i].y);x.lineTo(pts[j].x,pts[j].y);x.stroke();
+      }
+    }
+  }
+  for(const q of pts){x.beginPath();x.fillStyle=`rgba(234,210,154,${(alpha*.75).toFixed(3)})`;
+    x.arc(q.x,q.y,2.4,0,6.2832);x.fill();}
+}
+
+/* ===================== cena 1: palavras do caos ===================== */
+const CHAOS=['BRAND','ENGINEERING','DATA','STRATEGY'];
+const chaosEl=CHAOS.map((w,i)=>{
+  const d=document.createElement('div');
+  d.className='chaosWord'; d.textContent=w;
+  d.style.fontSize=(V?34:44)+'px';
+  $('#chaos').appendChild(d); return d;
+});
+const CHAOS_POS = V
+  ? [[.16,.26],[.56,.38],[.20,.62],[.58,.74]]
+  : [[.12,.24],[.66,.28],[.17,.72],[.70,.70]];
+
+/* ===================== layout por formato ===================== */
+function px(n){return (n*K)+'px';}
+function pxt(n){return (n*KT)+'px';}
+function layout(){
+  // moldura
+  const b=$('#brw');
+  if(V){ b.style.left='90px'; b.style.top='170px'; b.style.width='900px'; b.style.height='1120px'; }
+  else { b.style.left='110px'; b.style.top='120px'; b.style.width='1010px'; b.style.height='840px'; }
+  const ch=$('#chrome'), u=$('#url');
+  ch.style.height=(V?74:64)+'px'; ch.style.padding='0 22px';
+  u.style.height=(V?42:38)+'px'; u.style.fontSize=(V?23:20)+'px';
+  $$('.dots i').forEach(i=>{i.style.width=(V?12:11)+'px';i.style.height=(V?12:11)+'px';});
+  $('#vp').style.top=(V?74:64)+'px';
+  $('#shot').style.width=(V?900:1010)+'px';
+
+  // texto do painel
+  const p=$('#panelTxt');
+  if(V){ p.style.left='90px'; p.style.right='90px'; p.style.top='1312px'; p.style.textAlign='left'; }
+  else { p.style.left='1180px'; p.style.right='90px'; p.style.top='186px'; p.style.textAlign='left'; }
+  $('#pKick').style.fontSize=px(V?25:24);
+  $('#pKick').style.marginBottom=px(16);
+  $('#pTitle').style.fontSize=px(V?84:78);
+  $('#pSub').style.fontSize=px(V?31:30);
+  $('#pSub').style.marginTop=px(18);
+  $('#pSub').style.maxWidth=V?'30ch':'24ch';
+
+  /* o topo dos chips sai do rodape medido do bloco de texto, em render() —
+     um valor fixo aqui so funcionaria para o titulo mais curto da lista */
+  const c=$('#pChips');
+  if(V){ c.style.left='90px'; c.style.right='90px'; }
+  else { c.style.left='1180px'; c.style.right='90px'; }
+
+  // cena 1
+  $('#s1quote').style.fontSize=pxt(V?44:42);
+  $('#s1quote').style.top=V?'1320px':'800px';
+  $('#s1mark').querySelector('img').style.width=(V?660:620)+'px';
+
+  // cena 2
+  $$('#s2 .big').forEach(e=>e.style.fontSize=pxt(V?124:112));
+  $$('.psx').forEach(e=>e.style.fontSize=pxt(V?34:32));
+  $('#s2ps').style.marginTop=pxt(56);
+  $('#s2ps').style.gap=pxt(14);
+
+  // cena 7
+  $$('#s7 .mid').forEach(e=>e.style.fontSize=pxt(V?82:76));
+  $('#s7rule').style.width=pxt(560);
+  $('#s7rule').style.margin=pxt(34)+' 0';
+  $('#s7c').style.fontSize=pxt(V?46:44);
+
+  // cena 8
+  $('#s8img').style.width=(V?380:360)+'px';
+  $('#s8q').style.fontSize=pxt(V?80:74);
+  $('#s8q').style.maxWidth=(V?880:1180)+'px';
+  $('#s8q').style.textAlign='center';
+  $('#s8q').style.marginTop=pxt(36);
+  $('#s8s').style.fontSize=pxt(36);
+  $('#s8s').style.marginTop=pxt(14);
+  const wa=$('#waBtn');
+  wa.style.fontSize=pxt(36); wa.style.padding=pxt(24)+' '+pxt(50); wa.style.marginTop=pxt(42);
+  wa.querySelector('svg').style.width=pxt(42); wa.querySelector('svg').style.height=pxt(42);
+  $('#s8url').style.fontSize=pxt(V?44:42); $('#s8url').style.marginTop=pxt(30);
+  $('#s8url').style.fontFamily='"EB Garamond",Georgia,serif';
+  $('#s8url').style.fontWeight='700';
+  $('#s8sig').style.fontSize=pxt(26); $('#s8sig').style.marginTop=pxt(22);
+
+  // barras cinematográficas só no vertical (no 16:9 o quadro já é o formato)
+  $$('#bars i').forEach(i=>{i.style.height=(V?92:0)+'px';});
+}
+layout();
+
+/* ===================== cartoes tecnicos ===================== */
+const CARD={ w: V?820:820, h: V?290:280 };
+/* assenta o cartao dentro da moldura, encostado no rodape dela */
+function placeCard(el){
+  const b=$('#brw');
+  const bl=parseFloat(b.style.left), bt=parseFloat(b.style.top);
+  const bw=parseFloat(b.style.width), bh=parseFloat(b.style.height);
+  const ow=CARD.w+28, oh=CARD.h+20;              // + padding do cartao
+  el.style.left=Math.round(bl+(bw-ow)/2)+'px';
+  el.style.top =Math.round(bt+bh-oh-(V?40:36))+'px';
+}
+
+/* Diagrama da cena 05. A geometria sai da propria calculadora do site:
+   feixe angular entrando na chapa, refletindo no fundo e voltando — o
+   salto e a perna que o ensaio mede. Nada aqui e resultado de ensaio
+   real: e o esquema do metodo, desenhado em cota. */
+function buildDiagram(){
+  const {w,h}=CARD;
+  const el=$('#tech-dia');
+  const topY=Math.round(h*.52), botY=Math.round(h*.78), dimY=Math.round(h*.95);
+  const mid=Math.round(w/2);
+  el.innerHTML=`<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">
+    <rect class="dfill" x="40" y="${topY}" width="${w-80}" height="${botY-topY}" stroke="rgba(201,162,75,.5)"/>
+    <path class="dl2" d="M${mid} ${topY} L${mid} ${botY}"/>
+    <path class="dl" id="bead" d="M${mid-54} ${topY} q54 -40 108 0"/>
+    <path class="dl" id="beam" d="M120 ${topY} L${mid-10} ${botY} L${mid+120} ${topY}"/>
+    <path class="dl2" d="M120 ${topY} L120 ${topY-52}"/>
+    <circle id="probe" cx="120" cy="${topY-10}" r="9" fill="var(--gold-2)"/>
+    <path class="dl2" d="M40 ${dimY} L${w-40} ${dimY}"/>
+    <text class="dtxt" x="46"      y="${dimY-10}" font-size="${18*K}">PERNA</text>
+    <text class="dtxt" x="${mid+14}" y="${dimY-10}" font-size="${18*K}">SALTO</text>
+    <text class="dtxt" x="146"     y="${topY-34}" font-size="${18*K}">ÂNGULO θ</text>
+    <text class="dtxt" x="${w-168}" y="${Math.round((topY+botY)/2)+6}" font-size="${18*K}">ESPESSURA t</text>
+  </svg>`;
+  el.querySelectorAll('#bead,#beam').forEach(p=>{
+    const L=p.getTotalLength();
+    p.style.strokeDasharray=L; p.style.strokeDashoffset=L; p.dataset.len=L;
+  });
+  placeCard(el);
+}
+buildDiagram();
+
+/* Grafo da cena 06: sistemas separados que passam a se enxergar. */
+function buildGraph(){
+  const {w,h}=CARD;
+  const el=$('#graph');
+  let s=4242; const r=()=>(s=(s*1103515245+12345)&0x7fffffff)/0x7fffffff;
+  const N=Array.from({length:11},(_,i)=>({x:60+r()*(w-120),y:40+r()*(h-120),i}));
+  let lines='';
+  for(let i=0;i<N.length;i++)for(let j=i+1;j<N.length;j++){
+    if(Math.hypot(N[i].x-N[j].x,N[i].y-N[j].y)<210)
+      lines+=`<line class="gl" x1="${N[i].x}" y1="${N[i].y}" x2="${N[j].x}" y2="${N[j].y}" stroke="rgba(201,162,75,.45)" stroke-width="1.4"/>`;
+  }
+  const dots=N.map(n=>`<circle class="gn" cx="${n.x}" cy="${n.y}" r="${5+(n.i%3)*2}" fill="var(--gold-2)"/>`).join('');
+  el.innerHTML=`<svg width="${w}" height="${h}">${lines}${dots}`
+    +`<text class="dtxt" x="14" y="${h-8}" font-size="${16*K}">SISTEMAS QUE SE ENXERGAM</text></svg>`;
+  placeCard(el);
+}
+buildGraph();
+
+/* ===================== conteúdo dos painéis ===================== */
+const SHOT=(id)=>`film/${FMT}-${id}.png`;
+const VPW=V?900:1010, VPH=(V?1120:840)-(V?74:64);
+
+/* scroll em fracao do que a captura tem de sobra, nao em pixel: a mesma
+   pagina entra no quadro com escalas diferentes nos dois formatos, e um
+   valor fixo em pixel passaria do fim da imagem num deles. */
+const PANELS=[
+  // 03 THE INTERFACE
+  { a:12000,b:18600, shot:'home', url:'srchz-technologies.com.br',
+    kick:'As três portas', title:'Um site.<br>Três entradas.',
+    sub:'Branding &amp; Growth · Engenharia &amp; END · Tecnologia &amp; Dados/IA',
+    scroll:[0,.40], cursor:true },
+  // 04 BRANDING & GROWTH
+  { a:18600,b:26000, shot:'growth', url:'srchz-technologies.com.br/growth',
+    kick:'01 — Branding &amp; Growth', title:'Percepção<br>gera desejo.',
+    sub:'Estratégia transforma atenção em oportunidade.',
+    chips:['Tráfego pago','Branding','Produção de vídeo','Social media','Web','Portal do Cliente'],
+    scroll:[.02,.52] },
+  // 05 ENGINEERING & NDT
+  { a:26000,b:33000, shot:'end', url:'srchz-technologies.com.br/end',
+    kick:'02 — Engenharia &amp; END', title:'Precisão para<br>enxergar o que<br>outros deixam passar.',
+    sub:'', chips:['Ultrassom N2','Soldas','Trilhos','Espessura','Líquido penetrante'],
+    scroll:[.01,.46], diagram:true },
+  // 06 TECHNOLOGY & DATA / AI
+  { a:33000,b:40000, shot:'tech', url:'srchz-technologies.com.br/tech',
+    kick:'03 — Tecnologia &amp; Dados/IA', title:'Conecta o que<br>antes estava<br>fragmentado.',
+    sub:'', chips:['Web','Portais','Web apps','Automação','CX','Dados &amp; IA'],
+    scroll:[.01,.48], graph:true },
+  // 08 CONVERSION (volta ao site, no pe da pagina)
+  { a:47000,b:50400, shot:'home', url:'srchz-technologies.com.br',
+    kick:'Fale comigo', title:'Começa com<br>uma conversa.',
+    sub:'Sem compromisso.', scroll:[.62,.82], cursor:true }
+];
+
+/* ===================== legendas =====================
+   O filme nao tem narracao, entao nao ha fala para legendar: estas linhas
+   sao a transcricao do que aparece escrito, com o tempo de cada cena. Elas
+   nao vao queimadas no quadro (seriam o mesmo texto duas vezes, e no 9:16
+   cairiam sobre os chips) — saem em .srt ao lado do mp4, e quem quiser
+   queimar usa o comando do README. */
+const CAPS=[
+  [600,  5200,  'O problema raramente é o que parece.'],
+  [5800, 8600,  'A área muda. O método não.'],
+  [8800, 11800, 'Perception · Strategy · Execution'],
+  [12200,15200, 'Um site. Três entradas.'],
+  [15300,18400, 'Branding & Growth · Engenharia & END · Tecnologia & Dados/IA'],
+  [18900,25600, 'Percepção gera desejo.\nEstratégia transforma atenção em oportunidade.'],
+  [26300,32600, 'Precisão para enxergar o que outros deixam passar.'],
+  [33300,39600, 'Tecnologia que conecta o que antes estava fragmentado.'],
+  [40300,46600, 'Três práticas. Um método.\nResolvo o que os outros ignoram.'],
+  [47300,50300, 'Começa com uma conversa. Sem compromisso.'],
+  [50700,54600, 'Tem algo travado que ninguém resolve?\nAgende seu diagnóstico gratuito.']
+];
+window.CAPS=CAPS;
+
+const T={ s1:[0,5500], s2:[5500,12000], panels:[12000,40000], s7:[40000,47000], s8:[47000,55000] };
+const DUR=55000;
+
+/* Pre-carrega as capturas e guarda o tamanho natural de cada uma. A rolagem
+   e calculada em fracao do que sobra abaixo da janela, e isso depende da
+   altura real do print. Quem renderiza espera por window.ready() antes do
+   primeiro quadro — assim nenhum corte sai em branco. */
+const SZ={};
+window.ready=()=>Promise.all(
+  [...new Set(PANELS.map(p=>SHOT(p.shot)))].map(src=>new Promise(res=>{
+    const im=new Image();
+    im.onload =()=>{ SZ[src]={w:im.naturalWidth,h:im.naturalHeight}; res(); };
+    im.onerror=()=>{ SZ[src]=null; res(); };
+    im.src=src;
+  })));
+
+function sweep(sel,p){const sh=$(sel);
+  if(p<=0||p>=1){sh.style.opacity=0;return;}
+  sh.style.opacity=Math.sin(p*Math.PI);
+  sh.style.backgroundPosition=`${lerp(160,-60,p)}% 0`;}
+
+/* ===================== render ===================== */
+function render(t){
+  ['s1','s2','sp','s7','s8'].forEach(id=>{const e=$('#'+id);e.style.opacity=0;e.style.transform='none';});
+  $('#flash').style.opacity=0;
+  $('#tech-dia').style.opacity=0;
+  $('#graph').style.opacity=0;
+  $('#cursor').style.opacity=0;
+  drawDust(t);
+
+  // barras cinematográficas entram no primeiro segundo e saem no último
+  $('#bars').style.opacity = V ? outC(inv(t,200,1200))*(1-inv(t,53800,54800)) : 0;
+
+  const drift=Math.sin(t/5200)*10;
+  $('#glow').style.transform=`translate3d(${drift}px,${drift*.6}px,0)`;
+  $('#halo').style.opacity = (t<T.s1[1]||t>=T.s8[0]) ? 1 : .35;
+
+  /* ---------- 01 THE SIGNAL ---------- */
+  if(t<T.s1[1]){
+    const s=$('#s1'); s.style.opacity=1;
+    // linha fina nasce
+    const pl=inv(t,150,1500);
+    $('#s1line').style.width=lerp(0,W*.74,outQ(pl))+'px';
+    $('#s1line').style.opacity=1-inv(t,2600,3400);
+
+    // palavras do caos entram soltas, depois convergem
+    const conv=inv(t,2200,3700);
+    chaosEl.forEach((el,i)=>{
+      const [bx,by]=CHAOS_POS[i];
+      const pin=inv(t,320+i*180,1180+i*180);
+      const cx=lerp(bx,.5,inOutC(conv)), cy=lerp(by,.5,inOutC(conv));
+      el.style.left=(cx*W)+'px'; el.style.top=(cy*H)+'px';
+      el.style.transform=`translate(-50%,-50%) scale(${lerp(.86,1,outQ(pin))*lerp(1,.5,conv)})`;
+      el.style.opacity=outC(pin)*(1-inv(t,2900,3650));
+      el.style.filter=`blur(${lerp(9,0,outC(pin))}px)`;
+    });
+
+    // rede: aparece e aperta
+    drawNet(t, inOutC(inv(t,1400,3700)), outC(inv(t,1000,2000))*(1-inv(t,3300,4000)));
+
+    // impacto e revelação da marca
+    const fl=inv(t,3480,3800);
+    if(fl>0&&fl<1) $('#flash').style.opacity=Math.sin(fl*Math.PI)*.9;
+    const pm=inv(t,3620,4700);
+    const mk=$('#s1mark');
+    mk.style.opacity=outC(pm);
+    mk.style.transform=`translate(-50%,-50%) scale(${lerp(1.22,1,outQ(pm))})`;
+    mk.querySelector('img').style.filter=`blur(${lerp(16,0,outC(pm))}px) drop-shadow(0 0 48px rgba(201,162,75,.45))`;
+    sweep('#s1shine', inv(t,4150,5200));
+
+    const pq=inv(t,4350,5100);
+    $('#s1quote').style.opacity=outC(pq)*(1-inv(t,5250,5500));
+    $('#s1quote').style.transform=`translateY(${lerp(22,0,outQ(pq))}px)`;
+
+    s.style.opacity=1-inv(t,5280,5500);
+  } else { drawNet(t,1,0); }
+
+  /* ---------- 02 THE METHOD ---------- */
+  if(t>=T.s2[0]&&t<T.s2[1]){
+    const s=$('#s2'); s.style.opacity=1;
+    const lt=t-T.s2[0];
+    // a câmera "atravessa" a marca: entra ampliado e assenta
+    s.style.transform=`scale(${lerp(1.16,1,outQ(inv(lt,0,1400)))})`;
+    $('#s2a').style.transform=`translateY(${lerp(118,0,outQ(inv(lt,160,1080)))}%)`;
+    $('#s2b').style.transform=`translateY(${lerp(118,0,outQ(inv(lt,620,1620)))}%)`;
+    const psEls=['#ps1','#ps2','#ps3'];
+    psEls.forEach((sel,i)=>{
+      const p=inv(lt,2500+i*560,3400+i*560);
+      const el=$(sel);
+      el.style.opacity=outC(p)*(1-inv(lt,5900,6400));
+      el.style.letterSpacing=`${lerp(.78,.42,outC(p))}em`;
+      el.style.transform=`translateY(${lerp(16,0,outQ(p))}px)`;
+    });
+    s.style.opacity=1-inv(lt,6150,6500);
+  }
+
+  /* ---------- 03..06 e 08: painéis com o site ---------- */
+  for(const p of PANELS){
+    if(t<p.a||t>=p.b) continue;
+    const s=$('#sp'); s.style.opacity=1;
+    const lt=t-p.a, span=p.b-p.a;
+
+    const src=SHOT(p.shot);
+    if($('#shot').getAttribute('src')!==src) $('#shot').setAttribute('src',src);
+    $('#urlTxt').textContent=p.url;
+    $('#pKick').innerHTML=p.kick||'';
+    $('#pTitle').innerHTML=p.title||'';
+    $('#pSub').innerHTML=p.sub||'';
+
+    // moldura entra com leve parallax
+    const pin=inv(lt,0,700);
+    const b=$('#brw');
+    const dx=V?lerp(150,0,outQ(pin)):lerp(-150,0,outQ(pin));
+    b.style.transform=`translateX(${dx}px) scale(${lerp(.955,1,outQ(pin))})`;
+    b.style.opacity=outC(inv(lt,0,480));
+
+    // rolagem cinematográfica + leve zoom
+    const sp=inv(lt,180,span-200);
+    const nat=SZ[src];
+    const dispH=nat ? nat.h*(VPW/nat.w) : VPH;
+    const maxS=Math.max(0,dispH-VPH);
+    $('#shot').style.transform=
+      `translateY(${-maxS*lerp(p.scroll[0],p.scroll[1],inOutC(sp))}px) scale(${lerp(1,1.04,sp)})`;
+    $('#shot').style.transformOrigin='50% 0';
+
+    // texto
+    const tx=$('#panelTxt');
+    const pt=inv(lt,380,1280);
+    tx.style.opacity=outC(pt);
+    tx.style.transform=`translateY(${lerp(34,0,outQ(pt))}px)`;
+
+    // chips entram em cascata, logo abaixo do texto que acabou de medir
+    const cw=$('#pChips');
+    if(p.chips){
+      if(cw.dataset.for!==p.shot+p.a){
+        cw.dataset.for=p.shot+p.a;
+        cw.innerHTML=p.chips.map(c=>`<span class="chip">${c}</span>`).join('');
+        $$('#pChips .chip').forEach(el=>{
+          el.style.fontSize=px(26); el.style.padding=px(13)+' '+px(26);
+        });
+      }
+      cw.style.top=(tx.offsetTop+tx.offsetHeight+(V?26:24))+'px';
+      $$('#pChips .chip').forEach((el,i)=>{
+        const pc=inv(lt,900+i*150,1700+i*150);
+        el.style.opacity=outC(pc);
+        el.style.transform=`translateY(${lerp(18,0,outQ(pc))}px)`;
+      });
+    } else { cw.innerHTML=''; cw.dataset.for=''; }
+
+    // diagrama técnico: traços se desenham
+    if(p.diagram){
+      const d=$('#tech-dia');
+      d.style.opacity=outC(inv(lt,1100,1900));
+      d.querySelectorAll('#bead,#beam').forEach((pa,i)=>{
+        const L=+pa.dataset.len;
+        pa.style.strokeDashoffset=L*(1-outC(inv(lt,1300+i*500,2900+i*500)));
+      });
+      const probe=d.querySelector('#probe');
+      if(probe) probe.setAttribute('opacity', outC(inv(lt,2400,3000)));
+    }
+
+    // grafo de dados: nós e arestas acendem
+    if(p.graph){
+      const g=$('#graph');
+      g.style.opacity=outC(inv(lt,1100,1900));
+      g.querySelectorAll('.gl').forEach((l,i)=>{
+        l.setAttribute('opacity', outC(inv(lt,1400+i*55,2300+i*55)));
+      });
+      g.querySelectorAll('.gn').forEach((n,i)=>{
+        const pn=inv(lt,1200+i*90,2000+i*90);
+        n.setAttribute('opacity', outC(pn));
+        n.setAttribute('r', lerp(1, 5+(i%3)*2, outQ(pn)));
+      });
+    }
+
+    // cursor indo até o botão, na cena de conversão
+    if(p.cursor){
+      const pc=inv(lt,1500,2600);
+      const cur=$('#cursor');
+      if(pc>0){
+        cur.style.opacity=outC(pc)*(1-inv(lt,3100,3400));
+        const bw=parseFloat(b.style.width), bh=parseFloat(b.style.height);
+        cur.style.left=lerp(bw*.18,bw*.46,inOutC(pc))+'px';
+        cur.style.top =lerp(bh*.74,bh*.52,inOutC(pc))+'px';
+        const click=inv(lt,2500,2800);
+        cur.style.transform=`scale(${click>0&&click<1?lerp(1,.68,Math.sin(click*Math.PI)):1})`;
+      }
+    }
+
+    s.style.opacity=1-inv(lt,span-360,span);
+  }
+
+  /* ---------- 07 ONE SYSTEM ---------- */
+  if(t>=T.s7[0]&&t<T.s7[1]){
+    const s=$('#s7'); s.style.opacity=1;
+    const lt=t-T.s7[0];
+    s.style.transform=`scale(${lerp(1.08,1,outQ(inv(lt,0,1600)))})`;
+    $('#s7a').style.transform=`translateY(${lerp(118,0,outQ(inv(lt,200,1200)))}%)`;
+    $('#s7b').style.transform=`translateY(${lerp(118,0,outQ(inv(lt,640,1700)))}%)`;
+    $('#s7rule').style.transform=`scaleX(${outC(inv(lt,1500,2500))})`;
+    const pc=inv(lt,2100,3200);
+    $('#s7c').style.opacity=outC(pc);
+    $('#s7c').style.transform=`translateY(${lerp(22,0,outQ(pc))}px)`;
+    // rede volta, agora organizada
+    drawNet(t, 1, outC(inv(lt,300,1600))*.5*(1-inv(lt,5600,6400)));
+    s.style.opacity=1-inv(lt,6500,7000);
+  }
+
+  /* ---------- 08 CONVERSION ---------- */
+  if(t>=T.s8[0]+3400){
+    const s=$('#s8'); s.style.opacity=1;
+    const lt=t-(T.s8[0]+3400);
+    const pm=inv(lt,0,900);
+    $('#s8img').style.opacity=outC(pm);
+    $('#s8img').style.transform=`scale(${lerp(1.1,1,outQ(pm))})`;
+    $('#s8img').style.filter='drop-shadow(0 0 40px rgba(201,162,75,.42))';
+    sweep('#s8shine', inv(lt,800,1900));
+    const steps=[['#s8q',320,1180,28],['#s8s',620,1500,22],['#waBtn',900,1850,24],
+                 ['#s8url',1250,2200,20],['#s8sig',1500,2500,16]];
+    for(const [sel,a,b,dy] of steps){
+      const p=inv(lt,a,b);
+      $(sel).style.opacity=outC(p);
+      $(sel).style.transform=`translateY(${lerp(dy,0,outQ(p))}px)`;
+    }
+    const br=1+Math.sin(lt/560)*.02;
+    $('#waBtn').style.transform=
+      `translateY(${lerp(24,0,outQ(inv(lt,900,1850)))}px) scale(${br})`;
+  }
+
+}
+
+window.render=render;
+window.DUR=DUR;
+</script>
+</body>
+</html>

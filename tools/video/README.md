@@ -2,6 +2,9 @@
 
 Gera `assets/video/srchz-site-9x16.mp4`: 1080×1920, 32s, 30fps, H.264.
 
+> O filme institucional **The Order of Chaos** (55s, 16:9 e 9:16) usa o mesmo
+> método num pipeline próprio: veja [`README-film.md`](README-film.md).
+
 **Não é mockup.** O que aparece na tela são capturas reais das páginas deste
 repositório, animadas por cima. Trocar o texto do site muda o vídeo na próxima
 renderização.
