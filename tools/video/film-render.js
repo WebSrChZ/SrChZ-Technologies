@@ -40,6 +40,14 @@ const FPS = 30;
 const argv = process.argv.slice(2);
 const CHECK = argv.includes('--check');
 const only = (() => { const i = argv.indexOf('--fmt'); return i < 0 ? null : argv[i + 1]; })();
+/* o wav do film-audio.py entra como segunda entrada do mesmo ffmpeg: nao
+   ha motivo para escrever o mp4 mudo e remuxar depois */
+const AUDIO = (() => {
+  const i = argv.indexOf('--audio');
+  if (i >= 0) return argv[i + 1];
+  const d = path.join(OUTDIR, 'srchz-order-of-chaos.wav');
+  return fs.existsSync(d) ? d : null;
+})();
 const FORMATS = (only ? [only] : ['v', 'h']).filter(f => f === 'v' || f === 'h');
 
 const MIME = { '.html':'text/html;charset=utf-8', '.png':'image/png',
@@ -63,16 +71,21 @@ const FONT_CSS = `
 @font-face{font-family:"Inter";font-weight:300;font-display:block;src:url(/fonts/inter-latin-300-normal.woff2) format("woff2")}
 @font-face{font-family:"Inter";font-weight:600;font-display:block;src:url(/fonts/inter-latin-600-normal.woff2) format("woff2")}
 @font-face{font-family:"Inter";font-weight:700;font-display:block;src:url(/fonts/inter-latin-700-normal.woff2) format("woff2")}
+/* japones da cena de idiomas: a Inter nao tem kana nem kanji */
+@font-face{font-family:"Inter";font-weight:600;font-display:block;
+  unicode-range:U+3000-30FF,U+4E00-9FFF,U+FF00-FFEF;
+  src:local("IPAGothic"),local("IPAPGothic"),local("Noto Sans CJK JP")}
 `;
 
 /* instantes que valem conferir: entrada e saida de cada cena, e o meio de
    cada painel, onde o texto esta todo no quadro ao mesmo tempo */
 const MARKS = [1200, 2800, 3700, 4900, 6200, 9200, 11600,
   12900, 15500, 18000, 19500, 22000, 25400, 27200, 30000, 32600,
-  34200, 36500, 39600, 41200, 43500, 46600, 47600, 49500, 51200, 53000, 54800];
+  34200, 36500, 39600, 40500, 41700, 42900, 44000,
+  46200, 48500, 51600, 52600, 54500, 56200, 58000, 59800];
 
 /* o que nao pode se sobrepor nem sair do quadro */
-const BOXES = ['#brw','#panelTxt','#pChips','#tech-dia','#graph',
+const BOXES = ['#brw','#panelTxt','#pChips','#langRow','#tech-dia','#graph',
   '#s1mark','#s1quote','#s2a','#s2b','#s2ps','#s7a','#s7b','#s7c',
   '#s8mark','#s8q','#s8s','#waBtn','#s8url','#s8sig'];
 /* pares que precisam ficar separados (o cartao tecnico fica POR CIMA da
@@ -181,11 +194,17 @@ async function renderFormat(browser, fmt) {
   fs.mkdirSync(OUTDIR, { recursive: true });
   console.log(`  ${fmt}: ${total} quadros · ${FPS}fps · ${(DUR / 1000).toFixed(1)}s · ${W}x${H}`);
 
-  const ff = spawn('ffmpeg', ['-loglevel', 'error', '-y',
-    '-f', 'image2pipe', '-framerate', String(FPS), '-i', '-',
-    '-c:v', 'libx264', '-preset', 'slow', '-crf', '18',
-    '-pix_fmt', 'yuv420p', '-movflags', '+faststart', '-r', String(FPS), out],
-    { stdio: ['pipe', 'inherit', 'inherit'] });
+  const args = ['-loglevel', 'error', '-y',
+    '-f', 'image2pipe', '-framerate', String(FPS), '-i', '-'];
+  if (AUDIO) args.push('-i', AUDIO);
+  args.push('-c:v', 'libx264', '-preset', 'slow', '-crf', '18',
+    '-pix_fmt', 'yuv420p', '-movflags', '+faststart', '-r', String(FPS));
+  /* AAC 192k estereo: o wav sai mixado em -16 LUFS, entao aqui e so
+     transportar. -shortest corta no mais curto dos dois, que e a imagem. */
+  if (AUDIO) args.push('-c:a', 'aac', '-b:a', '192k', '-ar', '48000', '-shortest');
+  args.push(out);
+  console.log(AUDIO ? `  audio: ${AUDIO}` : '  sem audio');
+  const ff = spawn('ffmpeg', args, { stdio: ['pipe', 'inherit', 'inherit'] });
   const done = new Promise((res, rej) => {
     ff.on('exit', (c) => c === 0 ? res() : rej(new Error('ffmpeg saiu com ' + c)));
     ff.on('error', rej);

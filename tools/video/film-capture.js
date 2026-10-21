@@ -38,6 +38,7 @@ const PAGES = [
   { id: 'usn2',   url: '/end/USN2/?lang=pt' },
   { id: 'kl',     url: '/kl-sports/?lang=pt' },
   { id: 'home-en', url: '/?lang=en' },
+  { id: 'home-es', url: '/?lang=es' },
   { id: 'home-ja', url: '/?lang=ja' }
 ];
 

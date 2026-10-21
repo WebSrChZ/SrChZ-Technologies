@@ -92,6 +92,11 @@
     border-radius:50%;background:rgba(234,210,154,.18);border:2px solid var(--gold-2);
     box-shadow:0 0 22px rgba(201,162,75,.6)}
 
+  /* ---------- linha de idiomas (cena 07) ---------- */
+  .langs{display:flex;flex-wrap:wrap;color:var(--muted);font-weight:600;opacity:0}
+  .langs span{white-space:nowrap}
+  .langs span.on{color:var(--gold-2)}
+
   /* ---------- chips de serviço ---------- */
   .chips{position:absolute;display:flex;flex-wrap:wrap;gap:14px}
   .chip{border:1px solid rgba(201,162,75,.42);border-radius:999px;color:var(--soft);
@@ -152,13 +157,16 @@
         <div class="dots"><i></i><i></i><i></i></div>
         <div class="urlbar" id="url">🔒 <b id="urlTxt">srchz-technologies.com.br</b></div>
       </div>
-      <div class="vp" id="vp"><img id="shot" src=""></div>
+      <!-- duas camadas: na troca de idioma a de baixo segura o print
+           anterior enquanto a de cima entra, para o corte nao piscar -->
+      <div class="vp" id="vp"><img id="shotB" src=""><img id="shot" src=""></div>
       <div id="cursor"></div>
     </div>
     <div id="panelTxt" style="position:absolute">
       <div class="kick" id="pKick"></div>
       <div class="mid" id="pTitle"></div>
       <div class="sub" id="pSub"></div>
+      <div class="langs" id="langRow"></div>
     </div>
     <div class="chips" id="pChips"></div>
     <div id="tech-dia"></div>
@@ -286,6 +294,10 @@ function layout(){
   $('#pSub').style.fontSize=px(V?31:30);
   $('#pSub').style.marginTop=px(18);
   $('#pSub').style.maxWidth=V?'30ch':'24ch';
+  const lr=$('#langRow');
+  lr.style.fontSize=px(V?30:28);
+  lr.style.marginTop=px(22);
+  lr.style.gap='0 '+px(V?22:18);
 
   /* o topo dos chips sai do rodape medido do bloco de texto, em render() —
      um valor fixo aqui so funcionaria para o titulo mais curto da lista */
@@ -420,8 +432,14 @@ const PANELS=[
     kick:'03 — Tecnologia &amp; Dados/IA', title:'Conecta o que<br>antes estava<br>fragmentado.',
     sub:'', chips:['Web','Portais','Web apps','Automação','CX','Dados &amp; IA'],
     scroll:[.01,.48], graph:true },
-  // 08 CONVERSION (volta ao site, no pe da pagina)
-  { a:47000,b:50400, shot:'home', url:'srchz-technologies.com.br',
+  // 07 ALCANCE — a mesma home trocando de lingua debaixo do mesmo layout
+  { a:40000,b:45000, shot:'home', url:'srchz-technologies.com.br',
+    kick:'Alcance', title:'Quatro idiomas.<br>Entrega internacional.',
+    sub:'', scroll:[.05,.11],
+    langs:[[0,'home','PT','Português'],[1150,'home-en','EN','English'],
+           [2300,'home-es','ES','Español'],[3450,'home-ja','JA','日本語']] },
+  // 09 CONVERSION (volta ao site, no pe da pagina)
+  { a:52000,b:55400, shot:'home', url:'srchz-technologies.com.br',
     kick:'Fale comigo', title:'Começa com<br>uma conversa.',
     sub:'Sem compromisso.', scroll:[.62,.82], cursor:true }
 ];
@@ -441,27 +459,65 @@ const CAPS=[
   [18900,25600, 'Percepção gera desejo.\nEstratégia transforma atenção em oportunidade.'],
   [26300,32600, 'Precisão para enxergar o que outros deixam passar.'],
   [33300,39600, 'Tecnologia que conecta o que antes estava fragmentado.'],
-  [40300,46600, 'Três práticas. Um método.\nResolvo o que os outros ignoram.'],
-  [47300,50300, 'Começa com uma conversa. Sem compromisso.'],
-  [50700,54600, 'Tem algo travado que ninguém resolve?\nAgende seu diagnóstico gratuito.']
+  [40300,44600, 'Quatro idiomas. Entrega internacional.\nPortuguês · English · Español · 日本語'],
+  [45300,51600, 'Três práticas. Um método.\nResolvo o que os outros ignoram.'],
+  [52300,55300, 'Começa com uma conversa. Sem compromisso.'],
+  [55700,59600, 'Tem algo travado que ninguém resolve?\nAgende seu diagnóstico gratuito.']
 ];
 window.CAPS=CAPS;
 
-const T={ s1:[0,5500], s2:[5500,12000], panels:[12000,40000], s7:[40000,47000], s8:[47000,55000] };
-const DUR=55000;
+/* ===================== marcas de som =====================
+   Lidas por film-audio.py. Ficam aqui, e nao no script de audio, para o
+   som nao sair do lugar quando uma cena mudar de duracao: a imagem e o
+   desenho de som saem da mesma tabela.
+   [ms, tipo, forca]  tipos: sub whoosh impact riser tick bell ping tail */
+const CUES=[
+  [   0,'sub',   .50],                        // o drone nasce com o filme
+  [ 150,'riser', .30],                        // a linha sendo tracada
+  [1400,'whoosh',.45],                        // as palavras convergindo
+  [2600,'riser', .80],
+  [3500,'impact',1.0],                        // o estouro e a marca
+  [4150,'bell',  .40],                        // o brilho passando
+  [5500,'whoosh',.60], [5700,'tick',.5], [6220,'tick',.5],
+  [8000,'tick',.45], [8560,'tick',.45], [9120,'tick',.45],
+  [12000,'whoosh',.55], [12000,'sub',.60],
+  [18600,'whoosh',.55],
+  [19500,'tick',.35],[19650,'tick',.35],[19800,'tick',.35],
+  [19950,'tick',.35],[20100,'tick',.35],[20250,'tick',.35],
+  [26000,'whoosh',.55],
+  [27300,'ping',.75], [28700,'ping',.60], [30100,'ping',.45],   // o ensaio
+  [33000,'whoosh',.55],
+  [34400,'tick',.3],[34600,'tick',.3],[34800,'tick',.3],[35000,'tick',.3],
+  [40000,'whoosh',.60], [40000,'sub',.70],
+  [41150,'bell',.45], [42300,'bell',.45], [43450,'bell',.45],   // as linguas
+  [45000,'impact',.75], [45000,'sub',.80],
+  [52000,'whoosh',.50],
+  [55400,'impact',.90], [55400,'sub',1.0],
+  [56300,'bell',.50],
+  [58200,'tail',1.0]
+];
+window.CUES=CUES;
+
+const T={ s1:[0,5500], s2:[5500,12000], panels:[12000,45000], s7:[45000,52000], s8:[52000,60000] };
+const DUR=60000;
 
 /* Pre-carrega as capturas e guarda o tamanho natural de cada uma. A rolagem
    e calculada em fracao do que sobra abaixo da janela, e isso depende da
    altura real do print. Quem renderiza espera por window.ready() antes do
    primeiro quadro — assim nenhum corte sai em branco. */
 const SZ={};
+const ALLSHOTS=PANELS.flatMap(p=>
+  [SHOT(p.shot), ...(p.langs||[]).map(l=>SHOT(l[1]))]);
 window.ready=()=>Promise.all(
-  [...new Set(PANELS.map(p=>SHOT(p.shot)))].map(src=>new Promise(res=>{
+  [...new Set(ALLSHOTS)].map(src=>new Promise(res=>{
     const im=new Image();
     im.onload =()=>{ SZ[src]={w:im.naturalWidth,h:im.naturalHeight}; res(); };
     im.onerror=()=>{ SZ[src]=null; res(); };
     im.src=src;
   })));
+
+/* trocar o src por um igual recarregaria a imagem e piscaria um quadro */
+function setSrc(el,src){ if(el.getAttribute('src')!==src) el.setAttribute('src',src); }
 
 function sweep(sel,p){const sh=$(sel);
   if(p<=0||p>=1){sh.style.opacity=0;return;}
@@ -549,12 +605,39 @@ function render(t){
     const s=$('#sp'); s.style.opacity=1;
     const lt=t-p.a, span=p.b-p.a;
 
-    const src=SHOT(p.shot);
-    if($('#shot').getAttribute('src')!==src) $('#shot').setAttribute('src',src);
+    /* qual print esta no ar. Na cena de idiomas sao quatro, e o de baixo
+       segura o anterior durante o cruzamento. */
+    let src=SHOT(p.shot), under=null, fade=1, li=0;
+    if(p.langs){
+      for(let i=0;i<p.langs.length;i++) if(lt>=p.langs[i][0]) li=i;
+      src=SHOT(p.langs[li][1]);
+      if(li>0){ under=SHOT(p.langs[li-1][1]); fade=outC(inv(lt,p.langs[li][0],p.langs[li][0]+280)); }
+    }
+    setSrc($('#shot'),src);
+    $('#shot').style.opacity=fade;
+    if(under){ setSrc($('#shotB'),under); $('#shotB').style.opacity=1; }
+    else $('#shotB').style.opacity=0;
+
     $('#urlTxt').textContent=p.url;
     $('#pKick').innerHTML=p.kick||'';
     $('#pTitle').innerHTML=p.title||'';
     $('#pSub').innerHTML=p.sub||'';
+
+    // linha das quatro linguas: a do print no ar fica dourada
+    const lr=$('#langRow');
+    if(p.langs){
+      if(lr.dataset.for!==String(p.a)){
+        lr.dataset.for=String(p.a);
+        lr.innerHTML=p.langs.map(l=>`<span>${l[3]}</span>`).join('');
+      }
+      lr.style.display='flex';
+      lr.style.opacity=outC(inv(lt,700,1500));
+      $$('#langRow span').forEach((el,i)=>el.classList.toggle('on',i===li));
+    } else {
+      /* display:none, nao opacity:0 — vazio ele ainda somaria a margem a
+         altura do bloco, e os chips desceriam para fora do quadro */
+      lr.style.display='none'; lr.style.opacity=0; lr.dataset.for='';
+    }
 
     // moldura entra com leve parallax
     const pin=inv(lt,0,700);
@@ -565,12 +648,19 @@ function render(t){
 
     // rolagem cinematográfica + leve zoom
     const sp=inv(lt,180,span-200);
-    const nat=SZ[src];
+    /* Na cena de idiomas a referencia e sempre o primeiro print. As quatro
+       paginas tem alturas um pouco diferentes (o texto em japones ocupa
+       menos linha), e usar a altura de cada uma faria o quadro pular de
+       posicao a cada troca — o argumento e o mesmo site, nao quatro telas. */
+    const nat=SZ[p.langs ? SHOT(p.langs[0][1]) : src];
     const dispH=nat ? nat.h*(VPW/nat.w) : VPH;
     const maxS=Math.max(0,dispH-VPH);
-    $('#shot').style.transform=
-      `translateY(${-maxS*lerp(p.scroll[0],p.scroll[1],inOutC(sp))}px) scale(${lerp(1,1.04,sp)})`;
-    $('#shot').style.transformOrigin='50% 0';
+    const tr=`translateY(${-maxS*lerp(p.scroll[0],p.scroll[1],inOutC(sp))}px) scale(${lerp(1,1.04,sp)})`;
+    /* as duas camadas rolam juntas: no cruzamento, uma parada atras da
+       outra entregaria a troca */
+    for(const el of [$('#shot'),$('#shotB')]){
+      el.style.transform=tr; el.style.transformOrigin='50% 0';
+    }
 
     // texto
     const tx=$('#panelTxt');

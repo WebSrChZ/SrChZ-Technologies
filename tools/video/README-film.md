@@ -1,6 +1,6 @@
 # The Order of Chaos — filme institucional
 
-Gera dois masters do mesmo filme, 55s, 30fps, H.264:
+Gera dois masters do mesmo filme, 60s, 30fps, H.264 com som:
 
 | arquivo | formato | onde serve |
 |---|---|---|
@@ -8,12 +8,13 @@ Gera dois masters do mesmo filme, 55s, 30fps, H.264:
 | `assets/video/srchz-order-of-chaos-9x16.mp4` | 1080×1920 | Reels, TikTok, Stories, Shorts |
 | `assets/video/srchz-order-of-chaos-*.pt-BR.srt` | — | legenda em pt-BR, igual nos dois |
 | `assets/video/srchz-order-of-chaos-*-capa.jpg` | — | capa/thumbnail: o quadro da marca, em 4,9s |
+| `assets/video/srchz-order-of-chaos.wav` | — | o desenho de som, já mixado (entra nos dois mp4) |
 
 **Não é mockup.** O que aparece dentro da moldura são capturas reais das
 páginas deste repositório. Mudar o texto do site muda o filme na próxima
 renderização.
 
-## As oito cenas
+## As nove cenas
 
 | # | t | cena | o que carrega |
 |---|---|---|---|
@@ -23,8 +24,9 @@ renderização.
 | 04 | 18,6–26s | Branding & Growth | a página /growth e os serviços |
 | 05 | 26–33s | Engenharia & END | a página /end e o diagrama de ensaio |
 | 06 | 33–40s | Tecnologia & Dados/IA | a página /tech e o grafo de sistemas |
-| 07 | 40–47s | um sistema | "Três práticas. Um método." |
-| 08 | 47–55s | conversão | volta ao site, e o cartão final com o WhatsApp |
+| 07 | 40–45s | alcance | a mesma home em pt, en, es e ja — quatro idiomas |
+| 08 | 45–52s | um sistema | "Três práticas. Um método." |
+| 09 | 52–60s | conversão | volta ao site, e o cartão final com o WhatsApp |
 
 Os tempos estão no objeto `T` e no array `PANELS`, no fim de `film.html`.
 Mudar uma frase, reordenar ou esticar uma cena é editar texto e renderizar de
@@ -48,18 +50,46 @@ node tools/video/film-capture.js
 # 3. conferir a geometria antes de gastar uma renderização
 node tools/video/film-render.js --check
 
-# 4. renderizar os dois masters (ou --fmt v / --fmt h para um só)
+# 4. o som (precisa vir antes: o render embute o wav que encontrar)
+python3 tools/video/film-audio.py
+
+# 5. renderizar os dois masters (ou --fmt v / --fmt h para um só)
 node tools/video/film-render.js
 
-# 5. legendas
+# 6. legendas
 node tools/video/film-subs.js
 ```
 
-A etapa 3 abre 27 instantes do filme em cada formato e **falha** se algum
+A etapa 3 abre 31 instantes do filme em cada formato e **falha** se algum
 bloco sair do quadro ou encostar em outro. Foi ela que pegou o cartão técnico
-em cima dos chips no 16:9, o texto do painel em cima dos chips no 9:16 e a
-pergunta final colada nas duas bordas. Rodar antes custa 40 segundos;
-descobrir depois custa a renderização inteira.
+em cima dos chips no 16:9, o texto do painel em cima dos chips no 9:16, a
+pergunta final colada nas duas bordas e — quando a cena de idiomas entrou —
+os chips empurrados para fora do quadro pela margem de uma `<div>` vazia.
+Rodar antes custa 40 segundos; descobrir depois custa a renderização inteira.
+
+## O som
+
+`film-audio.py` sintetiza tudo do zero: um leito grave contínuo mais eventos
+— corte de cena, impacto, tique de interface, sino e o *ping* do ensaio na
+cena de END. **Não é trilha.** Não tem melodia, não tem instrumento tocado,
+não tem sample de banco, e por isso não depende de licença de terceiros: não
+há obra de terceiro nenhuma dentro. Se um dia entrar música licenciada, ela
+soma por cima — o filme não precisa dela para se explicar.
+
+As marcas vivem no array `CUES` de `film.html`, não no script de áudio. Se
+uma cena mudar de duração, imagem e som andam juntos porque leem a mesma
+tabela.
+
+A mixagem é feita em duas passagens de `loudnorm` com um compressor leve na
+frente, mirando **−16 LUFS** com pico real em **−1,5 dBTP**: as redes
+normalizam perto de −14 e atenuam o que passa disso. Sem isso o arquivo saía
+em −24,8 LUFS com 15,8 LU de faixa — os impactos dominavam e o leito sumia no
+alto-falante do telefone. Fechar o compressor demais tem o problema oposto: a
+primeira tentativa derrubou a faixa para 1,8 LU, uma parede plana em que o
+impacto deixa de ser impacto. O ajuste atual fica em torno de 4,6 LU.
+
+Sem numpy de propósito — o container não tem, e Python puro resolve em sete
+segundos um arquivo que sai uma vez.
 
 ## Legenda queimada
 
@@ -116,8 +146,14 @@ desenha circunflexo e agudo soltos, flutuando acima e à esquerda da letra —
 "três" vira "trêˆs". EB Garamond é da mesma linhagem e acentua português
 direito.
 
-**Sem áudio.** Trilha com licença é decisão de quem publica. O filme foi
-montado para funcionar mudo: nenhuma informação depende de som.
+**O som é sintetizado, não licenciado.** Veja a seção "O som" acima. O filme
+continua funcionando mudo: nenhuma informação depende de áudio.
+
+**A cena de idiomas trava as quatro capturas na mesma altura de referência.**
+As quatro páginas têm alturas um pouco diferentes — o japonês ocupa menos
+linha — e usar a altura de cada uma fazia o quadro pular de posição a cada
+troca. O argumento é "o mesmo site em quatro línguas", não quatro telas
+diferentes.
 
 **Sem imagem de banco.** Não há foto de solda, trilho ou instrumento que não
 seja da empresa. A cena 05 resolve isso com o diagrama do próprio ensaio —
