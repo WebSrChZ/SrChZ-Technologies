@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#08080a">
+<meta name="theme-color" content="#09090b">
 <meta name="color-scheme" content="dark">
 <title>SrChZ Technologies — Rafael Cordeiro | Solutions Strategist</title>
 <meta name="description" content="Rafael Cordeiro — Solutions Strategist. Resolvo o que os outros ignoram: Branding & Growth, Engenharia & END e Tecnologia & Dados/IA.">
@@ -103,286 +103,175 @@
 }
 </script>
 
-<style>
-:root{
-  --gold:#c9a24b; --gold2:#ead29a; --ink:#f6f2e9; --soft:#cfc7b6; --muted:#8c8675;
-  --bg:#08080a; --bg2:#0d0d10; --line:rgba(201,162,75,.22); --line-soft:rgba(201,162,75,.12);
-  --gold-grad:linear-gradient(180deg,#f6e4ad,#cda74f 55%,#9a7833);
-  --serif:"Cormorant Garamond",Georgia,serif; --sans:"Inter",system-ui,sans-serif;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:300;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-.wrap{width:min(1120px,92vw);margin-inline:auto}
-a{color:inherit;text-decoration:none}
-.gold-text{background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-.eyebrow{font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);font-weight:600;display:block}
-h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.08}
-.sec-title{font-size:clamp(2rem,4.5vw,3.1rem);letter-spacing:-.01em;margin:.35rem 0 .8rem}
-.sec-lede{color:var(--soft);font-size:1.06rem;max-width:60ch}
-
-/* NAV */
-.nav{position:sticky;top:0;z-index:50;background:rgba(8,8,10,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line-soft)}
-.nav-inner{display:flex;align-items:center;justify-content:space-between;height:66px}
-.brand{display:flex;align-items:center;gap:.6rem;font-family:var(--serif);font-size:1.25rem;letter-spacing:.01em}
-.brand img{width:30px;height:30px;object-fit:contain}
-.brand em{font-style:normal;color:var(--muted);font-weight:500}
-.nav-links{display:flex;align-items:center;gap:1.6rem;font-size:.9rem;font-weight:400}
-.nav-links a{color:var(--soft);transition:color .2s}
-.nav-links a:hover{color:var(--gold2)}
-.nav-cta{border:1px solid var(--gold);color:var(--gold2)!important;padding:.5rem 1.05rem;border-radius:999px;font-weight:500}
-.nav-cta:hover{background:var(--gold);color:#0a0a0a!important}
-/* No telefone a barra guarda apenas o seletor de idioma. O CTA "Falar comigo"
-   sai porque não cabe ao lado dele em 390px, e não se perde nada: o botão
-   flutuante de WhatsApp fica fixo na tela e a seção de contato continua no
-   final da página. */
-@media(max-width:720px){.nav-links a{display:none}}
-
-/* HERO */
-.hero{position:relative;padding:clamp(3.5rem,9vw,7rem) 0 clamp(2.5rem,6vw,4rem);text-align:center;overflow:hidden}
-.hero-glow{position:absolute;inset:0;background:radial-gradient(60% 55% at 50% 22%,rgba(201,162,75,.16),transparent 70%);pointer-events:none}
-.hero-inner{position:relative}
-.medallion{width:132px;height:auto;margin:0 auto .9rem;display:block;filter:drop-shadow(0 6px 30px rgba(201,162,75,.25))}
-.hero-kicker{font-size:.78rem;letter-spacing:.34em;text-transform:uppercase;color:var(--gold2);font-weight:600;margin-bottom:.8rem}
-.hero-name{font-size:clamp(2.6rem,7vw,5rem);letter-spacing:.02em;font-weight:700}
-.hero-title{font-family:var(--serif);font-style:italic;font-size:clamp(1.2rem,3vw,1.7rem);color:var(--soft);margin-top:.15rem}
-.hero-line{max-width:44ch;margin:1.4rem auto 0;font-size:1.12rem;color:var(--ink)}
-.hero-line b{color:var(--gold2);font-weight:500}
-.hero-sign{margin-top:1rem;font-family:var(--serif);font-style:italic;font-size:1.15rem;color:var(--gold);letter-spacing:.01em}
-.hero-sign::before,.hero-sign::after{content:"—";color:var(--muted);margin:0 .5rem}
-
-/* DOORS */
-.doors{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2.6rem}
-.door{position:relative;display:block;padding:1.5rem 1.3rem;border:1px solid var(--line);border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,0));text-align:left;transition:transform .25s,border-color .25s,background .25s}
-.door:hover{transform:translateY(-4px);border-color:var(--gold);background:linear-gradient(180deg,rgba(201,162,75,.08),rgba(255,255,255,0))}
-.door .d-n{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:600}
-.door h3{font-size:1.5rem;margin:.35rem 0 .3rem}
-.door p{font-size:.9rem;color:var(--soft)}
-.door .d-go{margin-top:.9rem;font-size:.85rem;color:var(--gold2);font-weight:500;display:inline-flex;align-items:center;gap:.35rem}
-.door.soon{opacity:.72;cursor:default}
-.door.soon:hover{transform:none;border-color:var(--line);background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,0))}
-.badge{position:absolute;top:1.1rem;right:1.1rem;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold2);border:1px solid var(--line);border-radius:999px;padding:.2rem .5rem}
-@media(max-width:720px){.doors{grid-template-columns:1fr}}
-
-/* SECTION */
-.section{padding:clamp(3.2rem,7vw,5.5rem) 0;border-top:1px solid var(--line-soft)}
-.section-alt{background:var(--bg2)}
-.sec-head{max-width:64ch}
-
-/* SOBRE */
-.about-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:2.4rem;align-items:start;margin-top:1.6rem}
-.about-body p{margin-bottom:1rem;color:var(--soft);font-size:1.04rem}
-.about-body p b{color:var(--ink);font-weight:500}
-.pull{font-family:var(--serif);font-style:italic;font-size:1.5rem;line-height:1.3;color:var(--gold2);border-left:2px solid var(--gold);padding-left:1.1rem;margin:1.6rem 0}
-.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.4rem}
-.chip{font-size:.82rem;color:var(--soft);border:1px solid var(--line);border-radius:999px;padding:.4rem .8rem}
-.chip b{color:var(--gold2);font-weight:600}
-.about-card{border:1px solid var(--line);border-radius:16px;padding:1.5rem;background:linear-gradient(180deg,rgba(201,162,75,.05),transparent)}
-.about-card h3{font-size:1.35rem;margin-bottom:.5rem}
-.about-card p{font-size:.95rem;color:var(--soft)}
-@media(max-width:820px){.about-grid{grid-template-columns:1fr}}
-
-/* MÉTODO */
-.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:1.8rem;counter-reset:s}
-.step{border:1px solid var(--line-soft);border-radius:14px;padding:1.3rem;background:rgba(255,255,255,.02)}
-.step .s-k{font-family:var(--serif);font-size:2rem;color:var(--gold);line-height:1}
-.step h3{font-size:1.2rem;margin:.5rem 0 .3rem}
-.step p{font-size:.88rem;color:var(--soft)}
-@media(max-width:820px){.steps{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:480px){.steps{grid-template-columns:1fr}}
-
-/* CTA */
-.cta{text-align:center;border:1px solid var(--line);border-radius:22px;padding:clamp(2.2rem,5vw,3.4rem);background:radial-gradient(70% 100% at 50% 0%,rgba(201,162,75,.1),transparent 70%)}
-.cta h2{font-size:clamp(1.8rem,4vw,2.8rem)}
-.cta p{color:var(--soft);margin:.6rem auto 1.6rem;max-width:48ch}
-.btns{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.5rem;border-radius:999px;font-weight:500;font-size:.98rem;transition:transform .2s,box-shadow .2s}
-.btn-gold{background:var(--gold-grad);color:#0a0a0a}
-.btn-gold:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(201,162,75,.28)}
-.btn-ghost{border:1px solid var(--gold);color:var(--gold2)}
-.btn-ghost:hover{background:rgba(201,162,75,.12)}
-
-/* FOOTER */
-.footer{border-top:1px solid var(--line-soft);padding:2.2rem 0}
-.footer-inner{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;color:var(--muted);font-size:.88rem}
-.footer .brand-txt{font-family:var(--serif);font-size:1.15rem;color:var(--ink)}
-.footer a{color:var(--soft)}
-.footer a:hover{color:var(--gold2)}
-
-/* WhatsApp FAB */
-.wa{position:fixed;right:18px;bottom:18px;width:54px;height:54px;border-radius:50%;background:#25d366;display:grid;place-items:center;box-shadow:0 8px 26px rgba(0,0,0,.4);z-index:60}
-.wa svg{width:28px;height:28px;fill:#fff}
-
-/* a11y */
-.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-.skip{position:absolute;left:-999px;top:0;z-index:100;background:var(--gold);color:#0a0a0a;padding:.6rem 1rem;border-radius:0 0 8px 0;font-weight:600}
-.skip:focus{left:0}
-
-/* ---- redes sociais (rodape) ---- */
-.social{display:flex;gap:12px;justify-content:center;align-items:center;margin:18px 0 6px;flex-wrap:wrap}
-.social a{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;border:1px solid var(--line,rgba(201,162,75,.24));color:var(--soft,#cbc4b6);background:transparent;transition:color .2s,border-color .2s,background .2s,transform .2s}
-.social a:hover,.social a:focus-visible{color:var(--gold-2,var(--gold2,#ead29a));border-color:var(--gold,#c9a24b);background:rgba(201,162,75,.09);transform:translateY(-2px)}
-.social svg{width:17px;height:17px;fill:currentColor;display:block}
-@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}html{scroll-behavior:auto!important}}
-</style>
+<link rel="preload" as="image" href="assets/logo-mark.png" fetchpriority="high">
+<link rel="stylesheet" href="assets/css/srchz.css">
 </head>
 <body>
-<a class="skip" href="#sobre" data-i18n="nav.skip">Pular para o conteúdo</a>
+<div class="scroll-progress" id="progress" aria-hidden="true"></div>
+<a class="skip" href="#praticas" data-i18n="nav.skip">Pular para o conteúdo</a>
 
-<!-- NAV -->
-<header class="nav">
+<!-- ===== NAV ===== -->
+<header class="nav" id="nav">
   <div class="wrap nav-inner">
-    <a class="brand" href="#top"><img src="assets/logo-icon.png" alt=""> SrChZ <em>Technologies</em></a>
-    <nav class="nav-links">
+    <a class="brand" href="#top" aria-label="SrChZ Technologies — início">
+      <img class="brand-mark" src="assets/logo-icon.png" alt="" aria-hidden="true">
+      <span class="brand-txt">SrChZ <em>Technologies</em></span>
+    </a>
+    <nav class="nav-links" aria-label="Navegação principal">
+      <a href="#praticas" data-i18n="nav.practices">Práticas</a>
       <a href="#sobre" data-i18n="nav.about">Sobre</a>
       <a href="#metodo" data-i18n="nav.method">Método</a>
-      <a href="#praticas" data-i18n="nav.practices">Práticas</a>
       <a class="nav-cta" href="#contato" data-i18n="nav.cta">Falar comigo</a>
       <span data-i18n-switcher></span>
     </nav>
+    <div class="nav-right">
+      <span class="nav-sw-mobile" data-i18n-switcher></span>
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobileMenu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu" hidden>
+    <a href="#praticas" data-i18n="nav.practices">Práticas</a>
+    <a href="#sobre" data-i18n="nav.about">Sobre</a>
+    <a href="#metodo" data-i18n="nav.method">Método</a>
+    <a href="#contato" data-i18n="nav.cta">Falar comigo</a>
   </div>
 </header>
 
-<!-- HERO -->
+<!-- ===== HERO =====
+     Mesmo desenho do topo do /growth/: rotulo, nome, cargo, a frase e as
+     acoes. O rotulo e um conceito da marca, e nao repete o cargo logo
+     abaixo. As portas das praticas, que apareciam aqui e de novo na secao
+     Praticas, ficam so na secao, logo depois deste topo. -->
 <section class="hero" id="top">
-  <div class="hero-glow"></div>
-  <div class="wrap hero-inner">
-    <img class="medallion" src="assets/logo-mark.png" alt="SrChZ Technologies">
-    <p class="hero-kicker">⚜&nbsp;&nbsp;<span data-i18n="hero.role">Solutions Strategist</span>&nbsp;&nbsp;⚜</p>
+  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="wrap hero-inner reveal">
+    <img class="medallion" src="assets/logo-mark.png" width="212" height="145" fetchpriority="high" alt="SrChZ Technologies">
+    <p class="hero-kicker"><span class="fl" aria-hidden="true">⚜</span><span class="kw">The Chaos Order</span><span class="fl" aria-hidden="true">⚜</span></p>
     <h1 class="hero-name gold-text">RAFAEL CORDEIRO</h1>
-    <p class="hero-title" data-i18n="hero.title">Estrategista de Soluções</p>
-    <p class="hero-line" data-i18n-html="hero.lead">Resolvo o que os outros ignoram — na fronteira entre <b>tecnologia, marca e engenharia</b>, e o jeito real como as pessoas pensam, aprendem e decidem. Do crescimento digital à inspeção industrial: <b>domínios diferentes, um só sistema.</b></p>
-    <p class="hero-sign">Solving what most people overlook.</p>
+    <p class="hero-title" data-i18n="hero.role">Solutions Strategist</p>
+    <p class="hero-line" data-i18n-html="hero.line">Resolvo o que os outros ignoram — do crescimento digital à inspeção industrial: <b>domínios diferentes, um só sistema.</b></p>
+    <div class="hero-actions">
+      <a class="btn btn-gold" href="https://wa.me/5511996869309?text=Ol%C3%A1%20Rafael%2C%20vim%20pelo%20site%20SrChZ." target="_blank" rel="noopener" data-i18n-wa="wa.home">
+        <svg viewBox="0 0 32 32" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M16 .4C7.4.4.5 7.3.5 15.9c0 2.8.7 5.5 2.1 7.9L.4 31.6l8-2.1c2.3 1.3 4.9 1.9 7.6 1.9 8.6 0 15.5-6.9 15.5-15.5S24.6.4 16 .4zm0 28.3c-2.4 0-4.7-.6-6.7-1.8l-.5-.3-4.7 1.2 1.3-4.6-.3-.5c-1.3-2.1-2-4.5-2-7C3.4 8.9 9 3.3 16 3.3S28.6 8.9 28.6 16 23 28.7 16 28.7zm7.1-9.4c-.4-.2-2.3-1.1-2.6-1.3-.3-.1-.6-.2-.9.2s-1 1.3-1.2 1.5c-.2.2-.4.3-.8.1-.4-.2-1.6-.6-3.1-1.9-1.1-1-1.9-2.3-2.1-2.7-.2-.4 0-.6.2-.8.2-.2.4-.4.5-.7.2-.2.2-.4.4-.6.1-.3 0-.5 0-.7-.1-.2-.9-2.1-1.2-2.9-.3-.8-.6-.6-.9-.7h-.7c-.2 0-.6.1-.9.4-.3.4-1.2 1.2-1.2 2.9s1.2 3.4 1.4 3.6c.2.2 2.5 3.8 6 5.3.8.4 1.5.6 2 .8.8.3 1.6.2 2.2.1.7-.1 2.3-.9 2.6-1.8.3-.9.3-1.6.2-1.8-.1-.2-.3-.2-.7-.4z"/></svg>
+        <span data-i18n="contact.wa">Chamar no WhatsApp</span></a>
+      <a class="btn btn-ghost" href="#praticas" data-i18n="hero.cta2">Ver as práticas</a>
+    </div>
+    <ul class="hero-disc" aria-label="Fundamentos">
+      <li data-i18n="gr.m.p1.t">Engenharia</li><li data-i18n="gr.m.p2.t">Psicanálise</li><li data-i18n="gr.m.p3.t">Estética High-End</li>
+    </ul>
+  </div>
+  <a class="scroll-cue" href="#praticas" aria-label="Rolar para baixo"><span></span></a>
+</section>
 
-    <h2 class="sr-only" data-i18n="nav.practices">Práticas</h2>
-    <div class="doors">
-      <a class="door" href="growth/">
-        <span class="d-n" data-i18n="doors.n1">01 · Prática</span>
+<!-- ===== PRÁTICAS ===== -->
+<section class="section" id="praticas">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow" data-i18n="practices.eyebrow">O que ofereço</span>
+      <h2 class="sec-title" data-i18n="practices.title">Escolha a porta certa.</h2>
+      <p class="sec-lede" data-i18n="practices.lede">Cada prática tem sua própria linguagem, seu portfólio e seu jeito de começar. Entre pela que resolve a sua dor de agora.</p>
+    </div>
+    <div class="cards">
+      <a class="card reveal" href="growth/">
+        <span class="card-k" data-i18n="doors.n1">01 · Prática</span>
         <h3 class="gold-text" data-i18n="doors.growth.name">Branding &amp; Growth</h3>
-        <p data-i18n="doors.growth.desc">Tráfego, marca, produção de vídeo e Portal do Cliente. Ecossistemas de alta performance.</p>
-        <span class="d-go"><span data-i18n="doors.enter">Entrar</span> <span aria-hidden="true">→</span></span>
+        <p data-i18n="practices.growth.desc">Tráfego pago (Meta Ads), branding, produção de vídeo cinematográfica e Portal do Cliente próprio.</p>
+        <span class="card-go"><span data-i18n="doors.enter">Entrar</span> <span aria-hidden="true">→</span></span>
       </a>
-      <a class="door" href="end/">
-        <span class="d-n" data-i18n="doors.n2">02 · Prática</span>
+      <a class="card reveal" data-delay="1" href="end/">
+        <span class="card-k" data-i18n="doors.n2">02 · Prática</span>
         <h3 class="gold-text" data-i18n="doors.end.name">Engenharia &amp; END</h3>
-        <p data-i18n="doors.end.desc">Inspeção por ultrassom, ferrovia, espessura e LP — com laudo conforme norma. E os guias de certificação.</p>
-        <span class="d-go"><span data-i18n="doors.enter">Entrar</span> <span aria-hidden="true">→</span></span>
+        <p data-i18n="practices.end.desc">Ensaio por ultrassom Nível II, inspeção de soldas e trilhos, e o guia de certificação publicado.</p>
+        <span class="card-go"><span data-i18n="doors.enter">Entrar</span> <span aria-hidden="true">→</span></span>
       </a>
-      <a class="door" href="tech/">
-        <span class="d-n" data-i18n="doors.n3">03 · Prática</span>
+      <a class="card reveal" data-delay="2" href="tech/">
+        <span class="card-k" data-i18n="doors.n3">03 · Prática</span>
         <h3 class="gold-text" data-i18n="doors.tech.name">Tecnologia &amp; Dados/IA</h3>
-        <p data-i18n="doors.tech.desc">Web, portais, automação, Customer Experience e inteligência de dados aplicada.</p>
-        <span class="d-go"><span data-i18n="doors.enter">Entrar</span> <span aria-hidden="true">→</span></span>
+        <p data-i18n="practices.tech.desc">Desenvolvimento web, portais e web apps, automação, CX e inteligência de dados com IA.</p>
+        <span class="card-go"><span data-i18n="doors.enter">Entrar</span> <span aria-hidden="true">→</span></span>
       </a>
     </div>
   </div>
 </section>
 
-<!-- SOBRE -->
-<section class="section" id="sobre">
+<!-- ===== SOBRE ===== -->
+<section class="section section-alt" id="sobre">
   <div class="wrap">
-    <div class="sec-head">
+    <div class="sec-head reveal">
       <span class="eyebrow" data-i18n="about.eyebrow">Quem sou</span>
       <h2 class="sec-title" data-i18n-html="about.title">A área muda. <span class="gold-text">O método não.</span></h2>
+      <p class="sec-lede" data-i18n="about.lede">Trabalho na fronteira entre tecnologia, marca e engenharia — e o jeito real como as pessoas pensam, aprendem e decidem.</p>
     </div>
     <div class="about-grid">
-      <div class="about-body">
+      <div class="about-body reveal">
         <p data-i18n-html="about.p1">Me chamam pra resolver <b>o que ninguém mais consegue destravar</b> — seja qual for a área. Já trabalhei em engenharia industrial e ferroviária, tecnologia, marketing e tráfego pago, produção visual e experiência do cliente internacional.</p>
         <p class="pull" data-i18n="about.pull">Não me defino pelo que faço; me defino pelo que entendo. Cargos são ferramentas — o que eu entrego é a solução.</p>
         <p data-i18n-html="about.p2">Meu diferencial é <b>enxergar o que a maioria ignora</b>. Pego problemas ambíguos, quebro o mecanismo até a causa-raiz e devolvo uma solução clara — principalmente no espaço digital e de tecnologia, onde análise, estratégia e estética se encontram.</p>
         <p data-i18n="about.p4">Todas as três práticas são entregues internacionalmente. A única exceção é a gravação cinematográfica, que exige captação presencial e é combinada por projeto.</p>
         <p data-i18n-html="about.p3">Tem algo travado que ninguém resolve? Estratégia, tecnologia, produção visual, dados &amp; IA — eu trago o mesmo método pra qualquer campo. Se você precisa de alguém que <b>pensa antes de executar</b>, me chama.</p>
       </div>
-      <aside class="about-card">
-        <h3 class="gold-text">SrChZ Technologies</h3>
-        <p data-i18n="about.card">"A Ordem do Caos" — consultoria estratégica que une engenharia, psicanálise e estética high-end. Fundada por Rafael Cordeiro.</p>
-        <div class="chips">
-          <span class="chip" data-i18n-html="about.chip1">Idiomas · <b>PT · EN C2 · JP B1 · ES A2</b></span>
-          <span class="chip" data-i18n-html="about.chip2">Eng. Computação + <b>Psicanálise</b></span>
-          <span class="chip" data-i18n-html="about.chip3">Inspetor <b>END Nível 2</b></span>
-          <span class="chip" data-i18n-html="about.chip4"><b>Customer Experience</b> internacional</span>
-          <span class="chip" data-i18n-html="about.chip5"><b>Entrega internacional</b></span>
-        </div>
+      <aside class="portal-card about-card reveal" data-delay="1">
+        <span class="portal-tag">SrChZ Technologies</span>
+        <p class="case-quote" data-i18n="about.card">"A Ordem do Caos" — consultoria estratégica que une engenharia, psicanálise e estética high-end. Fundada por Rafael Cordeiro.</p>
+        <ul class="feats feats-1">
+          <li data-i18n-html="about.chip1">Idiomas · <b>PT · EN C2 · JP B1 · ES A2</b></li>
+          <li data-i18n-html="about.chip2">Eng. Computação + <b>Psicanálise</b></li>
+          <li data-i18n-html="about.chip3">Inspetor <b>END Nível 2</b></li>
+          <li data-i18n-html="about.chip4"><b>Customer Experience</b> internacional</li>
+          <li data-i18n-html="about.chip5"><b>Entrega internacional</b></li>
+        </ul>
       </aside>
     </div>
   </div>
 </section>
 
-<!-- MÉTODO -->
-<section class="section section-alt" id="metodo">
+<!-- ===== MÉTODO ===== -->
+<section class="section" id="metodo">
   <div class="wrap">
-    <div class="sec-head">
+    <div class="sec-head reveal">
       <span class="eyebrow" data-i18n="method.eyebrow">Como eu trabalho</span>
       <h2 class="sec-title" data-i18n="method.title">Um método, qualquer campo.</h2>
       <p class="sec-lede" data-i18n="method.lede">O mesmo processo que aplico numa solda ferroviária, numa campanha de tráfego ou num sistema digital. É o que mantém o resultado consistente entre áreas tão diferentes.</p>
     </div>
-    <div class="steps">
-      <div class="step"><span class="s-k">01</span><h3 data-i18n="method.s1.t">Leio padrões</h3><p data-i18n="method.s1.d">Observo o problema até enxergar o mecanismo por trás — o que a maioria não vê.</p></div>
-      <div class="step"><span class="s-k">02</span><h3 data-i18n="method.s2.t">Comparo cenários</h3><p data-i18n="method.s2.d">Coloco as hipóteses lado a lado e testo o caminho de menor atrito e maior efeito.</p></div>
-      <div class="step"><span class="s-k">03</span><h3 data-i18n="method.s3.t">Construo a estratégia</h3><p data-i18n="method.s3.d">Desço até a causa-raiz e desenho a solução clara, com começo, meio e fim.</p></div>
-      <div class="step"><span class="s-k">04</span><h3 data-i18n="method.s4.t">Executo com estética</h3><p data-i18n="method.s4.d">Entrego com padrão high-end — porque a forma também comunica confiança.</p></div>
-    </div>
+    <ol class="steps steps-4">
+      <li class="step reveal"><span class="step-k" data-i18n="gr.s.k1">Passo 01</span><h3 data-i18n="method.s1.t">Leio padrões</h3><p data-i18n="method.s1.d">Observo o problema até enxergar o mecanismo por trás — o que a maioria não vê.</p></li>
+      <li class="step reveal" data-delay="1"><span class="step-k" data-i18n="gr.s.k2">Passo 02</span><h3 data-i18n="method.s2.t">Comparo cenários</h3><p data-i18n="method.s2.d">Coloco as hipóteses lado a lado e testo o caminho de menor atrito e maior efeito.</p></li>
+      <li class="step reveal" data-delay="2"><span class="step-k" data-i18n="gr.s.k3">Passo 03</span><h3 data-i18n="method.s3.t">Construo a estratégia</h3><p data-i18n="method.s3.d">Desço até a causa-raiz e desenho a solução clara, com começo, meio e fim.</p></li>
+      <li class="step reveal" data-delay="3"><span class="step-k" data-i18n="gr.s.k4">Passo 04</span><h3 data-i18n="method.s4.t">Executo com estética</h3><p data-i18n="method.s4.d">Entrego com padrão high-end — porque a forma também comunica confiança.</p></li>
+    </ol>
   </div>
 </section>
 
-<!-- PRÁTICAS -->
-<section class="section" id="praticas">
+<!-- ===== CONTATO ===== -->
+<section class="section section-alt cta-section" id="contato">
   <div class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow" data-i18n="practices.eyebrow">O que ofereço</span>
-      <h2 class="sec-title" data-i18n="practices.title">Escolha a porta certa.</h2>
-      <p class="sec-lede" data-i18n="practices.lede">Cada prática tem sua própria linguagem, seu portfólio e seu jeito de começar. Entre pela que resolve a sua dor de agora.</p>
-    </div>
-    <div class="doors" style="margin-top:1.8rem">
-      <a class="door" href="growth/">
-        <span class="d-n">Visual Branding</span>
-        <h3 class="gold-text" data-i18n="doors.growth.name">Branding &amp; Growth</h3>
-        <p data-i18n="practices.growth.desc">Tráfego pago (Meta Ads), branding, produção de vídeo cinematográfica e Portal do Cliente próprio.</p>
-        <span class="d-go"><span data-i18n="practices.see">Ver a prática</span> <span aria-hidden="true">→</span></span>
-      </a>
-      <a class="door" href="end/">
-        <span class="d-n">Engineering</span>
-        <h3 class="gold-text" data-i18n="doors.end.name">Engenharia &amp; END</h3>
-        <p data-i18n="practices.end.desc">Ensaio por ultrassom Nível II, inspeção de soldas e trilhos, e o guia de certificação publicado.</p>
-        <span class="d-go"><span data-i18n="practices.see">Ver a prática</span> <span aria-hidden="true">→</span></span>
-      </a>
-      <a class="door" href="tech/">
-        <span class="d-n">Technologies · Data AI</span>
-        <h3 class="gold-text" data-i18n="doors.tech.name">Tecnologia &amp; Dados/IA</h3>
-        <p data-i18n="practices.tech.desc">Desenvolvimento web, portais e web apps, automação, CX e inteligência de dados com IA.</p>
-        <span class="d-go"><span data-i18n="practices.see">Ver a prática</span> <span aria-hidden="true">→</span></span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- CONTATO -->
-<section class="section section-alt" id="contato">
-  <div class="wrap">
-    <div class="cta">
+    <div class="cta reveal">
       <span class="eyebrow" data-i18n="contact.eyebrow">Vamos conversar</span>
       <h2 class="gold-text" data-i18n="contact.title">Tem algo travado que ninguém resolve?</h2>
       <p data-i18n="contact.lede">Me manda o problema — seja de marca, engenharia, tecnologia ou dados. Se precisa de alguém que pensa antes de executar, é só chamar.</p>
-      <div class="btns">
-        <a class="btn btn-gold" href="https://wa.me/5511996869309?text=Ol%C3%A1%20Rafael%2C%20vim%20pelo%20site%20SrChZ." target="_blank" rel="noopener" data-i18n="contact.wa" data-i18n-wa="wa.home">Chamar no WhatsApp</a>
-        <a class="btn btn-ghost" href="mailto:rafaelhenriquecsantosz@gmail.com?subject=Contato%20SrChZ" data-i18n="contact.mail">Enviar e-mail</a>
-        <a class="btn btn-ghost" href="https://www.linkedin.com/in/websrchz/" target="_blank" rel="noopener">LinkedIn</a>
+      <div class="cta-actions">
+        <a class="btn btn-gold btn-lg" href="https://wa.me/5511996869309?text=Ol%C3%A1%20Rafael%2C%20vim%20pelo%20site%20SrChZ." target="_blank" rel="noopener" data-i18n-wa="wa.home">
+          <svg viewBox="0 0 32 32" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M16 .4C7.4.4.5 7.3.5 15.9c0 2.8.7 5.5 2.1 7.9L.4 31.6l8-2.1c2.3 1.3 4.9 1.9 7.6 1.9 8.6 0 15.5-6.9 15.5-15.5S24.6.4 16 .4zm0 28.3c-2.4 0-4.7-.6-6.7-1.8l-.5-.3-4.7 1.2 1.3-4.6-.3-.5c-1.3-2.1-2-4.5-2-7C3.4 8.9 9 3.3 16 3.3S28.6 8.9 28.6 16 23 28.7 16 28.7zm7.1-9.4c-.4-.2-2.3-1.1-2.6-1.3-.3-.1-.6-.2-.9.2s-1 1.3-1.2 1.5c-.2.2-.4.3-.8.1-.4-.2-1.6-.6-3.1-1.9-1.1-1-1.9-2.3-2.1-2.7-.2-.4 0-.6.2-.8.2-.2.4-.4.5-.7.2-.2.2-.4.4-.6.1-.3 0-.5 0-.7-.1-.2-.9-2.1-1.2-2.9-.3-.8-.6-.6-.9-.7h-.7c-.2 0-.6.1-.9.4-.3.4-1.2 1.2-1.2 2.9s1.2 3.4 1.4 3.6c.2.2 2.5 3.8 6 5.3.8.4 1.5.6 2 .8.8.3 1.6.2 2.2.1.7-.1 2.3-.9 2.6-1.8.3-.9.3-1.6.2-1.8-.1-.2-.3-.2-.7-.4z"/></svg>
+          <span data-i18n="contact.wa">Chamar no WhatsApp</span></a>
+        <a class="btn btn-ghost btn-lg" href="mailto:rafaelhenriquecsantosz@gmail.com?subject=Contato%20SrChZ" data-i18n="contact.mail">Enviar e-mail</a>
+        <a class="btn btn-ghost btn-lg" href="https://www.linkedin.com/in/websrchz/" target="_blank" rel="noopener">LinkedIn</a>
       </div>
+      <p class="cta-meta"><span>Solving what most people overlook.</span></p>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- ===== FOOTER ===== -->
 <footer class="footer">
   <div class="wrap footer-inner">
-    <div>
-      <span class="brand-txt">SrChZ <em style="font-style:normal;color:var(--muted)">Technologies</em></span>
-      <div style="margin-top:.2rem" data-i18n="footer.tagline">Solutions Strategist · Perception · Strategy · Execution</div>
+    <div class="footer-brand">
+      <span class="brand-txt">SrChZ <em>Technologies</em></span>
+      <p data-i18n="footer.tagline">Solutions Strategist · Perception · Strategy · Execution</p>
     </div>
-    <div style="text-align:right">
-      <a href="mailto:rafaelhenriquecsantosz@gmail.com">rafaelhenriquecsantosz@gmail.com</a><br>
-      <a href="privacidade.html" data-i18n="footer.privacy">Política de Privacidade</a><br>
-      <span>© 2026 SrChZ Technologies</span><br>
+    <div class="footer-meta">
+      <a href="mailto:rafaelhenriquecsantosz@gmail.com">rafaelhenriquecsantosz@gmail.com</a>
+      <a href="privacidade.html" data-i18n="footer.privacy">Política de Privacidade</a>
+      <span id="year">© 2026 SrChZ Technologies</span><br>
       <span>CNPJ 68.371.698/0001-95</span>
     </div>
   <nav class="social" aria-label="Redes sociais de SrChZ Technologies">
@@ -394,10 +283,11 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.08}
   </div>
 </footer>
 
-<a class="wa" href="https://wa.me/5511996869309?text=Ol%C3%A1%20Rafael%2C%20vim%20pelo%20site%20SrChZ." target="_blank" rel="noopener" aria-label="WhatsApp" data-i18n-wa="wa.home">
-  <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 .4C7.4.4.5 7.3.5 15.9c0 2.8.7 5.5 2.1 7.9L.4 31.6l8-2.1c2.3 1.3 4.9 1.9 7.6 1.9 8.6 0 15.5-6.9 15.5-15.5S24.6.4 16 .4zm0 28.3c-2.4 0-4.7-.6-6.7-1.8l-.5-.3-4.7 1.2 1.3-4.6-.3-.5c-1.3-2.1-2-4.5-2-7C3.4 8.9 9 3.3 16 3.3S28.6 8.9 28.6 16 23 28.7 16 28.7zm7.1-9.4c-.4-.2-2.3-1.1-2.6-1.3-.3-.1-.6-.2-.9.2s-1 1.3-1.2 1.5c-.2.2-.4.3-.8.1-.4-.2-1.6-.6-3.1-1.9-1.1-1-1.9-2.3-2.1-2.7-.2-.4 0-.6.2-.8.2-.2.4-.4.5-.7.2-.2.2-.4.4-.6.1-.3 0-.5 0-.7-.1-.2-.9-2.1-1.2-2.9-.3-.8-.6-.6-.9-.7h-.7c-.2 0-.6.1-.9.4-.3.4-1.2 1.2-1.2 2.9s1.2 3.4 1.4 3.6c.2.2 2.5 3.8 6 5.3.8.4 1.5.6 2 .8.8.3 1.6.2 2.2.1.7-.1 2.3-.9 2.6-1.8.3-.9.3-1.6.2-1.8-.1-.2-.3-.2-.7-.4z"/></svg>
+<a class="wa-fab" href="https://wa.me/5511996869309?text=Ol%C3%A1%20Rafael%2C%20vim%20pelo%20site%20SrChZ." target="_blank" rel="noopener" aria-label="Falar no WhatsApp" data-i18n-wa="wa.home">
+  <svg viewBox="0 0 32 32" width="28" height="28" fill="currentColor" aria-hidden="true"><path d="M16 .4C7.4.4.5 7.3.5 15.9c0 2.8.7 5.5 2.1 7.9L.4 31.6l8-2.1c2.3 1.3 4.9 1.9 7.6 1.9 8.6 0 15.5-6.9 15.5-15.5S24.6.4 16 .4zm0 28.3c-2.4 0-4.7-.6-6.7-1.8l-.5-.3-4.7 1.2 1.3-4.6-.3-.5c-1.3-2.1-2-4.5-2-7C3.4 8.9 9 3.3 16 3.3S28.6 8.9 28.6 16 23 28.7 16 28.7zm7.1-9.4c-.4-.2-2.3-1.1-2.6-1.3-.3-.1-.6-.2-.9.2s-1 1.3-1.2 1.5c-.2.2-.4.3-.8.1-.4-.2-1.6-.6-3.1-1.9-1.1-1-1.9-2.3-2.1-2.7-.2-.4 0-.6.2-.8.2-.2.4-.4.5-.7.2-.2.2-.4.4-.6.1-.3 0-.5 0-.7-.1-.2-.9-2.1-1.2-2.9-.3-.8-.6-.6-.9-.7h-.7c-.2 0-.6.1-.9.4-.3.4-1.2 1.2-1.2 2.9s1.2 3.4 1.4 3.6c.2.2 2.5 3.8 6 5.3.8.4 1.5.6 2 .8.8.3 1.6.2 2.2.1.7-.1 2.3-.9 2.6-1.8.3-.9.3-1.6.2-1.8-.1-.2-.3-.2-.7-.4z"/></svg>
 </a>
-
+<button class="to-top" id="toTop" aria-label="Voltar ao topo" hidden>↑</button>
+<script src="assets/js/srchz.js" defer></script>
 <script>
 /* Limpa o Service Worker antigo do site de Growth que rodava na raiz (evita cache velho) */
 if ('serviceWorker' in navigator) {

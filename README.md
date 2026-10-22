@@ -20,11 +20,13 @@ Arquitetura **hub-and-spoke**: a raiz é a home guarda-chuva (*Solutions Strateg
 ```
 index.html              Home guarda-chuva — Solutions Strategist (apresentação, método, portas)
 assets/                 logo, og.png, favicons, favicon.ico, manifest.webmanifest, ícones PWA 192/512
+  ├─ css/srchz.css       sistema visual das páginas de entrada (home, growth, end, tech)
+  └─ js/srchz.js         nav, barra de progresso, reveal ao rolar, scroll-spy, count-up
 favicon.ico             ícone de aba (crawlers legados)
 404.html · robots.txt · sitemap.xml · CNAME
 growth/                 Prática Branding & Growth (one-page premium)
   ├─ index.html          método, planos, Portal do Cliente, caso ITS Power, FAQ, lead form
-  ├─ css/ · js/          estilos, animações e main.js (nav, reveal, scroll-spy, count-up, lead)
+  ├─ css/ · js/          só o que é desta página: o painel do Portal e o lead form
   ├─ manifest.webmanifest · sw.js   PWA do subsite
   └─ Planos/Planos.GrowthBranding.v2.pdf   proposta para download
 kl-sports/              Catálogo digital do cliente KL Sports Fitness (pesos para musculação)
@@ -34,7 +36,7 @@ kl-sports/              Catálogo digital do cliente KL Sports Fitness (pesos pa
 As **portas** da home levam a: **Branding &amp; Growth** (`/growth/`), **Engenharia &amp; END** (hub do livro *Ultrassom Nível II*, publicado na Amazon) e **Tecnologia &amp; Dados/IA** (em breve).
 
 ## ✨ Destaques
-- **Design** preto / branco / dourado (Cormorant Garamond + Inter), responsivo mobile-first, reveal on-scroll.
+- **Design** preto / branco / dourado (Cormorant Garamond + Inter), responsivo mobile-first, reveal on-scroll. A home, o `/growth/`, o `/end/` e o `/tech/` usam o mesmo sistema (`assets/css/srchz.css` + `assets/js/srchz.js`): o `/growth/` é a régua, e as outras páginas não divergem dele.
 - **Acessibilidade**: skip-link, foco visível, hierarquia de headings, ARIA, `prefers-reduced-motion`.
 - **SEO**: Open Graph / Twitter Card (imagem absoluta), canonical, `sitemap.xml`, `robots.txt` e **JSON-LD** consolidado — a `Organization` (com `legalName` e `taxID`) é declarada uma vez na home sob o `@id` `/#organization`, e as outras seções a referenciam por esse `@id` em vez de repetir um nó solto.
 - **PWA-ready**: `manifest.webmanifest`, ícones 192/512, `favicon.ico`, `theme-color`.
