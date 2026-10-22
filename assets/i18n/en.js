@@ -92,11 +92,13 @@ window.SRCHZ_I18N.en = {
   'about.pull': 'I am not defined by what I do; I am defined by what I understand. Job titles are tools — what I deliver is the solution.',
   'about.p2': 'What sets me apart is <b>seeing what most people miss</b>. I take ambiguous problems, break the mechanism down to root cause, and hand back a clear solution — above all in digital and technology, where analysis, strategy and aesthetics meet.',
   'about.p3': 'Got something stuck that nobody can solve? Strategy, technology, visual production, data &amp; AI — I bring the same method to any field. If you need someone who <b>thinks before executing</b>, get in touch.',
+  'about.p4': 'All three practices are delivered internationally. The one exception is cinematographic recording, which requires being on site and is arranged per project.',
   'about.card': '"The Order of Chaos" — a strategy consultancy joining engineering, psychoanalysis and high-end aesthetics. Founded by Rafael Cordeiro.',
-  'about.chip1': 'Trilingual · <b>PT · EN C2 · JP B1</b>',
+  'about.chip1': 'Languages · <b>PT · EN C2 · JP B1 · ES A2</b>',
   'about.chip2': 'Computer Eng. + <b>Psychoanalysis</b>',
   'about.chip3': '<b>NDT Level 2</b> Inspector',
   'about.chip4': 'International <b>Customer Experience</b>',
+  'about.chip5': '<b>International delivery</b>',
 
   'method.eyebrow': 'How I work',
   'method.title': 'One method, any field.',
@@ -449,7 +451,7 @@ window.SRCHZ_I18N.en = {
   'gr.f.q4': 'How does the Client Portal work?',
   'gr.f.a4': 'It is a web app of your own where you follow everything in real time — schedule, the status of each video, script approvals and metrics — synced across devices and installable as an app. Full transparency, from brief to publication.',
   'gr.f.q5': 'Do you work with clients outside Brazil?',
-  'gr.f.a5': 'Yes. Everything that is digital — paid media, branding, web, portals, data and consulting — is delivered remotely, wherever you are, and I work in English, Spanish and Portuguese. On-site video and photo shoots are the one exception: those are arranged per project and, in practice, happen in Brazil.',
+  'gr.f.a5': 'Yes. Paid media, branding, web, the Client Portal and consulting are delivered remotely, wherever you are. Cinematographic recording is the exception: on-site video and photo shoots depend on travel and are arranged per project.',
   'gr.f.q6': 'How do I start?',
   'gr.f.a6': 'With a free diagnosis: I read your current ecosystem, point at the bottlenecks and design a proposal around you. No commitment — just get in touch.',
 

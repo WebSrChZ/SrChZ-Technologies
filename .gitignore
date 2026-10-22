@@ -2,3 +2,6 @@ _*.png
 .DS_Store
 Thumbs.db
 Planos.GrowthBranding.v2.html
+
+# o wav sai do film-audio.py em 7s, deterministico — o mp4 ja o carrega
+assets/video/srchz-order-of-chaos.wav
