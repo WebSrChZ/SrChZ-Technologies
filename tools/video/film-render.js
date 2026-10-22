@@ -225,10 +225,16 @@ const put = (stream, buf) => new Promise((res, rej) => {
 async function renderFormat(browser, fmt) {
   const { page, W, H } = await openPage(browser, fmt);
   const DUR = await page.evaluate(() => window.DUR);
-  /* --secs N encurta a renderizacao para testar o caminho inteiro sem
-     esperar o filme todo */
-  const LIM = (() => { const i = argv.indexOf('--secs'); return i < 0 ? 0 : parseFloat(argv[i + 1]); })();
-  const total = Math.round((LIM > 0 ? Math.min(LIM * 1000, DUR) : DUR) / 1000 * FPS);
+  /* --from A --secs B renderiza so o trecho [A, A+B). Serve para testar sem
+     esperar o filme todo, e para partir um master em pedacos: uma
+     renderizacao de 47 minutos nao cabe na janela deste container, e um
+     reinicio no meio perde tudo. Os pedacos saem sem audio e se juntam
+     depois, com o som entrando numa passada so. */
+  const FROM = (() => { const i = argv.indexOf('--from'); return i < 0 ? 0 : parseFloat(argv[i + 1]); })();
+  const LIM  = (() => { const i = argv.indexOf('--secs'); return i < 0 ? 0 : parseFloat(argv[i + 1]); })();
+  const endMs = LIM > 0 ? Math.min(FROM * 1000 + LIM * 1000, DUR) : DUR;
+  const f0 = Math.round(FROM * 1000 / 1000 * FPS);
+  const total = Math.round(endMs / 1000 * FPS) - f0;
   const sub = total * MB;                       // subquadros a desenhar
   const out = path.join(OUTDIR, OUTNAME
     || (fmt === 'v' ? 'srchz-order-of-chaos-9x16.mp4' : 'srchz-order-of-chaos-16x9.mp4'));
@@ -238,16 +244,16 @@ async function renderFormat(browser, fmt) {
 
   const args = ['-loglevel', 'error', '-y',
     '-f', 'image2pipe', '-framerate', String(FPS * MB), '-i', '-'];
-  if (AUDIO) args.push('-i', AUDIO);
+  if (AUDIO && !argv.includes('--noaudio')) args.push('-i', AUDIO);
   /* funde cada grupo de MB subquadros num quadro final e volta para 30fps */
   if (MB > 1) args.push('-vf', `tmix=frames=${MB}:weights='${Array(MB).fill(1).join(' ')}',fps=${FPS}`);
   args.push('-c:v', 'libx264', '-preset', 'slow', '-crf', '18',
     '-pix_fmt', 'yuv420p', '-movflags', '+faststart', '-r', String(FPS));
   /* AAC 192k estereo: o wav sai mixado em -16 LUFS, entao aqui e so
      transportar. -shortest corta no mais curto dos dois, que e a imagem. */
-  if (AUDIO) args.push('-c:a', 'aac', '-b:a', '192k', '-ar', '48000', '-shortest');
+  if (AUDIO && !argv.includes('--noaudio')) args.push('-c:a', 'aac', '-b:a', '192k', '-ar', '48000', '-shortest');
   args.push(out);
-  console.log(AUDIO ? `  audio: ${AUDIO}` : '  sem audio');
+  console.log(AUDIO && !argv.includes('--noaudio') ? `  audio: ${AUDIO}` : '  sem audio');
   const ff = spawn('ffmpeg', args, { stdio: ['pipe', 'inherit', 'inherit'] });
   const done = new Promise((res, rej) => {
     ff.on('exit', (c) => c === 0 ? res() : rej(new Error('ffmpeg saiu com ' + c)));
@@ -260,7 +266,7 @@ async function renderFormat(browser, fmt) {
   const SHUTTER = 0.5;
   const t0 = Date.now();
   for (let i = 0; i < sub; i++) {
-    const f = Math.floor(i / MB), k = i % MB;
+    const f = f0 + Math.floor(i / MB), k = i % MB;
     await page.evaluate(ms => window.render(ms), ((f + (k / MB) * SHUTTER) / FPS) * 1000);
     const buf = await page.screenshot({ animations: 'disabled' });
     await put(ff.stdin, buf);
