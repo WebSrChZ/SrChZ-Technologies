@@ -1,0 +1,79 @@
+<!doctype html>
+<!-- Capa do Reels do filme, renderizada por film-cover.js em 1080x1920.
+
+     O Instagram mostra a capa inteira no feed de Reels, mas no grid do perfil
+     recorta os 1440 px do meio (3:4). Tudo o que precisa ser lido mora nessa
+     faixa, de y=240 a y=1680; fora dela so fundo.
+
+     O desenho e o do filme: as quatro palavras do caos espalhadas e apagadas
+     nas bordas, e no centro a ordem — a marca e a frase que abre o filme, com
+     o fim em dourado, como "ninguem resolve?" no convite final. -->
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<style>
+  @font-face{font-family:"EB Garamond";font-weight:700;font-display:block;src:url(/fonts/eb-garamond-latin-700-normal.woff2) format("woff2")}
+  @font-face{font-family:"Inter";font-weight:600;font-display:block;src:url(/fonts/inter-latin-600-normal.woff2) format("woff2")}
+  @font-face{font-family:"Inter";font-weight:700;font-display:block;src:url(/fonts/inter-latin-700-normal.woff2) format("woff2")}
+  :root{
+    --bg:#09090b; --ink:#f6f2e9; --soft:#cbc4b6; --muted:#8b8576;
+    --gold:#c9a24b; --gold-2:#ead29a;
+    --gold-grad:linear-gradient(180deg,#f6e4ad,#cda74f 55%,#9a7833);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{background:var(--bg)}
+  #c{position:relative;width:1080px;height:1920px;overflow:hidden;background:var(--bg);
+     font-family:"Inter",sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+  #glow{position:absolute;inset:0;background:
+    radial-gradient(44% 20% at 50% 30%,rgba(201,162,75,.26),transparent 72%),
+    radial-gradient(82% 46% at 50% 46%,rgba(201,162,75,.07),transparent 70%)}
+  #dust{position:absolute;inset:0}
+  .w{position:absolute;font-weight:700;font-size:30px;letter-spacing:.3em;color:var(--gold-2);opacity:.16}
+  #mark{position:absolute;left:50%;top:420px;width:440px;transform:translateX(-50%);
+        filter:drop-shadow(0 0 44px rgba(201,162,75,.45))}
+  #hook{position:absolute;left:70px;right:70px;top:820px;text-align:center;
+        font-family:"EB Garamond",Georgia,serif;font-weight:700;font-size:124px;
+        line-height:1.02;letter-spacing:-.015em}
+  .g{background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  #rule{position:absolute;left:50%;top:1250px;width:520px;height:2px;transform:translateX(-50%);
+        background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+  /* o espaco depois da ultima letra empurraria a linha para a esquerda; o
+     recuo do mesmo tamanho na frente devolve o centro */
+  #tag{position:absolute;left:0;right:0;top:1292px;text-align:center;font-weight:600;font-size:24px;
+       letter-spacing:.42em;padding-left:.42em;color:var(--muted);text-transform:uppercase}
+</style>
+</head>
+<body>
+<div id="c">
+  <div id="glow"></div>
+  <canvas id="dust" width="1080" height="1920"></canvas>
+  <div class="w" style="left:96px;top:300px">Brand</div>
+  <div class="w" style="right:96px;top:352px">Engineering</div>
+  <div class="w" style="left:110px;top:1480px">Data</div>
+  <div class="w" style="right:110px;top:1540px">Strategy</div>
+  <img id="mark" src="/brand/srchz-mark.png" alt="">
+  <div id="hook">O problema<br>raramente é<br><span class="g">o que parece.</span></div>
+  <div id="rule"></div>
+  <div id="tag">Perception · Strategy · Execution</div>
+</div>
+<script>
+  for (const el of document.querySelectorAll('.w')) el.textContent = el.textContent.toUpperCase();
+
+  /* poeira dourada como a do filme, com semente fixa: a mesma capa em toda
+     execucao. Perto do texto ela fica mais fraca, para nao sujar a leitura. */
+  let s = 20261022;
+  const rnd = () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; };
+  const x = document.getElementById('dust').getContext('2d');
+  for (let i = 0; i < 170; i++) {
+    const px = rnd() * 1080, py = rnd() * 1920;
+    const nearText = py > 800 && py < 1330 && px > 60 && px < 1020;
+    const a = (0.12 + rnd() * 0.5) * (nearText ? 0.35 : 1);
+    x.beginPath();
+    x.fillStyle = `rgba(234,210,154,${a.toFixed(3)})`;
+    x.arc(px, py, 0.9 + rnd() * 1.7, 0, Math.PI * 2);
+    x.fill();
+  }
+  window.drawn = true;
+</script>
+</body>
+</html>

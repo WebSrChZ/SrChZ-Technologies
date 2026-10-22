@@ -61,6 +61,9 @@ node tools/video/film-subs.js
 
 # 7. o corte de 30 s, tirado dos masters (ver "Corte de 30 s")
 python3 tools/video/film-cut.py
+
+# 8. a capa do Reels (ver "Capa do Reels")
+node tools/video/film-cover.js
 ```
 
 A etapa 3 abre 31 instantes do filme em cada formato e **falha** se algum
@@ -171,6 +174,26 @@ legendas: `srchz-order-of-chaos-30s-{16x9,9x16}.mp4` e `.pt-BR.srt`.
 Conferido: cada trecho bate com o quadro exato da origem — SSIM 0,999 contra
 0,96 a 0,99 dos quadros vizinhos — e os impactos do corte ficam a menos de
 0,6 dB dos do filme de 60 s.
+
+## Capa do Reels
+
+`film-cover.js` renderiza `film-cover.html` em 1080×1920 e grava
+`srchz-order-of-chaos-reels-capa.jpg`. Serve para o de 60 s e para o de 30 s.
+
+O Instagram mostra a capa inteira na aba Reels, mas no grid do perfil recorta
+os 1440 px do meio (3:4). Tudo o que precisa ser lido fica nessa faixa, de
+y=240 a y=1680. Fora dela, só fundo.
+
+O desenho é o do filme: as quatro palavras do caos espalhadas e apagadas nas
+bordas e, no centro, a ordem — a marca e a frase que abre o filme, com o fim
+em dourado, como o "ninguém resolve?" do convite final. As cores, as fontes e
+o logo são os mesmos do filme. A frase tem 124 px para continuar legível na
+miniatura do grid, que num celular fica com cerca de um terço da largura da
+tela.
+
+O script recusa gerar a capa se uma fonte ou o logo não carregar, em vez de
+deixar o título sair em Georgia. A poeira tem semente fixa, então duas
+execuções dão o mesmo arquivo.
 
 ## Legenda queimada
 
