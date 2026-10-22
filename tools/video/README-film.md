@@ -182,10 +182,14 @@ Conferido: cada trecho bate com o quadro exato da origem — SSIM 0,999 contra
 
 **A capa reproduz o topo da /growth.** O modelo foi um recorte 9:16 que o
 usuário mandou da página: logo no alto, "High-Performance Ecosystems" entre
-flores de lis, o nome em dourado e o cargo em caixa-alta espaçada. Só o cargo
-muda, a pedido dele: Growth & Solutions Strategist. As posições do HTML são as
-medidas daquele recorte, escaladas para 1080×1920, e a capa bate com ele a
-menos de 3 px em cada linha. As fontes, as cores e os espaçamentos são os do
+flores de lis, o nome em dourado e o cargo em caixa-alta espaçada. Duas coisas
+mudam, a pedido dele: o cargo, que vira Solutions & Growth Strategist, e o
+rótulo, que fica com as duas palavras centradas uma sobre a outra. No site cada
+flor ocupa lugar na própria linha e empurra a palavra para o lado; aqui a flor
+fica pendurada para fora da palavra, com uma margem negativa do tamanho dela.
+As posições do HTML são as medidas daquele recorte, escaladas para 1080×1920, e
+cada linha cai a menos de 3 px da altura do modelo. As fontes, as cores e os
+espaçamentos são os do
 CSS da página: Cormorant Garamond 700 no nome, Inter 400 no resto e o mesmo
 gradiente dourado nas duas linhas do nome.
 

@@ -4,7 +4,8 @@
      Reproduz o topo da /growth no recorte 9:16 que o usuario mandou como
      modelo: as posicoes abaixo sao as medidas daquele recorte, escaladas para
      1080x1920, e fontes, cores e espacamentos sao os do CSS da pagina. Muda
-     so o cargo, a pedido dele: Growth & Solutions, e nao Growth & Branding.
+     o cargo, a pedido dele: Solutions & Growth, e nao Growth & Branding. E
+     as duas palavras do rotulo ficam centradas uma sobre a outra.
 
      O bloco vai de y=159 a y=1658 — 1499 px, mais que os 1440 do recorte
      3:4 do grid do perfil. No recorte padrao (o miolo) o grid perde o topo
@@ -36,12 +37,22 @@
      com os 655 de largura do modelo, e o topo dele cai em y=159 */
   #mark{position:absolute;left:50%;top:133px;width:951px;transform:translateX(-50%)}
   /* .hero-kicker: Inter 400, caixa-alta, .45em, cinza */
-  #kick{top:892px;font-size:40px;line-height:67px;letter-spacing:.45em;padding-left:.45em;
+  #kick{top:892px;font-size:40px;line-height:67px;letter-spacing:.45em;
         text-transform:uppercase;color:var(--muted)}
   /* a Inter nao tem a flor de lis; no celular ela vem de uma fonte do
      sistema e sai vazada e fina. A da FreeSerif e assim; a da DejaVu, que
      seria a escolha automatica aqui, e cheia */
   .fl{font-family:"FreeSerif",serif;letter-spacing:0;font-size:1.02em}
+  /* No site cada flor ocupa lugar na propria linha: empurra HIGH-PERFORMANCE
+     para a direita e ECOSYSTEMS para a esquerda, e as palavras deixam de
+     ficar uma sobre a outra. Aqui a flor fica pendurada para fora da
+     palavra: a margem negativa do tamanho dela tira a flor da conta da
+     centralizacao, e a linha continua na base certa por ser texto corrido. */
+  .hang{white-space:nowrap}
+  /* o espacamento depois da ultima letra conta na largura da palavra; sem
+     tirar ele, a palavra centra deslocada e a flor de baixo fica 18 px mais
+     longe que a de cima */
+  .wd{margin-right:-.45em}
   /* .hero-name + .gold-text: um gradiente so para as duas linhas, como no
      site — por isso o CORDEIRO sai mais fundo que o RAFAEL */
   #name{top:1079px;font-family:var(--serif);font-weight:700;font-size:183px;line-height:183px;
@@ -57,10 +68,19 @@
 <div id="c">
   <div id="glow"></div>
   <img id="mark" src="/brand/srchz-mark.png" alt="SrChZ Technologies">
-  <p id="kick" class="ab"><span class="fl">⚜</span>&nbsp;&nbsp;High-Performance<br>Ecosystems&nbsp;&nbsp;<span class="fl">⚜</span></p>
+  <p id="kick" class="ab"><span class="hang l"><span class="fl">⚜</span>&nbsp;&nbsp;</span><span class="wd">High-Performance</span><br><span class="wd">Ecosystems</span><span class="hang r">&nbsp;&nbsp;<span class="fl">⚜</span></span></p>
   <h1 id="name" class="ab">RAFAEL<br>CORDEIRO</h1>
-  <p id="role" class="ab">Growth &amp; Solutions<br>Strategist</p>
+  <p id="role" class="ab">Solutions &amp; Growth<br>Strategist</p>
 </div>
-<script>window.drawn = true;</script>
+<script>
+  /* a largura da flor so e certa com as fontes carregadas */
+  document.fonts.ready.then(() => {
+    for (const h of document.querySelectorAll('.hang')) {
+      const w = h.getBoundingClientRect().width;
+      h.style[h.classList.contains('l') ? 'marginLeft' : 'marginRight'] = -w + 'px';
+    }
+    window.drawn = true;
+  });
+</script>
 </body>
 </html>
