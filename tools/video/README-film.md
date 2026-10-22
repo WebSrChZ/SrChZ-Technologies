@@ -58,6 +58,9 @@ node tools/video/film-render.js
 
 # 6. legendas
 node tools/video/film-subs.js
+
+# 7. o corte de 30 s, tirado dos masters (ver "Corte de 30 s")
+python3 tools/video/film-cut.py
 ```
 
 A etapa 3 abre 31 instantes do filme em cada formato e **falha** se algum
@@ -139,6 +142,35 @@ tem de dar igual:
 ```bash
 ffmpeg -loglevel error -i master.mp4 -map 0:v -c copy -f streamhash -hash md5 -
 ```
+
+## Corte de 30 s
+
+`film-cut.py` tira o corte de 30 s dos masters, nos dois formatos, com as
+legendas: `srchz-order-of-chaos-30s-{16x9,9x16}.mp4` e `.pt-BR.srt`.
+
+- **A imagem sai do master aprovado, não de uma renderização nova.** O site
+  mudou desde a aprovação, e capturar de novo daria outro filme. São oito
+  trechos, juntados com fusão de 11 quadros — o tempo que as cenas do filme
+  levam para sumir — ou com corte seco onde o trecho seguinte começa num
+  impacto, porque fundir ali amoleceria o impacto.
+- **O som não é cortado do master.** Sai do mesmo `film-audio.py`, sobre a
+  tabela de cues remontada para o corte (`VIDEO_CUES`): cada afx cai onde a
+  imagem dele caiu, e a trilha ganha andamento próprio. Um afx que caía dentro
+  de uma fusão fica de fora, porque seria som de algo que já está saindo da
+  tela.
+- **A conta que fecha o corte:** em 109,6 BPM os três impactos (3,5 / 21,03 /
+  25,4 s) caem nos compassos 0, 8 e 10, e o filme termina em 30,0 s exatos.
+  Cada troca de cena cai num tempo da música. A tabela `CUT` foi montada para
+  isso, e o `film-audio.py` chega ao mesmo andamento sozinho, a partir dos
+  impactos (erro de 13 ms no do meio).
+- Ficam as três práticas, as três. Saem "Um site. Três entradas." e "Começa
+  com uma conversa", que o convite final já cobre.
+- CRF 16, e não o 18 do render: o corte reencoda um master que já é uma
+  compressão, e a segunda geração precisa de folga.
+
+Conferido: cada trecho bate com o quadro exato da origem — SSIM 0,999 contra
+0,96 a 0,99 dos quadros vizinhos — e os impactos do corte ficam a menos de
+0,6 dB dos do filme de 60 s.
 
 ## Legenda queimada
 

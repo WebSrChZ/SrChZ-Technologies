@@ -16,6 +16,8 @@ duracao, a imagem e o som andam juntos, porque leem a mesma tabela.
 
     python3 film-audio.py              escreve em assets/video
     VIDEO_OUT=... python3 film-audio.py
+    VIDEO_CUES=x.json VIDEO_NAME=y     outra tabela de cues, outro nome
+                                       (e assim que film-cut.py faz o de 30 s)
 
 Sem numpy de proposito: o container nao tem, e o custo de escrever isto
 em Python puro e de uns segundos para um arquivo que sai uma vez.
@@ -37,23 +39,35 @@ OUT = os.environ.get('VIDEO_OUT') or os.path.join(SITE, 'assets', 'video')
 
 # ---------------------------------------------------------------- roteiro
 
-def read_cues():
-    """Le CUES e DUR de film.html. O roteiro manda; este arquivo obedece."""
-    src = open(os.path.join(DIR, 'film.html'), encoding='utf-8').read()
-    m = re.search(r'const CUES=(\[[\s\S]*?\n\]);', src)
+def js_table(src, name):
+    """Le a tabela `const NAME=[...];` de film.html. Ela vira JSON valido
+    com tres ajustes: fora os comentarios, aspas simples viram duplas, e .5
+    vira 0.5 (JSON exige o zero)."""
+    m = re.search(r'const %s=(\[[\s\S]*?\n\]);' % name, src)
     if not m:
-        sys.exit('ERRO: nao achei CUES em film.html.')
-    # a tabela vira JSON valido com tres ajustes: fora os comentarios,
-    # aspas simples viram duplas, e .5 vira 0.5 (JSON exige o zero)
+        sys.exit('ERRO: nao achei %s em film.html.' % name)
     body = re.sub(r'//[^\n]*', '', m.group(1))
     body = body.replace("'", '"')
     body = re.sub(r'(?<=[\s,\[])\.(\d)', r'0.\1', body)
     body = re.sub(r',(\s*\])', r'\1', body)
-    cues = json.loads(body)
+    return json.loads(body)
+
+
+def read_cues():
+    """Le CUES e DUR de film.html. O roteiro manda; este arquivo obedece.
+
+    Com VIDEO_CUES, le de um JSON com as mesmas duas chaves: e por ai que
+    o corte de 30 s entrega a tabela remontada, e o som do corte sai do
+    mesmo codigo que o do filme inteiro."""
+    alt = os.environ.get('VIDEO_CUES')
+    if alt:
+        d = json.load(open(alt, encoding='utf-8'))
+        return d['CUES'], int(d['DUR'])
+    src = open(os.path.join(DIR, 'film.html'), encoding='utf-8').read()
     d = re.search(r'const DUR=(\d+);', src)
     if not d:
         sys.exit('ERRO: nao achei DUR em film.html.')
-    return cues, int(d.group(1))
+    return js_table(src, 'CUES'), int(d.group(1))
 
 # -------------------------------------------------------------- utilidades
 
@@ -643,7 +657,7 @@ def main():
         pcm[i] = int(max(-32767, min(32767, x * 32767)))
 
     os.makedirs(OUT, exist_ok=True)
-    path = os.path.join(OUT, 'srchz-order-of-chaos.wav')
+    path = os.path.join(OUT, (os.environ.get('VIDEO_NAME') or 'srchz-order-of-chaos') + '.wav')
     raw = path + '.raw.wav'
     with wave.open(raw, 'wb') as w:
         w.setnchannels(CH)
