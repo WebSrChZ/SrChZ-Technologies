@@ -199,8 +199,8 @@ saturado, o rótulo é cinza neutro e o cargo é creme. O print passa pelo
 Instagram, que desbota um pouco os dourados; o logo, que é o mesmo arquivo nas
 duas capas, mostra quanto (−3, −2, +8 em RGB). Os dourados daqui descontam
 isso, para a capa sair igual à dele depois de postada. Medida do mesmo jeito
-que o print (reduzida por área ao tamanho da miniatura), cada região cai a
-menos de 6 níveis dele.
+que o print (reduzida por área ao tamanho da miniatura), nenhuma região fica
+a mais de 6 níveis dele.
 
 **Inter 500, e não a 400 do site, no rótulo e no cargo.** O celular desenha a
 fonte mais cheia que o Chromium daqui. Com a 400, as letras finas saíam 10 a
