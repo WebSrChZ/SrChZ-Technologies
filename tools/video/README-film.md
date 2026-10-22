@@ -37,8 +37,8 @@ novo — não é retrabalho de vídeo.
 ```bash
 # 1. fontes (não moram no repo)
 mkdir -p /tmp/video/fonts && cd /tmp/video/fonts
-npm pack @fontsource/eb-garamond @fontsource/inter
-tar xzf fontsource-eb-garamond-*.tgz && tar xzf fontsource-inter-*.tgz
+npm pack @fontsource/eb-garamond @fontsource/inter @fontsource/cormorant-garamond
+for t in fontsource-*.tgz; do tar xzf $t; done   # a Cormorant e so da capa do Reels
 
 cd <repo>
 export VIDEO_WORK=/tmp/video
@@ -61,6 +61,9 @@ node tools/video/film-subs.js
 
 # 7. o corte de 30 s, tirado dos masters (ver "Corte de 30 s")
 python3 tools/video/film-cut.py
+
+# 8. a capa do Reels (ver "Capa do Reels")
+node tools/video/film-cover.js
 ```
 
 A etapa 3 abre 31 instantes do filme em cada formato e **falha** se algum
@@ -171,6 +174,55 @@ legendas: `srchz-order-of-chaos-30s-{16x9,9x16}.mp4` e `.pt-BR.srt`.
 Conferido: cada trecho bate com o quadro exato da origem — SSIM 0,999 contra
 0,96 a 0,99 dos quadros vizinhos — e os impactos do corte ficam a menos de
 0,6 dB dos do filme de 60 s.
+
+## Capa do Reels
+
+`film-cover.js` renderiza `film-cover.html` em 1080×1920 e grava
+`srchz-order-of-chaos-reels-capa.jpg`. Serve para o de 60 s e para o de 30 s.
+
+**A composição é a do topo da /growth.** O modelo foi um recorte 9:16 que o
+usuário mandou da página: logo no alto, "High-Performance Ecosystems", o nome
+em dourado e o cargo em caixa-alta espaçada. As posições do HTML são as medidas
+daquele recorte, escaladas para 1080×1920, e cada linha cai a menos de 3 px da
+altura do modelo. Mudam duas coisas, a pedido dele:
+
+- o cargo, que vira Solutions & Growth Strategist;
+- as flores de lis, que ficam só na linha de cima, uma de cada lado de
+  HIGH-PERFORMANCE, com ECOSYSTEMS centrada embaixo. As flores ficam penduradas
+  para fora da palavra, com uma margem negativa do tamanho delas, para não
+  entrarem na conta da centralização.
+
+**As cores são as da capa que o usuário já tem no Instagram**, medidas num print
+do grid — não as do CSS. O fundo é grafite (`#131218`) em vez de quase preto, o
+brilho do topo tem o dobro da força, o nome é um dourado mais claro e menos
+saturado, o rótulo é cinza neutro e o cargo é creme. O print passa pelo
+Instagram, que desbota um pouco os dourados; o logo, que é o mesmo arquivo nas
+duas capas, mostra quanto (−3, −2, +8 em RGB). Os dourados daqui descontam
+isso, para a capa sair igual à dele depois de postada. Medida do mesmo jeito
+que o print (reduzida por área ao tamanho da miniatura), nenhuma região fica
+a mais de 6 níveis dele.
+
+**Inter 500, e não a 400 do site, no rótulo e no cargo.** O celular desenha a
+fonte mais cheia que o Chromium daqui. Com a 400, as letras finas saíam 10 a
+20% mais fracas que no print, medida a tinta total da linha — e não era tamanho:
+"STRATEGIST" tem 160 px de largura nas duas. Com a 500, a tinta bate a ±2%.
+
+Duas armadilhas que a capa já resolve:
+
+- **A margem do logo.** A `srchz-mark.png` tem 720 px de largura, mas o desenho
+  ocupa 496; o resto é transparente. Dimensionada pela largura do arquivo, a
+  marca sai um terço menor do que parece.
+- **A flor de lis.** A Inter não tem o ⚜. No celular ele vem de uma fonte do
+  sistema e sai vazado e fino. Aqui a escolha automática seria a DejaVu, que
+  desenha a flor cheia; a capa pede a FreeSerif, que desenha vazada.
+
+**O grid do perfil corta o topo do logo.** O Instagram mostra a capa inteira na
+aba Reels, mas no grid recorta os 1440 px do meio (3:4). O bloco do modelo vai
+de y=159 a y=1658, 1499 px, então nenhum recorte 3:4 mostra tudo: o padrão
+perde os 80 px de cima do logo.
+
+O script recusa gerar a capa se uma fonte ou o logo não carregar, em vez de
+deixar o nome sair em Georgia. Duas execuções dão o mesmo arquivo.
 
 ## Legenda queimada
 

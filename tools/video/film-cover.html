@@ -1,0 +1,100 @@
+<!doctype html>
+<!-- Capa do Reels, renderizada por film-cover.js em 1080x1920.
+
+     Reproduz o topo da /growth no recorte 9:16 que o usuario mandou como
+     modelo: as posicoes abaixo sao as medidas daquele recorte, escaladas para
+     1080x1920, e fontes e espacamentos sao os do CSS da pagina. Muda o
+     cargo, a pedido dele: Solutions & Growth, e nao Growth & Branding. E as
+     flores ficam so na linha de cima, com as duas palavras do rotulo
+     centradas uma sobre a outra.
+
+     As cores nao sao as do CSS: sao as da capa que o usuario ja tem no
+     Instagram, medidas num print do grid. O print passa pelo Instagram, que
+     desbota um pouco os dourados — o logo, que e o mesmo arquivo nas duas,
+     mostra quanto (-3, -2, +8 em RGB). Os dourados daqui descontam isso, para
+     a capa sair igual a dele depois de postada. Medida do mesmo jeito que o
+     print, nenhuma regiao fica a mais de 6 niveis dele.
+
+     O bloco vai de y=159 a y=1658 — 1499 px, mais que os 1440 do recorte
+     3:4 do grid do perfil. No recorte padrao (o miolo) o grid perde o topo
+     do logo; o modelo foi escolhido assim, com o logo no alto. -->
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<style>
+  @font-face{font-family:"Cormorant Garamond";font-weight:700;font-display:block;
+    src:url(/fonts/cormorant-garamond-latin-700-normal.woff2) format("woff2")}
+  @font-face{font-family:"Inter";font-weight:500;font-display:block;
+    src:url(/fonts/inter-latin-500-normal.woff2) format("woff2")}
+  :root{
+    --bg:#131218; --kick:#8c8a89; --role:#c7b9a4;
+    --name-1:#e8d1a1; --name-2:#cfaa59; --name-3:#ab893e;
+    --serif:"Cormorant Garamond",Georgia,serif; --sans:"Inter",sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{background:var(--bg)}
+  #c{position:relative;width:1080px;height:1920px;overflow:hidden;background:var(--bg);
+     font-family:var(--sans);font-weight:500;-webkit-font-smoothing:antialiased;text-align:center}
+  /* o brilho de cima do .hero-glow da pagina, com a forca e a largura da
+     capa do usuario (no centro do topo, 65,56,39 sobre o fundo 19,18,24). O
+     de baixo fica de fora: no site ele mora no pe do topo, abaixo dos botoes,
+     fora do recorte que serviu de modelo */
+  #glow{position:absolute;inset:0;background:
+    radial-gradient(85% 50% at 50% 0%,rgba(201,165,88,.29),transparent 62%)}
+  .ab{position:absolute;left:0;right:0}
+  /* a srchz-mark.png tem 720 px, mas o desenho ocupa 496 a partir de x=107,
+     y=20; o resto e margem transparente. Com 951 px de imagem o desenho fica
+     com os 655 de largura do modelo, e o topo dele cai em y=159 */
+  #mark{position:absolute;left:50%;top:133px;width:951px;transform:translateX(-50%)}
+  /* .hero-kicker: caixa-alta, .45em, cinza neutro. Inter 500, e nao a 400 do
+     site: o celular desenha a fonte mais cheia que o Chromium daqui, e com a
+     400 as letras finas saiam 10 a 20% mais fracas que no print, medida a
+     tinta total da linha (mesmo tamanho, 227 px de largura nas duas) */
+  #kick{top:892px;font-size:40px;line-height:67px;letter-spacing:.45em;
+        text-transform:uppercase;color:var(--kick)}
+  /* a Inter nao tem a flor de lis; no celular ela vem de uma fonte do
+     sistema e sai vazada e fina. A da FreeSerif e assim; a da DejaVu, que
+     seria a escolha automatica aqui, e cheia */
+  .fl{font-family:"FreeSerif",serif;letter-spacing:0;font-size:1.02em}
+  /* As duas flores ficam na linha de cima, uma de cada lado, e penduradas
+     para fora da palavra: a margem negativa do tamanho delas tira as flores
+     da conta da centralizacao, e as duas palavras ficam centradas uma sobre
+     a outra. No site cada flor ocupa lugar na linha — uma antes de
+     HIGH-PERFORMANCE, outra depois de ECOSYSTEMS — e empurra as palavras
+     para os lados. */
+  .hang{white-space:nowrap}
+  /* o espacamento depois da ultima letra conta na largura da palavra; sem
+     tirar ele, a palavra centra deslocada e a flor de baixo fica 18 px mais
+     longe que a de cima */
+  .wd{margin-right:-.45em}
+  /* .hero-name + .gold-text: um gradiente so para as duas linhas, como no
+     site — por isso o CORDEIRO sai mais fundo que o RAFAEL */
+  #name{top:1079px;font-family:var(--serif);font-weight:700;font-size:183px;line-height:183px;
+        letter-spacing:.04em;padding-left:.04em;
+        background:linear-gradient(180deg,var(--name-1) 0%,var(--name-2) 52%,var(--name-3) 100%);
+        -webkit-background-clip:text;background-clip:text;color:transparent}
+  /* .hero-title: Inter 500 pelo mesmo motivo, caixa-alta, .42em, creme */
+  #role{top:1518px;font-size:49.5px;line-height:81px;letter-spacing:.42em;padding-left:.42em;
+        text-transform:uppercase;color:var(--role)}
+</style>
+</head>
+<body>
+<div id="c">
+  <div id="glow"></div>
+  <img id="mark" src="/brand/srchz-mark.png" alt="SrChZ Technologies">
+  <p id="kick" class="ab"><span class="hang l"><span class="fl">⚜</span>&nbsp;&nbsp;</span><span class="wd">High-Performance</span><span class="hang r">&nbsp;&nbsp;<span class="fl">⚜</span></span><br><span class="wd">Ecosystems</span></p>
+  <h1 id="name" class="ab">RAFAEL<br>CORDEIRO</h1>
+  <p id="role" class="ab">Solutions &amp; Growth<br>Strategist</p>
+</div>
+<script>
+  /* a largura da flor so e certa com as fontes carregadas */
+  document.fonts.ready.then(() => {
+    for (const h of document.querySelectorAll('.hang')) {
+      const w = h.getBoundingClientRect().width;
+      h.style[h.classList.contains('l') ? 'marginLeft' : 'marginRight'] = -w + 'px';
+    }
+    window.drawn = true;
+  });
+</script>
+</body>
+</html>
