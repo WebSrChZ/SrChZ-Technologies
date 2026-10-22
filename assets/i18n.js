@@ -146,7 +146,7 @@
     + '.cat-count,.hero-kicker,.hero-title .line,.hero-title,.hero__kicker,'
     + '.hero__sub,.lead-or,.plan-badge,.plan-sub,.plan__ribbon,.portal-tag,'
     + '.proof__tag,.q-phone legend,.r-label,.sharebox label,.spec-label,'
-    + '.step-k,.trail__tag){letter-spacing:.06em}';
+    + '.step-k,.trail__tag,.card-k,.card-tag){letter-spacing:.06em}';
 
   var styleEl = document.createElement('style');
   styleEl.textContent = css;

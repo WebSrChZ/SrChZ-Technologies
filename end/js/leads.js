@@ -30,7 +30,7 @@
 
   function setStatus(msg, cls) {
     statusEl.textContent = msg;
-    statusEl.className = 'insp-status' + (cls ? ' ' + cls : '');
+    statusEl.className = 'lead-status' + (cls ? ' ' + cls : '');
   }
 
   form.addEventListener('submit', async function (e) {
