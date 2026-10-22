@@ -1,78 +1,84 @@
 <!doctype html>
-<!-- Capa do Reels do filme, renderizada por film-cover.js em 1080x1920.
+<!-- Capa do Reels, renderizada por film-cover.js em 1080x1920.
 
-     O Instagram mostra a capa inteira no feed de Reels, mas no grid do perfil
-     recorta os 1440 px do meio (3:4). Tudo o que precisa ser lido mora nessa
-     faixa, de y=240 a y=1680; fora dela so fundo.
+     O desenho e o do topo das paginas do site: medalhao, rotulo entre flores
+     de lis, o nome em dourado e o cargo em caixa-alta espacada — com as
+     mesmas fontes, cores e espacamentos do CSS da /growth. O texto e o da
+     home, que fala das tres praticas, e nao o da /growth, que fala so de uma.
 
-     O desenho e o do filme: as quatro palavras do caos espalhadas e apagadas
-     nas bordas, e no centro a ordem — a marca e a frase que abre o filme, com
-     o fim em dourado, como "ninguem resolve?" no convite final. -->
+     O Instagram mostra a capa inteira na aba Reels, mas no grid do perfil
+     recorta os 1440 px do meio (3:4). O bloco fica centrado nessa faixa, de
+     y=240 a y=1680; fora dela so o brilho do fundo.
+
+     ?v=praticas  o cargo vira as tres praticas, uma por linha (padrao)
+     ?v=solucoes  o cargo e "Estrategista de Solucoes", como na home -->
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <style>
-  @font-face{font-family:"EB Garamond";font-weight:700;font-display:block;src:url(/fonts/eb-garamond-latin-700-normal.woff2) format("woff2")}
-  @font-face{font-family:"Inter";font-weight:600;font-display:block;src:url(/fonts/inter-latin-600-normal.woff2) format("woff2")}
-  @font-face{font-family:"Inter";font-weight:700;font-display:block;src:url(/fonts/inter-latin-700-normal.woff2) format("woff2")}
+  @font-face{font-family:"Cormorant Garamond";font-weight:700;font-display:block;
+    src:url(/fonts/cormorant-garamond-latin-700-normal.woff2) format("woff2")}
+  @font-face{font-family:"Inter";font-weight:500;font-display:block;
+    src:url(/fonts/inter-latin-500-normal.woff2) format("woff2")}
   :root{
-    --bg:#09090b; --ink:#f6f2e9; --soft:#cbc4b6; --muted:#8b8576;
-    --gold:#c9a24b; --gold-2:#ead29a;
-    --gold-grad:linear-gradient(180deg,#f6e4ad,#cda74f 55%,#9a7833);
+    --bg:#09090b; --muted:#8b8576; --gold:#c9a24b; --gold-2:#ead29a; --gold-deep:#9c7c2e;
+    --serif:"Cormorant Garamond",Georgia,serif; --sans:"Inter",sans-serif;
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html,body{background:var(--bg)}
   #c{position:relative;width:1080px;height:1920px;overflow:hidden;background:var(--bg);
-     font-family:"Inter",sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+     font-family:var(--sans);-webkit-font-smoothing:antialiased}
+  /* o .hero-glow do site, com o foco de cima puxado para dentro do recorte */
   #glow{position:absolute;inset:0;background:
-    radial-gradient(44% 20% at 50% 30%,rgba(201,162,75,.26),transparent 72%),
-    radial-gradient(82% 46% at 50% 46%,rgba(201,162,75,.07),transparent 70%)}
-  #dust{position:absolute;inset:0}
-  .w{position:absolute;font-weight:700;font-size:30px;letter-spacing:.3em;color:var(--gold-2);opacity:.16}
-  #mark{position:absolute;left:50%;top:420px;width:440px;transform:translateX(-50%);
-        filter:drop-shadow(0 0 44px rgba(201,162,75,.45))}
-  #hook{position:absolute;left:70px;right:70px;top:820px;text-align:center;
-        font-family:"EB Garamond",Georgia,serif;font-weight:700;font-size:124px;
-        line-height:1.02;letter-spacing:-.015em}
-  .g{background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-  #rule{position:absolute;left:50%;top:1250px;width:520px;height:2px;transform:translateX(-50%);
-        background:linear-gradient(90deg,transparent,var(--gold),transparent)}
-  /* o espaco depois da ultima letra empurraria a linha para a esquerda; o
-     recuo do mesmo tamanho na frente devolve o centro */
-  #tag{position:absolute;left:0;right:0;top:1292px;text-align:center;font-weight:600;font-size:24px;
-       letter-spacing:.42em;padding-left:.42em;color:var(--muted);text-transform:uppercase}
+    radial-gradient(70% 34% at 50% 14%,rgba(201,162,75,.16),transparent 62%),
+    radial-gradient(46% 24% at 50% 100%,rgba(201,162,75,.07),transparent 60%)}
+  #safe{position:absolute;left:0;right:0;top:240px;height:1440px;
+        display:flex;flex-direction:column;align-items:center;justify-content:center;
+        padding-bottom:40px;text-align:center}
+  /* a srchz-mark.png tem 720 px, mas o desenho ocupa 496: o resto e margem
+     transparente. A 900 px de imagem o desenho fica com 620, dois tercos
+     da largura do nome — a proporcao da /growth */
+  #mark{width:900px;height:auto;display:block}
+  /* .hero-kicker */
+  #kick{margin-top:74px;font-size:32px;font-weight:500;letter-spacing:.45em;padding-left:.45em;
+        text-transform:uppercase;color:var(--muted);white-space:nowrap}
+  /* a Inter nao tem a flor de lis; no celular ela vem de uma fonte do
+     sistema e sai vazada e fina. A da FreeSerif e assim; a da DejaVu, que
+     seria a escolha automatica aqui, e cheia */
+  .fl{font-family:"FreeSerif",serif;font-weight:400;letter-spacing:0;font-size:1.3em;vertical-align:-.08em}
+  /* .hero-name + .gold-text: um gradiente so para as duas linhas, como no
+     site — por isso o CORDEIRO sai mais fundo que o RAFAEL */
+  #name{margin-top:26px;font-family:var(--serif);font-weight:700;font-size:176px;line-height:1;
+        letter-spacing:.04em;padding-left:.04em;
+        background:linear-gradient(180deg,var(--gold-2) 0%,var(--gold) 52%,var(--gold-deep) 100%);
+        -webkit-background-clip:text;background-clip:text;color:transparent}
+  /* .hero-title */
+  #role{margin-top:62px;font-size:38px;font-weight:500;line-height:1.7;letter-spacing:.42em;
+        padding-left:.42em;text-transform:uppercase;color:var(--gold-2)}
+  /* com duas linhas cabe maior; com tres, TECNOLOGIA & DADOS/IA limita */
+  #role.v-solucoes{font-size:46px}
 </style>
 </head>
 <body>
 <div id="c">
   <div id="glow"></div>
-  <canvas id="dust" width="1080" height="1920"></canvas>
-  <div class="w" style="left:96px;top:300px">Brand</div>
-  <div class="w" style="right:96px;top:352px">Engineering</div>
-  <div class="w" style="left:110px;top:1480px">Data</div>
-  <div class="w" style="right:110px;top:1540px">Strategy</div>
-  <img id="mark" src="/brand/srchz-mark.png" alt="">
-  <div id="hook">O problema<br>raramente é<br><span class="g">o que parece.</span></div>
-  <div id="rule"></div>
-  <div id="tag">Perception · Strategy · Execution</div>
+  <div id="safe">
+    <img id="mark" src="/brand/srchz-mark.png" alt="SrChZ Technologies">
+    <p id="kick"><span class="fl">⚜</span>&nbsp;&nbsp;Solutions Strategist&nbsp;&nbsp;<span class="fl">⚜</span></p>
+    <h1 id="name">RAFAEL<br>CORDEIRO</h1>
+    <p id="role"></p>
+  </div>
 </div>
 <script>
-  for (const el of document.querySelectorAll('.w')) el.textContent = el.textContent.toUpperCase();
-
-  /* poeira dourada como a do filme, com semente fixa: a mesma capa em toda
-     execucao. Perto do texto ela fica mais fraca, para nao sujar a leitura. */
-  let s = 20261022;
-  const rnd = () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; };
-  const x = document.getElementById('dust').getContext('2d');
-  for (let i = 0; i < 170; i++) {
-    const px = rnd() * 1080, py = rnd() * 1920;
-    const nearText = py > 800 && py < 1330 && px > 60 && px < 1020;
-    const a = (0.12 + rnd() * 0.5) * (nearText ? 0.35 : 1);
-    x.beginPath();
-    x.fillStyle = `rgba(234,210,154,${a.toFixed(3)})`;
-    x.arc(px, py, 0.9 + rnd() * 1.7, 0, Math.PI * 2);
-    x.fill();
-  }
+  const v = new URLSearchParams(location.search).get('v') || 'praticas';
+  const ROLE = {
+    praticas: ['Branding &amp; Growth', 'Engenharia &amp; END', 'Tecnologia &amp; Dados/IA'],
+    solucoes: ['Estrategista', 'de Soluções'],
+  };
+  if (!ROLE[v]) throw new Error('variante desconhecida: ' + v);
+  const role = document.getElementById('role');
+  role.innerHTML = ROLE[v].join('<br>');
+  role.className = 'v-' + v;
   window.drawn = true;
 </script>
 </body>

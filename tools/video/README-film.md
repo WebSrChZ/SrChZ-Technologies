@@ -37,8 +37,8 @@ novo — não é retrabalho de vídeo.
 ```bash
 # 1. fontes (não moram no repo)
 mkdir -p /tmp/video/fonts && cd /tmp/video/fonts
-npm pack @fontsource/eb-garamond @fontsource/inter
-tar xzf fontsource-eb-garamond-*.tgz && tar xzf fontsource-inter-*.tgz
+npm pack @fontsource/eb-garamond @fontsource/inter @fontsource/cormorant-garamond
+for t in fontsource-*.tgz; do tar xzf $t; done   # a Cormorant e so da capa do Reels
 
 cd <repo>
 export VIDEO_WORK=/tmp/video
@@ -62,7 +62,7 @@ node tools/video/film-subs.js
 # 7. o corte de 30 s, tirado dos masters (ver "Corte de 30 s")
 python3 tools/video/film-cut.py
 
-# 8. a capa do Reels (ver "Capa do Reels")
+# 8. a capa do Reels (ver "Capa do Reels"); "solucoes" para a outra versao
 node tools/video/film-cover.js
 ```
 
@@ -180,20 +180,35 @@ Conferido: cada trecho bate com o quadro exato da origem — SSIM 0,999 contra
 `film-cover.js` renderiza `film-cover.html` em 1080×1920 e grava
 `srchz-order-of-chaos-reels-capa.jpg`. Serve para o de 60 s e para o de 30 s.
 
-O Instagram mostra a capa inteira na aba Reels, mas no grid do perfil recorta
-os 1440 px do meio (3:4). Tudo o que precisa ser lido fica nessa faixa, de
-y=240 a y=1680. Fora dela, só fundo.
+**O desenho é o do topo das páginas do site**: o logo, o rótulo entre flores de
+lis, o nome em dourado e o cargo em caixa-alta espaçada. As fontes, as cores e
+os espaçamentos vêm do CSS da /growth — Cormorant Garamond no nome, Inter no
+resto, o mesmo gradiente dourado —, e o texto vem da home, que fala das três
+práticas, e não da /growth, que fala só de uma.
 
-O desenho é o do filme: as quatro palavras do caos espalhadas e apagadas nas
-bordas e, no centro, a ordem — a marca e a frase que abre o filme, com o fim
-em dourado, como o "ninguém resolve?" do convite final. As cores, as fontes e
-o logo são os mesmos do filme. A frase tem 124 px para continuar legível na
-miniatura do grid, que num celular fica com cerca de um terço da largura da
-tela.
+- `node film-cover.js` — o cargo vira as três práticas, uma por linha
+- `node film-cover.js solucoes` — o cargo é "Estrategista de Soluções", como
+  na home. Repete o rótulo ("Solutions Strategist") em português.
+
+Duas armadilhas que a capa já resolve:
+
+- **A margem do logo.** A `srchz-mark.png` tem 720 px de largura, mas o desenho
+  ocupa 496; o resto é transparente. Dimensionada pela largura do arquivo, a
+  marca sai um terço menor do que parece. A capa usa 900 px de imagem para o
+  desenho ficar com 620, dois terços da largura do nome, que é a proporção do
+  site.
+- **A flor de lis.** A Inter não tem o ⚜. No celular ele vem de uma fonte do
+  sistema e sai vazado e fino. Aqui a escolha automática seria a DejaVu, que
+  desenha a flor cheia; a capa pede a FreeSerif, que desenha vazada.
+
+O Instagram mostra a capa inteira na aba Reels, mas no grid do perfil recorta
+os 1440 px do meio (3:4). O bloco fica centrado nessa faixa, de y=240 a
+y=1680, e fora dela fica só o brilho do fundo. Conferido simulando o recorte em
+tamanho de miniatura de celular.
 
 O script recusa gerar a capa se uma fonte ou o logo não carregar, em vez de
-deixar o título sair em Georgia. A poeira tem semente fixa, então duas
-execuções dão o mesmo arquivo.
+deixar o nome sair em Georgia, e falha na hora com uma variante que não
+existe. Duas execuções dão o mesmo arquivo.
 
 ## Legenda queimada
 
