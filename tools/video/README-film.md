@@ -66,9 +66,12 @@ node tools/video/film-render.js --check
 python3 tools/video/film-audio.py
 
 # 5. renderizar os dois masters
-#    --mb 3   desfoque de movimento (3x o tempo; use 1 enquanto itera)
-#    --fmt v  um formato só
-#    --secs N só os primeiros N segundos, para testar o caminho inteiro
+#    --mb 3    desfoque de movimento (3x o tempo; use 1 enquanto itera)
+#    --fmt v   um formato só
+#    --from A  começa em A segundos
+#    --secs B  renderiza B segundos
+#    --noaudio sai sem som (para pedaços que serão juntados)
+#    --out X   nome do arquivo de saída
 node tools/video/film-render.js --mb 3
 
 # 6. legendas
@@ -212,3 +215,38 @@ não há câmera nem objeto real a filmar.
 Se um dia o filme precisar daquele acabamento, o caminho é produzir em AE — e
 o que está aqui serve de roteiro, com os tempos, os textos e as capturas
 prontos.
+
+## Renderizar em pedaços
+
+Um master com `--mb 3` leva uns 45 minutos por formato. Se a máquina que
+renderiza reiniciar no meio, perde-se tudo — aconteceu três vezes durante a
+produção deste filme, e as duas primeiras custaram a renderização inteira.
+
+A saída para isso é partir o master e juntar depois. Os pedaços saem **sem
+som** e **fora do repositório**, para que um reinício no meio não deixe mp4
+pela metade versionado:
+
+```bash
+export VIDEO_OUT=$VIDEO_WORK/chunks && mkdir -p "$VIDEO_OUT"
+for a in 0 15 30 45; do
+  node tools/video/film-render.js --fmt h --mb 3 \
+    --from $a --secs 15 --noaudio --out h$a.mp4
+done
+
+cd "$VIDEO_OUT"
+for a in 0 15 30 45; do echo "file '$PWD/h$a.mp4'"; done > list.txt
+ffmpeg -f concat -safe 0 -i list.txt -c copy video.mp4
+ffmpeg -i video.mp4 -i <repo>/assets/video/srchz-order-of-chaos.wav \
+  -map 0:v -map 1:a -c:v copy -c:a aac -b:a 192k -ar 48000 -shortest \
+  -movflags +faststart <repo>/assets/video/srchz-order-of-chaos-16x9.mp4
+```
+
+Se um pedaço morrer no meio, ele fica sem o átomo `moov` e o `ffprobe`
+acusa; refaz-se só aquele. Na terceira queda, isso custou 12 minutos em vez
+de 45.
+
+**Como saber se a emenda apareceu na imagem.** Mede-se a mudança visual
+quadro a quadro e olha-se os instantes das emendas. Nas emendas que caem
+sobre um corte de plano do roteiro o salto é esperado — é o corte. A emenda
+que **não** tem corte por perto é o controle: se a concatenação tivesse
+introduzido artefato, ele apareceria justamente ali.
