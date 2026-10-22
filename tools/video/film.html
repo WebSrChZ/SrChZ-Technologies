@@ -18,6 +18,21 @@
 
   #stage{position:relative;overflow:hidden;background:var(--bg);
     perspective:2000px;perspective-origin:50% 46%}
+  /* Malha tecnica no fundo inteiro. Medindo as referencias, elas tem
+     luminancia media de 48 a 197 contra 30 daqui: o quadro era quase todo
+     preto, e nenhuma quantidade de movimento muda um quadro que nao tem
+     area acesa para mudar. A malha enche a tela sem clarear a marca —
+     e papel tecnico, que e o lugar certo para uma consultoria de
+     engenharia. */
+  #grid{position:absolute;inset:-10%;pointer-events:none;opacity:1;
+    background-image:
+      linear-gradient(rgba(201,162,75,.42) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,162,75,.42) 1px, transparent 1px),
+      linear-gradient(rgba(201,162,75,.20) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,162,75,.20) 1px, transparent 1px);
+    background-size:240px 240px,240px 240px,48px 48px,48px 48px}
+  #gridfade{position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(126% 80% at 50% 46%, transparent 26%, rgba(9,9,11,.46) 82%)}
   /* Tudo que e cena mora aqui dentro. A camera nunca para: e isso, e nao o
      numero de cortes, que separa as referencias do filme anterior — nelas a
      mudanca mediana por quadro e 3 a 20x maior, com quase nenhum corte. */
@@ -50,7 +65,8 @@
   #bars i{position:absolute;left:0;right:0;height:92px;background:#000;display:block}
   #bars i:first-child{top:0} #bars i:last-child{bottom:0}
 
-  .g{background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .g{background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+     background-size:100% 260%}
   .serif{font-family:"EB Garamond",Georgia,serif}
   .rule{height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);transform-origin:50% 50%}
 
@@ -146,6 +162,8 @@
 </head>
 <body data-fmt="v">
 <div id="stage">
+  <div id="grid"></div>
+  <div id="gridfade"></div>
   <div id="glow"></div>
   <canvas id="dust"></canvas>
   <canvas id="net"></canvas>
@@ -257,7 +275,7 @@ for(const c of ['#dust','#net']){ const el=$(c); el.width=W; el.height=H; }
 
 /* ===================== partículas ===================== */
 const DUST=(()=>{let s=20261021;const r=()=>(s=(s*1103515245+12345)&0x7fffffff)/0x7fffffff;
-  return Array.from({length:170},()=>({x:r()*W,y:r()*H,r:.7+r()*2.5,sp:4+r()*17,ph:r()*6.283,am:.2+r()*.7}));})();
+  return Array.from({length:320},()=>({x:r()*W,y:r()*H,r:1.1+r()*3.6,sp:26+r()*78,ph:r()*6.283,am:.3+r()*.9}));})();
 function drawDust(t){const x=$('#dust').getContext('2d');x.clearRect(0,0,W,H);const s=t/1000;
   for(const p of DUST){const y=((p.y-p.sp*s)%(H+60)+(H+60))%(H+60)-30;
     const a=p.am*(.45+.55*Math.sin(s*1.5+p.ph));
@@ -277,7 +295,7 @@ function drawNet(t,p,alpha){
       const d=Math.hypot(dx,dy);
       const lim=lerp(170,330,p);
       if(d<lim){
-        x.strokeStyle=`rgba(201,162,75,${(alpha*(1-d/lim)*0.5).toFixed(3)})`;
+        x.strokeStyle=`rgba(201,162,75,${(alpha*(1-d/lim)*0.95).toFixed(3)})`;
         x.beginPath();x.moveTo(pts[i].x,pts[i].y);x.lineTo(pts[j].x,pts[j].y);x.stroke();
       }
     }
@@ -457,14 +475,22 @@ const T_CHIPS=['Web','Portais','Web apps','Automação','CX','Dados &amp; IA'];
 const U_HOME='srchz-technologies.com.br';
 
 const SHOTS=[
-  /* ---- ATO 1 · O SINAL (12 tempos) ---- */
-  {k:'chaos',  b:2, p:[0,.34]},
-  {k:'chaos',  b:2, p:[.34,.62]},
-  {k:'chaos',  b:1, p:[.62,.82]},
-  {k:'chaos',  b:1, p:[.82,1]},
+  /* ---- ATO 1 · O SINAL (12 tempos) ----
+     Abre pelo site varrendo o quadro inteiro, nao por palavras no escuro.
+     Medido, a abertura antiga ficava em 0,0002 de mudanca por quadro — o
+     trecho mais morto do filme, no lugar onde se decide continuar
+     assistindo. E serve melhor o conceito: a avalanche de informacao E o
+     caos, e ela resolve na marca. */
+  {k:'detail', b:1.5, shot:'home',   at:[.5,.10], z:1.55, pan:[.03,.30]},
+  {k:'detail', b:1,   shot:'growth', at:[.5,.14], z:1.70, pan:[.10,.34]},
+  {k:'detail', b:1,   shot:'end',    at:[.5,.18], z:1.70, pan:[.14,.38]},
+  {k:'detail', b:.5,  shot:'tech',   at:[.5,.22], z:1.80, pan:[.20,.40]},
+  {k:'chaos',  b:1.5, p:[0,.45]},
+  {k:'chaos',  b:1,   p:[.45,.78]},
+  {k:'chaos',  b:.5,  p:[.78,1]},
   {k:'impact', b:1},
-  {k:'logo',   b:3},
-  {k:'quote',  b:2, tx:'“O problema raramente é o que parece.”'},
+  {k:'logo',   b:2.5},
+  {k:'quote',  b:1.5, tx:'“O problema raramente é o que parece.”'},
 
   /* ---- ATO 2 · O MÉTODO (7 tempos) ---- */
   {k:'type',   b:2, a:'A área muda.'},
@@ -473,7 +499,7 @@ const SHOTS=[
 
   /* ---- ATO 3 · AS TRÊS PORTAS (6 tempos) ---- */
   {k:'panel',  b:2, shot:'home', url:U_HOME, kick:'As três portas',
-                    title:'Um site.<br>Três entradas.', scroll:[.01,.05]},
+                    title:'Um site.<br>Três entradas.', scroll:[0.01,0.2284]},
   /* Os pontos de foco dos closes nao sao chute: saem de uma medicao de
      densidade de dourado linha a linha em cada captura — no site, titulo e
      borda sao dourados, entao o pico de dourado e onde esta o titulo. Antes
@@ -484,40 +510,40 @@ const SHOTS=[
   {k:'panel',  b:2, shot:'home', url:U_HOME, kick:'As três portas',
                     title:'Um site.<br>Três entradas.',
                     sub:'Branding &amp; Growth · Engenharia &amp; END · Tecnologia &amp; Dados/IA',
-                    scroll:[.22,.30]},
+                    scroll:[0.22,0.6568]},
 
   /* ---- ATO 4 · BRANDING & GROWTH (11 tempos) ---- */
   {k:'panel',  b:2, shot:'growth', url:U_HOME+'/growth', kick:'01 — Branding &amp; Growth',
-                    title:'Percepção<br>gera desejo.', scroll:[.02,.07]},
+                    title:'Percepção<br>gera desejo.', scroll:[0.02,0.293]},
   {k:'detail', b:1, shot:'growth', at:[.5,.102], z:2.3},
   {k:'panel',  b:3, shot:'growth', url:U_HOME+'/growth', kick:'01 — Branding &amp; Growth',
                     title:'Percepção<br>gera desejo.',
                     sub:'Estratégia transforma atenção em oportunidade.',
-                    chips:G_CHIPS, scroll:[.18,.28]},
+                    chips:G_CHIPS, scroll:[0.18,0.726]},
   {k:'detail', b:1, shot:'growth', at:[.5,.182], z:2.2},
   {k:'panel',  b:2, shot:'growth', url:U_HOME+'/growth', kick:'01 — Branding &amp; Growth',
-                    title:'Percepção<br>gera desejo.', chips:G_CHIPS, scroll:[.42,.50]},
+                    title:'Percepção<br>gera desejo.', chips:G_CHIPS, scroll:[0.42,0.8568]},
   {k:'detail', b:2, shot:'growth', at:[.5,.264], z:2.0},
 
   /* ---- ATO 5 · ENGENHARIA & END (13 tempos) ---- */
   {k:'panel',  b:2, shot:'end', url:U_HOME+'/end', kick:'02 — Engenharia &amp; END',
                     title:'Precisão para<br>enxergar o que<br>outros deixam passar.',
-                    scroll:[.01,.06]},
+                    scroll:[0.01,0.283]},
   {k:'detail', b:1, shot:'end', at:[.5,.238], z:2.3},
   {k:'dia',    b:5},
   {k:'panel',  b:3, shot:'end', url:U_HOME+'/end', kick:'02 — Engenharia &amp; END',
                     title:'Precisão para<br>enxergar o que<br>outros deixam passar.',
-                    chips:E_CHIPS, scroll:[.26,.36]},
+                    chips:E_CHIPS, scroll:[0.26,0.806]},
   {k:'detail', b:2, shot:'end', at:[.5,.404], z:2.1},
 
   /* ---- ATO 6 · TECNOLOGIA & DADOS/IA (12 tempos) ---- */
   {k:'panel',  b:2, shot:'tech', url:U_HOME+'/tech', kick:'03 — Tecnologia &amp; Dados/IA',
-                    title:'Conecta o que<br>antes estava<br>fragmentado.', scroll:[.01,.06]},
+                    title:'Conecta o que<br>antes estava<br>fragmentado.', scroll:[0.01,0.283]},
   {k:'detail', b:1, shot:'tech', at:[.5,.220], z:2.3},
   {k:'graph',  b:4},
   {k:'panel',  b:3, shot:'tech', url:U_HOME+'/tech', kick:'03 — Tecnologia &amp; Dados/IA',
                     title:'Conecta o que<br>antes estava<br>fragmentado.',
-                    chips:T_CHIPS, scroll:[.28,.38]},
+                    chips:T_CHIPS, scroll:[0.28,0.826]},
   {k:'detail', b:2, shot:'tech', at:[.5,.418], z:2.1},
 
   /* ---- ATO 7 · ALCANCE (10 tempos) ---- */
@@ -692,9 +718,18 @@ function render(t){
      dentro do filme, então não existe quadro igual ao anterior. É o que as
      referências têm e o corte sozinho não dá — nelas a mudança mediana por
      quadro é 3 a 20x maior que a daqui, com quase nenhum corte. */
-  const cy=Math.sin(t/4300)*0.9, cx=Math.cos(t/5900)*0.7, cz=Math.sin(t/7100)*26;
+  const cy=Math.sin(t/3100)*2.6, cx=Math.cos(t/4300)*1.7, cz=Math.sin(t/5300)*95;
+  const cs=1.012+Math.sin(t/6700)*0.012;
   $('#world').style.transform=
-    `translateZ(${cz.toFixed(2)}px) rotateY(${cy.toFixed(3)}deg) rotateX(${cx.toFixed(3)}deg)`;
+    `scale(${cs.toFixed(4)}) translateZ(${cz.toFixed(2)}px) `+
+    `rotateY(${cy.toFixed(3)}deg) rotateX(${cx.toFixed(3)}deg)`;
+
+  /* o gradiente dourado escorre: muda pixel mesmo onde o texto esta parado */
+  for(const g of $$('.g')) g.style.backgroundPosition=`0 ${(t/26).toFixed(1)}px`;
+
+  /* a malha desliza devagar: fundo vivo, nao papel colado */
+  $('#grid').style.transform=
+    `translate3d(${(Math.sin(t/8200)*46).toFixed(1)}px,${(-t/150).toFixed(1)}px,0)`;
 
   const drift=Math.sin(t/5200)*10;
   $('#glow').style.transform=`translate3d(${drift}px,${drift*.6}px,0)`;
@@ -723,7 +758,13 @@ DRAW.chaos=(s,lt,u)=>{
     const pin=inv(cp,.05+i*.09,.22+i*.09);
     const cx=lerp(bx,.5,inOutC(conv)), cy=lerp(by,.5,inOutC(conv));
     el.style.left=(cx*W)+'px'; el.style.top=(cy*H)+'px';
-    el.style.transform=`translate(-50%,-50%) scale(${lerp(.86,1,outQ(pin))*lerp(1,.52,conv)})`;
+    /* elas VIAJAM: entram de longe e passam. Paradas, so piscando na tela,
+       a abertura ficava em 0.0002 de mudanca por quadro — morta justo onde
+       se decide se a pessoa continua assistindo. */
+    const tz=lerp(-760,120,cp)+i*90;
+    const px2=Math.sin(cp*2.4+i)*W*0.07;
+    el.style.transform=`translate(-50%,-50%) translate3d(${px2.toFixed(1)}px,0,${tz.toFixed(1)}px) `
+      +`rotateY(${(lerp(-24,6,cp)+i*3).toFixed(1)}deg) scale(${lerp(.86,1,outQ(pin))*lerp(1,.52,conv)})`;
     el.style.opacity=outC(pin)*(1-inv(cp,.72,.98));
     el.style.filter=`blur(${lerp(9,0,outC(pin))}px)`;
   });
@@ -752,7 +793,9 @@ DRAW.logo=(s,lt,u)=>{
   drawNet(0,1,0);
   const mk=$('#s1mark');
   mk.style.opacity=1;
-  mk.style.transform=`translate(-50%,-50%) scale(${lerp(1.02,1,outQ(u))})`;
+  mk.style.transform=`translate(-50%,-50%) `
+    +`rotateY(${(Math.sin(lt/900)*9).toFixed(2)}deg) rotateX(${(Math.cos(lt/1200)*4).toFixed(2)}deg) `
+    +`scale(${(lerp(1.02,1,outQ(u))*(1+0.035*(lt/1000))).toFixed(4)})`;
   mk.querySelector('img').style.filter='drop-shadow(0 0 48px rgba(201,162,75,.45))';
   sweep('#s1shine', inv(lt,180,s.d*.8));
 };
@@ -765,7 +808,9 @@ DRAW.quote=(s,lt,u)=>{
   drawNet(0,1,0);
   const mk=$('#s1mark');
   mk.style.opacity=1;
-  mk.style.transform=`translate(-50%,-50%) scale(${lerp(1,.88,outC(u))})`;
+  mk.style.transform=`translate(-50%,-50%) `
+    +`rotateY(${(Math.sin((lt+1800)/900)*7).toFixed(2)}deg) `
+    +`scale(${lerp(1,.88,outC(u)).toFixed(4)})`;
   mk.querySelector('img').style.filter='drop-shadow(0 0 40px rgba(201,162,75,.35))';
   $('#s1shine').style.opacity=0;
   const q=$('#s1quote'), p=ein(s,lt);
@@ -787,7 +832,11 @@ const BIG_FS=Math.round((V?124:112)*KT), BIG_MAX=W-140;
 /* --- tipografia cinetica: uma ou duas linhas subindo da mascara --- */
 DRAW.type=(s,lt,u)=>{
   const sc=$('#s2'); sc.style.opacity=1;
-  sc.style.transform=`scale(${lerp(1.05,1,outQ(inv(lt,0,s.d*.9)))})`;
+  /* o assentar da entrada MAIS um empurrao continuo: sem ele a cena de tipo
+     congela depois do primeiro meio segundo, e e isso que derruba a mediana
+     de movimento do filme */
+  sc.style.transform=`scale(${lerp(1.05,1,outQ(inv(lt,0,s.d*.9)))*(1+0.022*(lt/1000))}) `
+    +`translateY(${(-5*(lt/1000)).toFixed(2)}px)`;
   $('#s2a').textContent=s.a_||s.a;
   $('#s2b').textContent=s.c||'';
   fit($('#s2a'),BIG_FS,BIG_MAX);
@@ -801,7 +850,8 @@ DRAW.type=(s,lt,u)=>{
 
 /* --- Perception · Strategy · Execution, uma por tempo --- */
 DRAW.psx=(s,lt,u)=>{
-  const sc=$('#s2'); sc.style.opacity=1; sc.style.transform='none';
+  const sc=$('#s2'); sc.style.opacity=1;
+  sc.style.transform=`scale(${(1+0.020*(lt/1000)).toFixed(4)}) translateY(${(-4*(lt/1000)).toFixed(2)}px)`;
   $('#s2a').textContent='A área muda.';
   $('#s2b').textContent='O método não.';
   fit($('#s2a'),BIG_FS,BIG_MAX); fit($('#s2b'),BIG_FS,BIG_MAX);
@@ -889,7 +939,7 @@ DRAW.panel=(s,lt,u)=>{
 /* --- a mesma home trocando de lingua debaixo do mesmo layout --- */
 DRAW.lang=(s,lt,u)=>{
   const sh={...s, url:U_HOME, kick:'Alcance',
-            title:'Quatro idiomas.<br>Entrega internacional.', scroll:[.05,.07]};
+            title:'Quatro idiomas.<br>Entrega internacional.', scroll:[0.05,0.1592]};
   const tx=panelCommon(sh,lt,u,s.li);
   $('#pChips').innerHTML=''; $('#pChips').dataset.for='';
   const lr=$('#langRow');
@@ -909,14 +959,23 @@ DRAW.detail=(s,lt,u)=>{
   const nat=SZ[src]; if(!nat) return;
   /* Empurra e desliza o plano inteiro. Um close parado e uma foto; o que
      prende e o movimento continuo dentro dele. */
-  const z=s.z*lerp(1,1.11,u);
+  /* 9% por segundo: a velocidade aparente fica igual num plano de 0,2s e
+     num de 1,2s. Por fracao do plano, o close longo ficava parado. */
+  const z=s.z*(1+0.09*(lt/1000));
   const dw=W*z, dh=dw*nat.h/nat.w;
-  const slide=(s.i%2?1:-1)*lerp(0,W*.035,u);
+  const slide=(s.i%2?1:-1)*W*0.030*(lt/1000);
+  /* pan: varre a pagina de cima a baixo dentro do plano. E o que faz a
+     abertura entregar conteudo em movimento nos primeiros segundos, em vez
+     de palavras pequenas aparecendo no escuro. */
+  const fy = s.pan ? lerp(s.pan[0], s.pan[1], inOutC(u)) : s.at[1];
   $('#dimg').style.width=dw+'px';
   $('#dimg').style.left=(W/2-s.at[0]*dw+slide)+'px';
-  $('#dimg').style.top =(H/2-s.at[1]*dh-lerp(0,H*.018,u))+'px';
+  $('#dimg').style.top =(H/2-fy*dh-(s.pan?0:H*0.016*(lt/1000)))+'px';
   $('#spill').style.opacity=0.6;
-  sc.style.opacity=outC(inv(lt,0,Math.min(90,s.d*.25)));
+  /* Entra cheio. O fade de 90ms que havia aqui fazia o quadro piscar escuro
+     em cada um dos 21 cortes de close — num corte seco isso e defeito, nao
+     transicao. */
+  sc.style.opacity=1;
 };
 
 /* --- cartao tecnico em tela cheia --- */
@@ -957,7 +1016,8 @@ DRAW.graph=(s,lt,u)=>{
 /* --- tres praticas, um metodo --- */
 DRAW.sys=(s,lt,u)=>{
   const sc=$('#s7'); sc.style.opacity=1;
-  sc.style.transform=`scale(${lerp(1.03,1,outQ(inv(lt,0,s.d*.8)))})`;
+  sc.style.transform=`scale(${lerp(1.03,1,outQ(inv(lt,0,s.d*.8)))*(1+0.020*(lt/1000))}) `
+    +`translateY(${(-4.5*(lt/1000)).toFixed(2)}px)`;
   const p1=s.n>=1?ein(s,lt):0;
   $('#s7a').style.transform=`translateY(${lerp(118,0,outQ(s.n>1?1:p1))}%)`;
   $('#s7b').style.transform=`translateY(${lerp(118,0,outQ(s.n>2?1:(s.n===2?ein(s,lt):0)))}%)`;
@@ -971,6 +1031,8 @@ DRAW.sys=(s,lt,u)=>{
 /* --- o fecho: o plano mais longo, logo depois do mais curto --- */
 DRAW.card=(s,lt,u)=>{
   const sc=$('#s8'); sc.style.opacity=1;
+  /* o plano mais longo do filme nao pode ser o mais parado */
+  sc.style.transform=`scale(${(1+0.013*(lt/1000)).toFixed(4)}) translateY(${(-3*(lt/1000)).toFixed(2)}px)`;
   const pm=inv(lt,0,700);
   $('#s8img').style.opacity=outC(pm);
   $('#s8img').style.transform=`scale(${lerp(1.08,1,outQ(pm))})`;
