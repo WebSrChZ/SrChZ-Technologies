@@ -49,7 +49,7 @@ const server = http.createServer((q, r) => {
      descricao, entao nao serve de prova. load() devolve as faces que de fato
      carregaram: lista vazia e nome saindo em Georgia. */
   const missing = await page.evaluate(async () => {
-    const want = ['700 183px "Cormorant Garamond"', '400 40px "Inter"'];
+    const want = ['700 183px "Cormorant Garamond"', '500 40px "Inter"'];
     const out = [];
     for (const w of want) if (!(await document.fonts.load(w)).length) out.push(w);
     const img = document.getElementById('mark');

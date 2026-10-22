@@ -180,18 +180,32 @@ Conferido: cada trecho bate com o quadro exato da origem — SSIM 0,999 contra
 `film-cover.js` renderiza `film-cover.html` em 1080×1920 e grava
 `srchz-order-of-chaos-reels-capa.jpg`. Serve para o de 60 s e para o de 30 s.
 
-**A capa reproduz o topo da /growth.** O modelo foi um recorte 9:16 que o
-usuário mandou da página: logo no alto, "High-Performance Ecosystems" entre
-flores de lis, o nome em dourado e o cargo em caixa-alta espaçada. Duas coisas
-mudam, a pedido dele: o cargo, que vira Solutions & Growth Strategist, e o
-rótulo, que fica com as duas palavras centradas uma sobre a outra. No site cada
-flor ocupa lugar na própria linha e empurra a palavra para o lado; aqui a flor
-fica pendurada para fora da palavra, com uma margem negativa do tamanho dela.
-As posições do HTML são as medidas daquele recorte, escaladas para 1080×1920, e
-cada linha cai a menos de 3 px da altura do modelo. As fontes, as cores e os
-espaçamentos são os do
-CSS da página: Cormorant Garamond 700 no nome, Inter 400 no resto e o mesmo
-gradiente dourado nas duas linhas do nome.
+**A composição é a do topo da /growth.** O modelo foi um recorte 9:16 que o
+usuário mandou da página: logo no alto, "High-Performance Ecosystems", o nome
+em dourado e o cargo em caixa-alta espaçada. As posições do HTML são as medidas
+daquele recorte, escaladas para 1080×1920, e cada linha cai a menos de 3 px da
+altura do modelo. Mudam duas coisas, a pedido dele:
+
+- o cargo, que vira Solutions & Growth Strategist;
+- as flores de lis, que ficam só na linha de cima, uma de cada lado de
+  HIGH-PERFORMANCE, com ECOSYSTEMS centrada embaixo. As flores ficam penduradas
+  para fora da palavra, com uma margem negativa do tamanho delas, para não
+  entrarem na conta da centralização.
+
+**As cores são as da capa que o usuário já tem no Instagram**, medidas num print
+do grid — não as do CSS. O fundo é grafite (`#131218`) em vez de quase preto, o
+brilho do topo tem o dobro da força, o nome é um dourado mais claro e menos
+saturado, o rótulo é cinza neutro e o cargo é creme. O print passa pelo
+Instagram, que desbota um pouco os dourados; o logo, que é o mesmo arquivo nas
+duas capas, mostra quanto (−3, −2, +8 em RGB). Os dourados daqui descontam
+isso, para a capa sair igual à dele depois de postada. Medida do mesmo jeito
+que o print (reduzida por área ao tamanho da miniatura), cada região cai a
+menos de 6 níveis dele.
+
+**Inter 500, e não a 400 do site, no rótulo e no cargo.** O celular desenha a
+fonte mais cheia que o Chromium daqui. Com a 400, as letras finas saíam 10 a
+20% mais fracas que no print, medida a tinta total da linha — e não era tamanho:
+"STRATEGIST" tem 160 px de largura nas duas. Com a 500, a tinta bate a ±2%.
 
 Duas armadilhas que a capa já resolve:
 
@@ -205,7 +219,7 @@ Duas armadilhas que a capa já resolve:
 **O grid do perfil corta o topo do logo.** O Instagram mostra a capa inteira na
 aba Reels, mas no grid recorta os 1440 px do meio (3:4). O bloco do modelo vai
 de y=159 a y=1658, 1499 px, então nenhum recorte 3:4 mostra tudo: o padrão
-perde os 80 px de cima do logo. Foi a escolha do modelo, com o logo no alto.
+perde os 80 px de cima do logo.
 
 O script recusa gerar a capa se uma fonte ou o logo não carregar, em vez de
 deixar o nome sair em Georgia. Duas execuções dão o mesmo arquivo.
