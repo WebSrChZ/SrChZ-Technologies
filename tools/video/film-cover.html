@@ -1,25 +1,22 @@
 <!doctype html>
 <!-- Capa do Reels, renderizada por film-cover.js em 1080x1920.
 
-     O desenho e o do topo das paginas do site: medalhao, rotulo entre flores
-     de lis, o nome em dourado e o cargo em caixa-alta espacada — com as
-     mesmas fontes, cores e espacamentos do CSS da /growth. O texto e o da
-     home, que fala das tres praticas, e nao o da /growth, que fala so de uma.
+     Reproduz o topo da /growth no recorte 9:16 que o usuario mandou como
+     modelo: as posicoes abaixo sao as medidas daquele recorte, escaladas para
+     1080x1920, e fontes, cores e espacamentos sao os do CSS da pagina. Muda
+     so o cargo, a pedido dele: Growth & Solutions, e nao Growth & Branding.
 
-     O Instagram mostra a capa inteira na aba Reels, mas no grid do perfil
-     recorta os 1440 px do meio (3:4). O bloco fica centrado nessa faixa, de
-     y=240 a y=1680; fora dela so o brilho do fundo.
-
-     ?v=praticas  o cargo vira as tres praticas, uma por linha (padrao)
-     ?v=solucoes  o cargo e "Estrategista de Solucoes", como na home -->
+     O bloco vai de y=159 a y=1658 — 1499 px, mais que os 1440 do recorte
+     3:4 do grid do perfil. No recorte padrao (o miolo) o grid perde o topo
+     do logo; o modelo foi escolhido assim, com o logo no alto. -->
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <style>
   @font-face{font-family:"Cormorant Garamond";font-weight:700;font-display:block;
     src:url(/fonts/cormorant-garamond-latin-700-normal.woff2) format("woff2")}
-  @font-face{font-family:"Inter";font-weight:500;font-display:block;
-    src:url(/fonts/inter-latin-500-normal.woff2) format("woff2")}
+  @font-face{font-family:"Inter";font-weight:400;font-display:block;
+    src:url(/fonts/inter-latin-400-normal.woff2) format("woff2")}
   :root{
     --bg:#09090b; --muted:#8b8576; --gold:#c9a24b; --gold-2:#ead29a; --gold-deep:#9c7c2e;
     --serif:"Cormorant Garamond",Georgia,serif; --sans:"Inter",sans-serif;
@@ -27,59 +24,43 @@
   *{margin:0;padding:0;box-sizing:border-box}
   html,body{background:var(--bg)}
   #c{position:relative;width:1080px;height:1920px;overflow:hidden;background:var(--bg);
-     font-family:var(--sans);-webkit-font-smoothing:antialiased}
-  /* o .hero-glow do site, com o foco de cima puxado para dentro do recorte */
+     font-family:var(--sans);font-weight:400;-webkit-font-smoothing:antialiased;text-align:center}
+  /* o brilho de cima do .hero-glow da pagina. O de baixo fica de fora: no
+     site ele mora no pe do topo, abaixo dos botoes, fora do recorte que
+     serviu de modelo — aqui ele acendia um brilho que o modelo nao tem */
   #glow{position:absolute;inset:0;background:
-    radial-gradient(70% 34% at 50% 14%,rgba(201,162,75,.16),transparent 62%),
-    radial-gradient(46% 24% at 50% 100%,rgba(201,162,75,.07),transparent 60%)}
-  #safe{position:absolute;left:0;right:0;top:240px;height:1440px;
-        display:flex;flex-direction:column;align-items:center;justify-content:center;
-        padding-bottom:40px;text-align:center}
-  /* a srchz-mark.png tem 720 px, mas o desenho ocupa 496: o resto e margem
-     transparente. A 900 px de imagem o desenho fica com 620, dois tercos
-     da largura do nome — a proporcao da /growth */
-  #mark{width:900px;height:auto;display:block}
-  /* .hero-kicker */
-  #kick{margin-top:74px;font-size:32px;font-weight:500;letter-spacing:.45em;padding-left:.45em;
-        text-transform:uppercase;color:var(--muted);white-space:nowrap}
+    radial-gradient(60% 50% at 50% 0%,rgba(201,162,75,.14),transparent 60%)}
+  .ab{position:absolute;left:0;right:0}
+  /* a srchz-mark.png tem 720 px, mas o desenho ocupa 496 a partir de x=107,
+     y=20; o resto e margem transparente. Com 951 px de imagem o desenho fica
+     com os 655 de largura do modelo, e o topo dele cai em y=159 */
+  #mark{position:absolute;left:50%;top:133px;width:951px;transform:translateX(-50%)}
+  /* .hero-kicker: Inter 400, caixa-alta, .45em, cinza */
+  #kick{top:892px;font-size:40px;line-height:67px;letter-spacing:.45em;padding-left:.45em;
+        text-transform:uppercase;color:var(--muted)}
   /* a Inter nao tem a flor de lis; no celular ela vem de uma fonte do
      sistema e sai vazada e fina. A da FreeSerif e assim; a da DejaVu, que
      seria a escolha automatica aqui, e cheia */
-  .fl{font-family:"FreeSerif",serif;font-weight:400;letter-spacing:0;font-size:1.3em;vertical-align:-.08em}
+  .fl{font-family:"FreeSerif",serif;letter-spacing:0;font-size:1.02em}
   /* .hero-name + .gold-text: um gradiente so para as duas linhas, como no
      site — por isso o CORDEIRO sai mais fundo que o RAFAEL */
-  #name{margin-top:26px;font-family:var(--serif);font-weight:700;font-size:176px;line-height:1;
+  #name{top:1079px;font-family:var(--serif);font-weight:700;font-size:183px;line-height:183px;
         letter-spacing:.04em;padding-left:.04em;
         background:linear-gradient(180deg,var(--gold-2) 0%,var(--gold) 52%,var(--gold-deep) 100%);
         -webkit-background-clip:text;background-clip:text;color:transparent}
-  /* .hero-title */
-  #role{margin-top:62px;font-size:38px;font-weight:500;line-height:1.7;letter-spacing:.42em;
-        padding-left:.42em;text-transform:uppercase;color:var(--gold-2)}
-  /* com duas linhas cabe maior; com tres, TECNOLOGIA & DADOS/IA limita */
-  #role.v-solucoes{font-size:46px}
+  /* .hero-title: Inter 400, caixa-alta, .42em, dourado claro */
+  #role{top:1518px;font-size:49.5px;line-height:81px;letter-spacing:.42em;padding-left:.42em;
+        text-transform:uppercase;color:var(--gold-2)}
 </style>
 </head>
 <body>
 <div id="c">
   <div id="glow"></div>
-  <div id="safe">
-    <img id="mark" src="/brand/srchz-mark.png" alt="SrChZ Technologies">
-    <p id="kick"><span class="fl">⚜</span>&nbsp;&nbsp;Solutions Strategist&nbsp;&nbsp;<span class="fl">⚜</span></p>
-    <h1 id="name">RAFAEL<br>CORDEIRO</h1>
-    <p id="role"></p>
-  </div>
+  <img id="mark" src="/brand/srchz-mark.png" alt="SrChZ Technologies">
+  <p id="kick" class="ab"><span class="fl">⚜</span>&nbsp;&nbsp;High-Performance<br>Ecosystems&nbsp;&nbsp;<span class="fl">⚜</span></p>
+  <h1 id="name" class="ab">RAFAEL<br>CORDEIRO</h1>
+  <p id="role" class="ab">Growth &amp; Solutions<br>Strategist</p>
 </div>
-<script>
-  const v = new URLSearchParams(location.search).get('v') || 'praticas';
-  const ROLE = {
-    praticas: ['Branding &amp; Growth', 'Engenharia &amp; END', 'Tecnologia &amp; Dados/IA'],
-    solucoes: ['Estrategista', 'de Soluções'],
-  };
-  if (!ROLE[v]) throw new Error('variante desconhecida: ' + v);
-  const role = document.getElementById('role');
-  role.innerHTML = ROLE[v].join('<br>');
-  role.className = 'v-' + v;
-  window.drawn = true;
-</script>
+<script>window.drawn = true;</script>
 </body>
 </html>
